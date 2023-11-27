@@ -1,0 +1,86 @@
+{
+	"code":  "limberedgun",
+	"class": "EntityLimber",
+    "variantgroups": [
+		{ "code": "type",     "states": ["fieldgun", "howitzer", "heavymachinegun", "heavyfieldgun", "heavyhowitzer", "heavygun"]},
+		{ "code": "material", "states": ["tinbronze", "iron", "meteoriciron", "steel"]},
+		{ "code": "barrel",   "states": ["smoothbore", "rifled"]}
+	],
+	"skipVariants": [
+		"*-heavyfieldgun-tinbronze-smoothbore", "*-heavyfieldgun-iron-smoothbore", "*-heavyfieldgun-meteoriciron-smoothbore", "*-heavyfieldgun-steel-smoothbore",
+		"*-heavyhowitzer-tinbronze-smoothbore", "*-heavyhowitzer-iron-smoothbore", "*-heavyhowitzer-meteoriciron-smoothbore", "*-heavyhowitzer-steel-smoothbore",
+		"*-heavymachinegun-tinbronze-smoothbore", "*-heavymachinegun-iron-smoothbore", "*-heavymachinegun-meteoriciron-smoothbore", "*-heavymachinegun-steel-smoothbore",
+		"*-heavygun-tinbronze-rifled", "*-heavygun-iron-rifled", "*-heavygun-meteoriciron-rifled", "*-heavygun-steel-rifled"
+	],
+	"hitboxSize":   { "x": 1.15, "y": 1.4 },
+	"weightByType": {
+		"*-heavygun-tinbronze-*":        700,
+		"*-heavygun-steel-*":            800,
+		"*-heavygun-*":                  900,
+
+		"*-fieldgun-tinbronze-*":        900,
+		"*-fieldgun-steel-*":           1000,
+		"*-fieldgun-*":                 1200,
+
+		"*-howitzer-tinbronze-*":        800,
+		"*-howitzer-steel-*":            900,
+		"*-howitzer-*":                 1100,
+
+		"*-heavymachinegun-tinbronze-*": 800,
+		"*-heavymachinegun-steel-*":     900,
+		"*-heavymachinegun-*":          1000,
+
+		"*-heavyfieldgun-tinbronze-*":  3500,
+		"*-heavyfieldgun-steel-*":      4000,
+		"*-heavyfieldgun-*":            5000,
+
+		"*-heavyhowitzer-tinbronze-*":  3300,
+		"*-heavyhowitzer-steel-*":      3800,
+		"*-heavyhowitzer-*":            4800,
+		
+		"*":                             800
+	},
+	"drops": [{
+		"type": "block", 
+		"code": "game:wagonwheels-spoked-west", 
+		"quantity": { "avg": 1, "var": 0.5 } 
+	}],
+	"attributes": { "limber": {
+		"entityCodes": [ "limber" ],
+		"deployedBlock": "rustyshell:{type}-{material}-{barrel}",
+		"offset": -2
+	}},
+	"client": {
+		"renderer": "Shape",
+		"shape":   { "base": "gun/{type}" },
+        "textures": {
+			"metal":    { "base": "game:block/metal/plate/{material}" },
+			"metalalt": { "base": "game:block/metal/sheet/{material}1" },
+			"iron1":    { "base": "game:block/metal/sheet/iron1" },
+			"top":      { "base": "game:block/wood/echochamber/top" },
+			"plainoak": { "base": "game:block/wood/plainoak" },
+			"generic":  { "base": "game:block/wood/planks/generic" },
+			"pedrail":  { "base": "game:block/wood/charred" }
+        },
+		"behaviors": [
+			{ "code": "controlledphysics", "stepHeight": 1.1251 }, 
+			{ "code": "interpolateposition" },
+			{ "code": "floatupwhenstuck", "onlyWhenDead": true },
+			{ "code": "deployablelimber" }
+		],
+		"animations": [{
+			"code":      "move",
+			"animation": "move",
+			"weight":    10,
+			"blendMode": "AddAverage"
+		}]
+	},
+	"server": {
+		"behaviors": [
+			{ "code": "controlledphysics", "stepHeight": 1.1251 },
+			{ "code": "health", "currenthealth": 20, "maxhealth": 20 },
+			{ "code": "floatupwhenstuck", "onlyWhenDead": true },
+			{ "code": "deployablelimber" }
+		]
+	}
+}

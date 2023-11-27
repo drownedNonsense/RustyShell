@@ -1,0 +1,26 @@
+[
+    {
+		"ingredientPattern": "AB,CD",
+		"ingredients": {
+			"A": { "type": "item",  "code": "game:metalbit-*", "quantity": 4 },
+			"B": { "type": "item",  "code": "game:flaxtwine" },
+			"C": { "type": "item",  "code": "game:blastingpowder", "quantity": 4 },
+			"D": { "type": "block", "code": "game:linen-*" }
+		},
+		"width":  2,
+		"height": 2,
+		"output": { "type": "item", "code": "rustyshell:cartridge", "quantity": 4 }
+	},
+    {
+		"ingredientPattern": "BA,DC",
+		"ingredients": {
+			"A": { "type": "item",  "code": "game:metalbit-*", "quantity": 4 },
+			"B": { "type": "item",  "code": "game:flaxtwine" },
+			"C": { "type": "item",  "code": "game:blastingpowder", "quantity": 4 },
+			"D": { "type": "block", "code": "game:linen-*" }
+		},
+		"width":  2,
+		"height": 2,
+		"output": { "type": "item", "code": "rustyshell:cartridge", "quantity": 4 }
+	}
+]

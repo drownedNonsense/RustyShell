@@ -1,0 +1,205 @@
+{
+    "game:tabname-rustyshell": "Rusty Shell",
+
+    "game:blockhelp-wheeled-turnleft":  "Turn left",
+    "game:blockhelp-wheeled-turnright": "Turn right",
+    
+    "game:blockhelp-muzzleloading-clean": "Clean",
+    "game:blockhelp-muzzleloading-load":  "Load",
+
+    "game:blockhelp-gearedgun-laying": "Change laying",
+
+    "game:blockhelp-loadable-fillammunition": "Add ammunition",
+    "game:blockhelp-loadable-filldetonator":  "Add detonator",
+    "game:blockhelp-loadable-fire":           "Fire the gun",
+
+    "game:blockhelp-repeatingfire-activate": "Activate the gun",
+
+    "game:blockhelp-limber-deploy": "Deploy limber",
+    "game:blockhelp-limber-set":    "Try to limber",
+
+    "game:heldhelp-lead": "Lead entity",
+
+    "item-creature-limberedgun-heavygun-tinbronze-smoothbore":    "Limbered tin bronze heavy gun",
+    "item-creature-limberedgun-heavygun-iron-smoothbore":         "Limbered iron heavy gun",
+    "item-creature-limberedgun-heavygun-meteoriciron-smoothbore": "Limbered meteoric iron heavy gun",
+    "item-creature-limberedgun-heavygun-steel-smoothbore":        "Limbered steel heavy gun",
+
+    "item-creature-limberedgun-fieldgun-tinbronze-smoothbore":    "Limbered tin bronze field gun (smoothbore)",
+    "item-creature-limberedgun-fieldgun-iron-smoothbore":         "Limbered iron field gun (smoothbore)",
+    "item-creature-limberedgun-fieldgun-meteoriciron-smoothbore": "Limbered meteoric iron field gun (smoothbore)",
+    "item-creature-limberedgun-fieldgun-steel-smoothbore":        "Limbered steel field gun (smoothbore)",
+
+    "item-creature-limberedgun-howitzer-tinbronze-smoothbore":    "Limbered tin bronze howitzer (smoothbore)",
+    "item-creature-limberedgun-howitzer-iron-smoothbore":         "Limbered iron howitzer (smoothbore)",
+    "item-creature-limberedgun-howitzer-meteoriciron-smoothbore": "Limbered meteoric iron howitzer (smoothbore)",
+    "item-creature-limberedgun-howitzer-steel-smoothbore":        "Limbered steel howitzer (smoothbore)",
+
+    "item-creature-limberedgun-fieldgun-tinbronze-rifled":    "Limbered tin bronze field gun (rifled)",
+    "item-creature-limberedgun-fieldgun-iron-rifled":         "Limbered iron field gun (rifled)",
+    "item-creature-limberedgun-fieldgun-meteoriciron-rifled": "Limbered meteoric iron field gun (rifled)",
+    "item-creature-limberedgun-fieldgun-steel-rifled":        "Limbered steel field gun (rifled)",
+
+    "item-creature-limberedgun-howitzer-tinbronze-rifled":    "Limbered tin bronze howitzer (rifled)",
+    "item-creature-limberedgun-howitzer-iron-rifled":         "Limbered iron howitzer (rifled)",
+    "item-creature-limberedgun-howitzer-meteoriciron-rifled": "Limbered meteoric iron howitzer (rifled)",
+    "item-creature-limberedgun-howitzer-steel-rifled":        "Limbered steel howitzer (rifled)",
+
+    "item-creature-limberedgun-heavyfieldgun-tinbronze-rifled":    "Limbered heavy tin bronze field gun",
+    "item-creature-limberedgun-heavyfieldgun-iron-rifled":         "Limbered heavy iron field gun",
+    "item-creature-limberedgun-heavyfieldgun-meteoriciron-rifled": "Limbered heavy meteoric iron field gun",
+    "item-creature-limberedgun-heavyfieldgun-steel-rifled":        "Limbered heavy steel field gun",
+
+    "item-creature-limberedgun-heavyhowitzer-tinbronze-rifled":    "Limbered heavy tin bronze howitzer",
+    "item-creature-limberedgun-heavyhowitzer-iron-rifled":         "Limbered heavy iron howitzer",
+    "item-creature-limberedgun-heavyhowitzer-meteoriciron-rifled": "Limbered heavy meteoric iron howitzer",
+    "item-creature-limberedgun-heavyhowitzer-steel-rifled":        "Limbered heavy steel howitzer",
+
+    "item-creature-limberedgun-heavymachinegun-tinbronze-rifled":    "Limbered tin bronze machine gun",
+    "item-creature-limberedgun-heavymachinegun-iron-rifled":         "Limbered iron machine gun",
+    "item-creature-limberedgun-heavymachinegun-meteoriciron-rifled": "Limbered meteoric iron machine gun",
+    "item-creature-limberedgun-heavymachinegun-steel-rifled":        "Limbered steel machine gun",
+
+    "item-creature-limber": "Limber",
+    "block-limber": "Limber",
+    "blockdesc-limber": "A wheeled carriage used to draw guns.",
+
+    "block-siegegun-tinbronze-smoothbore":    "Tin bronze siege gun",
+    "block-siegegun-iron-smoothbore":         "Iron siege gun",
+    "block-siegegun-meteoriciron-smoothbore": "Meteoric iron siege gun",
+    "block-siegegun-steel-smoothbore":        "Steel siege gun",
+
+    "block-heavygun-tinbronze-smoothbore":    "Tin bronze heavy gun",
+    "block-heavygun-iron-smoothbore":         "Iron heavy gun",
+    "block-heavygun-meteoriciron-smoothbore": "Meteoric iron heavy gun",
+    "block-heavygun-steel-smoothbore":        "Steel heavy gun",
+
+    "block-fieldgun-tinbronze-smoothbore":    "Tin bronze field gun (smoothbore)",
+    "block-fieldgun-iron-smoothbore":         "Iron field gun (smoothbore)",
+    "block-fieldgun-meteoriciron-smoothbore": "Meteoric iron field gun (smoothbore)",
+    "block-fieldgun-steel-smoothbore":        "Steel field gun (smoothbore)",
+
+    "block-howitzer-tinbronze-smoothbore":    "Tin bronze howitzer (smoothbore)",
+    "block-howitzer-iron-smoothbore":         "Iron howitzer (smoothbore)",
+    "block-howitzer-meteoriciron-smoothbore": "Meteoric iron howitzer (smoothbore)",
+    "block-howitzer-steel-smoothbore":        "Steel howitzer (smoothbore)",
+
+    "block-fieldgun-tinbronze-rifled":    "Tin bronze field gun (rifled)",
+    "block-fieldgun-iron-rifled":         "Iron field gun (rifled)",
+    "block-fieldgun-meteoriciron-rifled": "Meteoric iron field gun (rifled)",
+    "block-fieldgun-steel-rifled":        "Steel field gun (rifled)",
+
+    "block-howitzer-tinbronze-rifled":    "Tin bronze howitzer (rifled)",
+    "block-howitzer-iron-rifled":         "Iron howitzer (rifled)",
+    "block-howitzer-meteoriciron-rifled": "Meteoric iron howitzer (rifled)",
+    "block-howitzer-steel-rifled":        "Steel howitzer (rifled)",
+
+    "block-heavyfieldgun-tinbronze-rifled":    "Heavy tin bronze field gun",
+    "block-heavyfieldgun-iron-rifled":         "Heavy iron field gun",
+    "block-heavyfieldgun-meteoriciron-rifled": "Heavy meteoric iron field gun",
+    "block-heavyfieldgun-steel-rifled":        "Heavy steel field gun",
+
+    "block-heavyhowitzer-tinbronze-rifled":    "Heavy tin bronze howitzer",
+    "block-heavyhowitzer-iron-rifled":         "Heavy iron howitzer",
+    "block-heavyhowitzer-meteoriciron-rifled": "Heavy meteoric iron howitzer",
+    "block-heavyhowitzer-steel-rifled":        "Heavy steel howitzer",
+
+    "block-heavymachinegun-tinbronze-rifled":    "Tin bronze machine gun",
+    "block-heavymachinegun-iron-rifled":         "Iron machine gun",
+    "block-heavymachinegun-meteoriciron-rifled": "Meteoric iron machine gun",
+    "block-heavymachinegun-steel-rifled":        "Steel machine gun",
+
+    "item-shell-simple":    "Shell",
+    "item-shell-explosive": "High explosive shell",
+    "item-shell-piercing":  "Piercing shell",
+    "item-shell-shrapnel":  "Shrapnel shell",
+    "item-shell-gas":       "Gas shell",
+    "itemdesc-shell-simple":    "A fused projectile suited for rifled cannons.",
+    "itemdesc-shell-explosive": "A highly explosive fused projetile that is suited for rifled cannons.",
+    "itemdesc-shell-piercing":  "A fused projectile made to pierce most walls.",
+    "itemdesc-shell-shrapnel":  "A fused projectile filled with metal bits.",
+    "itemdesc-shell-gas":       "A fused projectile filled with airborne miasmas.",
+
+    "item-clothes-face-gasmask":     "Gasmask",
+    "itemdesc-clothes-face-gasmask": "A mask made to survive toxic miasmas.",
+
+    "item-barrel-tinbronze-smoothbore":    "Tin bronze barrel (smoothbore)",
+    "item-barrel-iron-smoothbore":         "Iron barrel (smoothbore)",
+    "item-barrel-meteoriciron-smoothbore": "Meteoric iron barrel (smoothbore)",
+    "item-barrel-steel-smoothbore":        "Steel barrel (smoothbore)",
+
+    "item-barrel-tinbronze-rifled":    "Tin bronze barrel (rifled)",
+    "item-barrel-iron-rifled":         "Iron barrel (rifled)",
+    "item-barrel-meteoriciron-rifled": "Meteoric iron barrel (rifled)",
+    "item-barrel-steel-rifled":        "Steel barrel (rifled)",
+
+    "item-thinbarrel-tinbronze-smoothbore":    "Tin bronze thin barrel (smoothbore)",
+    "item-thinbarrel-iron-smoothbore":         "Iron thin barrel (smoothbore)",
+    "item-thinbarrel-meteoriciron-smoothbore": "Meteoric iron thin barrel (smoothbore)",
+    "item-thinbarrel-steel-smoothbore":        "Steel thin barrel (smoothbore)",
+
+    "item-thinbarrel-tinbronze-rifled":    "Tin bronze thin barrel (rifled)",
+    "item-thinbarrel-iron-rifled":         "Iron thin barrel (rifled)",
+    "item-thinbarrel-meteoriciron-rifled": "Meteoric iron thin barrel (rifled)",
+    "item-thinbarrel-steel-rifled":        "Steel thin barrel (rifled)",
+    
+    "item-ramrod": "Ramrod",
+    "itemdesc-ramrod": "A rod used to clean and load heavy guns.",
+
+    "item-lanyard-copper":        "Copper lanyard",
+    "item-lanyard-tinbronze":     "Tin bronze lanyard",
+    "item-lanyard-bismuthbronze": "Bismuth bronze lanyard",
+    "item-lanyard-blackbronze":   "Black bronze lanyard",
+    "item-lanyard-iron":          "Iron lanyard",
+    "item-lanyard-meteoriciron":  "Meteoric iron lanyard",
+    "item-lanyard-steel":         "Steel lanyard",
+
+    "item-goad":     "Goad",
+    "itemdesc-goad": "A pole used to lead draft animals.",
+
+    "item-heavybullet-stone":  "Heavy stone bullet",
+    "item-heavybullet-simple": "Heavy metal bullet",
+
+    "item-shot-stone":     "Gun stone",
+    "item-shot-round":     "Round shot",
+    "item-shot-explosive": "Explosive round shot",
+    "item-shot-grape":     "Grape shot",
+    "item-roundshell":     "Round shell",
+    "itemdesc-shot-stone":     "A stone projectile suited for smoothbore cannons.",
+    "itemdesc-shot-round":     "A metal projectile suited for smoothbore cannons.",
+    "itemdesc-shot-explosive": "A highly explosive projectile that is suited for smoothbore cannons.",
+    "itemdesc-shot-grape":     "A bag filled with metal bits that can be blasted with a smoothbore cannon.",
+    "itemdesc-roundshell":     "A hollow round shot.",
+
+    "item-fixedshot-stone":     "Fixed gun stone",
+    "item-fixedshot-round":     "Fixed round shot",
+    "item-fixedshot-explosive": "Fixed explosive round shot",
+    "item-fixedshot-canister":  "Fixed canister shot",
+    "itemdesc-fixedshot-stone":     "A fused stone projectile that is suited for smoothbore cannons.",
+    "itemdesc-fixedshot-round":     "A fused metal projectile that is suited for smoothbore cannons.",
+    "itemdesc-fixedshot-explosive": "A highly explosive fused projectile that is suited for smoothbore cannons.",
+    "itemdesc-fixedshot-canister":  "A projectile filled with metal bits that is suited for smoothbore cannons.",
+
+    "item-wetblastingpowder":     "Blasting powder (wet)",
+    "itemdesc-wetblastingpowder": "Dry it to save some its explosive value",
+
+    "item-cartridge": "Cartridge",
+
+    "game:heavygun-fireinterval":  "{0} shot per seconds",
+    "game:heavygun-accuracy":      "Accuracy: {0}%",
+    "game:heavygun-firepower":     "Gun velocity: {0}m per seconds",
+    "game:heavygun-cooldown":      "Cooldown: {0:0}s",
+    "game:heavygun-turnspeed":     "Turnspeed: {0} turn per seconds",
+    "game:heavygun-elevation":     "Pitch: {0} to {1}",
+    "game:heavygun-cleanduration": "Clean duration: {0:0}s",
+    "game:heavygun-loadduration":  "Load duration: {0:0}s",
+
+    "game:ammunition-damage":       "{0} piercing damage",
+    "game:ammunition-duration":     "{0} damage for {1:0} seconds",
+    "game:ammunition-blastradius":  "Blast radius: {0} m",
+    "game:ammunition-injureradius": "Injure radius: {0} m",
+    "game:ammunition-fuseduration": "Fuse duration: {0}s",
+
+    "game:missing-near-draftentity": "There is nothing I can attach the limber to.",
+    "game:barrel-toohot": "The barrel is too hot."
+}

@@ -1,0 +1,47 @@
+{
+	"code":  "limber",
+	"class": "EntityLimber",
+	"hitboxSize": { "x": 1.15, "y": 1.4 },
+	"weight": 400,
+	"drops": [{
+		"type": "block", 
+		"code": "game:wagonwheels-spoked-west", 
+		"quantity": { "avg": 1, "var": 0.5 } 
+	}],
+	"attributes": {
+		"limber": {
+			"entityCodes": [ "sheep-bighorn-male" ],
+			"requiresSideEntity": true,
+			"offset": -1.8
+		}
+	},
+	"client": {
+		"renderer": "Shape",
+		"shape":   { "base": "gun/limber-complete" },
+        "textures": {
+			"iron1":    { "base": "game:block/metal/sheet/iron1" },
+			"top":      { "base": "game:block/wood/echochamber/top" },
+			"plainoak": { "base": "game:block/wood/plainoak" },
+			"generic":  { "base": "game:block/wood/planks/generic" }
+        },
+		"behaviors": [
+			{ "code": "interpolateposition" },
+			{ "code": "floatupwhenstuck", "onlyWhenDead": true },
+			{ "code": "controlledphysics", "stepHeight": 1.1251 },
+			{ "code": "deployablelimber" }
+		],
+		"animations": [{
+			"code":      "move",
+			"animation": "move",
+			"blendMode": "AddAverage"
+		}]
+	},
+	"server": {
+		"behaviors": [
+			{ "code": "controlledphysics", "stepHeight": 1.1251 },
+			{ "code": "floatupwhenstuck", "onlyWhenDead": true },
+			{ "code": "health", "currenthealth": 20, "maxhealth": 20 },
+			{ "code": "deployablelimber" }
+		]
+	}
+}

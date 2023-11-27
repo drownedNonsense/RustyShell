@@ -1,0 +1,28 @@
+[
+	{
+		"ingredientPattern": "PWP,WAW,PWP",
+		"ingredients": {
+            "P": {
+                "type": "item",
+                "code": "game:metalplate-*",
+                "name": "metal",
+                "allowedVariants": ["iron", "meteoriciron", "steel"],
+                "quantity": 1
+            },
+            "A": {
+                "type": "block",
+                "code": "game:woodenaxle-ud",
+                "quantity": 1
+            },
+            "W": {
+                "type": "item",
+                "code": "game:plank-*",
+                "name": "wood",
+                "quantity": 2
+            }
+		},
+		"width":  3,
+		"height": 3,
+		"output": { "type": "block", "code": "game:wagonwheels-spoked-west" }
+	}
+]

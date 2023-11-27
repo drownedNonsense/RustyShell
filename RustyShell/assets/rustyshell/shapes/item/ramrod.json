@@ -1,0 +1,67 @@
+{
+	"editor": {
+		"allAngles": false,
+		"entityTextureMode": false
+	},
+	"textureWidth": 16,
+	"textureHeight": 16,
+	"textureSizes": {
+		"blackbronze": [16,16],
+		"metal": [16,16],
+		"wood": [16,16],
+		"handle": [16,16]
+	},
+	"textures": {
+	},
+	"elements": [
+		{
+			"name": "Origin",
+			"from": [ 8.0, 0.0, 8.0 ],
+			"to": [ 8.0, 0.0, 8.0 ],
+			"rotationOrigin": [ 8.0, 0.0, 8.0 ],
+			"faces": {
+			},
+			"children": [
+				{
+					"name": "Shaft1",
+					"from": [ -8.0, -0.75, -0.75 ],
+					"to": [ 8.0, 0.75, 0.75 ],
+					"rotationOrigin": [ 8.0, 0.0, 0.0 ],
+					"faces": {
+						"north": { "texture": "#plainoak", "uv": [ 0.0, 8.5, 16.0, 10.0 ] },
+						"south": { "texture": "#plainoak", "uv": [ 0.0, 4.5, 16.0, 6.0 ] },
+						"up": { "texture": "#plainoak", "uv": [ 0.0, 7.0, 16.0, 8.5 ] },
+						"down": { "texture": "#plainoak", "uv": [ 0.0, 2.0, 16.0, 3.5 ] }
+					},
+					"children": [
+						{
+							"name": "Shaft2",
+							"from": [ -16.0, 0.0, 0.0 ],
+							"to": [ 0.0, 1.5, 1.5 ],
+							"rotationOrigin": [ 0.0, 0.75, 0.75 ],
+							"faces": {
+								"north": { "texture": "#plainoak", "uv": [ 0.0, 11.0, 16.0, 12.5 ] },
+								"south": { "texture": "#plainoak", "uv": [ 0.0, 7.5, 16.0, 9.0 ] },
+								"up": { "texture": "#plainoak", "uv": [ 0.0, 9.0, 16.0, 10.5 ], "autoUv": false },
+								"down": { "texture": "#plainoak", "uv": [ 0.0, 4.5, 16.0, 6.0 ] }
+							}
+						}
+					]
+				},
+				{
+					"name": "RamHead",
+					"from": [ 8.0, -1.5, -1.5 ],
+					"to": [ 14.0, 1.5, 1.5 ],
+					"rotationOrigin": [ 8.0, 0.0, 0.0 ],
+					"faces": {
+						"north": { "texture": "#aged-side", "uv": [ 1.0, 10.5, 7.0, 13.5 ] },
+						"east": { "texture": "#aged-side", "uv": [ 10.0, 11.0, 13.0, 14.0 ] },
+						"south": { "texture": "#aged-side", "uv": [ 3.0, 13.0, 9.0, 16.0 ] },
+						"west": { "texture": "#aged-side", "uv": [ 7.0, 6.0, 10.0, 9.0 ] },
+						"up": { "texture": "#aged-side", "uv": [ 8.0, 9.5, 14.0, 12.5 ], "rotation": 180 },
+						"down": { "texture": "#aged-side", "uv": [ 8.0, 7.0, 14.0, 10.0 ] }
+					}
+				}
+			]
+		}
+	]}

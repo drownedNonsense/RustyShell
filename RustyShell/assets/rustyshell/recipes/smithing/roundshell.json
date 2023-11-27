@@ -1,0 +1,27 @@
+{
+    "ingredient": {
+      "type": "item",
+      "code": "game:ingot-*",
+      "name": "metal",
+      "allowedVariants": ["lead", "iron"]
+    },
+    "pattern": [
+        [
+            "####",
+            "####",
+            "####",
+            "####"
+        ],
+        [
+            "####",
+            "#__#",
+            "#__#",
+            "####"
+        ]
+    ],
+    "name": "RoundShell",
+    "output": {
+        "type": "item",
+        "code": "rustyshell:roundshell"
+    }
+}

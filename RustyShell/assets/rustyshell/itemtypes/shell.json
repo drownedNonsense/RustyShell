@@ -1,0 +1,57 @@
+{
+    "code": "shell",
+    "class": "ItemAmmunition",
+	  "variantgroups": [{ "code": "type", "states": ["simple", "explosive", "piercing", "shrapnel", "gas" ]}],
+    "maxstacksize": 1,
+    "creativeinventory": { "general": ["*"], "items": ["*"], "rustyshell": ["*"] },
+    "behaviors": [{ "name": "GroundStorable", "properties": { "layout": "Quadrants", "collisionBox": { "x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 1, "z2": 1 } }}],
+    "heldTpIdleAnimation": "holdbothhandslarge", "heldTpUseAnimation": "twohandplaceblock",
+    "attributes": {
+      "hasFuse":         true,
+      "smokelessPowder": true,
+      "detonationByType": {
+        "*-simple":    { "type": "Simple",        "amount":  80, "blastRadius":  5, "injureRadius":  8 },
+        "*-piercing":  { "type": "Piercing",      "amount": 120, "blastRadius":  5, "injureRadius":  9 },
+        "*-explosive": { "type": "HighExplosive", "amount":  20, "blastRadius":  6, "injureRadius": 14 },
+        "*-shrapnel":  { "type": "Canister",      "amount":  20, "blastRadius": 10, "injureRadius": 28, "fuseDuration": 4000 },
+        "*-gas":       { "type": "Gas",           "amount":  20, "blastRadius":  1, "injureRadius": 40, "duration": 10000 }
+      },
+      "groundStorageTransform": {
+        "translation": { "x":   0, "y": 0.5, "z":   0 },
+        "rotation":    { "x":   0, "y":  45, "z":  90 },
+        "origin":      { "x": 0.5, "y":   0, "z": 0.5 }
+      },
+		  "handbook": { "groupBy": [ "shell-*" ]}
+    },
+    "shapeByType": {
+      "*-explosive": { "base": "ammunition/shell-explosive" },
+      "*-piercing":  { "base": "ammunition/shell-piercing" },
+      "*":           { "base": "ammunition/shell" }
+    },
+    "texturesByType": {
+      "*-piercing": { "blackbronze1": { "base": "game:block/metal/sheet/blackbronze1" }, "lead1": { "base": "game:block/metal/sheet/lead1" }},
+      "*":          { "blackbronze1": { "base": "game:block/metal/sheet/blackbronze1" }}
+    },
+    "tpHandTransform": {
+      "translation": { "x": -0.7, "y": -0.1, "z": -0.3 },
+      "rotation":    { "x":   45, "y":  -45, "z": -110 },
+      "origin":      { "x":  0.5, "y":    0, "z":  0.5 },
+      "scale": 0.65
+    },
+    "fpHandTransform": {
+      "rotation": { "x":   0, "y":   0, "z":  89 },
+      "origin":   { "x": 0.5, "y": 0.3, "z": 0.5 },
+      "scale": 2.56
+    },
+    "guiTransform": {
+      "translation": { "x":   2, "y":   2, "z":   0 },
+      "rotation":    { "x":   0, "y": 150, "z": -45 },
+      "origin":      { "x": 0.5, "y":   0, "z": 0.5 },
+      "scale": 1.65
+    },
+    "groundTransform": {
+      "translation": { "x":  0, "y": 0.05, "z":  0 },
+      "rotation":    { "x": 90, "y":    0, "z": 20 },
+      "scale": 3
+    }
+}

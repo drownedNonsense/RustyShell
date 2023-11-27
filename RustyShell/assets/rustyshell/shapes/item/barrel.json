@@ -1,0 +1,130 @@
+{
+	"editor": {
+		"collapsedPaths": "Root/Base/Barrel4,Root/Base/Gun,Root/Base/Barrel1,Root/RimMoverLeft/Quadrant10-12,Root/HubRight,Root/Base/Barrel1/Barrel2/Barrel3,Root/Base/Barrel4/Barrel5,Root/Base/Barrel1/Barrel2,Root/Base/HubLeft/HubFatPart,Root/RimMoverLeft2,Root/RimMover,Root/Base/HubLeft,Root/Base/Barrel1/Barrel4,Root/HubLeft,Root/Base/Barrel1/Barrel1Detail2,Root/Hub,Root/Base/Barrel4/Barrel1Detail5,Root/HubRight/HubFatPart,Root/Base/Barrel1/BarrelDetail3,Root/Base/Barrel1/BarrelDetail1,Root/Base/BaseLeft1,Root/RimMoverLeft/Quadrant1-3,Root/Base/HubLeft/WheelLeft2,Root/RimMoverLeft/Quadrant4-6,Root/RimMoverLeft/Quadrant7-9,Root/Base/BaseRight1,Root/Base/Barrel4/Barrel5/Barrel6,Root/Base/HubRight,Root/RimMoverRight,Root/HubLeft/HubFatPart",
+		"allAngles": false,
+		"entityTextureMode": false
+	},
+	"textureWidth": 16,
+	"textureHeight": 16,
+	"textureSizes": {
+	},
+	"textures": {
+	},
+	"elements": [
+		{
+			"name": "SmoothBoreBarrel1",
+			"from": [ 11.0, 0.0, 6.0 ],
+			"to": [ 12.0, 10.0, 10.0 ],
+			"rotationOrigin": [ 11.0, 0.0, 8.0 ],
+			"faces": {
+				"north": { "texture": "#metal", "uv": [ 3.0, 2.0, 4.0, 12.0 ] },
+				"east": { "texture": "#metal", "uv": [ 9.0, 2.0, 13.0, 12.0 ] },
+				"south": { "texture": "#metal", "uv": [ 10.0, 4.0, 11.0, 14.0 ] },
+				"west": { "texture": "#metal", "uv": [ 4.0, 1.5, 8.0, 11.5 ] },
+				"up": { "texture": "#metal", "uv": [ 5.0, 7.5, 6.0, 11.5 ] },
+				"down": { "texture": "#metal", "uv": [ 3.0, 7.0, 4.0, 11.0 ] }
+			}
+		},
+		{
+			"name": "SmoothBoreBarrel2",
+			"from": [ 4.0, 0.0, 6.0 ],
+			"to": [ 5.0, 10.0, 10.0 ],
+			"rotationOrigin": [ 5.0, 0.0, 8.0 ],
+			"faces": {
+				"north": { "texture": "#metal", "uv": [ 5.0, 2.0, 6.0, 12.0 ] },
+				"east": { "texture": "#metal", "uv": [ 2.5, 4.5, 6.5, 14.5 ] },
+				"south": { "texture": "#metal", "uv": [ 4.0, 2.5, 5.0, 12.5 ] },
+				"west": { "texture": "#metal", "uv": [ 9.5, 5.0, 13.5, 15.0 ] },
+				"up": { "texture": "#metal", "uv": [ 13.0, 3.0, 14.0, 7.0 ] },
+				"down": { "texture": "#metal", "uv": [ 1.5, 3.0, 2.5, 7.0 ] }
+			}
+		},
+		{
+			"name": "SmoothBoreBarrel3",
+			"from": [ 6.0, 0.0, 11.0 ],
+			"to": [ 10.0, 10.0, 12.0 ],
+			"rotationOrigin": [ 8.0, 0.0, 11.0 ],
+			"faces": {
+				"north": { "texture": "#metal", "uv": [ 6.0, 2.5, 10.0, 12.5 ] },
+				"east": { "texture": "#metal", "uv": [ 12.5, 3.5, 13.5, 13.5 ] },
+				"south": { "texture": "#metal", "uv": [ 8.5, 4.0, 12.5, 14.0 ] },
+				"west": { "texture": "#metal", "uv": [ 2.0, 2.0, 3.0, 12.0 ] },
+				"up": { "texture": "#metal", "uv": [ 7.0, 7.5, 11.0, 8.5 ] },
+				"down": { "texture": "#metal", "uv": [ 3.0, 6.0, 7.0, 7.0 ] }
+			}
+		},
+		{
+			"name": "SmoothBoreBarrel4",
+			"from": [ 6.0, 0.0, 4.0 ],
+			"to": [ 10.0, 10.0, 5.0 ],
+			"rotationOrigin": [ 8.0, 0.0, 5.0 ],
+			"faces": {
+				"north": { "texture": "#metal", "uv": [ 3.5, 5.0, 7.5, 15.0 ] },
+				"east": { "texture": "#metal", "uv": [ 3.0, 4.0, 4.0, 14.0 ] },
+				"south": { "texture": "#metal", "uv": [ 6.5, 2.0, 10.5, 12.0 ] },
+				"west": { "texture": "#metal", "uv": [ 5.5, 3.0, 6.5, 13.0 ] },
+				"up": { "texture": "#metal", "uv": [ 5.5, 7.0, 9.5, 8.0 ] },
+				"down": { "texture": "#metal", "uv": [ 6.0, 8.0, 10.0, 9.0 ] }
+			}
+		},
+		{
+			"name": "SmoothBoreBarrel5",
+			"from": [ 9.5, 0.0, 11.0 ],
+			"to": [ 12.5, 10.01, 12.0 ],
+			"rotationOrigin": [ 11.0, 0.0, 11.0 ],
+			"rotationY": -135.0,
+			"faces": {
+				"north": { "texture": "#metal", "uv": [ 11.5, 2.5, 14.5, 12.5 ] },
+				"east": { "texture": "#metal", "uv": [ 3.5, 4.0, 4.5, 14.0 ] },
+				"south": { "texture": "#metal", "uv": [ 5.0, 1.5, 8.0, 11.5 ] },
+				"west": { "texture": "#metal", "uv": [ 9.0, 4.0, 10.0, 14.0 ] },
+				"up": { "texture": "#metal", "uv": [ 13.0, 2.5, 16.0, 3.5 ] },
+				"down": { "texture": "#metal", "uv": [ 3.0, 7.0, 6.0, 8.0 ] }
+			}
+		},
+		{
+			"name": "SmoothBoreBarrel6",
+			"from": [ 3.5, 0.0, 11.0 ],
+			"to": [ 6.5, 10.01, 12.0 ],
+			"rotationOrigin": [ 5.0, 0.0, 11.0 ],
+			"rotationY": 135.0,
+			"faces": {
+				"north": { "texture": "#metal", "uv": [ 8.0, 3.0, 11.0, 13.0 ] },
+				"east": { "texture": "#metal", "uv": [ 6.0, 2.5, 7.0, 12.5 ] },
+				"south": { "texture": "#metal", "uv": [ 13.0, 1.0, 16.0, 11.0 ] },
+				"west": { "texture": "#metal", "uv": [ 13.0, 2.0, 14.0, 12.0 ] },
+				"up": { "texture": "#metal", "uv": [ 3.5, 3.5, 6.5, 4.5 ] },
+				"down": { "texture": "#metal", "uv": [ 11.0, 10.5, 14.0, 11.5 ] }
+			}
+		},
+		{
+			"name": "SmoothBoreBarrel7",
+			"from": [ 3.5, 0.0, 5.0 ],
+			"to": [ 6.5, 10.01, 6.0 ],
+			"rotationOrigin": [ 5.0, 0.0, 5.0 ],
+			"rotationY": 45.0,
+			"faces": {
+				"north": { "texture": "#metal", "uv": [ 8.0, 2.0, 11.0, 12.0 ] },
+				"east": { "texture": "#metal", "uv": [ 6.0, 4.5, 7.0, 14.5 ] },
+				"south": { "texture": "#metal", "uv": [ 1.5, 1.5, 4.5, 11.5 ] },
+				"west": { "texture": "#metal", "uv": [ 13.5, 3.0, 14.5, 13.0 ] },
+				"up": { "texture": "#metal", "uv": [ 15.0, 6.0, 18.0, 7.0 ] },
+				"down": { "texture": "#metal", "uv": [ 9.5, 6.5, 12.5, 7.5 ] }
+			}
+		},
+		{
+			"name": "SmoothBoreBarrel8",
+			"from": [ 9.5, 0.0, 5.0 ],
+			"to": [ 12.5, 10.01, 6.0 ],
+			"rotationOrigin": [ 11.0, 0.0, 5.0 ],
+			"rotationY": -45.0,
+			"faces": {
+				"north": { "texture": "#metal", "uv": [ 8.0, 3.5, 11.0, 13.5 ] },
+				"east": { "texture": "#metal", "uv": [ 4.0, 4.0, 5.0, 14.0 ] },
+				"south": { "texture": "#metal", "uv": [ 8.5, 2.0, 11.5, 12.0 ] },
+				"west": { "texture": "#metal", "uv": [ 7.5, 4.5, 8.5, 14.5 ] },
+				"up": { "texture": "#metal", "uv": [ 11.5, 6.5, 14.5, 7.5 ] },
+				"down": { "texture": "#metal", "uv": [ 6.5, 8.5, 9.5, 9.5 ] }
+			}
+		}
+	]}

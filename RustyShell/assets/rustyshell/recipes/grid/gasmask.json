@@ -1,0 +1,27 @@
+[
+	{
+		"ingredientPattern": "HLH,QLQ,_C_",
+		"ingredients": {
+			"L": { "type": "item", "code": "game:leather-plain", "quantity": 2 },
+			"H": { "type": "item", "code": "game:hoop-*", "allowedVariants": ["iron", "meteoriciron", "steel"]},
+			"Q": { "type": "item", "code": "game:clearquartz" },
+			"C": { "type": "item", "code": "game:charcoal", "quantity": 8 }
+		},
+		"width":  3,
+		"height": 3,
+		"output": { "type": "item", "code": "rustyshell:clothes-face-gasmask" }
+	},
+    {
+		"ingredientPattern": "M,C",
+		"ingredients": {
+			"M": { "type": "item", "code": "rustyshell:clothes-face-gasmask" },
+			"C": { "type": "item", "code": "game:charcoal", "quantity": 8 }
+		},
+		"width":  1,
+		"height": 2,
+        "copyAttributesFrom": "M",
+        "averageDurability": false,
+		"name": "gasmask repair",
+		"output": { "type": "item", "code": "rustyshell:clothes-face-gasmask" }
+	}
+]
