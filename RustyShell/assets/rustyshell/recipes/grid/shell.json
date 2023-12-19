@@ -1,23 +1,21 @@
 [
 	{
-		"ingredientPattern": "A_,BC,BD",
+		"ingredientPattern": "A_,BC,B_",
 		"ingredients": {
 			"A": { "type": "item", "code": "game:hammer-*",       "isTool": true },
 			"B": { "type": "item", "code": "game:metalplate-*",   "name": "metal", "allowedVariants": ["tinbronze", "bismuthbronze", "blackbronze", "brass"]},
-			"C": { "type": "item", "code": "game:blastingpowder", "quantity": 4 },
-			"D": { "type": "item", "code": "game:blastingpowder", "quantity": 4 }
+			"C": { "type": "item", "code": "game:blastingpowder", "quantity": 4 }
 		},
 		"width":  2,
 		"height": 3,
 		"output": { "type": "item", "code": "rustyshell:shell-simple" }
 	},
 	{
-		"ingredientPattern": "_A,CB,DB",
+		"ingredientPattern": "_A,CB,_B",
 		"ingredients": {
 			"A": { "type": "item", "code": "game:hammer-*",       "isTool": true },
 			"B": { "type": "item", "code": "game:metalplate-*",   "name": "metal", "allowedVariants": ["tinbronze", "bismuthbronze", "blackbronze", "brass"]},
-			"C": { "type": "item", "code": "game:blastingpowder", "quantity": 4 },
-			"D": { "type": "item", "code": "game:blastingpowder", "quantity": 4 }
+			"C": { "type": "item", "code": "game:blastingpowder", "quantity": 4 }
 		},
 		"width":  2,
 		"height": 3,

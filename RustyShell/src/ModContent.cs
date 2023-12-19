@@ -143,7 +143,7 @@ namespace RustyShell {
                     (e) => !(e.Attributes?.GetBool("isMechanical", false) ?? false) && serverWorld.CanDamageEntity(byEntity, e, out bool _) && room.Contains(e.Pos.AsBlockPos))
                 ) {
 
-                    ItemSlot itemSlot    = (entity as EntityAgent)?.GearInventory[(int)EnumCharacterDressType.ArmorHead];
+                    ItemSlot itemSlot    = (entity as EntityAgent)?.GearInventory?[(int)EnumCharacterDressType.ArmorHead];
                     ItemWearable gasmask = itemSlot?.Itemstack?.Item as ItemWearable;
                     float gasStrength    = GameMath.Clamp((room.CoolingWallCount + room.NonCoolingWallCount) / GameMath.Max(room.ExitCount, 1f), 0f, damage);
 
