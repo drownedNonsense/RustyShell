@@ -27,7 +27,6 @@ namespace RustyShell {
                 "Simple"        => EnumExplosionType.Simple,
                 "Piercing"      => EnumExplosionType.Piercing,
                 "HighExplosive" => EnumExplosionType.HighExplosive,
-                "Grape"         => EnumExplosionType.Grape,
                 "Canister"      => EnumExplosionType.Canister,
                 "Gas"           => EnumExplosionType.Gas,
                 _               => EnumExplosionType.Simple,

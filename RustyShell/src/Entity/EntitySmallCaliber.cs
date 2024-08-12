@@ -93,14 +93,12 @@ namespace RustyShell {
                     if ((this.World as IServerWorldAccessor)?.CanDamageEntity(this.FiredBy, entity, out bool isFromPlayer) ?? false) {
 
                         this.msCollide = this.World.ElapsedMilliseconds;
-                        this.SidedPos.Motion.Set(Vec3d.Zero);
-
                         bool didDamage = entity.ReceiveDamage(new DamageSource() {
                             Source       = isFromPlayer ? EnumDamageSource.Player : EnumDamageSource.Entity,
                             SourceEntity = this,
                             CauseEntity  = this.FiredBy,
                             Type         = EnumDamageType.PiercingAttack
-                        }, 40);
+                        }, 50);
 
                         entity.SidedPos.Motion.Add(entity.Properties.KnockbackResistance * 0.1f * this.SidedPos.Motion.ToVec3f());
 
@@ -117,6 +115,7 @@ namespace RustyShell {
             // P H Y S I C S
             //---------------
 
+                public override bool ShouldReceiveDamage(DamageSource damageSource, float damage) => false;
                 public override void OnCollided() {
                     this.IsColliding();
                     this.motionBeforeCollide.Set(this.SidedPos.Motion);
@@ -131,8 +130,6 @@ namespace RustyShell {
 
 
                 private void IsColliding() {
-
-                    this.SidedPos.Motion.Set(0, 0, 0);
                     if (!this.stuck
                         && this.Api.Side.IsServer()
                         && this.msSinceCollide > 500
@@ -154,7 +151,7 @@ namespace RustyShell {
 
                         this.Die();
 
-                    } // if ..
+                    } else if (this.stuck) this.Die();
                 } // void ..
 
 
@@ -169,7 +166,7 @@ namespace RustyShell {
                         || this.ServerPos.Motion == Vec3d.Zero
                     ) return false;
 
-                    Cuboidf projectileBox = this.SelectionBox.Translate(this.ServerPos.XYZFloat);
+                    Cuboidf projectileBox = this.SelectionBox.OmniGrowBy(4f).Translate(this.ServerPos.XYZFloat);
                     Vec3f   motion        = this.ServerPos.Motion.ToVec3f();
 
                     if (float.IsNegative(motion.X)) projectileBox.X1 += 1.5f * motion.X;
@@ -181,7 +178,7 @@ namespace RustyShell {
 
                     return this.entityPartitioning.GetNearestInteractableEntity(this.SidedPos.XYZ, 5f, (e) => {
 
-                        if (e.EntityId == this.EntityId) return false;
+                        if (e.EntityId == this.EntityId || e is EntitySmallCaliber) return false;
 
                         Cuboidf translatedBox = e.SelectionBox.Translate(e.ServerPos.XYZ);
                         if (   translatedBox.X2 >= projectileBox.X1

@@ -96,30 +96,114 @@
 		"output": { "type": "item", "code": "rustyshell:shell-shrapnel" }
 	},
 	{
-		"ingredientPattern": "A__,BCE,BDF",
+		"ingredientPattern": "AB,CD,CE",
 		"ingredients": {
-			"A": { "type": "item", "code": "game:hammer-*",       "isTool": true },
-			"B": { "type": "item", "code": "game:metalplate-*",   "name": "metal", "allowedVariants": ["tinbronze", "bismuthbronze", "blackbronze", "brass"]},
-			"C": { "type": "item", "code": "game:blastingpowder", "quantity": 32 },
-			"D": { "type": "item", "code": "game:blastingpowder", "quantity": 4 },
-			"E": { "type": "item", "code": "game:powderedsulfur", "quantity": 32 },
-			"F": { "type": "item", "code": "game:coke",           "quantity": 32 }
+			"A": { "type": "item", "code": "game:hammer-*", "isTool": true },
+			"B": {
+				"type": "block",
+				"code": "game:woodbucket"
+			},
+			"C": { "type": "item", "code": "game:metalplate-*",             "name": "metal", "allowedVariants": ["tinbronze", "bismuthbronze", "blackbronze", "brass"]},
+			"D": { "type": "item", "code": "chemistrylib:ammoniumchloride", "quantity": 64 },
+			"E": { "type": "item", "code": "game:blastingpowder",           "quantity": 4 }
 		},
-		"width":  3,
+		"attributes": {
+			"liquidContainerProps": {
+				"requiresContent": { "type": "item", "code": "chemistrylib:mineralacidportion-hydrochloric" },
+				"requiresLitres": 0.5
+			}
+		},
+		"width":  2,
 		"height": 3,
 		"output": { "type": "item", "code": "rustyshell:shell-gas" }
 	},
 	{
-		"ingredientPattern": "__A,ECB,FDB",
+		"ingredientPattern": "BA,DC,EC",
 		"ingredients": {
-			"A": { "type": "item", "code": "game:hammer-*",       "isTool": true },
-			"B": { "type": "item", "code": "game:metalplate-*",   "name": "metal", "allowedVariants": ["tinbronze", "bismuthbronze", "blackbronze", "brass"]},
-			"C": { "type": "item", "code": "game:blastingpowder", "quantity": 32 },
-			"D": { "type": "item", "code": "game:blastingpowder", "quantity": 4 },
-			"E": { "type": "item", "code": "game:powderedsulfur", "quantity": 32 },
-			"F": { "type": "item", "code": "game:coke",           "quantity": 32 }
+			"A": { "type": "item", "code": "game:hammer-*", "isTool": true },
+			"B": {
+				"type": "block",
+				"code": "game:woodbucket"
+			},
+			"C": { "type": "item", "code": "game:metalplate-*",             "name": "metal", "allowedVariants": ["tinbronze", "bismuthbronze", "blackbronze", "brass"]},
+			"D": { "type": "item", "code": "chemistrylib:ammoniumchloride", "quantity": 64 },
+			"E": { "type": "item", "code": "game:blastingpowder",           "quantity": 4 }
 		},
-		"width":  3,
+		"attributes": {
+			"liquidContainerProps": {
+				"requiresContent": { "type": "item", "code": "chemistrylib:mineralacidportion-hydrochloric" },
+				"requiresLitres": 0.5
+			}
+		},
+		"width":  2,
+		"height": 3,
+		"output": { "type": "item", "code": "rustyshell:shell-gas" }
+	},
+	{
+		"ingredientPattern": "AB,CD,CE",
+		"ingredients": {
+			"A": { "type": "item", "code": "game:hammer-*", "isTool": true },
+			"B": {
+				"type": "block",
+				"code": "game:bowl-fired"
+			},
+			"C": { "type": "item", "code": "game:metalplate-*",             "name": "metal", "allowedVariants": ["tinbronze", "bismuthbronze", "blackbronze", "brass"]},
+			"D": { "type": "item", "code": "chemistrylib:ammoniumchloride", "quantity": 64 },
+			"E": { "type": "item", "code": "game:blastingpowder",           "quantity": 4 }
+		},
+		"attributes": {
+			"liquidContainerProps": {
+				"requiresContent": { "type": "item", "code": "chemistrylib:mineralacidportion-hydrochloric" },
+				"requiresLitres": 0.5
+			}
+		},
+		"width":  2,
+		"height": 3,
+		"output": { "type": "item", "code": "rustyshell:shell-gas" }
+	},
+	{
+		"ingredientPattern": "BA,DC,EC",
+		"ingredients": {
+			"A": { "type": "item", "code": "game:hammer-*", "isTool": true },
+			"B": {
+				"type": "block",
+				"code": "game:bowl-fired"
+			},
+			"C": { "type": "item", "code": "game:metalplate-*",             "name": "metal", "allowedVariants": ["tinbronze", "bismuthbronze", "blackbronze", "brass"]},
+			"D": { "type": "item", "code": "chemistrylib:ammoniumchloride", "quantity": 64 },
+			"E": { "type": "item", "code": "game:blastingpowder",           "quantity": 4 }
+		},
+		"attributes": {
+			"liquidContainerProps": {
+				"requiresContent": { "type": "item", "code": "chemistrylib:mineralacidportion-hydrochloric" },
+				"requiresLitres": 0.5
+			}
+		},
+		"width":  2,
+		"height": 3,
+		"output": { "type": "item", "code": "rustyshell:shell-gas" }
+	},
+	{
+		"ingredientPattern": "A_,BC,BD",
+		"ingredients": {
+			"A": { "type": "item", "code": "game:hammer-*", "isTool": true },
+			"B": { "type": "item", "code": "game:metalplate-*",             "name": "metal", "allowedVariants": ["tinbronze", "bismuthbronze", "blackbronze", "brass"]},
+			"C": { "type": "item", "code": "chemistrylib:phosphorus-white", "quantity": 32 },
+			"D": { "type": "item", "code": "game:blastingpowder",           "quantity": 4 }
+		},
+		"width":  2,
+		"height": 3,
+		"output": { "type": "item", "code": "rustyshell:shell-gas" }
+	},
+	{
+		"ingredientPattern": "_A,CB,DB",
+		"ingredients": {
+			"A": { "type": "item", "code": "game:hammer-*", "isTool": true },
+			"B": { "type": "item", "code": "game:metalplate-*",             "name": "metal", "allowedVariants": ["tinbronze", "bismuthbronze", "blackbronze", "brass"]},
+			"C": { "type": "item", "code": "chemistrylib:phosphorus-white", "quantity": 32 },
+			"D": { "type": "item", "code": "game:blastingpowder",           "quantity": 4 }
+		},
+		"width":  2,
 		"height": 3,
 		"output": { "type": "item", "code": "rustyshell:shell-gas" }
 	}

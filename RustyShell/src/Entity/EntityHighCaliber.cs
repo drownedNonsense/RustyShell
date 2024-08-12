@@ -72,7 +72,6 @@ namespace RustyShell {
                     "Simple"        => EnumExplosionType.Simple,
                     "Piercing"      => EnumExplosionType.Piercing,
                     "HighExplosive" => EnumExplosionType.HighExplosive,
-                    "Grape"         => EnumExplosionType.Grape,
                     "Canister"      => EnumExplosionType.Canister,
                     "Gas"           => EnumExplosionType.Gas,
                     _               => EnumExplosionType.NonExplosive,
@@ -84,7 +83,7 @@ namespace RustyShell {
                 this.AltDamage    = (detonation["altDamage"].AsFloat() is float altDamage && altDamage != 0) ? altDamage : RustyShellModSystem.GlobalConstants.GasBaseDamage;
                 this.Duration     =  detonation["duration"].AsInt();
 
-                if (this.FuseDuration is int fuseDuration && fuseDuration == 0) this.FuseDuration = detonation["fuseDuration"].AsInt();
+                if (detonation["fuseDuration"].Exists) this.FuseDuration = detonation["fuseDuration"].AsInt();
 
                 EntityHighCaliber.FireBlock        ??= this.World.GetBlock(new AssetLocation("fire"));
                 EntityHighCaliber.WastedSoilLookUp   = ObjectCacheUtil.GetOrCreate(api, "wastedSoilLookup", delegate {
@@ -147,7 +146,7 @@ namespace RustyShell {
 
                         this.SetRotation();
 
-                        if (this.msSinceLaunch >= this.FuseDuration - 1500 && this.Properties.Sounds.TryGetValue("flying", out AssetLocation sound))
+                        if (this.Pos.Motion.LengthSq() >= 1 && this.msSinceLaunch >= this.FuseDuration - 1500 && this.Properties.Sounds.TryGetValue("flying", out AssetLocation sound))
                             this.World.PlaySoundAt(sound, this, null, true, 64, 0.8f );
 
                     } // if ..
@@ -220,12 +219,6 @@ namespace RustyShell {
                                 .GetBlock(blockPos)
                                 .OnBlockExploded(this.World, blockPos, blockPos, EnumBlastType.OreBlast);
                             
-                            if (this.World.Side.IsServer()) this.Die();
-                            break;
-
-                        } case EnumExplosionType.Grape : {
-
-                            this.World.DetonateGrape(this.SidedPos.AsBlockPos, 0.4f, this.SidedPos.Yaw, this.FiredBy);
                             if (this.World.Side.IsServer()) this.Die();
                             break;
 
@@ -308,7 +301,7 @@ namespace RustyShell {
                                                 IIgnitable ignitable = b.GetInterface<IIgnitable>(this.World, p);
                                                 ignitable?.OnTryIgniteBlockOver(this.FiredBy as EntityAgent, p, this.BlastRadius, ref handled);
 
-                                                BlockPos overBlockPos = p + new BlockPos(0, 1, 0);
+                                                BlockPos overBlockPos = p.Up();
                                                 Block overBlock       = this.World.BlockAccessor.GetBlock(overBlockPos);
                                                 if (overBlock.BlockId == 0) {
 

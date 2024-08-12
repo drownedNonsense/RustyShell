@@ -89,11 +89,19 @@ namespace RustyShell {
                     IPlayer forPlayer,
                     ref EnumHandling handled
                 ) => new WorldInteraction[] {
-                        new WorldInteraction() {
-                            ActionLangCode    = "blockhelp-gearedgun-laying",
-                            MouseButton       = EnumMouseButton.Right,
-                            Itemstacks        = BlockBehaviorGearedGun.WrenchStacks
+
+                        new () {
+                            ActionLangCode = "blockhelp-gearedgun-lay-up",
+                            MouseButton    = EnumMouseButton.Right,
+                            Itemstacks     = BlockBehaviorGearedGun.WrenchStacks
                         }, // WorldInteraction ..
+                        new () {
+                            ActionLangCode = "blockhelp-gearedgun-lay-down",
+                            MouseButton    = EnumMouseButton.Right,
+                            Itemstacks     = BlockBehaviorGearedGun.WrenchStacks,
+                            HotKeyCodes    = new string[1] { "ctrl" }
+                        }, // WorldInteraction ..
+
                     }; // WorldInteraction[] ..
 
 
@@ -105,11 +113,15 @@ namespace RustyShell {
                 ) {
 
                     handling = EnumHandling.PreventDefault;
-                    if (CanInteract(byPlayer))
-                        world.BlockAccessor
+                    if (CanInteract(byPlayer) && world.BlockAccessor
                             .GetBlockEntity(blockSel.Position)?
-                            .GetBehavior<BlockEntityBehaviorGearedGun>()?
-                            .TryStartUpdate();
+                            .GetBehavior<BlockEntityBehaviorGearedGun>() is BlockEntityBehaviorGearedGun behavior
+                    ) {
+
+                        behavior.Movement = Vintagestory.GameContent.Mechanics.EnumRotDirection.Clockwise;
+                        behavior.TryStartUpdate();
+
+                    } // if ..
 
                     return true;
 
@@ -127,6 +139,13 @@ namespace RustyShell {
                     if (CanInteract(byPlayer)) {
 
                         handling = EnumHandling.PreventSubsequent;
+                        if (world.BlockAccessor
+                            .GetBlockEntity(blockSel.Position)?
+                            .GetBehavior<BlockEntityBehaviorGearedGun>() is BlockEntityBehaviorGearedGun behavior
+                        ) behavior.Movement = byPlayer.Entity.Controls.CtrlKey
+                            ? Vintagestory.GameContent.Mechanics.EnumRotDirection.Counterclockwise
+                            : Vintagestory.GameContent.Mechanics.EnumRotDirection.Clockwise;
+                        
                         if (byPlayer?.WorldData?.CurrentGameMode != EnumGameMode.Creative)
                             byPlayer.Entity
                                 .ActiveHandItemSlot

@@ -16,7 +16,7 @@ namespace RustyShell {
 
     public enum EnumGunState      { Dirty, Clean, Ready  }
     public enum EnumBarrelType    { Smoothbore, Rifled }
-    public enum EnumExplosionType { Simple, Piercing, HighExplosive, Grape, Canister, Fire, Gas, NonExplosive }
+    public enum EnumExplosionType { Simple, Piercing, HighExplosive, Canister, Fire, Gas, NonExplosive }
 
     public static class ModContent {
 
@@ -139,13 +139,13 @@ namespace RustyShell {
 
 
                 foreach (Entity entity in serverWorld.GetEntitiesAround(
-                    pos.ToVec3d(), radius, radius >> 1,
+                    pos.ToVec3d(), radius, radius,
                     (e) => !(e.Attributes?.GetBool("isMechanical", false) ?? false) && serverWorld.CanDamageEntity(byEntity, e, out bool _) && room.Contains(e.Pos.AsBlockPos))
                 ) {
 
                     ItemSlot itemSlot    = (entity as EntityAgent)?.GearInventory?[(int)EnumCharacterDressType.ArmorHead];
                     ItemWearable gasmask = itemSlot?.Itemstack?.Item as ItemWearable;
-                    float gasStrength    = GameMath.Clamp((room.CoolingWallCount + room.NonCoolingWallCount) / GameMath.Max(room.ExitCount, 1f), 0f, damage);
+                    float gasStrength    = GameMath.Clamp(damage * (room.CoolingWallCount + room.NonCoolingWallCount) / GameMath.Max(room.ExitCount, 1f), 0f, damage);
 
 
                     if (gasmask?.GetRemainingDurability(itemSlot?.Itemstack) == 0 || gasmask == null)
@@ -208,45 +208,6 @@ namespace RustyShell {
         } // void ..
 
 
-        public static void DetonateGrape(
-            this IWorldAccessor self,
-            BlockPos pos,
-            float    range,
-            float    orientation,
-            Entity   byEntity
-        ) {
-
-            if (self is IServerWorldAccessor server) {
-                for (int i = 0; i < 8; i++) {
-
-                    float pitch = -range * 0.5f + i / 8f * range;
-                    float num   = MathF.Cos(pitch);
-                    float num2  = MathF.Sin(pitch);
-
-
-                    for (int j = 0; j < 5; j++) {
-
-                        float yaw  = orientation - range * 0.5f + j * 0.2f * range;
-                        float num3 = MathF.Cos(yaw);
-                        float num4 = MathF.Sin(yaw);
-
-                        EntityProperties type         = server.GetEntityType(new AssetLocation("rustyshell:smallcaliber"));
-                        EntitySmallCaliber projectile = server.ClassRegistry.CreateEntity(type) as EntitySmallCaliber;
-
-                        projectile.FiredBy    = byEntity;
-                        projectile.ImpactSize = 1;
-                        projectile.ServerPos.SetPos(pos);
-                        projectile.ServerPos.Motion = new (-num * num4, num2, -num * num3);
-                        projectile.Pos.SetFrom(projectile.ServerPos);
-
-                        server.SpawnEntity(projectile);
-
-                    } // for ..
-                } // for ..
-            } // if ..
-        } // void ..
-
-
         public static void DetonateCanister(
             this IWorldAccessor self,
             BlockPos pos,
@@ -273,7 +234,7 @@ namespace RustyShell {
                     float num2  = MathF.Sin(pitch);
 
                     int amount  = 10 / (i + 1);
-                    float ratio = 1f / (float)amount;
+                    float ratio = 1f / amount;
                     
 
                     for (int j = 0; j <= amount; j++) {

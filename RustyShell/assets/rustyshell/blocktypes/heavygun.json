@@ -25,9 +25,9 @@
 	"creativeinventory": { "general": ["*"], "mechanics": ["*"], "rustyshell": ["*"] },
 	"maxstacksize": 1,
 	"behaviors": [
-		{ "name": "Loadable",      "properties": { "ammunitionCodes": [ "rustyshell:heavybullet-*" ]}},
+		{ "name": "Loadable",      "properties": { "ammunitionCodes": [ "rustyshell:heavybullet-*", "rustyshell:shot-grape" ]}},
 		{ "name": "MuzzleLoading", "properties": { "cleanDuration": 2.5, "loadDuration": 2.5 }},
-		{ "name": "Geared",        "properties": { "minElevation": 0, "maxElevation": 0.3, "barrelShapePath": "rustyshell:shapes/barrel/heavygun-barrel" }},
+		{ "name": "Geared",        "properties": { "minElevation": -0.05, "maxElevation": 0.3, "barrelShapePath": "rustyshell:shapes/barrel/heavygun-barrel" }},
 		{ "name": "Limberable",    "properties": { "entityCode": "rustyshell:limberedgun-heavygun-{material}-{barrel}" }},
 		{ "name": "Wheeled",       "properties": { "turnSpeedByType": { "*-tinbronze-*": 0.3, "*-steel-*": 0.25, "*": 0.2 }, "wheelShapePath": "rustyshell:shapes/wheel/spoked-small" }},
 		{ "name": "Ignitable" },

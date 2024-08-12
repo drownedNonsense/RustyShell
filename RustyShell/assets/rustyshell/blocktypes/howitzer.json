@@ -9,9 +9,12 @@
 	"attributes": {
 		"barrelLength": 2,
 		"accuracyByType": {
-			"*-tinbronze-*": 0.8,
-			"*-steel-*":     0.9,
-			"*":             0.85
+			"*-tinbronze-smoothbore": 0.7,
+			"*-steel-smoothbore":     0.85,
+			"*-smoothbore":           0.8,
+			"*-tinbronze-rifled":     0.8,
+			"*-steel-rifled":         0.9,
+			"*-rifled":               0.85
 		},
 		"firePower": 1.6,
 		"cooldownByType": {

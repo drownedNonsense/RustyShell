@@ -2,7 +2,7 @@
 	"code":  "smallcaliber",
 	"class": "EntitySmallCaliber",
 	"attributes": { "physics": { "groundDragFactor": 1, "airDragFactor": 0.25 }},
-	"hitboxSize": { "x": 2, "y": 2 },
+	"hitboxSize": { "x": 1, "y": 1 },
 	"client": {
 		"renderer":  "Shape",
 		"shape":     { "base": "game:entity/bullet" },

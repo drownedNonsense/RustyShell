@@ -1,3 +1,4 @@
+using System;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Datastructures;
@@ -11,7 +12,7 @@ namespace RustyShell {
         //=======================
 
             /** <summary> Tangent theta elevation </summary> **/ internal float Elevation;
-            /** <summary> ELevation direction </summary> **/     protected EnumRotDirection? movement = EnumRotDirection.Clockwise;
+            /** <summary> ELevation direction </summary> **/     internal EnumRotDirection? Movement = null;
 
             /** <summary> Reference to the elevation update listener </summary> **/ private long? updateRef;
 
@@ -28,7 +29,7 @@ namespace RustyShell {
 
                 this.Behavior            = this.Block.GetBehavior<BlockBehaviorGearedGun>();
                 this.blockEntityHeavyGun = blockEntity as BlockEntityHeavyGun;
-                this.Elevation           = this.Behavior.MinElevation;
+                this.Elevation           = MathF.Max(this.Behavior.MinElevation, 0f);
                 this.blockEntityHeavyGun.MarkDirty(true);
 
             } // BlockEntityBehaviorGearedGun ..
@@ -87,9 +88,9 @@ namespace RustyShell {
             /// <param name="deltaTime"></param>
             private void Update(float deltaTime) {
 
-                this.Elevation += this.movement.Sign() * this.Behavior.LayingSpeed * deltaTime;
-                if (this.Elevation > this.Behavior.MaxElevation) this.movement = EnumRotDirection.Counterclockwise;
-                if (this.Elevation < this.Behavior.MinElevation) this.movement = EnumRotDirection.Clockwise;
+                this.Elevation += this.Movement.Sign() * this.Behavior.LayingSpeed * deltaTime;
+                if (this.Elevation > this.Behavior.MaxElevation) { this.Movement = null; this.Elevation = this.Behavior.MaxElevation; }
+                if (this.Elevation < this.Behavior.MinElevation) { this.Movement = null; this.Elevation = this.Behavior.MinElevation; }
 
             } // void ..
 
@@ -98,9 +99,6 @@ namespace RustyShell {
             /// Tries to start gun elevation
             /// </summary>
             public void TryStartUpdate() {
-
-                if (this.Elevation > this.Behavior.MinElevation) this.movement = EnumRotDirection.Clockwise;
-                else                                             this.movement = EnumRotDirection.Counterclockwise;
 
                 this.updateRef ??= this.blockEntityHeavyGun.RegisterGameTickListener(this.Update, ModContent.HEAVY_GUN_UPDATE_RATE);
                 this.Blockentity.MarkDirty();
@@ -113,7 +111,7 @@ namespace RustyShell {
             /// </summary>
             public void TryEndUpdate() {
 
-                this.movement = null;
+                this.Movement = null;
                 if (this.updateRef.HasValue) {
                     
                     this.blockEntityHeavyGun.UnregisterGameTickListener(this.updateRef.Value);
@@ -134,7 +132,7 @@ namespace RustyShell {
                 ) {
 
                     this.Elevation = tree.GetFloat("elevation", this.Elevation);
-                    this.movement  = tree.GetInt("elevationDirection", this.movement.Sign()) switch {
+                    this.Movement  = tree.GetInt("elevationDirection", this.Movement.Sign()) switch {
                          1 => EnumRotDirection.Clockwise,
                         -1 => EnumRotDirection.Counterclockwise,
                          _ => null,
@@ -147,7 +145,7 @@ namespace RustyShell {
                 public override void ToTreeAttributes(ITreeAttribute tree) {
 
                     tree.SetFloat("elevation", this.Elevation);
-                    tree.SetInt("elevationDirection", this.movement.Sign());
+                    tree.SetInt("elevationDirection", this.Movement.Sign());
                     base.ToTreeAttributes(tree);
 
                 } // void ..

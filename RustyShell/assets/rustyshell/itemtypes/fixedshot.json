@@ -6,17 +6,22 @@
     "creativeinventory": { "general": ["*"], "items": ["*"], "rustyshell": ["*"] },
     "attributes": {
       "hasFuse": true,
+      "scrollrackable": true,
       "entityCode": "rustyshell:shot-{type}",
       "detonationByType": {
         "*-round":     { "type": "Piercing",      "amount": 80, "blastRadius": 4, "injureRadius":  5 },
-        "*-stone":     { "type": "NonExplosive",  "amount": 60, "blastRadius": 1, "injureRadius":  2 },
-        "*-explosive": { "type": "HighExplosive", "amount": 60, "blastRadius": 6, "injureRadius":  8 },
-        "*-grape":     { "type": "Grape",         "fuseDuration": 0 },
-        "*-canister":  { "type": "Canister",      "amount": 20, "blastRadius": 6, "injureRadius": 16, "fuseDuration": 2000 }
+        "*-stone":     { "type": "NonExplosive",  "amount": 60, "blastRadius": 2, "injureRadius":  2 },
+        "*-explosive": { "type": "HighExplosive", "amount": 60, "blastRadius": 5, "injureRadius":  8 },
+        "*-canister":  { "type": "Canister",      "amount": 20, "blastRadius": 6, "injureRadius": 20, "fuseDuration": 1000 }
       },
       "groundStorageTransform": {
         "rotation": { "x":   0, "y": 45, "z":   0 },
         "origin":   { "x": 0.5, "y":  0, "z": 0.5 }
+      },
+      "onscrollrackTransform": {
+        "translation": { "x": -0.95, "y": -0.1, "z": 0.5 },
+        "rotation":    { "x":   -45, "y":    0, "z": -90 },
+        "origin":      { "x":   0.5, "y":  0.1, "z": 0.5 }
       },
 		  "handbook": { "groupBy": [ "fixedshot-*" ]}
     },

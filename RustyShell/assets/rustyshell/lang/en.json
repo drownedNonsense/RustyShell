@@ -7,7 +7,8 @@
     "game:blockhelp-muzzleloading-clean": "Clean",
     "game:blockhelp-muzzleloading-load":  "Load",
 
-    "game:blockhelp-gearedgun-laying": "Change laying",
+    "game:blockhelp-gearedgun-lay-up":   "Increase elevation",
+    "game:blockhelp-gearedgun-lay-down": "Decrease elevation",
 
     "game:blockhelp-loadable-fillammunition": "Add ammunition",
     "game:blockhelp-loadable-filldetonator":  "Add detonator",

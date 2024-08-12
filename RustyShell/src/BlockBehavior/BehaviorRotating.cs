@@ -61,12 +61,12 @@ namespace RustyShell {
                     ref EnumHandling handled
                 ) { return new WorldInteraction[] {
 
-                        new WorldInteraction() {
+                        new () {
                             ActionLangCode  = "blockhelp-wheeled-turnleft",
                             MouseButton     = EnumMouseButton.Right,
                             HotKeyCode      = "shift",
                         }, // new ..
-                        new WorldInteraction() {
+                        new () {
                             ActionLangCode  = "blockhelp-wheeled-turnright",
                             MouseButton     = EnumMouseButton.Right,
                             HotKeyCodes     = new string[2] { "ctrl", "shift" },

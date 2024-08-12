@@ -1,0 +1,101 @@
+[
+    {
+        "file": "rustyshell:recipes/grid/gasmask.json",
+        "op": "addmerge",
+        "path": "/0/enabled",
+        "value": true,
+        "dependsOn": [{ "modid": "chemistrylib" }]
+      },
+      {
+        "file": "rustyshell:recipes/grid/gasmask.json",
+        "op": "addmerge",
+        "path": "/0/enabled",
+        "value": false,
+        "dependsOn": [{ "modid": "chemistrylib", "invert": true }]
+      },
+
+      {
+        "file": "rustyshell:recipes/grid/shell.json",
+        "op": "addmerge",
+        "path": "/8/enabled",
+        "value": true,
+        "dependsOn": [{ "modid": "chemistrylib" }]
+      },
+      {
+        "file": "rustyshell:recipes/grid/shell.json",
+        "op": "addmerge",
+        "path": "/8/enabled",
+        "value": false,
+        "dependsOn": [{ "modid": "chemistrylib", "invert": true }]
+      },
+      {
+        "file": "rustyshell:recipes/grid/shell.json",
+        "op": "addmerge",
+        "path": "/9/enabled",
+        "value": true,
+        "dependsOn": [{ "modid": "chemistrylib" }]
+      },
+      {
+        "file": "rustyshell:recipes/grid/shell.json",
+        "op": "addmerge",
+        "path": "/9/enabled",
+        "value": false,
+        "dependsOn": [{ "modid": "chemistrylib", "invert": true }]
+      },
+      {
+        "file": "rustyshell:recipes/grid/shell.json",
+        "op": "addmerge",
+        "path": "/10/enabled",
+        "value": true,
+        "dependsOn": [{ "modid": "chemistrylib" }]
+      },
+      {
+        "file": "rustyshell:recipes/grid/shell.json",
+        "op": "addmerge",
+        "path": "/10/enabled",
+        "value": false,
+        "dependsOn": [{ "modid": "chemistrylib", "invert": true }]
+      },
+      {
+        "file": "rustyshell:recipes/grid/shell.json",
+        "op": "addmerge",
+        "path": "/11/enabled",
+        "value": true,
+        "dependsOn": [{ "modid": "chemistrylib" }]
+      },
+      {
+        "file": "rustyshell:recipes/grid/shell.json",
+        "op": "addmerge",
+        "path": "/11/enabled",
+        "value": false,
+        "dependsOn": [{ "modid": "chemistrylib", "invert": true }]
+      },
+      {
+        "file": "rustyshell:recipes/grid/shell.json",
+        "op": "addmerge",
+        "path": "/12/enabled",
+        "value": true,
+        "dependsOn": [{ "modid": "chemistrylib" }]
+      },
+      {
+        "file": "rustyshell:recipes/grid/shell.json",
+        "op": "addmerge",
+        "path": "/12/enabled",
+        "value": false,
+        "dependsOn": [{ "modid": "chemistrylib", "invert": true }]
+      },
+      {
+        "file": "rustyshell:recipes/grid/shell.json",
+        "op": "addmerge",
+        "path": "/13/enabled",
+        "value": true,
+        "dependsOn": [{ "modid": "chemistrylib" }]
+      },
+      {
+        "file": "rustyshell:recipes/grid/shell.json",
+        "op": "addmerge",
+        "path": "/13/enabled",
+        "value": false,
+        "dependsOn": [{ "modid": "chemistrylib", "invert": true }]
+      }
+]

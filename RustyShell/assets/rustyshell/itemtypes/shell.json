@@ -9,17 +9,23 @@
     "attributes": {
       "hasFuse":         true,
       "smokelessPowder": true,
+      "scrollrackable": true,
       "detonationByType": {
         "*-simple":    { "type": "Simple",        "amount":  80, "blastRadius":  5, "injureRadius":  8 },
         "*-piercing":  { "type": "Piercing",      "amount": 120, "blastRadius":  5, "injureRadius":  9 },
-        "*-explosive": { "type": "HighExplosive", "amount":  20, "blastRadius":  6, "injureRadius": 14 },
-        "*-shrapnel":  { "type": "Canister",      "amount":  20, "blastRadius": 10, "injureRadius": 28, "fuseDuration": 4000 },
-        "*-gas":       { "type": "Gas",           "amount":  20, "blastRadius":  1, "injureRadius": 40, "duration": 10000 }
+        "*-explosive": { "type": "HighExplosive", "amount":  20, "blastRadius":  7, "injureRadius": 14 },
+        "*-shrapnel":  { "type": "Canister",      "amount":  20, "blastRadius": 10, "injureRadius": 28, "fuseDuration": 1500 },
+        "*-gas":       { "type": "Gas",           "amount": 100, "blastRadius":  1, "injureRadius": 60, "duration": 20000 }
       },
       "groundStorageTransform": {
         "translation": { "x":   0, "y": 0.5, "z":   0 },
         "rotation":    { "x":   0, "y":  45, "z":  90 },
         "origin":      { "x": 0.5, "y":   0, "z": 0.5 }
+      },
+      "onscrollrackTransform": {
+        "translation": { "x": -0.5, "y":   0, "z": 0.45 },
+        "rotation":    { "x": -45,  "y":   0, "z":    0 },
+        "origin":      { "x": 0.5,  "y": 0.1, "z":  0.5 }
       },
 		  "handbook": { "groupBy": [ "shell-*" ]}
     },

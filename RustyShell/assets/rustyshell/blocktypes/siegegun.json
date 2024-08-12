@@ -10,9 +10,9 @@
 		"siegeEquipment": true,
 		"barrelLength":   1.2,
 		"accuracyByType": {
-			"*-tinbronze-*": 0.6,
-			"*-steel-*":     0.75,
-			"*":             0.7
+			"*-tinbronze-*": 0.7,
+			"*-steel-*":     0.85,
+			"*":             0.8
 		},
 		"firePowerByType": {
 			"*-tinbronze-*":     0.7,
@@ -28,8 +28,8 @@
 	"maxstacksize": 1,
 	"behaviors": [
 		{ "name": "MuzzleLoading", "properties": { "cleanDuration": 2.0, "loadDuration": 2.0 }},
-		{ "name": "Loadable",      "properties": { "ammunitionCodes": [ "rustyshell:heavybullet-*" ]}},
-		{ "name": "Geared",        "properties": { "minElevation":  0, "maxElevation": 0.25, "barrelShapePath": "rustyshell:shapes/barrel/siegegun-barrel" }},
+		{ "name": "Loadable",      "properties": { "ammunitionCodes": [ "rustyshell:heavybullet-*", "rustyshell:shot-grape" ]}},
+		{ "name": "Geared",        "properties": { "minElevation":  -0.1, "maxElevation": 0.3, "barrelShapePath": "rustyshell:shapes/barrel/siegegun-barrel" }},
 		{ "name": "Ignitable" },
 		{ "name": "RightClickPickup"},
 		{ "name": "Unstable" }

@@ -9,9 +9,9 @@
 	"attributes": {
 		"barrelLength": 2,
 		"accuracyByType": {
-			"*-tinbronze-**": 0.9,
-			"*-steel-**":     1,
-			"*":              0.95
+			"*-tinbronze-**": 0.7,
+			"*-steel-**":     0.9,
+			"*":              0.8
 		},
 		"firePower":    4,
 		"cooldownByType": {
@@ -26,8 +26,8 @@
 	"maxstacksize": 1,
 	"behaviors": [
 		{ "name": "RepeatingFire", "properties": { "fireInterval": 0.2, "rotatingBarrelShapePath": "rustyshell:shapes/barrel/heavymachinegun-barrel-rotating" }},
-		{ "name": "Loadable",      "properties": { "ammunitionCodes": [ "rustyshell:cartridge" ]}},
-		{ "name": "Geared",        "properties": { "minElevation":  0.0, "maxElevation": 0.5, "barrelShapePath": "rustyshell:shapes/barrel/heavymachinegun-barrel-base" }},
+		{ "name": "Loadable",      "properties": { "ammunitionLimit": 64, "ammunitionCodes": [ "rustyshell:cartridge" ]}},
+		{ "name": "Geared",        "properties": { "minElevation":  -0.05, "maxElevation": 0.5, "barrelShapePath": "rustyshell:shapes/barrel/heavymachinegun-barrel-base" }},
 		{ "name": "Limberable",    "properties": { "entityCode": "rustyshell:limberedgun-heavymachinegun-{material}-rifled" }},
 		{ "name": "Wheeled",       "properties": { "turnSpeedByType": { "*-tinbronze-*": 0.4, "*-steel-*": 0.3 }}},
 		{ "name": "Unstable" }

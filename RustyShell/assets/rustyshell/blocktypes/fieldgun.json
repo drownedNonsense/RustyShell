@@ -9,9 +9,12 @@
 	"attributes": {
 		"barrelLength": 3,
 		"accuracyByType": {
-			"*-tinbronze-*": 0.75,
-			"*-steel-*":     0.85,
-			"*":             0.8
+			"*-tinbronze-smoothbore": 0.65,
+			"*-steel-smoothbore":     0.8,
+			"*-smoothbore":           0.75,
+			"*-tinbronze-rifled":     0.7,
+			"*-steel-rifled":         0.85,
+			"*-rifled":               0.8
 		},
 		"firePower": 1.8,
 		"cooldownByType": {
@@ -27,7 +30,7 @@
 	"behaviors": [
 		{ "name": "Loadable",      "properties": { "ammunitionCodes": { "smoothbore": [ "rustyshell:shot-*", "rustyshell:fixedshot-*" ], "rifled": [ "rustyshell:shell-*" ]}}},
 		{ "name": "MuzzleLoading", "properties": { "cleanDuration": 4, "loadDuration": 4 }},
-		{ "name": "Geared",        "properties": { "minElevation": 0, "maxElevation": 0.6, "barrelShapePath": "rustyshell:shapes/barrel/fieldgun-barrel" }},
+		{ "name": "Geared",        "properties": { "minElevation": -0.05, "maxElevation": 0.6, "barrelShapePath": "rustyshell:shapes/barrel/fieldgun-barrel" }},
 		{ "name": "Limberable",    "properties": { "entityCode": "rustyshell:limberedgun-fieldgun-{material}-{barrel}" }},
 		{ "name": "Wheeled",       "properties": { "turnSpeedByType": { "*-tinbronze-*": 0.25, "*-steel-*": 0.2, "*": 0.15 } }},
 		{ "name": "Unstable" }

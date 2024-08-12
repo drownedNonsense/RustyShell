@@ -18,6 +18,7 @@ namespace RustyShell {
             
             /** <summary> An array of each available ammunition for this gun </summary> **/       internal Item[] Ammunitions;
             /** <summary> An array of each available ammunition code for this gun </summary> **/  private string[] ammunitionCodes;
+            /** <summary> An array of each available ammunition code for this gun </summary> **/  private int ammunitionLimit;
 
             private ItemStack[] ammunitionStacks;
 
@@ -37,6 +38,7 @@ namespace RustyShell {
                 base.Initialize(properties);
 
                 JsonObject ammunitions = properties["ammunitionCodes"];
+                this.ammunitionLimit   = properties["ammunitionLimit"].AsInt(1);
                 this.ammunitionCodes   = ((this.block.Variant["barrel"] is string barrel && ammunitions[barrel].Exists) ? ammunitions[barrel] : ammunitions).AsArray<string>();
 
             } // void ..
@@ -65,7 +67,9 @@ namespace RustyShell {
                         return lanyardStacks.ToArray();
                     }); // ..
                     BlockBehaviorLoadableGun.BlastingPowderStack = ObjectCacheUtil.GetOrCreate(client, "blastingPowderStack", delegate {
-                        return new ItemStack[1] { new(client.World.GetItem(new AssetLocation("game:blastingpowder"))) };
+                        return client.World.GetItem(new AssetLocation("maltiezfirearms:gunpowder-fine")) is Item gunPowder
+                        ? new ItemStack[2] { new(client.World.GetItem(new AssetLocation("game:blastingpowder"))), new(gunPowder) }
+                        : new ItemStack[1] { new(client.World.GetItem(new AssetLocation("game:blastingpowder"))) };
                     }); // ..
 
                     this.ammunitionStacks = new ItemStack[this.Ammunitions.Length];
@@ -88,21 +92,18 @@ namespace RustyShell {
                 /// Indicates whether or not a given player has a matching ammunition
                 /// </summary>
                 /// <param name="byPlayer"></param>
-                /// <returns></returns>
                 private bool HasAmmunition(IPlayer byPlayer) => this.Ammunitions.Contains(byPlayer.Entity.ActiveHandItemSlot.Itemstack?.Item);
 
                 /// <summary>
                 /// Indicates whether or not a given player has a matching detonator
                 /// </summary>
                 /// <param name="byPlayer"></param>
-                /// <returns></returns>
-                private static bool HasDetonator(IPlayer byPlayer)  => byPlayer.Entity.ActiveHandItemSlot.Itemstack?.Collectible.Code.Path == "blastingpowder";
+                private static bool HasDetonator(IPlayer byPlayer) => BlockBehaviorLoadableGun.BlastingPowderStack.Any(x => x?.Collectible.Code.Path == byPlayer.Entity.ActiveHandItemSlot.Itemstack?.Collectible.Code.Path);
 
                 /// <summary>
                 /// Indicates whether or not a given gun requires a detonator to fire
                 /// </summary>
                 /// <param name="blockEntity"></param>
-                /// <returns></returns>
                 private static bool GunRequiresDetonator(BlockEntityHeavyGun blockEntity) => blockEntity?.BlockHeavyGun.BarrelType == EnumBarrelType.Smoothbore && !blockEntity.FusedAmmunition;
 
 
@@ -137,6 +138,7 @@ namespace RustyShell {
                                 BlockEntityHeavyGun blockEntity = world.BlockAccessor.GetBlockEntity<BlockEntityHeavyGun>(bs.Position);
 
                                 if (this.Ammunitions.Length == 0 || this.ammunitionStacks.Length == 0) return null;
+                                if (blockEntity?.AmmunitionSlot?.StackSize >= this.ammunitionLimit) return null;
                                 if (blockEntity?.AmmunitionSlot?.StackSize >= blockEntity?.AmmunitionSlot?.Itemstack?.Item.MaxStackSize) return null;
                                 if (blockEntity?.CanFill ?? false) return wi.Itemstacks;
                                 return null;
@@ -199,7 +201,7 @@ namespace RustyShell {
 
                            handling = EnumHandling.PreventSubsequent;
 
-                        } else if (this.HasAmmunition(byPlayer)) {
+                        } else if (this.HasAmmunition(byPlayer) && blockEntity.AmmunitionSlot.StackSize < this.ammunitionLimit) {
 
                             int moveableQuantity = GameMath.Min(slot.Itemstack.Item.MaxStackSize - blockEntity.AmmunitionSlot.StackSize, 1);
 

@@ -5,6 +5,7 @@ using Vintagestory.API.Common.Entities;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Util;
 using Vintagestory.API.Config;
+using Vintagestory.API.Datastructures;
 
 namespace RustyShell {
     public class BlockEntityHeavyGun : BlockEntityOrientable {
@@ -24,7 +25,7 @@ namespace RustyShell {
             /// </summary>
             private float blastStrength =>
                 this.BlockHeavyGun.BarrelType switch {
-                    EnumBarrelType.Smoothbore => this.BlockHeavyGun.FirePower * GameMath.Sqrt(this.FusedAmmunition switch { true => 8, false => this.DetonatorSlot.StackSize } * 0.1f),
+                    EnumBarrelType.Smoothbore => this.BlockHeavyGun.FirePower * GameMath.Sqrt(this.FusedAmmunition switch { true => 8, false => this.DetonatorSlot.StackSize } * 0.2f),
                     EnumBarrelType.Rifled     => this.BlockHeavyGun.FirePower,
                     _                         => 1f,
                 }; // swtich ..
@@ -42,8 +43,8 @@ namespace RustyShell {
 
 
             /** <summary> Gun's barrel content </summary> **/                         internal InventoryGeneric Inventory      =  null;
-            /** <summary> A reference to the ammunition dedicated slot </summary> **/ internal ItemSlot         AmmunitionSlot => this.Inventory[1];
             /** <summary> A reference to the detonator dedicated slot  </summary> **/ internal ItemSlot         DetonatorSlot  => this.Inventory[0];
+            /** <summary> A reference to the ammunition dedicated slot </summary> **/ internal ItemSlot         AmmunitionSlot => this.Inventory[1];
 
             /** <summary> Indicates whether or the gun is waiting to be cleaned </summary> **/ public bool CanClean => this.gunState == EnumGunState.Dirty;
             /** <summary> Indicates whether or the gun is waiting to be filled </summary> **/  public bool CanFill  => this.gunState == EnumGunState.Clean || !this.BlockHeavyGun.MuzzleLoading;
@@ -59,13 +60,21 @@ namespace RustyShell {
         // I N I T I A L I Z A T I O N S
         //===============================
 
-            public override void Initialize(ICoreAPI api) {
+            public BlockEntityHeavyGun() {
+                this.Inventory = new InventoryGeneric(2, null, null);
+            } // ..
 
+
+            public override void Initialize(ICoreAPI api) {
                 base.Initialize(api);
+
                 if (api.Side == EnumAppSide.Client) this.LoadOrCreateMesh();
 
+                this.Inventory.LateInitialize("heavygun" + "-" + Pos.X + "/" + Pos.Y + "/" + Pos.Z, api);
+                this.Inventory.Pos = this.Pos;
+                this.Inventory.ResolveBlocksOrItems();
+
                 this.BlockHeavyGun = this.Block as BlockHeavyGun;
-                this.Inventory     = new InventoryGeneric(2, "heavygun-" + this.Pos, this.Api);
                 this.muzzleLoading = this.GetBehavior<BlockEntityBehaviorMuzzleLoading>();
 
             } // void ..
@@ -96,8 +105,8 @@ namespace RustyShell {
                     Entity projectile     = this.Api.World.ClassRegistry.CreateEntity(type);
 
                     ThreadSafeRandom random = new();
-                    float randPitch = ((random.NextSingle() * 2f) - 1f) * (1f - this.BlockHeavyGun.Accuracy);
-                    float randYaw   = ((random.NextSingle() * 2f) - 1f) * (1f - this.BlockHeavyGun.Accuracy);
+                    float randPitch = (random.NextSingle() - 0.5f) * (1f - this.BlockHeavyGun.Accuracy) * 0.5f;
+                    float randYaw   = (random.NextSingle() - 0.5f) * (1f - this.BlockHeavyGun.Accuracy) * 0.5f;
 
                     float elevation = this.GetBehavior<BlockEntityBehaviorGearedGun>()?.Elevation ?? 0f;
 
@@ -149,7 +158,7 @@ namespace RustyShell {
                     if (this.Api.Side.IsClient()) {
 
                         int smokeAmount = 0;
-                        if (this.DetonatorSlot.Itemstack != null) { smokeAmount = this.DetonatorSlot.StackSize; this.DetonatorSlot?.TakeOutWhole(); }
+                        if (this.DetonatorSlot.Itemstack != null) smokeAmount = this.DetonatorSlot.StackSize;
                         if (this.AmmunitionSlot.Itemstack.ItemAttributes["hasFuse"].AsBool()) smokeAmount += 2;
 
                         for (int i = 0; i < smokeAmount >> (projectile is EntitySmallCaliber ? 1 : 0); i ++)
@@ -161,6 +170,7 @@ namespace RustyShell {
                     } // if ..
 
                     this.AmmunitionSlot?.TakeOut(1);
+                    if (this.DetonatorSlot.Itemstack != null) this.DetonatorSlot?.TakeOutWhole();
 
                     this.Api.World.SpawnEntity(projectile);
                     this.Api.World.PlaySoundAt(new AssetLocation("sounds/effect/mediumexplosion"), this.Pos.X, this.Pos.Y, this.Pos.Z, null, false, 120);
@@ -207,12 +217,26 @@ namespace RustyShell {
                 ) {
 
                     if (this.gunState == EnumGunState.Clean || this.gunState == EnumGunState.Ready)
-                        if (!this.AmmunitionSlot.Empty)
-                            dsc.AppendLine(string.Format(
+                        dsc.AppendLine((!this.AmmunitionSlot.Empty, !this.DetonatorSlot.Empty) switch {
+                            (true, false) => string.Format(
                                 "Loaded with {0}x {1}",
                                 this.AmmunitionSlot.StackSize,
                                 this.AmmunitionSlot.Itemstack.GetName()
-                            )); // ..
+                            ), // ..
+                            (false, true) => string.Format(
+                                "Loaded with {0}x {1}",
+                                this.DetonatorSlot.StackSize,
+                                this.DetonatorSlot.Itemstack.GetName()
+                            ), // ..
+                            (true, true) => string.Format(
+                                "Loaded with {0}x {1} and {2}x {3}",
+                                this.AmmunitionSlot.StackSize,
+                                this.AmmunitionSlot.Itemstack.GetName(),
+                                this.DetonatorSlot.StackSize,
+                                this.DetonatorSlot.Itemstack.GetName()
+                            ), // ..
+                            _ => "Empty",
+                        }); // switch ..
 
 
                     base.GetBlockInfo(forPlayer, dsc);
@@ -240,6 +264,32 @@ namespace RustyShell {
                             this.Cooldown          = 0f;
                             this.Offset            = 0f;
                         } // if ..
+                } // void ..
+
+
+            //-------------------------------
+            // T R E E   A T T R I B U T E S
+            //-------------------------------
+
+                public override void FromTreeAttributes(
+                    ITreeAttribute tree,
+                    IWorldAccessor worldForResolving
+                ) {
+                    base.FromTreeAttributes(tree, worldForResolving);
+                    this.Inventory.FromTreeAttributes(tree.GetTreeAttribute("inventory"));
+                } // void ..
+
+
+                public override void ToTreeAttributes(ITreeAttribute tree) {
+
+                    base.ToTreeAttributes(tree);
+                    if (this.Inventory != null) {
+
+                        ITreeAttribute inventoryTree = new TreeAttribute();
+                        this.Inventory.ToTreeAttributes(inventoryTree);
+                        tree["inventory"] = inventoryTree;
+                        
+                    } // if ..
                 } // void ..
     } // class ..
 } // namespace ..

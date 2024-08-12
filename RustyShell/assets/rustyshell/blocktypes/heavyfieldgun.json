@@ -26,7 +26,7 @@
 	"maxstacksize": 1,
 	"behaviors": [
 		{ "name": "Loadable",   "properties": { "ammunitionCodes": [ "rustyshell:shell-*" ]}},
-		{ "name": "Geared",     "properties": { "minElevation": 0, "maxElevation": 0.6, "barrelShapePath": "rustyshell:shapes/barrel/heavyfieldgun-barrel" }},
+		{ "name": "Geared",     "properties": { "minElevation": -0.05, "maxElevation": 0.6, "barrelShapePath": "rustyshell:shapes/barrel/heavyfieldgun-barrel" }},
 		{ "name": "Limberable", "properties": { "entityCode": "rustyshell:limberedgun-heavyfieldgun-{material}-rifled" }},
 		{ "name": "Wheeled",    "properties": { "turnSpeedByType": { "*-tinbronze-*": 0.15, "*-steel-*": 0.1, "*": 0.08 }, "wheelShapePath": "rustyshell:shapes/wheel/spoked-pedrail" }},
 		{ "name": "Unstable" }
@@ -68,8 +68,8 @@
 	"sideopaque": { "all": "false" },
     "heldTpIdleAnimation": "holdbothhandslarge", "heldTpUseAnimation": "twohandplaceblock",
 	"tpHandTransform": {
-		"translation": { "x": -1, "y": -1.2, "z": -0.5 },
-		"rotation":    { "x":  8, "y":   15, "z":  -35 },
+		"translation": { "x":  -1, "y": -1.5, "z": -0.5 },
+		"rotation":    { "x": -13, "y":   19, "z":  -51 },
 		"scale": 0.64
 	},
 	"guiTransform": {
