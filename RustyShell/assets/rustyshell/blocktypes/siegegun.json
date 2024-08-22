@@ -27,11 +27,10 @@
 	"creativeinventory": { "general": ["*"], "mechanics": ["*"], "rustyshell": ["*"] },
 	"maxstacksize": 1,
 	"behaviors": [
-		{ "name": "MuzzleLoading", "properties": { "cleanDuration": 2.0, "loadDuration": 2.0 }},
-		{ "name": "Loadable",      "properties": { "ammunitionCodes": [ "rustyshell:heavybullet-*", "rustyshell:shot-grape" ]}},
-		{ "name": "Geared",        "properties": { "minElevation":  -0.1, "maxElevation": 0.3, "barrelShapePath": "rustyshell:shapes/barrel/siegegun-barrel" }},
-		{ "name": "Ignitable" },
-		{ "name": "RightClickPickup"},
+		{ "name": "MuzzleLoading",    "properties": { "cleanDuration": 2.0, "loadDuration": 2.0 }},
+		{ "name": "Loadable",         "properties": { "ammunitionCodes": [ "rustyshell:heavybullet-*", "rustyshell:shot-grape" ]}},
+		{ "name": "Geared",           "properties": { "minElevation":  -0.1, "maxElevation": 0.3, "barrelShapePath": "rustyshell:shapes/barrel/siegegun-barrel" }},
+		{ "name": "RightClickPickup", "properties": { "dropsPickupMode": true }},
 		{ "name": "Unstable" }
 	],
 	"entityBehaviors": [

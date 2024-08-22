@@ -33,7 +33,6 @@
 		{ "name": "Geared",        "properties": { "minElevation": 0.4, "maxElevation": 1.2, "barrelShapePath": "rustyshell:shapes/barrel/howitzer-barrel" }},
 		{ "name": "Limberable",    "properties": { "entityCode": "rustyshell:limberedgun-howitzer-{material}-{barrel}" }},
 		{ "name": "Wheeled",       "properties": { "turnSpeedByType": { "*-tinbronze-*": 0.3, "*-steel-*": 0.25, "*": 0.2 } }},
-		{ "name": "Ignitable" },
 		{ "name": "Unstable" }
 	],
 	"entityBehaviors": [

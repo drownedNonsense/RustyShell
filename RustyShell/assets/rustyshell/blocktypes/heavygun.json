@@ -30,7 +30,6 @@
 		{ "name": "Geared",        "properties": { "minElevation": -0.05, "maxElevation": 0.3, "barrelShapePath": "rustyshell:shapes/barrel/heavygun-barrel" }},
 		{ "name": "Limberable",    "properties": { "entityCode": "rustyshell:limberedgun-heavygun-{material}-{barrel}" }},
 		{ "name": "Wheeled",       "properties": { "turnSpeedByType": { "*-tinbronze-*": 0.3, "*-steel-*": 0.25, "*": 0.2 }, "wheelShapePath": "rustyshell:shapes/wheel/spoked-small" }},
-		{ "name": "Ignitable" },
 		{ "name": "Unstable" }
 	],
 	"entityBehaviors": [
