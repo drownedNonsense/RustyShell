@@ -392,10 +392,7 @@ namespace RustyShell {
                 /// <returns></returns>
                 private bool CheckEntityCollision() {
 
-                    if (this.Api.Side.IsClient()
-                        || this.msSinceCollide   <  250
-                        || this.ServerPos.Motion == Vec3d.Zero
-                    ) return false;
+                    if (this.Api.Side.IsClient() || this.ServerPos.Motion == Vec3d.Zero) return false;
 
                     Cuboidf projectileBox = this.SelectionBox.Translate(this.ServerPos.XYZFloat);
                     Vec3f   motion        = this.ServerPos.Motion.ToVec3f();

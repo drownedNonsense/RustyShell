@@ -7,13 +7,13 @@
 		{ "code": "barrel",   "states": ["rifled"]}
 	],
 	"attributes": {
-		"barrelLength": 2,
+		"barrelLength": 1,
 		"accuracyByType": {
 			"*-tinbronze-**": 0.7,
-			"*-steel-**":     0.9,
-			"*":              0.8
+			"*-steel-**":     0.8,
+			"*":              0.75
 		},
-		"firePower":    4,
+		"firePower":    2,
 		"cooldownByType": {
 			"*-tinbronze-*":     6.0,
 			"*-iron-*":          4.5,

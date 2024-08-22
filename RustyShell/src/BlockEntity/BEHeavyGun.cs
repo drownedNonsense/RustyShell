@@ -17,8 +17,9 @@ namespace RustyShell {
             /** <summary> A reference to the heavy gun block </summary> **/     public BlockHeavyGun BlockHeavyGun { get; private set; }
             /** <summary> A reference to muzzle loading behavior </summary> **/ protected BlockEntityBehaviorMuzzleLoading muzzleLoading;
             
-            /** <summary> Remaining time until the gun can be fired </summary> **/ public float Cooldown { get; private set; }
-            /** <summary> A reference to the cooldown listener </summary> **/      private long? cooldownUpdateRef;
+            /** <summary> Remaining time until the gun can be fired </summary> **/     public float Cooldown { get; private set; }
+            /** <summary> A reference to the cooldown listener </summary> **/          private long? cooldownUpdateRef;
+            /** <summary> A reference to the offset rendering listener </summary> **/  private long? offsetRenderingRef;
 
             /// <summary>
             /// Projectile velocity in block per second at spawn
@@ -95,6 +96,7 @@ namespace RustyShell {
                 public void Fire(Entity byEntity) {
 
                     if (this.AmmunitionSlot.Itemstack == null) return;
+                    if (this.Cooldown > ((this.Block.GetBehavior<BlockBehaviorRepeatingFire>()?.FireInterval + 0.5f) ?? 0f)) return;
 
                     string entityCode = this.AmmunitionSlot?
                         .Itemstack?
@@ -145,7 +147,7 @@ namespace RustyShell {
                             _                               => 1f
                         });
 
-                        this.cooldownUpdateRef = this.RegisterGameTickListener(this.CooldownUpdate, ModContent.HEAVY_GUN_UPDATE_RATE);
+                        this.offsetRenderingRef ??= this.RegisterGameTickListener(this.OffsetRenderUpdate, ModContent.HEAVY_GUN_UPDATE_RATE);
 
                     } else if (projectile is EntitySmallCaliber smallCaliber) {
 
@@ -154,6 +156,8 @@ namespace RustyShell {
 
                     } // if ..
 
+                    this.Cooldown            = 0f;
+                    this.cooldownUpdateRef ??= this.RegisterGameTickListener(this.CooldownUpdate, ModContent.HEAVY_GUN_UPDATE_RATE);
 
                     if (this.Api.Side.IsClient()) {
 
@@ -245,25 +249,37 @@ namespace RustyShell {
 
 
                 /// <summary>
-                /// Called to update the gun's fire cooldown and client-side offset rendering
+                /// Called to update the gun's fire cooldown
                 /// </summary>
                 /// <param name="deltaTime"></param>
                 private void CooldownUpdate(float deltaTime) {
 
                     this.Cooldown += deltaTime;
+                    if (this.cooldownUpdateRef is long updateRef)
+                        if (this.Cooldown >= this.BlockHeavyGun.CooldownDuration) {
 
+                            this.UnregisterGameTickListener(updateRef);
+                            this.cooldownUpdateRef = null;
+                            this.Cooldown          = 0f;
+
+                            if (this.offsetRenderingRef is long offsetRenderingRef) {
+                                this.offsetRenderingRef = null;
+                                this.Offset             = 0f;
+                                this.UnregisterGameTickListener(offsetRenderingRef);
+                            } // if ..
+                        } // if ..
+                } // void ..
+
+
+                /// <summary>
+                /// Called to update the gun's client-side offset rendering
+                /// </summary>
+                /// <param name="deltaTime"></param>
+                private void OffsetRenderUpdate(float deltaTime) {
                     if (this.Api.Side.IsClient()
                         && this.BlockHeavyGun.Wheeled
                         && this.Cooldown <= GameMath.PIHALF
                     ) this.Offset = -2f * (MathF.Pow(GameMath.FastSin(this.Cooldown), this.Cooldown) - 1f);
-
-                    if (this.cooldownUpdateRef is long updateRef)
-                        if (this.Cooldown >= this.BlockHeavyGun.CooldownDuration) {
-                            this.UnregisterGameTickListener(updateRef);
-                            this.cooldownUpdateRef = null;
-                            this.Cooldown          = 0f;
-                            this.Offset            = 0f;
-                        } // if ..
                 } // void ..
 
 

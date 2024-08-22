@@ -54,8 +54,15 @@ namespace RustyShell {
                     foreach (string code in this.ammunitionCodes)
                         ammunitions.AddRange(api.World.SearchItems(new AssetLocation(code)));
 
-                this.Ammunitions ??= ammunitions.ToArray();
+                this.Ammunitions   ??= ammunitions.ToArray();
                 this.ammunitionCodes = null;
+
+                BlockBehaviorLoadableGun.BlastingPowderStack = ObjectCacheUtil.GetOrCreate(api, "blastingPowderStack", delegate {
+                    return api.World.GetItem(new AssetLocation("maltiezfirearms:gunpowder-fine")) is Item gunPowder
+                    ? new ItemStack[2] { new(api.World.GetItem(new AssetLocation("game:blastingpowder"))), new(gunPowder) }
+                    : new ItemStack[1] { new(api.World.GetItem(new AssetLocation("game:blastingpowder"))) };
+                }); // ..
+
 
                 if (api is ICoreClientAPI client) {
                     BlockBehaviorLoadableGun.LanyardStacks = ObjectCacheUtil.GetOrCreate(client, "lanyardStacks", delegate {
@@ -65,11 +72,6 @@ namespace RustyShell {
                             lanyardStacks.AddRange(item.GetHandBookStacks(client));
 
                         return lanyardStacks.ToArray();
-                    }); // ..
-                    BlockBehaviorLoadableGun.BlastingPowderStack = ObjectCacheUtil.GetOrCreate(client, "blastingPowderStack", delegate {
-                        return client.World.GetItem(new AssetLocation("maltiezfirearms:gunpowder-fine")) is Item gunPowder
-                        ? new ItemStack[2] { new(client.World.GetItem(new AssetLocation("game:blastingpowder"))), new(gunPowder) }
-                        : new ItemStack[1] { new(client.World.GetItem(new AssetLocation("game:blastingpowder"))) };
                     }); // ..
 
                     this.ammunitionStacks = new ItemStack[this.Ammunitions.Length];

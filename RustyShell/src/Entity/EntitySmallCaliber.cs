@@ -17,9 +17,6 @@ namespace RustyShell {
             /** <summary> Projectile velocity before collision </summary> **/                 private readonly Vec3d motionBeforeCollide = new();
             /** <summary> Indicates whether or not the projectile has collided </summary> **/ private          bool  stuck;
 
-            /** <summary> Milliseconds at collision </summary> **/    private long msCollide;
-            /** <summary> Milliseconds since collision </summary> **/ private int  msSinceCollide => (int)(this.World.ElapsedMilliseconds - this.msCollide);
-
             private readonly CollisionTester    collTester = new();
             private          Cuboidf            collisionTestBox;
             private          EntityPartitioning entityPartitioning;
@@ -57,25 +54,21 @@ namespace RustyShell {
             //---------
 
                 public override void OnGameTick(float deltaTime) {
-
-                    base.OnGameTick(deltaTime);
                     
                     if (this.ShouldDespawn) return;
 
                     bool newStuck = this.Collided
                         || this.collTester.IsColliding(this.World.BlockAccessor, this.collisionTestBox, this.SidedPos.XYZ)
-                        || (this.Api.Side.IsClient() && this.WatchedAttributes.GetBool("stuck"));
+                        || WatchedAttributes.GetBool("stuck");
                     
+                    base.OnGameTick(deltaTime);
+
                     if (this.Api.Side.IsServer() && newStuck != this.stuck) {
                         this.stuck = newStuck;
                         this.WatchedAttributes.SetBool("stuck", this.stuck);
                     } // if ..
 
-
                     if (this.stuck) {
-
-                        if (this.Api.Side.IsClient())
-                            this.ServerPos.SetFrom(this.Pos);
 
                         this.IsColliding();
                         return;
@@ -84,15 +77,14 @@ namespace RustyShell {
 
 
                     if (this.CheckEntityCollision()) return;
-                    this.motionBeforeCollide.Set(this.SidedPos.Motion.X, this.SidedPos.Motion.Y, this.SidedPos.Motion.Z);
+
+                    this.motionBeforeCollide.Set(this.SidedPos.Motion);
 
                 } // void ..
 
 
                 private void ImpactOnEntity(Entity entity) {
                     if ((this.World as IServerWorldAccessor)?.CanDamageEntity(this.FiredBy, entity, out bool isFromPlayer) ?? false) {
-
-                        this.msCollide = this.World.ElapsedMilliseconds;
                         bool didDamage = entity.ReceiveDamage(new DamageSource() {
                             Source       = isFromPlayer ? EnumDamageSource.Player : EnumDamageSource.Entity,
                             SourceEntity = this,
@@ -130,28 +122,23 @@ namespace RustyShell {
 
 
                 private void IsColliding() {
-                    if (!this.stuck
-                        && this.Api.Side.IsServer()
-                        && this.msSinceCollide > 500
-                    ) {
+                    if (!this.stuck) {
 
                         this.CheckEntityCollision();
+                        this.stuck = true;
 
-                        this.msCollide = World.ElapsedMilliseconds;
-                        this.stuck     = true;
+                    } // if ..
 
-                        if (this.ImpactSize != 0)
-                            (this.World as IServerWorldAccessor)?.CreateExplosion(
-                                this.ServerPos.AsBlockPos,
-                                EnumBlastType.EntityBlast,
-                                GameMath.RoundRandom(this.World.Rand, this.ImpactSize * 0.01f),
-                                this.World.Rand.Next(0, this.ImpactSize),
-                                0f
-                            ); // ..
+                    if (this.ImpactSize != 0 && this.Api.Side.IsServer())
+                        (this.World as IServerWorldAccessor)?.CreateExplosion(
+                            this.ServerPos.AsBlockPos,
+                            EnumBlastType.EntityBlast,
+                            GameMath.RoundRandom(this.World.Rand, this.ImpactSize * 0.01f),
+                            this.World.Rand.Next(0, this.ImpactSize),
+                            0f
+                        ); // ..
 
-                        this.Die();
-
-                    } else if (this.stuck) this.Die();
+                    this.Die();
                 } // void ..
 
 
@@ -161,12 +148,9 @@ namespace RustyShell {
                 /// <returns></returns>
                 private bool CheckEntityCollision() {
 
-                    if (this.Api.Side.IsClient()
-                        || this.msSinceCollide   <  250
-                        || this.ServerPos.Motion == Vec3d.Zero
-                    ) return false;
+                    if (this.Api.Side.IsClient() || this.ServerPos.Motion == Vec3d.Zero) return false;
 
-                    Cuboidf projectileBox = this.SelectionBox.OmniGrowBy(4f).Translate(this.ServerPos.XYZFloat);
+                    Cuboidf projectileBox = this.SelectionBox.Translate(this.ServerPos.XYZFloat);
                     Vec3f   motion        = this.ServerPos.Motion.ToVec3f();
 
                     if (float.IsNegative(motion.X)) projectileBox.X1 += 1.5f * motion.X;
@@ -176,24 +160,17 @@ namespace RustyShell {
                     if (float.IsNegative(motion.Z)) projectileBox.Z1 += 1.5f * motion.Z;
                     else                            projectileBox.Z2 += 1.5f * motion.Z;
 
+
                     return this.entityPartitioning.GetNearestInteractableEntity(this.SidedPos.XYZ, 5f, (e) => {
 
-                        if (e.EntityId == this.EntityId || e is EntitySmallCaliber) return false;
-
-                        Cuboidf translatedBox = e.SelectionBox.Translate(e.ServerPos.XYZ);
-                        if (   translatedBox.X2 >= projectileBox.X1
-                            && translatedBox.X1 <= projectileBox.X2
-                            && translatedBox.Y2 >= projectileBox.Y1
-                            && translatedBox.Y1 <= projectileBox.Y2
-                            && translatedBox.Z2 >= projectileBox.Z1
-                            && translatedBox.Z1 <= projectileBox.Z2
-                        ) {
+                        if (e.EntityId == this.EntityId) return true;
+                        if (e.SelectionBox.ToDouble().Translate(e.ServerPos.XYZ).IntersectsOrTouches(projectileBox.ToDouble())) {
 
                             this.ImpactOnEntity(e);
-                            return true;
+                            return false;
 
-                        } else return false;
-                    }) != null;
+                        } else return true;
+                    }) != null; // ..
                 } // bool ..
     } // class ..
 } // namespace ..

@@ -3,6 +3,7 @@ using System.Text;
 using Vintagestory.API.Common;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Config;
+using System.Linq;
 
 
 namespace RustyShell {
@@ -18,9 +19,11 @@ namespace RustyShell {
             /** <summary> Projectile spawn distance from the gun root </summary> **/        public float BarrelLength        { get; private set; }
             /** <summary> Duration in second until the gun can be used again </summary> **/ public float CooldownDuration    { get; private set; }
 
-            /** <summary> Indicates whether or not the gun requires muzzle loading and cleaning </summary> **/ public bool MuzzleLoading        { get; private set; }
-            /** <summary> Indicates whether or not the gun elevation can be adjusted </summary> **/            public bool GearedGun            { get; private set; }
-            /** <summary> Indicates whether or not the gun has wheels </summary> **/                           public bool Wheeled              { get; private set; }
+            /** <summary> Indicates whether or not the gun requires muzzle loading and cleaning </summary> **/ public bool MuzzleLoading { get; private set; }
+            /** <summary> Indicates whether or not the gun elevation can be adjusted </summary> **/            public bool GearedGun     { get; private set; }
+            /** <summary> Indicates whether or not the gun has wheels </summary> **/                           public bool Wheeled       { get; private set; }
+            /** <summary> Indicates whether or not the gun can fire multiple times </summary> **/              public bool Repeating     { get; private set; }
+
 
         //===============================
         // I N I T I A L I Z A T I O N S
@@ -43,6 +46,7 @@ namespace RustyShell {
                 this.MuzzleLoading = this.HasBehavior<BlockBehaviorMuzzleLoading>();
                 this.GearedGun     = this.HasBehavior<BlockBehaviorGearedGun>();
                 this.Wheeled       = this.HasBehavior<BlockBehaviorWheeled>();
+                this.Repeating     = this.HasBehavior<BlockBehaviorRepeatingFire>();
 
             } // void ..
 
@@ -94,5 +98,17 @@ namespace RustyShell {
                     if (loadDurationRaw  is float loadDuration)   dsc.AppendLine(Lang.Get("heavygun-loadduration",  loadDuration));
                     
                 } // void ..
+
+
+                public override ItemStack[] GetDrops(
+                    IWorldAccessor world,
+                    BlockPos pos,
+                    IPlayer byPlayer,
+                    float dropQuantityMultiplier = 1
+                ) {
+                    return world.BlockAccessor.GetBlockEntity<BlockEntityHeavyGun>(pos)?.AmmunitionSlot.Itemstack is ItemStack ammunitions
+                        ? base.GetDrops(world, pos, byPlayer, dropQuantityMultiplier).Append(ammunitions).ToArray()
+                        : base.GetDrops(world, pos, byPlayer, dropQuantityMultiplier);
+                } // ItemStack ..
     } // class ..
 } // namespace ..
