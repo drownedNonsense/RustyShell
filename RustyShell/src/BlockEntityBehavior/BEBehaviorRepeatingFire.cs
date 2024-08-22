@@ -102,6 +102,9 @@ namespace RustyShell {
             /// </summary>
             /// <param name="byEntity"></param>
             public void TryStartFire(Entity byEntity) {
+
+                if (this.blockEntityHeavyGun.Cooldown > this.behavior.FireInterval + 0.5f) return;
+
                 this.firingEntity = byEntity;
                 this.movement     = EnumRotDirection.Clockwise;
                 this.updateRef ??= this.Blockentity.RegisterGameTickListener(this.Update, ModContent.HEAVY_GUN_UPDATE_RATE);

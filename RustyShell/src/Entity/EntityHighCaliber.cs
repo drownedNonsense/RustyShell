@@ -11,13 +11,12 @@ using Vintagestory.API.Util;
 
 
 namespace RustyShell {
-    public class EntityHighCaliber : Entity {
+    public class EntityHighCaliber : EntityAmmunition {
 
         //=======================
         // D E F I N I T I O N S
         //=======================
 
-            /** <summary> Reference to the source entity </summary> **/                                internal Entity            FiredBy;
             /** <summary> Type of blast on detonation </summary> **/                                   internal EnumExplosionType BlastType;
             /** <summary> Abstract value of how unlikely a projectile is to exploded </summary> **/    internal int               Stability;
             /** <summary> Blast radius in block </summary> **/                                         internal int               BlastRadius;
@@ -27,18 +26,12 @@ namespace RustyShell {
             /** <summary> How long some projectiles will last in second after collision </summary> **/ internal int               Duration;
             /** <summary> How long before the projectile explodes before collision </summary> **/      internal int               FuseDuration;
 
-            /** <summary> Projectile velocity before collision </summary> **/             private readonly Vec3d motionBeforeCollide = new();
-            /** <summary> Indicates whether or not the projectile is stuck </summary> **/ private bool stuck;
             /** <summary> Indicates whether or not the projectile is stuck </summary> **/ private bool beforeCollided;
 
             /** <summary> Milliseconds at launch </summary> **/       private long msLaunch;
             /** <summary> Milliseconds at collision </summary> **/    private long msCollide;
             /** <summary> Milliseconds since launch </summary> **/    private int  msSinceLaunch  => (int)(this.World.ElapsedMilliseconds - this.msLaunch);
             /** <summary> Milliseconds since collision </summary> **/ private int  msSinceCollide => (int)(this.World.ElapsedMilliseconds - this.msCollide);
-
-            private readonly CollisionTester    collTester = new();
-            private          Cuboidf            collisionTestBox;
-            private          EntityPartitioning entityPartitioning;
 
             public override bool ApplyGravity                => true;
             public override bool IsInteractable              => false;
@@ -163,37 +156,6 @@ namespace RustyShell {
                     this.beforeCollided = false;
                     this.motionBeforeCollide.Set(this.SidedPos.Motion);
 
-                } // void ..
-
-
-                /// <summary>
-                /// Called on collision with an entity
-                /// </summary>
-                /// <param name="entity"></param>
-                private void ImpactOnEntity(Entity entity) {
-                    if ((this.World as IServerWorldAccessor)?.CanDamageEntity(this.FiredBy, entity, out bool isFromPlayer) ?? false) {
-
-                        this.msCollide = this.World.ElapsedMilliseconds;
-                        this.SidedPos.Motion.Set(Vec3d.Zero);
-
-                        if (FiredBy != null) this.Damage *= this.FiredBy.Stats.GetBlended("rangedWeaponsDamage");
-
-                        bool didDamage = entity.ReceiveDamage(new DamageSource() {
-                            Source       = isFromPlayer ? EnumDamageSource.Player : EnumDamageSource.Entity,
-                            SourceEntity = this,
-                            CauseEntity  = this.FiredBy,
-                            Type         = EnumDamageType.PiercingAttack
-                        }, this.Damage);
-
-                        float knockbackResistance = entity.Properties.KnockbackResistance;
-                        entity.SidedPos.Motion.Add(knockbackResistance * this.SidedPos.Motion.X, knockbackResistance * this.SidedPos.Motion.Y, knockbackResistance * this.SidedPos.Motion.Z);
-
-                        this.Detonate();
-
-                        if (isFromPlayer && didDamage)
-                            this.World.PlaySoundFor(new AssetLocation("sounds/player/projectilehit"), (this.FiredBy as EntityPlayer).Player, false, 24);
-
-                    } // if ..
                 } // void ..
 
 
@@ -354,25 +316,41 @@ namespace RustyShell {
             // P H Y S I C S
             //---------------
 
-                public override void OnCollided() {
-                    this.IsColliding();
-                    this.motionBeforeCollide.Set(this.SidedPos.Motion);
-                } // void ..
+                /// <summary>
+                /// Called on collision with an entity
+                /// </summary>
+                /// <param name="entity"></param>
+                public override void ImpactOnEntity(Entity entity) {
+                    if ((this.World as IServerWorldAccessor)?.CanDamageEntity(this.FiredBy, entity, out bool isFromPlayer) ?? false) {
 
+                        this.msCollide = this.World.ElapsedMilliseconds;
+                        this.SidedPos.Motion.Set(Vec3d.Zero);
 
+                        if (FiredBy != null) this.Damage *= this.FiredBy.Stats.GetBlended("rangedWeaponsDamage");
 
-                public override void OnCollideWithLiquid() {
-                    base.OnCollideWithLiquid();
-                    this.Detonate();
+                        bool didDamage = entity.ReceiveDamage(new DamageSource() {
+                            Source       = isFromPlayer ? EnumDamageSource.Player : EnumDamageSource.Entity,
+                            SourceEntity = this,
+                            CauseEntity  = this.FiredBy,
+                            Type         = EnumDamageType.PiercingAttack
+                        }, this.Damage);
+
+                        float knockbackResistance = entity.Properties.KnockbackResistance;
+                        entity.SidedPos.Motion.Add(knockbackResistance * this.SidedPos.Motion.X, knockbackResistance * this.SidedPos.Motion.Y, knockbackResistance * this.SidedPos.Motion.Z);
+
+                        this.Detonate();
+
+                        if (isFromPlayer && didDamage)
+                            this.World.PlaySoundFor(new AssetLocation("sounds/player/projectilehit"), (this.FiredBy as EntityPlayer).Player, false, 24);
+
+                    } // if ..
                 } // void ..
 
 
                 /// <summary>
                 /// Called on collision
                 /// </summary>
-                private void IsColliding() {
-
-                    // this.SidedPos.Motion.Set(Vec3d.Zero);
+                public override void IsColliding() {
                     if (!this.beforeCollided
                         && this.Api.Side.IsServer()
                         && this.msSinceCollide > 500
@@ -384,38 +362,6 @@ namespace RustyShell {
 
                     } // if ..
                 } // void ..
-
-
-                /// <summary>
-                /// Checks collision with entities
-                /// </summary>
-                /// <returns></returns>
-                private bool CheckEntityCollision() {
-
-                    if (this.Api.Side.IsClient() || this.ServerPos.Motion == Vec3d.Zero) return false;
-
-                    Cuboidf projectileBox = this.SelectionBox.Translate(this.ServerPos.XYZFloat);
-                    Vec3f   motion        = this.ServerPos.Motion.ToVec3f();
-
-                    if (float.IsNegative(motion.X)) projectileBox.X1 += 1.5f * motion.X;
-                    else                            projectileBox.X2 += 1.5f * motion.X;
-                    if (float.IsNegative(motion.Y)) projectileBox.Y1 += 1.5f * motion.Y;
-                    else                            projectileBox.Y2 += 1.5f * motion.Y;
-                    if (float.IsNegative(motion.Z)) projectileBox.Z1 += 1.5f * motion.Z;
-                    else                            projectileBox.Z2 += 1.5f * motion.Z;
-
-
-                    return this.entityPartitioning.GetNearestInteractableEntity(this.SidedPos.XYZ, 5f, (e) => {
-
-                        if (e.EntityId == this.EntityId) return true;
-                        if (e.SelectionBox.ToDouble().Translate(e.ServerPos.XYZ).IntersectsOrTouches(projectileBox.ToDouble())) {
-
-                            this.ImpactOnEntity(e);
-                            return false;
-
-                        } else return true;
-                    }) != null; // ..
-                } // bool ..
 
 
                 /// <summary>
