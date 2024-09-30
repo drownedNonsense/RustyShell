@@ -59,6 +59,7 @@ namespace RustyShell {
             // I N T E R A C T I O N S
             //-------------------------
 
+                public override EnumItemStorageFlags GetStorageFlags(ItemStack itemstack) => EnumItemStorageFlags.Backpack;
                 public override void GetHeldItemInfo(
                     ItemSlot inSlot,
                     StringBuilder dsc,
@@ -66,36 +67,52 @@ namespace RustyShell {
                     bool withDebugInfo
                 ) {
 
-                    base.GetHeldItemInfo(inSlot, dsc, world, withDebugInfo);
-
-                    if (inSlot.Itemstack.Collectible.Attributes == null) return;
-
                     int   accuracy  = (int)(inSlot.Itemstack.Collectible.Attributes["accuracy"].AsFloat() * 100);
-                    int   firePower = (int)(inSlot.Itemstack.Collectible.Attributes["firePower"].AsFloat() * 40);
+                    float firePower = inSlot.Itemstack.Collectible.Attributes["firePower"].AsFloat();
                     float cooldown  = inSlot.Itemstack.Collectible.Attributes["cooldown"].AsFloat();
 
                     BlockBehaviorRepeatingFire repeatingFire = this.GetBehavior<BlockBehaviorRepeatingFire>();
-                    float? fireIntervalRaw = 1f / repeatingFire?.FireInterval;
+                    float? fireInterval = 1f / repeatingFire?.FireInterval;
 
                     BlockBehaviorRotating rotating = this.GetBehavior<BlockBehaviorRotating>();
-                    float? turnSpeedRaw = rotating?.TurnSpeed / GameMath.PI;
+                    float? turnSpeed = rotating?.TurnSpeed / GameMath.PI;
 
                     BlockBehaviorGearedGun gearedGun = this.GetBehavior<BlockBehaviorGearedGun>();
-                    (float, float)? elevationRaw = (gearedGun != null) ? (gearedGun.MinElevation, gearedGun.MaxElevation) : null;
+                    (float, float)? elevation  = (gearedGun != null) ? (gearedGun.MinElevation, gearedGun.MaxElevation) : null;
+                    float? averageRecoilEffect = gearedGun?.RecoilEffect.avg;
 
                     BlockBehaviorMuzzleLoading muzzleLoading = this.GetBehavior<BlockBehaviorMuzzleLoading>();
-                    float? cleanDurationRaw = muzzleLoading?.CleanDuraction;
-                    float? loadDurationRaw  = muzzleLoading?.LoadDuration;
+                    float? cleanDuration = muzzleLoading?.CleanDuraction;
+                    float? loadDuration  = muzzleLoading?.LoadDuration;
+
+                    if (this.Variant["barrel"] is string barrelType) {
+                        dsc.AppendLine(Lang.Get($"heavygun-{barrelType}"));
+                        dsc.AppendLine();
+                    } // if ..
                     
-                    dsc.AppendLine();
-                    if (fireIntervalRaw is float fireInterval)    dsc.AppendLine(Lang.Get("heavygun-fireinterval",  fireInterval));
-                    if (accuracy != 0)                            dsc.AppendLine(Lang.Get("heavygun-accuracy",      accuracy));
-                    if (firePower != 0)                           dsc.AppendLine(Lang.Get("heavygun-firepower",     firePower));
-                    if (cooldown != 0)                            dsc.AppendLine(Lang.Get("heavygun-cooldown",      cooldown));
-                    if (turnSpeedRaw is float turnSpeed)          dsc.AppendLine(Lang.Get("heavygun-turnspeed",     turnSpeed));
-                    if (elevationRaw is (float, float) elevation) dsc.AppendLine(Lang.Get("heavygun-elevation",     elevation.Item1, elevation.Item2));
-                    if (cleanDurationRaw is float cleanDuration)  dsc.AppendLine(Lang.Get("heavygun-cleanduration", cleanDuration));
-                    if (loadDurationRaw  is float loadDuration)   dsc.AppendLine(Lang.Get("heavygun-loadduration",  loadDuration));
+                    if (fireInterval is float)       dsc.AppendLine(Lang.Get("heavygun-fireinterval",  fireInterval));
+                    if (accuracy > 0f)               dsc.AppendLine(Lang.Get("heavygun-accuracy",      accuracy));
+                    if (firePower > 0f)              dsc.AppendLine(Lang.Get("heavygun-firepower",     firePower));
+                    if (cooldown > 0f)               dsc.AppendLine(Lang.Get("heavygun-cooldown",      cooldown));
+
+                    if (
+                        (fireInterval is float ||accuracy > 0f || firePower > 0f || cooldown > 0f) &&
+                        (elevation is (float, float) || averageRecoilEffect > 0f)
+                    ) dsc.AppendLine();
+
+                    if (elevation is (float, float)) dsc.AppendLine(Lang.Get("heavygun-elevation",     elevation?.Item1, elevation?.Item2));
+                    if (averageRecoilEffect > 0f)    dsc.AppendLine(Lang.Get("heavygun-recoileffect",  averageRecoilEffect));
+                    
+                    if (
+                        (elevation is (float, float) || averageRecoilEffect > 0f) &&
+                        (turnSpeed > 0f || cleanDuration is float || loadDuration is float)
+                    ) dsc.AppendLine();
+
+                    if (turnSpeed > 0f)          dsc.AppendLine(Lang.Get("heavygun-turnspeed",     turnSpeed));
+                    if (cleanDuration is float)  dsc.AppendLine(Lang.Get("heavygun-cleanduration", cleanDuration));
+                    if (loadDuration  is float)  dsc.AppendLine(Lang.Get("heavygun-loadduration",  loadDuration));
+                    
+                    base.GetHeldItemInfo(inSlot, dsc, world, withDebugInfo);
                     
                 } // void ..
 

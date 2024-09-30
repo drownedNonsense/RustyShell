@@ -1,0 +1,89 @@
+{
+	"code": "fieldgun",
+	"class": "BlockHeavyGun",
+	"entityClass": "HeavyGun",
+	"variantgroups": [
+		{ "code": "class",    "states": ["12pdr"]},
+		{ "code": "material", "states": ["tinbronze", "iron"]},
+		{ "code": "barrel",   "states": ["smoothbore", "rifled"]}
+	],
+	"attributes": {
+		"barrelLength": 3,
+		"accuracyByType": {
+			"*-tinbronze-smoothbore" : 0.65,
+			"*-iron-smoothbore"      : 0.75,
+			"*-tinbronze-rifled"     : 0.7,
+			"*-iron-rifled"          : 0.8
+		},
+		"firePowerByType": {
+			"*-smoothbore" : 2.0,
+			"*-rifled"     : 2.4
+		},
+		"cooldownByType": {
+			"*-tinbronze-*": 6.0,
+			"*-iron-*":      4.5
+		},
+		"handbook": { "groupBy": [ "fieldgun-12pdr-*" ]}
+	},
+	"creativeinventory": { "general": ["*"], "mechanics": ["*"], "rustyshell": ["*"] },
+	"maxstacksize": 1,
+	"behaviors": [
+		{ "name": "Wheeled",       "properties": { "turnSpeedByType": { "*-tinbronze-*": 0.25, "*-iron-*": 0.2 }, "wheelShapePath": "rustyshell:shapes/wheel/spoked" }},
+		{ "name": "Loadable",      "properties": { "ammunitionCodes": { "smoothbore": ["rustyshell:shot-12pdr-*", "rustyshell:shot-grape-blunt-*", "rustyshell:shot-canister-blunt-*"], "rifled": ["rustyshell:shell-120mm-round-*-none", "rustyshell:shell-120mm-blunt-*-none", "rustyshell:shot-grape-blunt-*"]}}},
+		{ "name": "MuzzleLoading", "properties": { "cleanDuration": 4, "loadDuration": 4 }},
+		{ "name": "Geared",        "properties": {
+			"recoilEffect"    : { "avg": 4, "var": 2 },
+			"minElevation"    : -5,
+			"maxElevation"    : 20,
+			"barrelShapePath" : "rustyshell:shapes/barrel/fieldgun-12pdr"
+		}},
+		{ "name": "Unstable" }
+	],
+	"entityBehaviors": [
+		{ "name": "MuzzleLoadingGun" },
+		{ "name": "GearedGun" },
+		{ "name": "WheeledObject" }
+	],
+	"blockmaterial": "wood",
+    "shape"          : { "base": "gun/wheeledgun-12pdr-base" },
+    "shapeinventory" : { "base": "gun/fieldgun-12pdr-complete" },
+	"textures": {
+		"material"    : { "base": "game:block/metal/plate/{material}" },
+		"materialalt" : { "base": "game:block/metal/sheet/{material}1" },
+		"barrel"      : { "base": "barrel/{material}-{barrel}" }
+	},
+	"resistance": 6,
+	"sounds": {
+		"place" : "game:block/plate",
+		"walk"  : "game:walk/wood1",
+		"hit"   : "game:block/plate"
+	},
+	"drops": [{
+		"type": "item", 
+		"code": "rustyshell:barrel-fieldgun-{class}-{material}-{barrel}", 
+		"quantity": { "avg": 1, "var": 0 } 
+	}, {
+		"type": "block", 
+		"code": "game:wagonwheels-spoked-west", 
+		"quantity": { "avg": 1, "var": 1 } 
+	}],
+    "sidesolid"  : { "all": "false" },
+	"sideopaque" : { "all": "false" },
+    "heldTpIdleAnimation": "holdbothhandslarge", "heldTpUseAnimation": "twohandplaceblock",
+	"tpHandTransform": {
+		"translation": { "x": -0.2, "y": -1.2, "z": -0.5 },
+		"rotation": { "x": 50, "y": -11, "z": -64 },
+		"scale": 0.64
+	},
+	"guiTransform": {
+		"translation": { "x": 0, "y":  5, "z": 0 },
+		"rotation":    { "x": 0, "y": 33, "z": 0 },
+		"scale": 0.45
+	},
+	"groundTransform": {
+		"translation": { "x":   0, "y": 0, "z":   0 },
+		"rotation":    { "x":   0, "y": 0, "z":   0 },
+		"origin":      { "x": 0.5, "y": 0, "z": 0.5 },
+		"scale": 2.56
+	}
+}

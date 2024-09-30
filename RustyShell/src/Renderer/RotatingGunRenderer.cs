@@ -46,10 +46,10 @@ namespace RustyShell {
                 .Translate(0.5f, 0, 0.5f)
                 .RotateY(this.orientable.Orientation)
                 .Translate(this.gearAnchor.X - 0.5f, this.gearAnchor.Y, this.gearAnchor.Z - 0.5f)
-                .RotateX(MathF.Atan(this.gearedGun.Elevation))
+                .RotateXDeg(this.gearedGun.Elevation)
                 .Translate(this.barrelAnchor.X - 0.5f, this.barrelAnchor.Y, this.barrelAnchor.Z - 0.5f)
                 .RotateZ(this.repeatingFire.Angle)
-                .Translate(-this.barrelAnchor.X, -this.barrelAnchor.Y,-this.barrelAnchor.Z)
+                .Translate(-this.barrelAnchor.X, -this.barrelAnchor.Y, -this.barrelAnchor.Z)
                 .Values;
 
             prog.ViewMatrix       = rpi.CameraMatrixOriginf;

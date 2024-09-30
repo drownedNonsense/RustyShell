@@ -1,89 +1,90 @@
 {
     "code": "shot",
     "class": "ItemAmmunition",
-	  "variantgroups": [{ "code": "type", "states": ["stone", "round", "explosive", "grape", "canister" ]}],
+    "variantgroups": [
+      { "code": "class" ,   "states": ["4pdr", "12pdr"]},
+      { "code": "shape" ,   "states": ["round"]},
+      { "code": "type",     "states": ["common", "explosive", "incendiary"]},
+      { "code": "material", "states": ["stone", "lead", "iron"]}
+    ],
+    "allowedVariants": [
+      "shot-4pdr-round-common-*",
+      "shot-12pdr-*"
+    ],
+    "skipVariants": [
+      "shot-*-explosive-stone",
+      "shot-*-incendiary-stone"
+    ],
     "maxstacksize": 1,
-    "creativeinventory": {
-      "general":    ["shot-stone", "shot-round", "shot-explosive", "shot-grape"],
-      "items":      ["shot-stone", "shot-round", "shot-explosive", "shot-grape"],
-      "rustyshell": ["shot-stone", "shot-round", "shot-explosive", "shot-grape"]
-    },
+    "creativeinventory": { "general": ["*"], "items": ["*"], "rustyshell": ["*"] },
     "attributes": {
-      "detonationByType": {
-        "*-round":     { "type": "Piercing",      "amount": 80, "blastRadius": 4, "injureRadius":  5 },
-        "*-stone":     { "type": "NonExplosive",  "amount": 60, "blastRadius": 2, "injureRadius":  2 },
-        "*-explosive": { "type": "HighExplosive", "amount": 60, "blastRadius": 5, "injureRadius":  8 },
-        "*-grape":     { "type": "Canister",      "amount": 20, "blastRadius": 6, "injureRadius": 24, "fuseDuration": 400 },
-        "*-canister":  { "type": "Canister",      "amount": 20, "blastRadius": 6, "injureRadius": 20, "fuseDuration": 1000 }
+
+      "damageByType": {
+        "shot-4pdr-*"  : 30,
+        "shot-12pdr-*" : 40
       },
-		  "handbook": { "groupBy": [ "shot-*" ]}
-    },
-    "attributesByType": {
-      "*-grape": {
-        "scrollrackable": true,
-        "groundStorageTransform": {
-          "rotation": { "x":   0, "y": 45, "z":   0 },
-          "origin":   { "x": 0.5, "y":  0, "z": 0.5 }
-        },
-        "onscrollrackTransform": {
-          "translation": { "x": -0.95, "y": -0.1, "z": 0.5 },
-          "rotation":    { "x":   -45, "y":    0, "z": -90 },
-          "origin":      { "x":   0.5, "y":  0.1, "z": 0.5 }
-        }
+
+      "blastRadiusByType": {
+        "shot-4pdr-round-common-*"    : 3,
+        "shot-4pdr-round-explosive-*" : 5,
+
+        "shot-12pdr-round-common-*"    : 5,
+        "shot-12pdr-round-explosive-*" : 7,
+        "shot-12pdr-round-incendiary-*": 8
       },
-      "*": {
-        "shelvable": true,
-        "groundStorageTransform": {
-          "rotation": { "x": -45, "y":   0, "z": -45 },
-          "origin":   { "x": 0.5, "y": 0.2, "z": 0.5 }
-        }
+
+      "injureRadiusByType": {
+        "shot-4pdr-round-common-*"    : 5,
+        "shot-4pdr-round-explosive-*" : 7,
+
+        "shot-12pdr-round-common-*"     : 7,
+        "shot-12pdr-round-explosive-*"  : 12,
+        "shot-12pdr-round-incendiary-*" : 16
+      },
+
+      "flightExpectancyByType": {
+        "*-explosive-lead" : 3.00,
+        "*-explosive-iron" : 3.25,
+        "*-incendiary-lead" : 3.25,
+        "*-incendiary-iron" : 3.50,
+        "*-stone-*"  : 8.0,
+        "*-lead-*"   : 7.0,
+        "*-iron-*"   : 8.0
+      },
+
+      "entityCode" : "rustyshell:shot-{class}-{material}",
+      "handbook"   : { "groupBy": [ "shot-{class}-*" ]},
+
+      "shelvable": true,
+      "groundStorageTransformByType": {
+        "rotation": { "x": -45, "y":   0, "z": -45 },
+        "origin":   { "x": 0.5, "y": 0.2, "z": 0.5 }
       }
     },
     "shapeByType": {
-      "*-grape": { "base": "ammunition/grapeshot" },
-      "*":       { "base": "ammunition/roundshot" }
+      "shot-4pdr-*"   : { "base": "ammunition/shot", "scale": 0.75 },
+      "shot-12pdr-*"  : { "base": "ammunition/shot" }
     },
     "texturesByType": {
-      "*-stone": { "material": { "base": "game:block/stone/rock/granite1" }},
-      "*-grape": {
-        "generic1":        { "base": "game:block/wood/planks/aged/generic1" },
-        "blastpowdersack": { "base": "game:item/resource/blastpowdersack" }
-      },
-      "*": { "material": { "base": "game:block/metal/sheet/lead1" }}
+      "*-stone" : { "material": { "base": "game:block/stone/rock/granite1" }},
+      "*"       : { "material": { "base": "game:block/metal/ingot/{material}" }}
     },
     "behaviors": [{ "name": "GroundStorable", "properties": { "layout": "Quadrants", "collisionBox": { "x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 0.4, "z2": 1 } }}],
-    "heldTpIdleAnimation": "holdbothhandslarge", "heldTpUseAnimation": "twohandplaceblock",
-    "tpHandTransformByType": {
-      "*-grape": {
-          "translation": { "x": -0.9, "y": -0.4, "z": -0.475 },
-          "rotation":    { "x":    0, "y":    0, "z":   -110 },
-          "origin":      { "x":  0.5, "y":  0.2, "z":    0.5 },
-          "scale": 0.65
-      },
-      "*": {
-          "translation": { "x": -0.7, "y": -0.3, "z": -0.4 },
-          "rotation":    { "x":    0, "y":    0, "z": -110 },
-          "origin":      { "x":  0.5, "y":  0.2, "z":  0.5 },
-          "scale": 0.8
-      }
+    "heldTpIdleAnimationByType": {
+      "shot-4pdr-*"  : "holdbothhands",
+      "shot-12pdr-*" : "holdbothhandslarge"
     },
-    "fpHandTransform": {
-      "rotation": { "x": 12,  "y": -22, "z": 0 },
-      "origin":   { "x": 0.5, "y": 0.3, "z": 0.5 },
-      "scale": 2.56
+    "heldTpUseAnimation": "twohandplaceblock",
+    "tpHandTransform": {
+      "translationByType": { "*-4pdr-*" : { "x": -0.7, "y": -0.3, "z": -0.6 }, "*-12pdr-*" : { "x": -0.7, "y": -0.3, "z": -0.4 }} ,
+      "rotation":          { "x":    0, "y":    0, "z": -110 },
+      "origin":            { "x":  0.5, "y":  0.2, "z":  0.5 },
+      "scale": 0.8
     },
-    "guiTransformByType": {
-      "*-grape": {
-        "translation": { "x":   0, "y":    0, "z":   0 },
-        "rotation":    { "x":  45, "y":   45, "z": 111 },
-        "origin":      { "x": 0.5, "y": 0.35, "z": 0.5 },
-        "scale": 2.3
-      },
-      "*": {
-        "rotation": { "x": 45,  "y": 45,  "z": 24 },
-        "origin":   { "x": 0.5, "y": 0.2, "z": 0.5 },
-        "scale": 2.3
-      }
+    "guiTransform": {
+      "rotation": { "x": 45,  "y": 45,  "z": 24 },
+      "origin":   { "x": 0.5, "y": 0.2, "z": 0.5 },
+      "scale": 2.3
     },
     "groundTransform": {
       "translation": { "x":  0, "y": 0.05, "z":  0 },

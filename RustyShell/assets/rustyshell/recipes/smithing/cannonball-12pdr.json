@@ -1,0 +1,30 @@
+{
+  "ingredient": {
+    "type": "item",
+    "code": "game:ingot-*",
+    "name": "material",
+    "allowedVariants": ["lead", "iron"]
+  },
+  "pattern": [
+    [
+        "###",
+        "###",
+        "###"
+    ],
+    [
+        "###",
+        "###",
+        "###"
+    ],
+    [
+        "###",
+        "###",
+        "###"
+    ]
+  ],
+  "name": "Cannon ball (12-pounder)",
+  "output": {
+    "type": "item",
+    "code": "rustyshell:shot-12pdr-round-common-{material}"
+  }
+}

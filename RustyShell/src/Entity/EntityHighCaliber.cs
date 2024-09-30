@@ -17,28 +17,8 @@ namespace RustyShell {
         // D E F I N I T I O N S
         //=======================
 
-            /** <summary> Type of blast on detonation </summary> **/                                   internal EnumExplosionType BlastType;
-            /** <summary> Abstract value of how unlikely a projectile is to exploded </summary> **/    internal int               Stability;
-            /** <summary> Blast radius in block </summary> **/                                         internal int               BlastRadius;
-            /** <summary> Injure radius in block </summary> **/                                        internal int               InjureRadius;
-            /** <summary> Amount of damage caused by the projectile itself on impact </summary> **/    internal float             Damage;
-            /** <summary> Alternative damage like gas </summary> **/                                   internal float             AltDamage;
-            /** <summary> How long some projectiles will last in second after collision </summary> **/ internal int               Duration;
-            /** <summary> How long before the projectile explodes before collision </summary> **/      internal int               FuseDuration;
-
-            /** <summary> Indicates whether or not the projectile is stuck </summary> **/ private bool beforeCollided;
-
-            /** <summary> Milliseconds at launch </summary> **/       private long msLaunch;
-            /** <summary> Milliseconds at collision </summary> **/    private long msCollide;
-            /** <summary> Milliseconds since launch </summary> **/    private int  msSinceLaunch  => (int)(this.World.ElapsedMilliseconds - this.msLaunch);
-            /** <summary> Milliseconds since collision </summary> **/ private int  msSinceCollide => (int)(this.World.ElapsedMilliseconds - this.msCollide);
-
-            public override bool ApplyGravity                => true;
-            public override bool IsInteractable              => false;
-            public override bool CanCollect(Entity byEntity) => false;
-
-            /** <summary> Look up table for block wasting </summary> **/ private static Dictionary<string, Block> WastedSoilLookUp;
-            /** <summary> Reference to the fire block </summary> **/     private static Block FireBlock;
+            /** <summary> Look up table for block wasting </summary> **/ protected static Dictionary<string, Block> WastedSoilLookUp;
+            /** <summary> Reference to the fire block </summary> **/     protected static Block FireBlock;
 
 
         //===============================
@@ -52,31 +32,6 @@ namespace RustyShell {
             ) {
 
                 base.Initialize(properties, api, InChunkIndex3d);
-
-                this.msLaunch         = this.World.ElapsedMilliseconds;
-                this.collisionTestBox = this.SelectionBox.Clone().OmniGrowBy(0.05f);
-
-                this.GetBehavior<EntityBehaviorPassivePhysics>().collisionYExtra = 0f;
-
-                this.entityPartitioning = api.ModLoader.GetModSystem<EntityPartitioning>();
-
-                JsonObject detonation = api.World.GetItem(this.Code)?.Attributes["detonation"];
-                this.BlastType = detonation["type"].AsString() switch {
-                    "Simple"        => EnumExplosionType.Simple,
-                    "Piercing"      => EnumExplosionType.Piercing,
-                    "HighExplosive" => EnumExplosionType.HighExplosive,
-                    "Canister"      => EnumExplosionType.Canister,
-                    "Gas"           => EnumExplosionType.Gas,
-                    _               => EnumExplosionType.NonExplosive,
-                }; // switch ..
-
-                this.BlastRadius  =  detonation["blastRadius"].AsInt();
-                this.InjureRadius =  detonation["injureRadius"].AsInt();
-                this.Damage       =  detonation["amount"].AsFloat();
-                this.AltDamage    = (detonation["altDamage"].AsFloat() is float altDamage && altDamage != 0) ? altDamage : RustyShellModSystem.GlobalConstants.GasBaseDamage;
-                this.Duration     =  detonation["duration"].AsInt();
-
-                if (detonation["fuseDuration"].Exists) this.FuseDuration = detonation["fuseDuration"].AsInt();
 
                 EntityHighCaliber.FireBlock        ??= this.World.GetBlock(new AssetLocation("fire"));
                 EntityHighCaliber.WastedSoilLookUp   = ObjectCacheUtil.GetOrCreate(api, "wastedSoilLookup", delegate {
@@ -117,283 +72,194 @@ namespace RustyShell {
                 public override void OnGameTick(float deltaTime) {
 
                     base.OnGameTick(deltaTime);
-                    
-                    if (this.ShouldDespawn) return;
-
-                    bool newStuck = this.Collided
-                        || this.collTester.IsColliding(this.World.BlockAccessor, this.collisionTestBox, this.SidedPos.XYZ)
-                        || WatchedAttributes.GetBool("stuck");
-                    
-                    if (this.Api.Side.IsServer() && newStuck != this.stuck) {
-                        this.stuck = newStuck;
-                        this.WatchedAttributes.SetBool("stuck", this.stuck);
-                    } // if ..
-
-                    if (this.stuck) {
-
-                        this.IsColliding();
-                        this.Detonate();
-                        return;
-
-                    } else {
-
-                        this.SetRotation();
-
-                        if (this.Pos.Motion.LengthSq() >= 1 && this.msSinceLaunch >= this.FuseDuration - 1500 && this.Properties.Sounds.TryGetValue("flying", out AssetLocation sound))
-                            this.World.PlaySoundAt(sound, this, null, true, 64, 0.8f );
-
-                    } // if ..
-
-
-                    if (this.FuseDuration < this.msSinceLaunch) {
-                        this.Detonate();
-                        return;
-                    } // if ..
-
-
-                    if (this.CheckEntityCollision()) return;
-
-                    this.beforeCollided = false;
-                    this.motionBeforeCollide.Set(this.SidedPos.Motion);
+                    if (
+                        !this.stuck                                                                                  &&
+                        this.Pos.Motion.LengthSq() >= 1                                                              &&
+                        this.msSinceLaunch         >= (int)((this.Ammunition?.FlightExpectancy ?? 0f) * 1000) - 1500 &&
+                        this.Properties.Sounds.TryGetValue("flying", out AssetLocation sound)
+                    ) this.World.PlaySoundAt(sound, this, null, true, 64, 0.8f );
 
                 } // void ..
 
 
-                /// <summary>
-                /// This method is called on the ammunition's detonation.
-                /// </summary>
-                private void Detonate() {
-                    switch (this.BlastType) {
-                        case EnumExplosionType.NonExplosive: {
+                public override void HandleCommonBlast() {
+                    if (this.World is IServerWorldAccessor serverWorld) {
 
-                            (this.World as IServerWorldAccessor)?.CreateExplosion(
-                                this.ServerPos.AsBlockPos,
-                                EnumBlastType.EntityBlast,
-                                GameMath.RoundRandom(this.World.Rand, 0.02f),
-                                this.World.Rand.Next(0, 1),
-                                0f
-                            ); // ..
+                        Vec3i center = this.ServerPos.XYZInt;
+                        this.Api.ModLoader.GetModSystem<ScreenshakeToClientModSystem>().ShakeScreen(this.ServerPos.XYZ, (this.Ammunition.BlastRadius ?? 0) >> 2, (this.Ammunition.BlastRadius ?? 0) << 3);
 
-                            BlockPos blockPos = (this.ServerPos.XYZ + this.motionBeforeCollide.Normalize()).AsBlockPos;
-
-                            this.World
-                                .BlockAccessor
-                                .GetBlock(blockPos)
-                                .OnBlockExploded(this.World, blockPos, blockPos, EnumBlastType.OreBlast);
-                            
-                            if (this.World.Side.IsServer()) this.Die();
-                            break;
-
-                        } case EnumExplosionType.Canister : {
-
-                            this.World.DetonateCanister(this.SidedPos.AsBlockPos, this.BlastRadius, this.InjureRadius, this.FiredBy);
-                            if (this.World.Side.IsServer()) this.Die();
-                            break;
-                            
-                        } case EnumExplosionType.Gas : {
-
-                            this.World.ReleaseGas(this.SidedPos.AsBlockPos, this.InjureRadius, this.AltDamage, this.FiredBy);
-                            if (this.World.Side.IsServer() && this.msSinceCollide > this.Duration) this.Die();
-
-                            break;
-                        } default : {
-                            if (this.World is IServerWorldAccessor serverWorld) {
-
-                                Vec3i center = this.ServerPos.XYZInt;
-                                this.Api.ModLoader.GetModSystem<ScreenshakeToClientModSystem>().ShakeScreen(this.ServerPos.XYZ, this.BlastRadius >> 2, this.BlastRadius << 4);
-
-                                int roundRadius        = (int)MathF.Ceiling(this.BlastRadius);
-                                Cuboidi explosionArea  = new (this.ServerPos.XYZInt - new Vec3i(roundRadius, roundRadius, roundRadius), center + new Vec3i(roundRadius, roundRadius, roundRadius));
-                                List<LandClaim> claims = (this.Api as ICoreServerAPI)?.WorldManager.SaveGame.LandClaims;
+                        int roundRadius        = this.Ammunition.BlastRadius ?? 0;
+                        Cuboidi explosionArea  = new (this.ServerPos.XYZInt - new Vec3i(roundRadius, roundRadius, roundRadius), center + new Vec3i(roundRadius, roundRadius, roundRadius));
+                        List<LandClaim> claims = (this.Api as ICoreServerAPI)?.WorldManager.SaveGame.LandClaims;
 
 
-                                foreach (LandClaim landClaim in claims)
-                                    if (landClaim.Intersects(explosionArea)) {
-                                        this.Die();
-                                        return;
-
-                                    } // if ..
-
-
-                                int strength = this.BlastType switch {
-                                    EnumExplosionType.Piercing      => RustyShellModSystem.GlobalConstants.PiercingProjectileReinforcmentImpact,
-                                    EnumExplosionType.HighExplosive => RustyShellModSystem.GlobalConstants.HighExplosiveProjectileReinforcementImpact,
-                                    EnumExplosionType.Simple        => RustyShellModSystem.GlobalConstants.SimpleProjectileReinforcmentImpact,
-                                    _                               => 0,
-                                }; // ..
-
-                                bool canBreakReinforced = !((this.FiredBy as IPlayer)?.HasPrivilege("denybreakreinforced") ?? false) && strength != 0;
-                                int blastRadiusSq       = this.BlastRadius * this.BlastRadius;
-
-                                ModSystemBlockReinforcement reinforcement = null;
-                                if (canBreakReinforced)
-                                    reinforcement = this.World.Api.ModLoader.GetModSystem<ModSystemBlockReinforcement>();
-
-                                this.World.BlockAccessor.SearchBlocks(
-                                    explosionArea.Start.ToBlockPos(),
-                                    explosionArea.End.ToBlockPos(),
-                                    (b, p) => {
-                                    
-                                        Vec3i searchPos = p.AsVec3i;
-                                        int x = searchPos.X - center.X;
-                                        int y = searchPos.Y - center.Y;
-                                        int z = searchPos.Z - center.Z;
-
-                                        int negDistanceSq = -(x * x + y * y + z * z);
-                                        if (int.IsPositive(negDistanceSq + blastRadiusSq)) {
-                                            if (canBreakReinforced) {
-                                                
-                                                reinforcement.ConsumeStrength(p, strength);
-                                            
-                                                if (RustyShellModSystem.GlobalConstants.EnableLandWasting
-                                                    && b is BlockSoil
-                                                    && b.Variant["fertility"] is string fertility
-                                                    && b.Variant["grasscoverage"] is string grassCoverage
-                                                ) {
-
-                                                        Block newBlock = EntityHighCaliber.WastedSoilLookUp[fertility + grassCoverage];
-                                                        this.World.BlockAccessor.ExchangeBlock(newBlock.Id, p);
-
-                                                } // if ..                                                
-                                            } // if ..
-
-                                            if (int.IsPositive(negDistanceSq + blastRadiusSq >> 1)) {
-
-                                                EnumHandling handled = EnumHandling.PassThrough;
-                                                IIgnitable ignitable = b.GetInterface<IIgnitable>(this.World, p);
-                                                ignitable?.OnTryIgniteBlockOver(this.FiredBy as EntityAgent, p, this.BlastRadius, ref handled);
-
-                                                BlockPos overBlockPos = p.Up();
-                                                Block overBlock       = this.World.BlockAccessor.GetBlock(overBlockPos);
-                                                if (overBlock.BlockId == 0) {
-
-                                                    this.World.BlockAccessor.SetBlock(EntityHighCaliber.FireBlock.BlockId, overBlockPos);
-                                                    BlockEntity blockEntityFire = this.World.BlockAccessor.GetBlockEntity(overBlockPos);
-                                                    blockEntityFire?.GetBehavior<BEBehaviorBurning>()?.OnFirePlaced(BlockFacing.UP, (this.FiredBy as EntityPlayer)?.PlayerUID);
-
-                                                } // if ..
-                                            } // if ..
-
-                                            this.World.BlockAccessor.MarkBlockDirty(p);
-                                        } // if ..
-
-                                        return true;
-                                    } // ..
-                                ); // ..
-
-
-                                if (this.World.GetEntitiesInsideCuboid(
-                                    explosionArea.Start.ToBlockPos(),
-                                    explosionArea.End.ToBlockPos(),
-                                    (e) => !serverWorld.CanDamageEntity(this.FiredBy, e, out _)).Length != 0
-                                ) {
-                                    this.Die();
-                                    return;
-                                } // if ..
-
-
-                                serverWorld.CreateExplosion(
-                                    this.ServerPos.AsBlockPos,
-                                    EnumBlastType.RockBlast,
-                                    this.BlastRadius,
-                                    this.InjureRadius,
-                                    0f
-                                ); // ..
-
-
+                        foreach (LandClaim landClaim in claims)
+                            if (landClaim.Intersects(explosionArea)) {
                                 this.Die();
+                                return;
 
                             } // if ..
 
-                            break;
 
-                        } // case ..
-                    } // switch ..
-                } // void ..
+                        int strength = this.Ammunition.Type switch {
+                            EnumAmmunitionType.Common    => RustyShellModSystem.GlobalConstants.CommonHighcaliberReinforcmentImpact,
+                            EnumAmmunitionType.Explosive => RustyShellModSystem.GlobalConstants.ExplosiveHighcaliberReinforcmentImpact,
+                            _                            => 0,
+                        }; // ..
+
+                        bool canBreakReinforced = !((this.FiredBy as IPlayer)?.HasPrivilege("denybreakreinforced") ?? false) && strength != 0;
+                        int  blastRadiusSq      = (this.Ammunition.BlastRadius * this.Ammunition.BlastRadius) ?? 0;
+
+                        ModSystemBlockReinforcement reinforcement = null;
+                        if (canBreakReinforced)
+                            reinforcement = this.World.Api.ModLoader.GetModSystem<ModSystemBlockReinforcement>();
+
+                        this.World.BlockAccessor.WalkBlocks(
+                            minPos      : explosionArea.Start.ToBlockPos(),
+                            maxPos      : explosionArea.End.ToBlockPos(),
+                            centerOrder : true,
+                            onBlock     : (block, xWorld, yWorld, zWorld) => {
+
+                                if (block.Id == 0 || block.Id == EntityHighCaliber.FireBlock.Id) return;
+
+                                Vec3i searchPos = new (xWorld, yWorld, zWorld);
+                                int x = searchPos.X - center.X;
+                                int y = searchPos.Y - center.Y;
+                                int z = searchPos.Z - center.Z;
+
+                                int negDistanceSq = -(x * x + y * y + z * z);
+                                if (int.IsPositive(negDistanceSq + blastRadiusSq)) {
+                                    if (canBreakReinforced) {
+
+                                        BlockPos pos = searchPos.AsBlockPos;
+                                        reinforcement.ConsumeStrength(pos, strength);
+
+                                        if (RustyShellModSystem.GlobalConstants.EnableLandWasting
+                                            && block is BlockSoil
+                                            && block.Variant["fertility"] is string fertility
+                                            && block.Variant["grasscoverage"] is string grassCoverage
+                                        ) {
+
+                                            Block newBlock = EntityHighCaliber.WastedSoilLookUp[fertility + grassCoverage];
+                                            this.World.BlockAccessor.ExchangeBlock(newBlock.Id, pos);
+
+                                        } // if ..     
+
+                                        this.World.BlockAccessor.MarkBlockEntityDirty(pos);
+
+                                    } // if ..
+                                } // if ..
+                            } // ..
+                        ); // ..
 
 
-            //---------------
-            // P H Y S I C S
-            //---------------
+                        if (this.World.GetEntitiesInsideCuboid(
+                            explosionArea.Start.ToBlockPos(),
+                            explosionArea.End.ToBlockPos(),
+                            (e) => !serverWorld.CanDamageEntity(this.FiredBy, e, out _)).Length != 0
+                        ) {
+                            this.Die();
+                            return;
+                        } // if ..
 
-                /// <summary>
-                /// Called on collision with an entity
-                /// </summary>
-                /// <param name="entity"></param>
-                public override void ImpactOnEntity(Entity entity) {
-                    if ((this.World as IServerWorldAccessor)?.CanDamageEntity(this.FiredBy, entity, out bool isFromPlayer) ?? false) {
 
-                        this.msCollide = this.World.ElapsedMilliseconds;
-                        this.SidedPos.Motion.Set(Vec3d.Zero);
+                        serverWorld.CreateExplosion(
+                            this.ServerPos.AsBlockPos,
+                            EnumBlastType.RockBlast,
+                            this.Ammunition.BlastRadius  ?? 0,
+                            this.Ammunition.InjureRadius ?? 0,
+                            0f
+                        ); // ..
 
-                        if (FiredBy != null) this.Damage *= this.FiredBy.Stats.GetBlended("rangedWeaponsDamage");
 
-                        bool didDamage = entity.ReceiveDamage(new DamageSource() {
-                            Source       = isFromPlayer ? EnumDamageSource.Player : EnumDamageSource.Entity,
-                            SourceEntity = this,
-                            CauseEntity  = this.FiredBy,
-                            Type         = EnumDamageType.PiercingAttack
-                        }, this.Damage);
-
-                        float knockbackResistance = entity.Properties.KnockbackResistance;
-                        entity.SidedPos.Motion.Add(knockbackResistance * this.SidedPos.Motion.X, knockbackResistance * this.SidedPos.Motion.Y, knockbackResistance * this.SidedPos.Motion.Z);
-
-                        this.Detonate();
-
-                        if (isFromPlayer && didDamage)
-                            this.World.PlaySoundFor(new AssetLocation("sounds/player/projectilehit"), (this.FiredBy as EntityPlayer).Player, false, 24);
+                        this.Die();
 
                     } // if ..
                 } // void ..
 
 
-                /// <summary>
-                /// Called on collision
-                /// </summary>
-                public override void IsColliding() {
-                    if (!this.beforeCollided
-                        && this.Api.Side.IsServer()
-                        && this.msSinceCollide > 500
-                    ) {
+                public override void HandleExplosiveBlast() => this.HandleCommonBlast();
+                public override void HandleAntiPersonnelBlast() {
+                    if (this.World is IServerWorldAccessor serverWorld) {
 
-                        this.CheckEntityCollision();
-                        this.beforeCollided = true;
-                        this.msCollide      = this.World.ElapsedMilliseconds;
+                        serverWorld.CreateExplosion(
+                            this.ServerPos.AsBlockPos,
+                            EnumBlastType.EntityBlast,
+                            this.Ammunition.BlastRadius  ?? 0,
+                            this.Ammunition.InjureRadius ?? 0,
+                            0f
+                        ); // ..
 
+                        this.Die();
                     } // if ..
                 } // void ..
 
-
-                /// <summary>
-                /// Updates projecttile's rotation based on motion
-                /// </summary>
-                public virtual void SetRotation() {
-
-                    float speed        = this.SidedPos.Motion.ToVec3f().Length();
-                    float inverseSpeed = 1f / speed;
-
-                    if (speed > 0.01f) {
-
-                        this.SidedPos.Pitch = 0f;
-                        this.SidedPos.Yaw   = 
-                            GameMath.PI + MathF.Atan2((float)this.SidedPos.Motion.X * inverseSpeed, (float)this.SidedPos.Motion.Z * inverseSpeed)
-                            + GameMath.FastCos((World.ElapsedMilliseconds - msLaunch) / 200f) * 0.03f;
-                        this.SidedPos.Roll =
-                            - MathF.Asin(GameMath.Clamp(-(float)this.SidedPos.Motion.Y * inverseSpeed, -1, 1))
-                            + GameMath.FastSin((World.ElapsedMilliseconds - msLaunch) / 200f) * 0.03f;
-                    } // if ..
+                public override void HandleGasBlast() {
+                    this.World.ReleaseGas(this.SidedPos.AsBlockPos, this.Ammunition.BlastRadius ?? 0, this.FiredBy);
+                    if (this.World.Side.IsServer() && this.msSinceCollide > (this.Ammunition.IsSubmunition ? 10000 : 20000)) this.Die();
                 } // void ..
 
+                public override void HandleIncendiaryBlast() {
+                    if (this.World is IServerWorldAccessor serverWorld) {
 
-                public override void ToBytes(BinaryWriter writer, bool forClient) {
-                    base.ToBytes(writer, forClient);
-                    writer.Write(this.beforeCollided);
-                } // ..
-                
+                        Vec3i center           = this.ServerPos.XYZInt;
+                        int incendiaryRadius   = this.Ammunition.BlastRadius ?? 0;
+                        int falloutRadius      = this.Ammunition.InjureRadius ?? 0;
+                        Cuboidi incendiaryArea = new (this.ServerPos.XYZInt - new Vec3i(incendiaryRadius, incendiaryRadius, incendiaryRadius), center + new Vec3i(incendiaryRadius, incendiaryRadius, incendiaryRadius));
+                        Cuboidi falloutArea    = new (this.ServerPos.XYZInt - new Vec3i(falloutRadius, falloutRadius, falloutRadius),          center + new Vec3i(falloutRadius, falloutRadius, falloutRadius));
 
-                public override void FromBytes(BinaryReader reader, bool fromServer) {
-                    base.FromBytes(reader, fromServer);
-                    this.beforeCollided = reader.ReadBoolean();
-                } // ..
+                        List<LandClaim> claims = (this.Api as ICoreServerAPI)?.WorldManager.SaveGame.LandClaims;
+
+
+                        foreach (LandClaim landClaim in claims)
+                            if (landClaim.Intersects(incendiaryArea)) {
+                                this.Die();
+                                return;
+
+                            } // if ..
+
+                        int blastRadiusSq = (this.Ammunition.BlastRadius * this.Ammunition.BlastRadius) ?? 0;
+                        ThreadSafeRandom random = new();
+
+                        this.World.BlockAccessor.WalkBlocks(
+                            minPos      : incendiaryArea.Start.ToBlockPos(),
+                            maxPos      : incendiaryArea.End.ToBlockPos(),
+                            centerOrder : true,
+                            onBlock     : (block, xWorld, yWorld, zWorld) => {
+
+                                if (block.Id == 0 || block.Id == EntityHighCaliber.FireBlock.Id) return;
+
+                                Vec3i searchPos = new (xWorld, yWorld, zWorld);
+                                int x = searchPos.X - center.X;
+                                int y = searchPos.Y - center.Y;
+                                int z = searchPos.Z - center.Z;
+
+                                int distanceSq = x * x + y * y + z * z;
+                                if (int.IsPositive(-distanceSq + blastRadiusSq)) {
+
+                                    BlockPos pos = searchPos.AsBlockPos;
+                                    if (this.World.BlockAccessor.GetBlock(pos.UpCopy()).Id == 0 && random.Next(0, distanceSq >> 1) == 0)
+                                        this.World.BlockAccessor.SetBlock(EntityHighCaliber.FireBlock.Id, pos.UpCopy());
+
+                                    this.World.BlockAccessor.GetBlockEntity(pos.UpCopy())
+                                        ?.GetBehavior<BEBehaviorBurning>()
+                                        ?.OnFirePlaced(pos.UpCopy(), pos, (this.FiredBy as EntityPlayer).PlayerUID);
+                                        
+                                    this.World.BlockAccessor.MarkBlockDirty(pos);
+                                } // if ..
+                            } // ..
+                        ); // ..
+
+
+                        foreach (Entity entity in this.World.GetEntitiesInsideCuboid(
+                            falloutArea.Start.ToBlockPos(),
+                            falloutArea.End.ToBlockPos(),
+                            (e) => serverWorld.CanDamageEntity(this.FiredBy, e, out _)
+                        )) entity.IsOnFire = true;
+
+                        this.Die();
+
+                    } // if ..
+                } // void ..
     } // class ..
 } // namespace ..

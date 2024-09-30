@@ -1,0 +1,79 @@
+{
+	"code": "supportgun",
+	"class": "BlockHeavyGun",
+	"entityClass": "HeavyGun",
+	"variantgroups": [
+		{ "code": "class",    "states": ["4pdr"]},
+		{ "code": "material", "states": ["tinbronze", "iron"]},
+		{ "code": "barrel",   "states": ["smoothbore"]}
+	],
+	"attributes": {
+		"wearableAttachment": true,
+		"attachShape": { "base": "gun/supportgun-4pdr-attached" },
+
+		"barrelLength" : 2,
+		"firePower"    : 1.7,
+		"accuracyByType": {
+			"*-tinbronze-*" : 0.70,
+			"*-iron-*"      : 0.75
+		},
+		"cooldownByType": {
+			"*-tinbronze-*" : 5,
+			"*-iron-*"      : 4
+		},
+
+		"handbook": { "groupBy": [ "supportgun-4pdr-*" ]}
+	},
+	"creativeinventory": { "general": ["*"], "mechanics": ["*"], "rustyshell": ["*"] },
+	"maxstacksize": 1,
+	"behaviors": [
+		{ "name": "Wheeled",          "properties": { "turnSpeedByType": { "*-tinbronze-*": 0.4, "*-iron-*": 0.3 }, "wheelShapePath": "rustyshell:shapes/wheel/spoked-small" }},
+		{ "name": "Loadable",         "properties": { "ammunitionCodes": ["rustyshell:shot-4pdr-*", "rustyshell:shot-grape-blunt-*"]}},
+		{ "name": "MuzzleLoading",    "properties": { "cleanDuration": 2.5, "loadDuration": 2.5 }},
+		{ "name": "Geared",           "properties": {
+			"recoilEffect"    : { "avg": 6, "var": 3 },
+			"minElevation"    : -5,
+			"maxElevation"    : 20,
+			"barrelShapePath" : "rustyshell:shapes/barrel/supportgun-4pdr"
+		}},
+		{ "name": "RightClickPickup", "properties": { "dropsPickupMode": true }},
+		{ "name": "Unstable" }
+	],
+	"entityBehaviors": [
+		{ "name": "MuzzleLoadingGun" },
+		{ "name": "GearedGun" },
+		{ "name": "WheeledObject" }
+	],
+	"blockmaterial": "wood",
+    "shape"          : { "base": "gun/wheeledgun-4pdr-base" },
+    "shapeinventory" : { "base": "gun/supportgun-4pdr-complete" },
+	"textures": {
+		"material" : { "base": "game:block/metal/plate/{material}" },
+		"barrel"   : { "base": "barrel/{material}-{barrel}" }
+	},
+	"resistance": 6,
+	"sounds": {
+		"place" : "game:block/plate",
+		"walk"  : "game:walk/wood1",
+		"hit"   : "game:block/plate"
+	},
+    "sidesolid"  : { "all": "false" },
+	"sideopaque" : { "all": "false" },
+    "heldTpIdleAnimation": "holdbothhandslarge", "heldTpUseAnimation": "twohandplaceblock",
+	"tpHandTransform": {
+		"translation": { "x": -0.6, "y": -1.2, "z": -0.5 },
+		"rotation": { "x": 60, "y": -31, "z": -67 },
+		"scale": 0.64
+	},
+	"guiTransform": {
+		"translation": { "x": 0, "y":  5, "z": 0 },
+		"rotation":    { "x": 0, "y": 33, "z": 0 },
+		"scale": 0.45
+	},
+	"groundTransform": {
+		"translation": { "x":   0, "y": 0, "z":   0 },
+		"rotation":    { "x":   0, "y": 0, "z":   0 },
+		"origin":      { "x": 0.5, "y": 0, "z": 0.5 },
+		"scale": 2.56
+	}
+}

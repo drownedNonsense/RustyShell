@@ -1,0 +1,29 @@
+{
+  "ingredient": {
+    "type": "item",
+    "code": "game:ingot-*",
+    "name": "casingmaterial",
+    "allowedVariants": ["copper", "brass", "iron"]
+  },
+  "pattern": [
+    [
+      "###",
+      "###",
+      "###"
+    ], [
+      "###",
+      "#_#",
+      "###"
+    ], [
+      "###",
+      "#_#",
+      "###"
+    ], [
+      "###",
+      "#_#",
+      "###"
+    ]
+  ],
+  "name": "Casing",
+  "output": { "type": "item", "code": "rustyshell:casing-{casingmaterial}-fine" }
+}

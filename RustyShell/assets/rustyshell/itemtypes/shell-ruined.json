@@ -1,0 +1,58 @@
+{
+    "code": "shell",
+    "class": "Item",
+    "variantgroups": [
+      { "code": "class",    "states": ["120mm"]},
+      { "code": "shape" ,   "states": ["round", "blunt"]},
+      { "code": "material", "states": ["ruined"]}
+    ],
+    "maxstacksize": 1,
+    "creativeinventory": {
+      "general"    : ["shell-*"],
+      "items"      : ["shell-*"],
+      "rustyshell" : ["shell-*"]
+    },
+    "behaviors": [{
+      "name": "GroundStorable",
+      "properties": { "layout": "Quadrants", "collisionBox": { "x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 1, "z2": 1 } }
+    }],
+    "attributes": {
+  
+      "groundStorageTransform": {
+        "rotation": { "x": 0,   "y": -40, "z": 0 },
+        "origin":   { "x": 0.5, "y":   0, "z": 0.5 }
+      },
+  
+      "scrollrackable"        :  true,
+      "onscrollrackTransform" : {
+        "translation": { "x": -0.95, "y": -0.025, "z": 0.5 },
+        "rotation":    { "x":   -45, "y":      0, "z": -90 },
+        "origin":      { "x":   0.5, "y":      0, "z": 0.5 },
+        "scale": 0.9
+      }
+    },
+    "shape": { "base": "ammunition/warhead-{shape}" },
+    "textures":  {
+      "warhead"     : { "base": "game:block/metal/tarnished/iron" },
+      "drivingband" : { "base": "game:block/metal/tarnished/steel" },
+      "icon"        : { "base": "game:block/transparent" }
+    },
+    "heldTpIdleAnimation": "holdbothhandslarge", "heldTpUseAnimation": "twohandplaceblock",
+    "tpHandTransform": {
+      "translation": { "x": -0.65, "y": -0.1, "z": -0.3 },
+      "rotation":    { "x":   114, "y":    2, "z": -130 },
+      "origin":      { "x":   0.5, "y":    0, "z":  0.5 },
+      "scale": 0.65
+    },
+    "guiTransform": {
+      "translation"  : { "x":   2, "y":   2, "z":   0 },
+      "rotation"     : { "x":  23, "y":  45, "z": 132 },
+      "origin"       : { "x": 0.5, "y": 0.30, "z": 0.5 },
+      "scale": 1.54
+    },
+    "groundTransform": {
+      "translation": { "x":  0, "y": 0.1, "z": 0 },
+      "rotation":    { "x": 94, "y": 0,   "z": 0 },
+      "scale": 3.6
+    }
+  }

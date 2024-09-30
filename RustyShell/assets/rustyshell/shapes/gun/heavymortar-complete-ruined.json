@@ -9,12 +9,12 @@
 	"textureSizes": {
 	},
 	"textures": {
-		"rusty-iron":  "game:block/metal/tarnished/rusty-iron",
-		"rusty-iron2": "game:block/metal/tarnished/rusty-iron2",
-		"metal":       "game:block/metal/tarnished/rusty-iron",
-		"metalalt":    "game:block/metal/tarnished/rusty-iron2",
-		"metalbarrel": "game:block/metal/tarnished/steel",
-		"black":       "game:block/black"
+		"rusty-iron":  "block/wood/planks/generic",
+		"rusty-iron2": "block/wood/plainoak",
+		"metal":       "block/metal/tarnished/rusty-iron",
+		"metalalt":    "block/metal/tarnished/rusty-iron2",
+		"metalbarrel": "block/metal/tarnished/steel",
+		"black":       "block/black"
 	},
 	"elements": [
 		{

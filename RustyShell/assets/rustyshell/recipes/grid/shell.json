@@ -1,210 +1,219 @@
 [
-	{
-		"ingredientPattern": "A_,BC,B_",
-		"ingredients": {
-			"A": { "type": "item", "code": "game:hammer-*",       "isTool": true },
-			"B": { "type": "item", "code": "game:metalplate-*",   "name": "metal", "allowedVariants": ["tinbronze", "bismuthbronze", "blackbronze", "brass"]},
-			"C": { "type": "item", "code": "game:blastingpowder", "quantity": 4 }
-		},
-		"width":  2,
-		"height": 3,
-		"output": { "type": "item", "code": "rustyshell:shell-simple" }
-	},
-	{
-		"ingredientPattern": "_A,CB,_B",
-		"ingredients": {
-			"A": { "type": "item", "code": "game:hammer-*",       "isTool": true },
-			"B": { "type": "item", "code": "game:metalplate-*",   "name": "metal", "allowedVariants": ["tinbronze", "bismuthbronze", "blackbronze", "brass"]},
-			"C": { "type": "item", "code": "game:blastingpowder", "quantity": 4 }
-		},
-		"width":  2,
-		"height": 3,
-		"output": { "type": "item", "code": "rustyshell:shell-simple" }
-	},
-	{
-		"ingredientPattern": "A_,BD,CE",
-		"ingredients": {
-			"A": { "type": "item", "code": "game:hammer-*",       "isTool": true },
-			"B": { "type": "item", "code": "game:metalplate-*",   "name": "metaltop", "allowedVariants": ["iron"]},
-			"C": { "type": "item", "code": "game:metalplate-*",   "name": "metal", "allowedVariants": ["tinbronze", "bismuthbronze", "blackbronze", "brass"]},
-			"D": { "type": "item", "code": "game:blastingpowder", "quantity": 4 },
-			"E": { "type": "item", "code": "game:blastingpowder", "quantity": 4 }
-		},
-		"width":  2,
-		"height": 3,
-		"output": { "type": "item", "code": "rustyshell:shell-piercing" }
-	},
-	{
-		"ingredientPattern": "_A,DB,EC",
-		"ingredients": {
-			"A": { "type": "item", "code": "game:hammer-*",       "isTool": true },
-			"B": { "type": "item", "code": "game:metalplate-*",   "name": "metaltop", "allowedVariants": ["iron"]},
-			"C": { "type": "item", "code": "game:metalplate-*",   "name": "metal", "allowedVariants": ["tinbronze", "bismuthbronze", "blackbronze", "brass"]},
-			"D": { "type": "item", "code": "game:blastingpowder", "quantity": 4 },
-			"E": { "type": "item", "code": "game:blastingpowder", "quantity": 4 }
-		},
-		"width":  2,
-		"height": 3,
-		"output": { "type": "item", "code": "rustyshell:shell-piercing" }
-	},
-	{
-		"ingredientPattern": "A_,BC,BD",
-		"ingredients": {
-			"A": { "type": "item", "code": "game:hammer-*",       "isTool": true },
-			"B": { "type": "item", "code": "game:metalplate-*",   "name": "metal", "allowedVariants": ["tinbronze", "bismuthbronze", "blackbronze", "brass"]},
-			"C": { "type": "item", "code": "game:blastingpowder", "quantity": 16 },
-			"D": { "type": "item", "code": "game:blastingpowder", "quantity": 4 }
-		},
-		"width":  2,
-		"height": 3,
-		"output": { "type": "item", "code": "rustyshell:shell-explosive" }
-	},
-	{
-		"ingredientPattern": "_A,CB,DB",
-		"ingredients": {
-			"A": { "type": "item", "code": "game:hammer-*",       "isTool": true },
-			"B": { "type": "item", "code": "game:metalplate-*",   "name": "metal", "allowedVariants": ["tinbronze", "bismuthbronze", "blackbronze", "brass"]},
-			"C": { "type": "item", "code": "game:blastingpowder", "quantity": 16 },
-			"D": { "type": "item", "code": "game:blastingpowder", "quantity": 4 }
-		},
-		"width":  2,
-		"height": 3,
-		"output": { "type": "item", "code": "rustyshell:shell-explosive" }
-	},
-	{
-		"ingredientPattern": "A_,BC,BD",
-		"ingredients": {
-			"A": { "type": "item", "code": "game:hammer-*",       "isTool": true },
-			"B": { "type": "item", "code": "game:metalplate-*",   "name": "metal", "allowedVariants": ["tinbronze", "bismuthbronze", "blackbronze", "brass"]},
-			"C": { "type": "item", "code": "game:metalbit-*",     "quantity": 32 },
-			"D": { "type": "item", "code": "game:blastingpowder", "quantity": 4 }
-		},
-		"width":  2,
-		"height": 3,
-		"output": { "type": "item", "code": "rustyshell:shell-shrapnel" }
-	},
-	{
-		"ingredientPattern": "_A,CB,DB",
-		"ingredients": {
-			"A": { "type": "item", "code": "game:hammer-*",       "isTool": true },
-			"B": { "type": "item", "code": "game:metalplate-*",   "name": "metal", "allowedVariants": ["tinbronze", "bismuthbronze", "blackbronze", "brass"]},
-			"C": { "type": "item", "code": "game:metalbit-*",     "quantity": 32 },
-			"D": { "type": "item", "code": "game:blastingpowder", "quantity": 4 }
-		},
-		"width":  2,
-		"height": 3,
-		"output": { "type": "item", "code": "rustyshell:shell-shrapnel" }
-	},
-	{
-		"ingredientPattern": "AB,CD,CE",
-		"ingredients": {
-			"A": { "type": "item", "code": "game:hammer-*", "isTool": true },
-			"B": {
-				"type": "block",
-				"code": "game:woodbucket"
-			},
-			"C": { "type": "item", "code": "game:metalplate-*",             "name": "metal", "allowedVariants": ["tinbronze", "bismuthbronze", "blackbronze", "brass"]},
-			"D": { "type": "item", "code": "chemistrylib:ammoniumchloride", "quantity": 64 },
-			"E": { "type": "item", "code": "game:blastingpowder",           "quantity": 4 }
-		},
-		"attributes": {
+  {
+    "ingredientPattern": "A_,B_,CD",
+    "ingredients": {
+      "A": { "type": "item", "code": "game:hammer-*",                                 "isTool": true },
+      "B": { "type": "item", "code": "rustyshell:shell-120mm-round-*-tinbronze-none", "name": "type" },
+      "C": { "type": "item", "code": "rustyshell:casing-*-fine",                      "name": "casingmaterial" },
+      "D": { "type": "item", "code": "game:blastingpowder",                           "quantity": 4 }
+    },
+    "width":  2,
+    "height": 3,
+    "output": { "type": "item", "code": "rustyshell:shell-120mm-round-{type}-tinbronze-{casingmaterial}" }
+  }, {
+    "ingredientPattern": "A_,B_,CD",
+    "ingredients": {
+      "A": { "type": "item", "code": "game:hammer-*",                            "isTool": true },
+      "B": { "type": "item", "code": "rustyshell:shell-120mm-round-*-iron-none", "name": "type" },
+      "C": { "type": "item", "code": "rustyshell:casing-*-fine",                 "name": "casingmaterial" },
+      "D": { "type": "item", "code": "game:blastingpowder",                      "quantity": 4 }
+    },
+    "width":  2,
+    "height": 3,
+    "output": { "type": "item", "code": "rustyshell:shell-120mm-round-{type}-iron-{casingmaterial}" }
+  },
+
+
+  {
+    "ingredientPattern": "A_,B_,CD",
+    "ingredients": {
+      "A": { "type": "item", "code": "game:hammer-*",                                 "isTool": true },
+      "B": { "type": "item", "code": "rustyshell:shell-120mm-blunt-*-tinbronze-none", "name": "type" },
+      "C": { "type": "item", "code": "rustyshell:casing-*-fine",                      "name": "casingmaterial" },
+      "D": { "type": "item", "code": "game:blastingpowder",                           "quantity": 4 }
+    },
+    "width":  2,
+    "height": 3,
+    "output": { "type": "item", "code": "rustyshell:shell-120mm-blunt-{type}-tinbronze-{casingmaterial}" }
+  }, {
+    "ingredientPattern": "A_,B_,CD",
+    "ingredients": {
+      "A": { "type": "item", "code": "game:hammer-*",                            "isTool": true },
+      "B": { "type": "item", "code": "rustyshell:shell-120mm-blunt-*-iron-none", "name": "type" },
+      "C": { "type": "item", "code": "rustyshell:casing-*-fine",                 "name": "casingmaterial" },
+      "D": { "type": "item", "code": "game:blastingpowder",                      "quantity": 4 }
+    },
+    "width":  2,
+    "height": 3,
+    "output": { "type": "item", "code": "rustyshell:shell-120mm-blunt-{type}-iron-{casingmaterial}" }
+  },
+
+
+  {
+    "ingredientPattern": "AB,CD",
+    "ingredients": {
+      "A": { "type": "item", "code": "game:chisel-*",                              "isTool": true },
+      "B": { "type": "item", "code": "game:hammer-*",                              "isTool": true },
+      "C": { "type": "item", "code": "rustyshell:shell-120mm-round-common-*-none", "name": "material" },
+      "D": { "type": "item", "code": "game:blastingpowder",                        "quantity": 16 }
+    },
+    "shapeless": true,
+    "width":  2,
+    "height": 2,
+    "output": { "type": "item", "code": "rustyshell:shell-120mm-round-explosive-{material}-none" }
+  }, {
+    "ingredientPattern": "AB,CD",
+    "ingredients": {
+      "A": { "type": "item", "code": "game:chisel-*",                              "isTool": true },
+      "B": { "type": "item", "code": "game:hammer-*",                              "isTool": true },
+      "C": { "type": "item", "code": "rustyshell:shell-120mm-blunt-common-*-none", "name": "material" },
+      "D": { "type": "item", "code": "game:blastingpowder",                        "quantity": 16 }
+    },
+    "shapeless": true,
+    "width":  2,
+    "height": 2,
+    "output": { "type": "item", "code": "rustyshell:shell-120mm-blunt-explosive-{material}-none" }
+  }, {
+    "ingredientPattern": "_AB,CDE",
+    "ingredients": {
+      "A": { "type": "item", "code": "game:chisel-*",                              "isTool": true },
+      "B": { "type": "item", "code": "game:hammer-*",                              "isTool": true },
+      "C": { "type": "item", "code": "game:blastingpowder",                        "quantity": 4 },
+      "D": { "type": "item", "code": "rustyshell:shell-120mm-round-common-*-none", "name": "material" },
+      "E": { "type": "item", "code": "game:metalbit-*",                            "quantity": 32 }
+    },
+    "width":  3,
+    "height": 2,
+    "output": { "type": "item", "code": "rustyshell:shell-120mm-round-antipersonnel-{material}-none" }
+  }, {
+    "ingredientPattern": "_AB,CDE",
+    "ingredients": {
+      "A": { "type": "item", "code": "game:chisel-*",                              "isTool": true },
+      "B": { "type": "item", "code": "game:hammer-*",                              "isTool": true },
+      "C": { "type": "item", "code": "game:blastingpowder",                        "quantity": 4 },
+      "D": { "type": "item", "code": "rustyshell:shell-120mm-blunt-common-*-none", "name": "material" },
+      "E": { "type": "item", "code": "game:metalbit-*",                            "quantity": 32 }
+    },
+    "width":  3,
+    "height": 2,
+    "output": { "type": "item", "code": "rustyshell:shell-120mm-blunt-antipersonnel-{material}-none" }
+  }, {
+    "ingredientPattern": "_AB,CDE,_F_",
+    "ingredients": {
+      "A": { "type": "item",  "code": "game:chisel-*",                              "isTool": true },
+      "B": { "type": "item",  "code": "game:hammer-*",                              "isTool": true },
+      "C": { "type": "item",  "code": "game:blastingpowder",                        "quantity": 4 },
+      "D": { "type": "item",  "code": "rustyshell:shell-120mm-round-common-*-none", "name": "material" },
+      "E": { "type": "item",  "code": "chemistrylib:ammoniumchloride",              "quantity": 64 },
+      "F": { "type": "block", "code": "game:woodbucket" }
+    },
+    "attributes": {
+      "liquidContainerProps": {
+        "requiresContent": { "type": "item", "code": "chemistrylib:mineralacidportion-hydrochloric" },
+        "requiresLitres": 0.5
+      }
+    },
+    "width":  3,
+    "height": 3,
+    "output": { "type": "item", "code": "rustyshell:shell-120mm-round-gas-{material}-none" }
+  }, {
+    "ingredientPattern": "_AB,CDE,_F_",
+    "ingredients": {
+      "A": { "type": "item",  "code": "game:chisel-*",                              "isTool": true },
+      "B": { "type": "item",  "code": "game:hammer-*",                              "isTool": true },
+      "C": { "type": "item",  "code": "game:blastingpowder",                        "quantity": 4 },
+      "D": { "type": "item",  "code": "rustyshell:shell-120mm-round-common-*-none", "name": "material" },
+      "E": { "type": "item",  "code": "chemistrylib:ammoniumchloride",              "quantity": 64 },
+      "F": { "type": "block", "code": "game:bowl-fired" }
+    },
+    "attributes": {
+      "liquidContainerProps": {
+        "requiresContent": { "type": "item", "code": "chemistrylib:mineralacidportion-hydrochloric" },
+        "requiresLitres": 0.5
+      }
+    },
+    "width":  3,
+    "height": 3,
+    "output": { "type": "item", "code": "rustyshell:shell-120mm-round-gas-{material}-none" }
+  }, {
+    "ingredientPattern": "_AB,CDE,_F_",
+    "ingredients": {
+      "A": { "type": "item",  "code": "game:chisel-*",                              "isTool": true },
+      "B": { "type": "item",  "code": "game:hammer-*",                              "isTool": true },
+      "C": { "type": "item",  "code": "game:blastingpowder",                        "quantity": 4 },
+      "D": { "type": "item",  "code": "rustyshell:shell-120mm-blunt-common-*-none", "name": "material" },
+      "E": { "type": "item",  "code": "chemistrylib:ammoniumchloride",              "quantity": 64 },
+      "F": { "type": "block", "code": "game:woodbucket" }
+    },
+    "attributes": {
+      "liquidContainerProps": {
+        "requiresContent": { "type": "item", "code": "chemistrylib:mineralacidportion-hydrochloric" },
+        "requiresLitres": 0.5
+      }
+    },
+    "width":  3,
+    "height": 3,
+    "output": { "type": "item", "code": "rustyshell:shell-120mm-blunt-gas-{material}-none" }
+  }, {
+    "ingredientPattern": "_AB,CDE,_F_",
+    "ingredients": {
+      "A": { "type": "item",  "code": "game:chisel-*",                              "isTool": true },
+      "B": { "type": "item",  "code": "game:hammer-*",                              "isTool": true },
+      "C": { "type": "item",  "code": "game:blastingpowder",                        "quantity": 4 },
+      "D": { "type": "item",  "code": "rustyshell:shell-120mm-blunt-common-*-none", "name": "material" },
+      "E": { "type": "item",  "code": "chemistrylib:ammoniumchloride",              "quantity": 64 },
+      "F": { "type": "block", "code": "game:bowl-fired" }
+    },
+    "attributes": {
+      "liquidContainerProps": {
+        "requiresContent": { "type": "item", "code": "chemistrylib:mineralacidportion-hydrochloric" },
+        "requiresLitres": 0.5
+      }
+    },
+    "width":  3,
+    "height": 3,
+    "output": { "type": "item", "code": "rustyshell:shell-120mm-blunt-gas-{material}-none" }
+  }, {
+    "ingredientPattern": "_AB,CDE,FGH",
+    "ingredients": {
+      "A": { "type": "item",  "code": "game:chisel-*",                        "isTool": true },
+      "B": { "type": "item",  "code": "game:hammer-*",                        "isTool": true },
+			"C": { "type": "item",  "code": "game:powderedsulfur" },
+      "D": { "type": "item",  "code": "rustyshell:shell-120mm-round-common-*-none", "name": "material" },
+      "E": { "type": "item",  "code": "game:blastingpowder",                        "quantity": 8 },
+			"F": { "type": "item",  "code": "chemistrylib:ammoniumchloride", "quantity": 6 },
+			"G": { "type": "block", "code": "game:bowl-fired" },
+			"H": { "type": "item",  "code": "game:resin", "quantity": 12 }
+    },
+    "attributes": {
 			"liquidContainerProps": {
-				"requiresContent": { "type": "item", "code": "chemistrylib:mineralacidportion-hydrochloric" },
-				"requiresLitres": 0.5
+				"requiresContent": { "type": "item", "code": "chemistrylib:mineralacidportion-nitric" },
+				"requiresLitres": 1
 			}
 		},
-		"width":  2,
-		"height": 3,
-		"output": { "type": "item", "code": "rustyshell:shell-gas" }
-	},
-	{
-		"ingredientPattern": "BA,DC,EC",
-		"ingredients": {
-			"A": { "type": "item", "code": "game:hammer-*", "isTool": true },
-			"B": {
-				"type": "block",
-				"code": "game:woodbucket"
-			},
-			"C": { "type": "item", "code": "game:metalplate-*",             "name": "metal", "allowedVariants": ["tinbronze", "bismuthbronze", "blackbronze", "brass"]},
-			"D": { "type": "item", "code": "chemistrylib:ammoniumchloride", "quantity": 64 },
-			"E": { "type": "item", "code": "game:blastingpowder",           "quantity": 4 }
-		},
-		"attributes": {
+    "width":  3,
+    "height": 3,
+    "output": { "type": "item", "code": "rustyshell:shell-120mm-round-incendiary-{material}-none" }
+  }, {
+    "ingredientPattern": "_AB,CDE,FGH",
+    "ingredients": {
+      "A": { "type": "item",  "code": "game:chisel-*",                              "isTool": true },
+      "B": { "type": "item",  "code": "game:hammer-*",                              "isTool": true },
+			"C": { "type": "item",  "code": "game:powderedsulfur",                        "quantity": 4 },
+      "D": { "type": "item",  "code": "rustyshell:shell-120mm-blunt-common-*-none", "name": "material" },
+      "E": { "type": "item",  "code": "game:blastingpowder",                        "quantity": 8 },
+			"F": { "type": "item",  "code": "chemistrylib:ammoniumchloride",              "quantity": 6 },
+			"G": { "type": "block", "code": "game:bowl-fired" },
+			"H": { "type": "item",  "code": "game:resin", "quantity": 12 }
+    },
+    "attributes": {
 			"liquidContainerProps": {
-				"requiresContent": { "type": "item", "code": "chemistrylib:mineralacidportion-hydrochloric" },
-				"requiresLitres": 0.5
+				"requiresContent": { "type": "item", "code": "chemistrylib:mineralacidportion-nitric" },
+				"requiresLitres": 1
 			}
 		},
-		"width":  2,
-		"height": 3,
-		"output": { "type": "item", "code": "rustyshell:shell-gas" }
-	},
-	{
-		"ingredientPattern": "AB,CD,CE",
-		"ingredients": {
-			"A": { "type": "item", "code": "game:hammer-*", "isTool": true },
-			"B": {
-				"type": "block",
-				"code": "game:bowl-fired"
-			},
-			"C": { "type": "item", "code": "game:metalplate-*",             "name": "metal", "allowedVariants": ["tinbronze", "bismuthbronze", "blackbronze", "brass"]},
-			"D": { "type": "item", "code": "chemistrylib:ammoniumchloride", "quantity": 64 },
-			"E": { "type": "item", "code": "game:blastingpowder",           "quantity": 4 }
-		},
-		"attributes": {
-			"liquidContainerProps": {
-				"requiresContent": { "type": "item", "code": "chemistrylib:mineralacidportion-hydrochloric" },
-				"requiresLitres": 0.5
-			}
-		},
-		"width":  2,
-		"height": 3,
-		"output": { "type": "item", "code": "rustyshell:shell-gas" }
-	},
-	{
-		"ingredientPattern": "BA,DC,EC",
-		"ingredients": {
-			"A": { "type": "item", "code": "game:hammer-*", "isTool": true },
-			"B": {
-				"type": "block",
-				"code": "game:bowl-fired"
-			},
-			"C": { "type": "item", "code": "game:metalplate-*",             "name": "metal", "allowedVariants": ["tinbronze", "bismuthbronze", "blackbronze", "brass"]},
-			"D": { "type": "item", "code": "chemistrylib:ammoniumchloride", "quantity": 64 },
-			"E": { "type": "item", "code": "game:blastingpowder",           "quantity": 4 }
-		},
-		"attributes": {
-			"liquidContainerProps": {
-				"requiresContent": { "type": "item", "code": "chemistrylib:mineralacidportion-hydrochloric" },
-				"requiresLitres": 0.5
-			}
-		},
-		"width":  2,
-		"height": 3,
-		"output": { "type": "item", "code": "rustyshell:shell-gas" }
-	},
-	{
-		"ingredientPattern": "A_,BC,BD",
-		"ingredients": {
-			"A": { "type": "item", "code": "game:hammer-*", "isTool": true },
-			"B": { "type": "item", "code": "game:metalplate-*",             "name": "metal", "allowedVariants": ["tinbronze", "bismuthbronze", "blackbronze", "brass"]},
-			"C": { "type": "item", "code": "chemistrylib:phosphorus-white", "quantity": 32 },
-			"D": { "type": "item", "code": "game:blastingpowder",           "quantity": 4 }
-		},
-		"width":  2,
-		"height": 3,
-		"output": { "type": "item", "code": "rustyshell:shell-gas" }
-	},
-	{
-		"ingredientPattern": "_A,CB,DB",
-		"ingredients": {
-			"A": { "type": "item", "code": "game:hammer-*", "isTool": true },
-			"B": { "type": "item", "code": "game:metalplate-*",             "name": "metal", "allowedVariants": ["tinbronze", "bismuthbronze", "blackbronze", "brass"]},
-			"C": { "type": "item", "code": "chemistrylib:phosphorus-white", "quantity": 32 },
-			"D": { "type": "item", "code": "game:blastingpowder",           "quantity": 4 }
-		},
-		"width":  2,
-		"height": 3,
-		"output": { "type": "item", "code": "rustyshell:shell-gas" }
-	}
+    "width":  3,
+    "height": 3,
+    "output": { "type": "item", "code": "rustyshell:shell-120mm-blunt-incendiary-{material}-none" }
+  }
 ]

@@ -1,0 +1,56 @@
+[
+  {
+    "ingredientPattern": "_A_,BBC,DDD",
+    "ingredients": {
+      "A": { "type": "item", "code": "game:hammer-*", "isTool": true, "toolDurabilityCost": 40 },
+      "B": { "type": "item", "code": "rustyshell:barrel-part-*", "name": "material", "allowedVariants": ["tinbronze", "iron"]},
+      "C": { "type": "item", "code": "game:metalplate-*",        "name": "material", "allowedVariants": ["tinbronze", "iron"]},
+      "D": { "type": "item", "code": "game:plank-*",             "name": "wood" }
+    },
+    "width":  3,
+    "height": 3,
+    "output": { "type": "item", "code": "rustyshell:barrel-supportgun-4pdr-{material}-smoothbore" }
+  }, {
+    "ingredientPattern": "_A_,BBC",
+    "ingredients": {
+      "A": { "type": "item", "code": "game:hammer-*", "isTool": true, "toolDurabilityCost": 80 },
+      "B": { "type": "item", "code": "rustyshell:barrel-part-*", "quantity": 2, "name": "material", "allowedVariants": ["tinbronze", "iron"]},
+      "C": { "type": "item", "code": "game:metalplate-*",                       "name": "material", "allowedVariants": ["tinbronze", "iron"]}
+    },
+    "width":  3,
+    "height": 2,
+    "output": { "type": "item", "code": "rustyshell:barrel-fieldgun-12pdr-{material}-smoothbore" }
+  }, {
+    "ingredientPattern": "A_,BC",
+    "ingredients": {
+      "A": { "type": "item", "code": "game:hammer-*", "isTool": true, "toolDurabilityCost": 80 },
+      "B": { "type": "item", "code": "rustyshell:barrel-part-*", "quantity": 3, "name": "material", "allowedVariants": ["tinbronze", "iron"]},
+      "C": { "type": "item", "code": "game:metalplate-*",                       "name": "material", "allowedVariants": ["tinbronze", "iron"]}
+    },
+    "width":  2,
+    "height": 2,
+    "output": { "type": "item", "code": "rustyshell:barrel-howitzer-12pdr-{material}-smoothbore" }
+  },
+
+  {
+    "ingredientPattern": "A,B,C",
+    "ingredients": {
+      "A": { "type": "item", "code": "game:hammer-*", "isTool": true, "toolDurabilityCost": 80 },
+      "B": { "type": "item", "code": "game:chisel-*", "isTool": true, "toolDurabilityCost": 40 },
+      "C": { "type": "item", "code": "rustyshell:barrel-*-12pdr-tinbronze-smoothbore", "name": "type" }
+    },
+    "width":  1,
+    "height": 3,
+    "output": { "type": "item", "code": "rustyshell:barrel-{type}-12pdr-tinbronze-rifled" }
+  }, {
+    "ingredientPattern": "A,B,C",
+    "ingredients": {
+      "A": { "type": "item", "code": "game:hammer-*", "isTool": true, "toolDurabilityCost": 80 },
+      "B": { "type": "item", "code": "game:chisel-*", "isTool": true, "toolDurabilityCost": 40 },
+      "C": { "type": "item", "code": "rustyshell:barrel-*-12pdr-iron-smoothbore", "name": "type" }
+    },
+    "width":  1,
+    "height": 3,
+    "output": { "type": "item", "code": "rustyshell:barrel-{type}-12pdr-iron-rifled" }
+  }
+]

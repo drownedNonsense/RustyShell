@@ -65,7 +65,7 @@ namespace RustyShell {
                 /// </summary>
                 /// <param name="byPlayer"></param>
                 /// <returns></returns>
-                private static bool CanInteract(IPlayer byPlayer) => byPlayer.Entity.ActiveHandItemSlot.Empty && !byPlayer.Entity.Controls.Sneak;
+                private static bool CanInteract(IPlayer byPlayer) => byPlayer.Entity.Controls.Sprint && byPlayer.Entity.Controls.Sneak;
 
 
                 public override WorldInteraction[] GetPlacedBlockInteractionHelp(
@@ -74,10 +74,10 @@ namespace RustyShell {
                     IPlayer forPlayer,
                     ref EnumHandling handled
                 ) => new WorldInteraction[] {
-                        new WorldInteraction() {
-                            ActionLangCode  = "blockhelp-repeatingfire-activate",
+                        new () {
+                            ActionLangCode  = "blockhelp-repeatingfire-fire",
                             MouseButton     = EnumMouseButton.Right,
-                            RequireFreeHand = true,
+                            HotKeyCodes     = new string[] {"ctrl", "shift"},
                         }, // WorldInteraction ..
                     }; // WorldInteraction[] ..
 

@@ -24,12 +24,15 @@ namespace RustyShell {
             /// <summary>
             /// Projectile velocity in block per second at spawn
             /// </summary>
-            private float blastStrength =>
-                this.BlockHeavyGun.BarrelType switch {
-                    EnumBarrelType.Smoothbore => this.BlockHeavyGun.FirePower * GameMath.Sqrt(this.FusedAmmunition switch { true => 8, false => this.DetonatorSlot.StackSize } * 0.2f),
-                    EnumBarrelType.Rifled     => this.BlockHeavyGun.FirePower,
-                    _                         => 1f,
-                }; // swtich ..
+            private float expectedVelocity => this.BlockHeavyGun.FirePower * GameMath.Sqrt(this.blastStrength * 0.3f);
+            
+            /// <summary>
+            /// Strength of the charge or ammunition's propellant
+            /// </summary>
+            private float blastStrength => GameMath.Max(
+                this.AmmunitionSlot?.Itemstack?.ItemAttributes["propellant"]?["strength"].AsInt() ?? 0,
+                (this.ChargeSlot?.Itemstack?.ItemAttributes["propellant"]?["strength"].AsInt() ?? 0) * this.ChargeSlot.StackSize
+            ); // ..
 
             /// <summary>
             /// Current gun state
@@ -44,15 +47,15 @@ namespace RustyShell {
 
 
             /** <summary> Gun's barrel content </summary> **/                         internal InventoryGeneric Inventory      =  null;
-            /** <summary> A reference to the detonator dedicated slot  </summary> **/ internal ItemSlot         DetonatorSlot  => this.Inventory[0];
+            /** <summary> A reference to the charge dedicated slot  </summary> **/    internal ItemSlot         ChargeSlot  => this.Inventory[0];
             /** <summary> A reference to the ammunition dedicated slot </summary> **/ internal ItemSlot         AmmunitionSlot => this.Inventory[1];
 
             /** <summary> Indicates whether or the gun is waiting to be cleaned </summary> **/ public bool CanClean => this.gunState == EnumGunState.Dirty;
             /** <summary> Indicates whether or the gun is waiting to be filled </summary> **/  public bool CanFill  => this.gunState == EnumGunState.Clean || !this.BlockHeavyGun.MuzzleLoading;
-            /** <summary> Indicates whether or the gun is waiting to be loaded </summary> **/  public bool CanLoad  => this.gunState == EnumGunState.Clean && !this.AmmunitionSlot.Empty && (this.FusedAmmunition || !this.DetonatorSlot.Empty);
+            /** <summary> Indicates whether or the gun is waiting to be loaded </summary> **/  public bool CanLoad  => this.gunState == EnumGunState.Clean && !this.AmmunitionSlot.Empty && (this.FusedAmmunition || !this.ChargeSlot.Empty);
             /** <summary> Indicates whether or the gun is waiting to be fired </summary> **/   public bool CanFire  => this.gunState == EnumGunState.Ready;
 
-            /** <summary> Indicates whether or the loaded ammunition needs a detonator </summary> **/ public bool FusedAmmunition => this.AmmunitionSlot?.Itemstack?.ItemAttributes["hasFuse"]?.AsBool(false) ?? false;
+            /** <summary> Indicates whether or not the loaded ammunition contains a propellant </summary> **/ public bool FusedAmmunition => this.AmmunitionSlot?.Itemstack?.ItemAttributes["propellant"]?["strength"].AsInt() > 0;
 
             /** <summary> Gun's offset from initial position </summary> **/ public override float Offset { get; set; }
             
@@ -98,28 +101,29 @@ namespace RustyShell {
                     if (this.AmmunitionSlot.Itemstack == null) return;
                     if (this.Cooldown > ((this.Block.GetBehavior<BlockBehaviorRepeatingFire>()?.FireInterval + 0.5f) ?? 0f)) return;
 
-                    string entityCode = this.AmmunitionSlot?
-                        .Itemstack?
+                    string entityCode = this.AmmunitionSlot
+                        .Itemstack
                         .ItemAttributes["entityCode"]?
                         .AsString();
 
-                    EntityProperties type = this.Api.World.GetEntityType(entityCode == null ? this.AmmunitionSlot.Itemstack.Item.Code : new AssetLocation(entityCode));
-                    Entity projectile     = this.Api.World.ClassRegistry.CreateEntity(type);
+                    EntityProperties type       = this.Api.World.GetEntityType(entityCode == null ? this.AmmunitionSlot.Itemstack.Item.Code : new AssetLocation(entityCode));
+                    EntityAmmunition projectile = this.Api.World.ClassRegistry.CreateEntity(type) as EntityAmmunition;
 
                     ThreadSafeRandom random = new();
                     float randPitch = (random.NextSingle() - 0.5f) * (1f - this.BlockHeavyGun.Accuracy) * 0.5f;
                     float randYaw   = (random.NextSingle() - 0.5f) * (1f - this.BlockHeavyGun.Accuracy) * 0.5f;
 
-                    float elevation = this.GetBehavior<BlockEntityBehaviorGearedGun>()?.Elevation ?? 0f;
+                    BlockEntityBehaviorGearedGun gearedGun = this.GetBehavior<BlockEntityBehaviorGearedGun>();
+                    float elevation = gearedGun?.Elevation ?? 0f;
 
-                    float cosPitch = GameMath.FastCos(MathF.Atan(elevation) + randPitch);
-                    float sinPitch = GameMath.FastSin(MathF.Atan(elevation) + randPitch);
+                    float cosPitch = GameMath.FastCos(GameMath.DEG2RAD * elevation + randPitch);
+                    float sinPitch = GameMath.FastSin(GameMath.DEG2RAD * elevation + randPitch);
                     float cosYaw   = GameMath.FastCos(this.Orientation + randYaw);
                     float sinYaw   = GameMath.FastSin(this.Orientation + randYaw);
 
                     Vec3f direction     = new Vec3f(-cosPitch * sinYaw, sinPitch, -cosPitch * cosYaw).Normalize();
                     Vec3d projectilePos = (new Vec3f(this.Pos.X + 0.5f, this.Pos.Y + 0.5f, this.Pos.Z + 0.5f) + direction * this.BlockHeavyGun.BarrelLength).ToVec3d();
-                    Vec3f velocity      = direction * this.blastStrength;
+                    Vec3f velocity      = direction * this.expectedVelocity;
 
                     this.gunState = this.BlockHeavyGun.MuzzleLoading
                         ? EnumGunState.Dirty
@@ -127,57 +131,49 @@ namespace RustyShell {
                             ? EnumGunState.Clean
                             : EnumGunState.Ready;
 
+                    projectile.FiredBy    = byEntity;
+                    projectile.Ammunition = this.AmmunitionSlot.Itemstack.Item as ItemAmmunition;
                     projectile.ServerPos.SetPos(projectilePos);
                     projectile.ServerPos.Motion.Set(velocity);
                     projectile.Pos.SetFrom(projectile.ServerPos);
 
-
-                    if (projectile is EntityHighCaliber highCaliber) {
-
-                        highCaliber.FiredBy      = byEntity;
-                        highCaliber.FuseDuration = (int)(1000 * (((this.BlockHeavyGun.BarrelType == EnumBarrelType.Rifled)? 32f : 24f) / this.BlockHeavyGun.FirePower)
-                        * (this.AmmunitionSlot
-                                .Itemstack
-                                .ItemAttributes["hasFuse"]?
-                                .AsBool(false) ?? false ? 1f : 0.75f)
-                        * highCaliber.BlastType switch {
-                            EnumExplosionType.HighExplosive => 4f,
-                            EnumExplosionType.Canister      => 2f,
-                            EnumExplosionType.Simple        => 2f,
-                            _                               => 1f
-                        });
-
+                    if (projectile is EntityHighCaliber highCaliber)
                         this.offsetRenderingRef ??= this.RegisterGameTickListener(this.OffsetRenderUpdate, ModContent.HEAVY_GUN_UPDATE_RATE);
-
-                    } else if (projectile is EntitySmallCaliber smallCaliber) {
-
-                        smallCaliber.FiredBy    = byEntity;
-                        smallCaliber.ImpactSize = 0;
-
-                    } // if ..
 
                     this.Cooldown            = 0f;
                     this.cooldownUpdateRef ??= this.RegisterGameTickListener(this.CooldownUpdate, ModContent.HEAVY_GUN_UPDATE_RATE);
 
-                    if (this.Api.Side.IsClient()) {
-
-                        int smokeAmount = 0;
-                        if (this.DetonatorSlot.Itemstack != null) smokeAmount = this.DetonatorSlot.StackSize;
-                        if (this.AmmunitionSlot.Itemstack.ItemAttributes["hasFuse"].AsBool()) smokeAmount += 2;
-
-                        for (int i = 0; i < smokeAmount >> (projectile is EntitySmallCaliber ? 1 : 0); i ++)
+                    if (this.Api.Side.IsClient() && !((this.ChargeSlot.Itemstack?.Item ?? projectile.Ammunition) is IPropellant { PropellantIsSmokeless: true }))
+                        for (int i = 0; i < (int)this.blastStrength >> (projectile is EntitySmallCaliber ? 1 : 0); i ++)
                             this.Api.World.SpawnParticles(new ExplosionSmokeParticles() {
                                 basePos              = projectilePos,
                                 ParentVelocityWeight = 1f,
                                 ParentVelocity       = GlobalConstants.CurrentWindSpeedClient,
                             }); // ..
-                    } // if ..
+
+                    if (projectile.Ammunition.Casing is Item casing)
+                        this.Api.World.SpawnItemEntity(
+                            itemstack : new ItemStack(this.Api.World.GetItem(casing.CodeWithVariant("state", random.NextSingle() < projectile.Ammunition.RecoveryRate ? "fine" : "damaged"))),
+                            position  : this.Pos.UpCopy().ToVec3d() + new Vec3d(0.5, 0.5, 0.5),
+                            velocity  : new Vec3d(
+                                x: GameMath.FastSin(this.Orientation + GameMath.PIHALF * (0.25f + 0.5f * random.NextSingle())),
+                                y: 0,
+                                z: GameMath.FastCos(this.Orientation + GameMath.PIHALF * (0.25f + 0.5f * random.NextSingle()))
+                            ) * 0.1
+                        ); // ..
 
                     this.AmmunitionSlot?.TakeOut(1);
-                    if (this.DetonatorSlot.Itemstack != null) this.DetonatorSlot?.TakeOutWhole();
+                    if (this.ChargeSlot.Itemstack != null) this.ChargeSlot?.TakeOutWhole();
 
                     this.Api.World.SpawnEntity(projectile);
                     this.Api.World.PlaySoundAt(new AssetLocation("sounds/effect/mediumexplosion"), this.Pos.X, this.Pos.Y, this.Pos.Z, null, false, 120);
+
+                    if (gearedGun != null)
+                        gearedGun.Elevation = GameMath.Clamp(
+                            gearedGun.Elevation + ((gearedGun?.Behavior.RecoilEffect.nextFloat() - gearedGun?.Behavior.RecoilEffect.avg * 0.95f) * 3f) ?? 0f,
+                            gearedGun.Behavior.MinElevation,
+                            gearedGun.Behavior.MaxElevation
+                        ); // ..
 
                     this.MarkDirty();
 
@@ -193,7 +189,7 @@ namespace RustyShell {
 
                     if (this.GetBehavior<BlockEntityBehaviorGearedGun>() is BlockEntityBehaviorGearedGun gearedGun) {
 
-                        float elevation = MathF.Atan(MathF.Asin(this.Pos.DistanceTo(target) / (100f * this.blastStrength * this.blastStrength)));
+                        float elevation = MathF.Atan(MathF.Asin(this.Pos.DistanceTo(target) / (100f * this.expectedVelocity * this.expectedVelocity)));
                         if (float.IsNaN(elevation)) return false;
 
                         elevation = MathF.Min(gearedGun.Behavior.MaxElevation,
@@ -220,27 +216,30 @@ namespace RustyShell {
                     StringBuilder dsc
                 ) {
 
-                    if (this.gunState == EnumGunState.Clean || this.gunState == EnumGunState.Ready)
-                        dsc.AppendLine((!this.AmmunitionSlot.Empty, !this.DetonatorSlot.Empty) switch {
-                            (true, false) => string.Format(
-                                "Loaded with {0}x {1}",
+                    if (this.gunState == EnumGunState.Clean || this.gunState == EnumGunState.Ready) {
+                        if (!this.AmmunitionSlot.Empty)
+                            dsc.AppendLine(Lang.Get(
+                                "heavyguninfo-loaded",
                                 this.AmmunitionSlot.StackSize,
                                 this.AmmunitionSlot.Itemstack.GetName()
-                            ), // ..
-                            (false, true) => string.Format(
-                                "Loaded with {0}x {1}",
-                                this.DetonatorSlot.StackSize,
-                                this.DetonatorSlot.Itemstack.GetName()
-                            ), // ..
-                            (true, true) => string.Format(
-                                "Loaded with {0}x {1} and {2}x {3}",
-                                this.AmmunitionSlot.StackSize,
-                                this.AmmunitionSlot.Itemstack.GetName(),
-                                this.DetonatorSlot.StackSize,
-                                this.DetonatorSlot.Itemstack.GetName()
-                            ), // ..
-                            _ => "Empty",
-                        }); // switch ..
+                            ));
+
+                        if (!this.ChargeSlot.Empty)
+                            dsc.AppendLine(Lang.Get(
+                                "heavyguninfo-charged",
+                                this.ChargeSlot.StackSize,
+                                this.ChargeSlot.Itemstack.GetName()
+                            ));
+
+                        if (!this.AmmunitionSlot.Empty || !this.ChargeSlot.Empty)
+                            dsc.AppendLine();
+
+                        if (this.blastStrength > 0)
+                             dsc.AppendLine(Lang.Get("heavyguninfo-blaststrength", this.blastStrength));
+                    } // if ..
+
+                    if (this.GetBehavior<BlockEntityBehaviorGearedGun>().Elevation is float elevation)
+                        dsc.AppendLine(Lang.Get("heavyguninfo-elevation", MathF.Round(elevation)));
 
 
                     base.GetBlockInfo(forPlayer, dsc);

@@ -66,7 +66,7 @@ namespace RustyShell {
                     ref EnumHandling handled
                 ) {
                     return new WorldInteraction[] {
-                        new WorldInteraction() {
+                        new () {
                             ActionLangCode    = "blockhelp-muzzleloading-clean",
                             MouseButton       = EnumMouseButton.Right,
                             Itemstacks        = BlockBehaviorMuzzleLoading.RamrodStack,
@@ -77,7 +77,7 @@ namespace RustyShell {
                                 
                             } // ..
                         }, // new ..
-                        new WorldInteraction() {
+                        new () {
                             ActionLangCode    = "blockhelp-muzzleloading-load",
                             MouseButton       = EnumMouseButton.Right,
                             Itemstacks        = BlockBehaviorMuzzleLoading.RamrodStack,

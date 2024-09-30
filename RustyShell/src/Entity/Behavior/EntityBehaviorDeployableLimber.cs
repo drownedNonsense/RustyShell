@@ -92,8 +92,6 @@ namespace RustyShell {
 
                             if (this.entity.World.BlockAccessor.GetBlock(this.entity.ServerPos.AsBlockPos).Replaceable < 6000)
                                 return false;
-
-                            this.entity.World.Logger.Chat(this.entity.WatchedAttributes.GetLong("draftEntityLeaderId").ToString() + " " + this.entity.WatchedAttributes.GetLong("draftEntitySideId").ToString());
                             
                             this.entityLimber.DraftEntityLeader?.WatchedAttributes.RemoveAttribute("isDraftingLimber");
                             this.entityLimber.DraftEntitySide?.WatchedAttributes.RemoveAttribute("isDraftingLimber");

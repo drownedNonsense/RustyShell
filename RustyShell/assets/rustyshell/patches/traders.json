@@ -1,0 +1,107 @@
+[
+    {
+        "file"  : "game:entities/humanoid/trader-treasurehunter.json",
+        "op"    : "addmerge",
+        "path"  : "/attributes/tradeProps/selling/list/-",
+        "value" : {
+            "code"      : "rustyshell:barrel-fieldgun-12pdr-ruined",
+            "type"      : "item",
+            "stacksize" : 1,
+            "stock"     : { "avg": 1,  "var": 0.25 },
+            "price"     : { "avg": 26, "var": 6.5  }
+        }
+    }, {
+        "file"  : "game:entities/humanoid/trader-treasurehunter.json",
+        "op"    : "addmerge",
+        "path"  : "/attributes/tradeProps/selling/list/-",
+        "value" : {
+            "code"      : "rustyshell:barrel-howitzer-12pdr-ruined",
+            "type"      : "item",
+            "stacksize" : 1,
+            "stock"     : { "avg": 1,  "var": 0.25 },
+            "price"     : { "avg": 26, "var": 6.5  }
+        }
+    }, {
+        "file"  : "game:entities/humanoid/trader-treasurehunter.json",
+        "op"    : "addmerge",
+        "path"  : "/attributes/tradeProps/selling/list/-",
+        "value" : {
+            "code"      : "rustyshell:barrel-fieldgun-120mm-ruined",
+            "type"      : "item",
+            "stacksize" : 1,
+            "stock"     : { "avg": 0.8, "var": 0.25 },
+            "price"     : { "avg": 46,  "var": 12   }
+        }
+    }, {
+        "file"  : "game:entities/humanoid/trader-treasurehunter.json",
+        "op"    : "addmerge",
+        "path"  : "/attributes/tradeProps/selling/list/-",
+        "value" : {
+            "code"      : "rustyshell:barrel-howitzer-120mm-ruined",
+            "type"      : "item",
+            "stacksize" : 1,
+            "stock"     : { "avg": 0.8, "var": 0.25 },
+            "price"     : { "avg": 46,  "var": 12   }
+        }
+    }, {
+        "file"  : "game:entities/humanoid/trader-treasurehunter.json",
+        "op"    : "addmerge",
+        "path"  : "/attributes/tradeProps/selling/list/-",
+        "value" : {
+            "code"      : "rustyshell:barrel-machinegun-ruined",
+            "type"      : "item",
+            "stacksize" : 1,
+            "stock"     : { "avg": 0.8, "var": 0.25 },
+            "price"     : { "avg": 46,  "var": 12   }
+        },
+        "dependsOn": [{ "modid": "maltiezfirearms" }]
+    },
+    
+    {
+        "file"  : "game:entities/humanoid/trader-treasurehunter.json",
+        "op"    : "addmerge",
+        "path"  : "/attributes/tradeProps/selling/list/-",
+        "value" : {
+            "code"      : "rustyshell:shell-round-ruined",
+            "type"      : "item",
+            "stacksize" : 1,
+            "stock"     : { "avg": 2, "var": 3 },
+            "price"     : { "avg": 8, "var": 1 }
+        }
+    }, {
+        "file"  : "game:entities/humanoid/trader-treasurehunter.json",
+        "op"    : "addmerge",
+        "path"  : "/attributes/tradeProps/selling/list/-",
+        "value" : {
+            "code"      : "rustyshell:shell-blunt-ruined",
+            "type"      : "item",
+            "stacksize" : 1,
+            "stock"     : { "avg": 2, "var": 3 },
+            "price"     : { "avg": 8, "var": 1 }
+        }
+    },
+    
+    {
+        "file"  : "game:entities/humanoid/trader-treasurehunter.json",
+        "op"    : "addmerge",
+        "path"  : "/attributes/tradeProps/selling/list/-",
+        "value" : {
+            "code"      : "rustyshell:casing-brass-damaged",
+            "type"      : "item",
+            "stacksize" : 1,
+            "stock"     : { "avg": 2, "var": 1.25 },
+            "price"     : { "avg": 6, "var": 1 }
+        }
+    }, {
+        "file"  : "game:entities/humanoid/trader-treasurehunter.json",
+        "op"    : "addmerge",
+        "path"  : "/attributes/tradeProps/selling/list/-",
+        "value" : {
+            "code"      : "rustyshell:casing-iron-damaged",
+            "type"      : "item",
+            "stacksize" : 1,
+            "stock"     : { "avg": 2, "var": 1.25 },
+            "price"     : { "avg": 8, "var": 1.25 }
+        }
+    }
+]

@@ -1,8 +1,7 @@
 namespace RustyShell {
     public class RustyShellModConfig {
-        /** <summary> Additional block reinforcement damage for simple projectiles </summary> **/         public int SimpleProjectileReinforcmentImpact         = 0;
-        /** <summary> Additional block reinforcement damage for piercing projectiles </summary> **/       public int PiercingProjectileReinforcmentImpact       = 40;
-        /** <summary> Additional block reinforcement damage for high explosive projectiles </summary> **/ public int HighExplosiveProjectileReinforcementImpact = 20;
+        /** <summary> Additional block reinforcement damage for common high caliber </summary> **/    public int CommonHighcaliberReinforcmentImpact    =  0;
+        /** <summary> Additional block reinforcement damage for explosive high caliber </summary> **/ public int ExplosiveHighcaliberReinforcmentImpact = 40;
         
         /** <summary> Default gas induced damage </summary> **/ public float GasBaseDamage = 10;
 

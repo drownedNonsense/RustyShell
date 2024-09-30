@@ -1,0 +1,74 @@
+{
+    "code": "shot",
+    "class": "ItemAmmunition",
+    "variantgroups": [
+      { "code": "class" ,      "states": ["grape"]},
+      { "code": "shape" ,      "states": ["blunt", "submunition"]},
+      { "code": "type",        "states": ["antipersonnel"]},
+      { "code": "submaterial", "states": ["stone", "lead", "copper", "steel"]}
+    ],
+    "maxstacksize": 1,
+    "creativeinventory": { "general": ["shot-grape-blunt-*"], "items": ["shot-grape-blunt-*"], "rustyshell": ["shot-grape-blunt-*"] },
+    "attributes": {
+
+      "damageByType": {
+        "*-stone"  : 20,
+        "*-lead"   : 38,
+        "*-copper" : 20,
+        "*-steel"  : 25
+      },
+
+      "blastRadiusByType": {
+        "*-submunition-*" : 1,
+        "*"               : 6
+      },
+
+      "injureRadiusByType": {
+        "*-submunition-stone"  : 5,
+        "*-submunition-lead"   : 8,
+        "*-submunition-copper" : 6,
+        "*-submunition-steel"  : 7,
+        "*-stone"  : 10,
+        "*-lead"   : 16,
+        "*-copper" : 12,
+        "*-steel"  : 14
+      },
+
+      "flightExpectancyByType": { "shot-grape-blunt-*" : 0 },
+
+      "entityCodeByType": {
+        "*-submunition-*" : "rustyshell:shot-{class}-{shape}-{submaterial}",
+        "*"               : "rustyshell:shot-{class}-{shape}-linen"
+      },
+
+      "handbook"   : { "groupBy": [ "*-{type}-*" ]},
+
+      "shelvable": true,
+      "groundStorageTransformByType": {
+        "rotation": { "x": -45, "y":   0, "z": -45 },
+        "origin":   { "x": 0.5, "y": 0.2, "z": 0.5 }
+      }
+    },
+    "shapeByType": {
+      "*-submunition-*" : { "base": "game:block/basic/nothing" },
+      "*":                { "base": "ammunition/shot-grape" }
+    },
+    "behaviors": [{ "name": "GroundStorable", "properties": { "layout": "Quadrants", "collisionBox": { "x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 0.4, "z2": 1 } }}],
+    "heldTpIdleAnimation": "holdbothhandslarge", "heldTpUseAnimation": "twohandplaceblock",
+    "tpHandTransform": {
+      "translation": { "x": -0.7, "y": -0.3, "z": -0.4 },
+      "rotation":    { "x":    0, "y":    0, "z": -110 },
+      "origin":      { "x":  0.5, "y":  0.2, "z":  0.5 },
+      "scale": 0.8
+    },
+    "guiTransform": {
+      "rotation": { "x": 180, "y":   45, "z":  24 },
+      "origin":   { "x": 0.5, "y": 0.35, "z": 0.5 },
+      "scale": 1.5
+    },
+    "groundTransform": {
+      "translation": { "x":  0, "y": 0.05, "z":  0 },
+      "rotation":    { "x": 90, "y":    0, "z": 20 },
+      "scale": 3
+    }
+}

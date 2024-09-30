@@ -1,22 +1,32 @@
 {
+	"enabled": false,
 	"code":  "limberedgun",
 	"class": "EntityLimber",
     "variantgroups": [
-		{ "code": "type",     "states": ["fieldgun", "howitzer", "heavymachinegun", "heavyfieldgun", "heavyhowitzer", "heavygun"]},
-		{ "code": "material", "states": ["tinbronze", "iron", "meteoriciron", "steel"]},
+		{ "code": "type",     "states": ["supportgun", "fieldgun", "howitzer", "heavymachinegun", "heavyfieldgun", "howitzer-120mm"]},
+		{ "code": "material", "states": ["tinbronze", "iron", "steel"]},
 		{ "code": "barrel",   "states": ["smoothbore", "rifled"]}
 	],
 	"skipVariants": [
-		"*-heavyfieldgun-tinbronze-smoothbore", "*-heavyfieldgun-iron-smoothbore", "*-heavyfieldgun-meteoriciron-smoothbore", "*-heavyfieldgun-steel-smoothbore",
-		"*-heavyhowitzer-tinbronze-smoothbore", "*-heavyhowitzer-iron-smoothbore", "*-heavyhowitzer-meteoriciron-smoothbore", "*-heavyhowitzer-steel-smoothbore",
-		"*-heavymachinegun-tinbronze-smoothbore", "*-heavymachinegun-iron-smoothbore", "*-heavymachinegun-meteoriciron-smoothbore", "*-heavymachinegun-steel-smoothbore",
-		"*-heavygun-tinbronze-rifled", "*-heavygun-iron-rifled", "*-heavygun-meteoriciron-rifled", "*-heavygun-steel-rifled"
+		"limberedgun-supportgun-*-rifled",
+		"limberedgun-supportgun-steel-*",
+
+		"limberedgun-fieldgun-steel-*",
+		"limberedgun-howitzer-steel-*",
+
+		"limberedgun-heavymachinegun-*-smoothbore",
+
+		"limberedgun-heavyfieldgun-tinbronze-*",
+		"limberedgun-heavyfieldgun-*-smoothbore",
+
+		"limberedgun-howitzer-120mm-tinbronze-*",
+		"limberedgun-howitzer-120mm-*-smoothbore"
 	],
 	"hitboxSize":   { "x": 1.15, "y": 1.4 },
 	"weightByType": {
-		"*-heavygun-tinbronze-*":        700,
-		"*-heavygun-steel-*":            800,
-		"*-heavygun-*":                  900,
+		"*-supportgun-tinbronze-*":        700,
+		"*-supportgun-steel-*":            800,
+		"*-supportgun-*":                  900,
 
 		"*-fieldgun-tinbronze-*":        900,
 		"*-fieldgun-steel-*":           1000,
@@ -34,9 +44,9 @@
 		"*-heavyfieldgun-steel-*":      4000,
 		"*-heavyfieldgun-*":            5000,
 
-		"*-heavyhowitzer-tinbronze-*":  3300,
-		"*-heavyhowitzer-steel-*":      3800,
-		"*-heavyhowitzer-*":            4800,
+		"*-howitzer-120mm-tinbronze-*":  3300,
+		"*-howitzer-120mm-steel-*":      3800,
+		"*-howitzer-120mm-*":            4800,
 		
 		"*":                             800
 	},
@@ -60,7 +70,7 @@
 			"top":      { "base": "game:block/wood/echochamber/top" },
 			"plainoak": { "base": "game:block/wood/plainoak" },
 			"generic":  { "base": "game:block/wood/planks/generic" },
-			"pedrail":  { "base": "game:block/wood/charred" }
+			"girdle":  { "base": "game:block/wood/charred" }
         },
 		"behaviors": [
 			{ "code": "controlledphysics", "stepHeight": 1.1251 }, 

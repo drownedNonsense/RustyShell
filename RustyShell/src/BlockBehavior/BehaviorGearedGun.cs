@@ -15,9 +15,9 @@ namespace RustyShell {
 
             private static ItemStack[] WrenchStacks;
 
-            /** <summary> How fast the gun laying can change </summary> **/ public float LayingSpeed  { get; private set; }
-            /** <summary> Minimum tangent theta elevation </summary> **/    public float MinElevation { get; private set; }
-            /** <summary> Maximum tangent theta elevation </summary> **/    public float MaxElevation { get; private set; }
+            /** <summary> Recoil effect </summary> **/             public NatFloat RecoilEffect { get; private set; }
+            /** <summary> Minimum tangent elevation </summary> **/ public float MinElevation    { get; private set; }
+            /** <summary> Maximum tangent elevation </summary> **/ public float MaxElevation    { get; private set; }
 
             /** <summary> Loaded barrel mesh </summary> **/          internal MeshData BarrelMesh;
             /** <summary> Barrel mesh origin point </summary> **/    internal Vec3f    BarrelOrigin;
@@ -36,7 +36,7 @@ namespace RustyShell {
             public override void Initialize(JsonObject properties) {
 
                 base.Initialize(properties);
-                this.LayingSpeed  = properties["layingSPeed"].AsFloat(0.1f);
+                this.RecoilEffect = new NatFloat(properties["recoilEffect"]["avg"].AsFloat(), properties["recoilEffect"]["var"].AsFloat(), EnumDistribution.UNIFORM); 
                 this.MinElevation = properties["minElevation"].AsFloat(0f);
                 this.MaxElevation = properties["maxElevation"].AsFloat(1f);
                 this.barrelShapePath         = properties["barrelShapePath"].AsString();

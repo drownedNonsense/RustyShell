@@ -1,0 +1,21 @@
+{
+	"code":  "bullet",
+	"class": "EntitySmallCaliber",
+	"variantgroups": [{ "code": "material", "states": ["lead", "copper", "steel"]}],
+	"hitboxSize": { "x": 0.25, "y": 0.25 },
+	"client": {
+		"renderer"  : "Shape",
+		"shape"     : { "base" : "game:entity/bullet" },
+		"textures"  : { "lead" : { "base": "game:block/metal/ingot/{material}" }},
+		"behaviors": [
+			{ "code": "passivephysics", "groundDragFactor": 1, "airDragFactor": 0.25, "gravityFactor": 0.5 },
+			{ "code": "interpolateposition" }
+		]
+	},
+	"server": {
+		"behaviors": [
+			{ "code": "passivephysics", "groundDragFactor": 1, "airDragFactor": 0.25, "gravityFactor": 0.5 },
+			{ "code": "despawn", "minSeconds": 300 }
+		]
+	}
+}

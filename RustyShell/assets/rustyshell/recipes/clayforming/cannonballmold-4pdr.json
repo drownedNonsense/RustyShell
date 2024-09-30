@@ -1,0 +1,28 @@
+{
+	"ingredient": { "type": "item", "code": "game:clay-*", "name": "type", "allowedVariants": ["blue", "fire"] },
+	"pattern": [
+        [
+            "####",
+            "####",
+            "####",
+            "####"
+        ], [
+            "####",
+            "#__#",
+            "#__#",
+            "####"
+        ], [
+            "####",
+            "#__#",
+            "#__#",
+            "####"
+        ], [
+            "####",
+            "#__#",
+            "#__#",
+            "####"
+        ]
+    ],
+	"name": "4-pdr Cannonball Mold",
+	"output": { "type": "block", "code": "rustyshell:cannonballmold-4pdr-raw"  }
+}

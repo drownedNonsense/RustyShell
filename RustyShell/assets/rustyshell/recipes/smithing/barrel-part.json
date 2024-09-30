@@ -1,0 +1,29 @@
+{
+	"ingredient": {
+    "type": "item",
+    "code": "game:ingot-*",
+    "name": "metal",
+    "allowedVariants": ["tinbronze", "iron"]
+  },
+	"pattern": [[
+    "#####",
+    "#___#",
+    "#___#",
+    "#___#",
+    "#####"
+  ], [
+    "#####",
+    "#___#",
+    "#___#",
+    "#___#",
+    "#####"
+  ], [
+    "#####",
+    "#___#",
+    "#___#",
+    "#___#",
+    "#####"
+  ]],
+	"name": "Barrel part",
+	"output": { "type": "item", "code": "rustyshell:barrel-part-{metal}"  }
+}

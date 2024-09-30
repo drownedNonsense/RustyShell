@@ -1,0 +1,76 @@
+{
+	"editor": {
+		"allAngles": false,
+		"entityTextureMode": false
+	},
+	"textureWidth": 16,
+	"textureHeight": 16,
+	"textureSizes": {
+	},
+	"textures": {
+		"drivingband": "game:block/metal/anvil/copper"
+	},
+	"elements": [
+		{
+			"name": "Origin",
+			"from": [ 0.0, -7.5, 0.0 ],
+			"to": [ 0.0, -7.5, 0.0 ],
+			"rotationOrigin": [ 8.0, 0.5, 8.0 ],
+			"faces": {
+			},
+			"children": [
+				{
+					"name": "WarHead",
+					"from": [ 5.75, 8.0, 5.75 ],
+					"to": [ 10.25, 17.0, 10.25 ],
+					"rotationOrigin": [ 8.0, 8.0, 8.0 ],
+					"faces": {
+						"north": { "texture": "#warhead", "uv": [ 11.5, 7.0, 16.0, 16.0 ] },
+						"east": { "texture": "#warhead", "uv": [ 7.0, 7.0, 11.5, 16.0 ] },
+						"south": { "texture": "#warhead", "uv": [ 3.5, 7.0, 8.0, 16.0 ] },
+						"west": { "texture": "#warhead", "uv": [ 0.0, 7.0, 4.5, 16.0 ] },
+						"up": { "texture": "#warhead", "uv": [ 7.0, 5.0, 11.5, 9.5 ], "rotation": 90 },
+						"down": { "texture": "#warhead", "uv": [ 3.5, 5.0, 8.0, 9.5 ], "windMode": [-1,-1,-1,-1] }
+					},
+					"children": [
+						{
+							"name": "WarHeadBottom",
+							"from": [ 0.705, -0.5, 0.705 ],
+							"to": [ 3.705, 0.0, 3.705 ],
+							"rotationOrigin": [ 0.705, -0.5, 0.705 ],
+							"faces": {
+								"north": { "texture": "#warhead", "uv": [ 13.0, 3.0, 16.0, 3.5 ] },
+								"east": { "texture": "#warhead", "uv": [ 9.5, 3.0, 12.5, 3.5 ] },
+								"south": { "texture": "#warhead", "uv": [ 6.5, 4.0, 9.5, 4.5 ] },
+								"west": { "texture": "#warhead", "uv": [ 3.5, 5.0, 6.5, 5.5 ] },
+								"down": { "texture": "#warhead", "uv": [ 5.0, 4.5, 8.0, 7.5 ], "windMode": [-1,-1,-1,-1] }
+							}
+						},
+						{
+							"name": "Icon",
+							"from": [ 0.25, 5.5, 4.51 ],
+							"to": [ 4.25, 8.5, 4.51 ],
+							"rotationOrigin": [ -0.1, 5.5, 1.0 ],
+							"faces": {
+								"south": { "texture": "#icon", "uv": [ 1.0, 3.0, 15.0, 13.0 ], "autoUv": false, "windMode": [-1,-1,-1,-1] }
+							}
+						}
+					]
+				},
+				{
+					"name": "DrivingBand",
+					"from": [ 5.7, 11.0, 5.7 ],
+					"to": [ 10.3, 11.5, 10.3 ],
+					"rotationOrigin": [ 8.0, 11.0, 8.0 ],
+					"faces": {
+						"north": { "texture": "#drivingband", "uv": [ 0.0, 0.0, 4.5, 0.5 ] },
+						"east": { "texture": "#drivingband", "uv": [ 11.5, 0.0, 16.0, 0.5 ] },
+						"south": { "texture": "#drivingband", "uv": [ 8.5, 0.0, 13.0, 0.5 ] },
+						"west": { "texture": "#drivingband", "uv": [ 4.0, 0.0, 8.5, 0.5 ] },
+						"up": { "texture": "#drivingband", "uv": [ 0.0, 0.0, 4.5, 4.5 ], "windMode": [-1,-1,-1,-1] },
+						"down": { "texture": "#drivingband", "uv": [ 0.0, 0.0, 4.5, 4.5 ], "windMode": [-1,-1,-1,-1] }
+					}
+				}
+			]
+		}
+	]}

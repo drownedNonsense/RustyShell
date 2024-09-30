@@ -1,0 +1,30 @@
+{
+	"code":  "shell",
+	"class": "EntityHighCaliber",
+	"variantgroups": [
+   		{ "code": "class" ,   "states": ["120mm"]},
+		{ "code": "shape" ,   "states": ["round", "blunt", "submunition"]},
+		{ "code": "material", "states": ["tinbronze", "iron"]}
+	],
+	"attributes": { "physics": { "groundDragFactor": 1 }},
+	"hitboxSize": { "x": 1, "y": 0.4 },
+	"client": {
+
+		"behaviors": [{ "code": "passivephysics" }, { "code": "interpolateposition" }],
+
+		"renderer"    : "Shape",
+		"shapeByType" : {
+			"*-submunition-*" : { "base" : "game:entity/bullet" },
+			"*"               : { "base" : "ammunition/warhead-{shape}" }
+		},
+		"texturesByType": {
+			"*-submunition-*" : { "lead"    : { "base": "game:block/metal/ingot/{material}" }},
+			"*"               : {
+				"warhead" : { "base": "game:block/metal/ingot/{material}" },
+				"icon"    : { "base": "game:block/transparent" }
+			}
+		}
+	},
+	"server": { "behaviors": [{ "code": "passivephysics" }, { "code": "despawn", "minSeconds": 300 }]},
+	"sounds": { "flying": "sounds/incomingshell" }
+}

@@ -1,0 +1,78 @@
+{
+	"code": "machinegun",
+	"class": "BlockHeavyGun",
+	"entityClass": "HeavyGun",
+	"variantgroups": [{ "code": "material", "states": ["iron", "steel"]}],
+	"attributes": {
+		"barrelLength": 2,
+		"accuracyByType": {
+			"*-iron"  : 0.85,
+			"*-steel" : 0.9
+		},
+		"firePower": 1.5,
+		"cooldownByType": {
+			"*-iron"  : 3.0,
+			"*-steel" : 1.5
+		},
+		"handbook": { "groupBy": [ "machinegun-*" ]}
+	},
+	"creativeinventory": { "general": ["*"], "mechanics": ["*"], "rustyshell": ["*"] },
+	"maxstacksize": 1,
+	"behaviors": [
+		{ "name": "Wheeled",          "properties": { "turnSpeedByType": { "*-iron": 0.5, "*-steel": 0.4 }, "wheelShapePath": "rustyshell:shapes/wheel/spoked-small" }},
+		{ "name": "RepeatingFire",    "properties": { "fireInterval": 0.2, "rotatingBarrelShapePath": "rustyshell:shapes/barrel/machinegun-rotating" }},
+		{ "name": "Loadable",         "properties": { "ammunitionLimit": 64, "ammunitionCodes": [ "rustyshell:cartridge-*" ]}},
+		{ "name": "Geared",           "properties": {
+			"minElevation"    : -20,
+			"maxElevation"    :  20,
+			"barrelShapePath" : "rustyshell:shapes/barrel/machinegun-base"
+		}}, { "name": "Unstable" }
+	],
+	"entityBehaviors": [
+		{ "name": "RepeatingFireGun" },
+		{ "name": "GearedGun" },
+		{ "name": "WheeledObject" }
+	],
+	"blockmaterial": "wood",
+    "shape":          { "base": "gun/wheeledgun-generic-base" },
+    "shapeinventory": { "base": "gun/machinegun-complete" },
+	"textures": {
+		"material"       : { "base": "game:block/metal/plate/{material}" },
+		"materialalt"    : { "base": "game:block/metal/sheet/{material}1" },
+		"materialsheet"  : { "base": "game:block/metal/sheet/{material}1" }
+	},
+	"resistance": 6,
+	"sounds": {
+		"place": "game:block/plate",
+		"walk":  "game:walk/wood1",
+		"hit":   "game:block/plate"
+	},
+	"drops": [{
+		"type": "item", 
+		"code": "rustyshell:barrel-machinegun-{material}", 
+		"quantity": { "avg": 1, "var": 0 } 
+	}, {
+		"type": "block", 
+		"code": "game:wagonwheels-spoked-west", 
+		"quantity": { "avg": 1, "var": 1 } 
+	}],
+    "sidesolid": { "all": "false" },
+	"sideopaque": { "all": "false" },
+    "heldTpIdleAnimation": "holdbothhandslarge", "heldTpUseAnimation": "twohandplaceblock",
+	"tpHandTransform": {
+		"translation": { "x": -0.6, "y": -1.2, "z": -0.5 },
+		"rotation": { "x": 60, "y": -31, "z": -67 },
+		"scale": 0.64
+	},
+	"guiTransform": {
+		"translation": { "x": 0, "y":  5, "z": 0 },
+		"rotation":    { "x": 0, "y": 33, "z": 0 },
+		"scale": 0.45
+	},
+	"groundTransform": {
+		"translation": { "x":   0, "y": 0, "z":   0 },
+		"rotation":    { "x":   0, "y": 0, "z":   0 },
+		"origin":      { "x": 0.5, "y": 0, "z": 0.5 },
+		"scale": 2.56
+	}
+}

@@ -1,0 +1,82 @@
+{
+  "code": "shot",
+  "class": "ItemAmmunition",
+  "variantgroups": [
+    { "code": "class" ,      "states": ["canister"]},
+    { "code": "shape" ,      "states": ["blunt", "submunition"]},
+    { "code": "type",        "states": ["antipersonnel"]},
+    { "code": "material",    "states": ["copper", "brass", "iron"]},
+    { "code": "submaterial", "states": ["stone", "lead", "copper", "steel"]}
+  ],
+  "maxstacksize": 1,
+  "creativeinventory": { "general": ["shot-canister-blunt-*"], "items": ["shot-canister-blunt-*"], "rustyshell": ["shot-canister-blunt-*"] },
+  "attributes": {
+
+    "damageByType": {
+      "*-stone"  : 20,
+      "*-lead"   : 38,
+      "*-copper" : 20,
+      "*-steel"  : 25
+    },
+
+    "blastRadiusByType": {
+      "*-submunition-*" : 1,
+      "*"               : 4
+    },
+
+    "injureRadiusByType": {
+      "*-submunition-*" : 8,
+      "*"               : 12
+    },
+
+    "flightExpectancyByType": {
+      "*-copper-*" : 0.85,
+      "*-brass-*"  : 0.9,
+      "*-iron-*"   : 1.0
+    },
+
+    "propellant": { "strength": 4 },
+    "entityCodeByType": {
+      "*-submunition-*" : "rustyshell:shot-{class}-{shape}-{submaterial}",
+      "*"               : "rustyshell:shot-{class}-{shape}-{material}"
+    },
+
+    "handbook": { "groupBy": [ "*-{type}-*" ]},
+
+    "groundStorageTransform": {
+      "rotation": { "x": 0,   "y": -40, "z": 0 },
+      "origin":   { "x": 0.5, "y":   0, "z": 0.5 }
+    },
+
+    "scrollrackable"        :  true,
+    "onscrollrackTransform" : {
+      "translation": { "x": -0.95, "y": -0.025, "z": 0.5 },
+      "rotation":    { "x":   -45, "y":      0, "z": -90 },
+      "origin":      { "x":   0.5, "y":      0, "z": 0.5 },
+      "scale": 0.9
+    }
+  },
+  "shapeByType": {
+    "*-submunition-*" : { "base": "game:block/basic/nothing" },
+    "*":                { "base": "ammunition/shot-canister" }
+  },
+  "textures": { "material": { "base": "game:block/metal/ingot/{material}" }},
+  "behaviors": [{ "name": "GroundStorable", "properties": { "layout": "Quadrants", "collisionBox": { "x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 0.4, "z2": 1 } }}],
+  "heldTpIdleAnimation": "holdbothhandslarge", "heldTpUseAnimation": "twohandplaceblock",
+  "tpHandTransform": {
+    "translation": { "x": -0.7, "y": -0.3, "z": -0.4 },
+    "rotation":    { "x":    0, "y":    0, "z": -110 },
+    "origin":      { "x":  0.5, "y":  0.2, "z":  0.5 },
+    "scale": 0.8
+  },
+	"guiTransform": {
+		"rotation": { "x": 180, "y":   45, "z":  24 },
+		"origin":   { "x": 0.5, "y": 0.45, "z": 0.5 },
+		"scale": 1.5
+	},
+  "groundTransform": {
+    "translation": { "x":  0, "y": 0.05, "z":  0 },
+    "rotation":    { "x": 90, "y":    0, "z": 20 },
+    "scale": 3
+  }
+}

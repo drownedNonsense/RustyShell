@@ -22,8 +22,8 @@ namespace RustyShell {
 
             private ItemStack[] ammunitionStacks;
 
-            private static ItemStack[] BlastingPowderStack;
-            private static ItemStack[] LanyardStacks;
+            private static ItemStack[] BaggedChargeStacks;
+            private static ItemStack[] PrimerStacks;
 
 
         //===============================
@@ -57,21 +57,22 @@ namespace RustyShell {
                 this.Ammunitions   ??= ammunitions.ToArray();
                 this.ammunitionCodes = null;
 
-                BlockBehaviorLoadableGun.BlastingPowderStack = ObjectCacheUtil.GetOrCreate(api, "blastingPowderStack", delegate {
-                    return api.World.GetItem(new AssetLocation("maltiezfirearms:gunpowder-fine")) is Item gunPowder
-                    ? new ItemStack[2] { new(api.World.GetItem(new AssetLocation("game:blastingpowder"))), new(gunPowder) }
-                    : new ItemStack[1] { new(api.World.GetItem(new AssetLocation("game:blastingpowder"))) };
+                BlockBehaviorLoadableGun.BaggedChargeStacks = ObjectCacheUtil.GetOrCreate(api, "baggedChargeStacks", delegate {
+                    return api.World
+                        .SearchItems(new AssetLocation("rustyshell:baggedcharge-*"))
+                        .Select(charge => new ItemStack(charge, 1))
+                        .ToArray();
                 }); // ..
 
 
                 if (api is ICoreClientAPI client) {
-                    BlockBehaviorLoadableGun.LanyardStacks = ObjectCacheUtil.GetOrCreate(client, "lanyardStacks", delegate {
+                    BlockBehaviorLoadableGun.PrimerStacks = ObjectCacheUtil.GetOrCreate(client, "primerStacks", delegate {
 
-                        List<ItemStack> lanyardStacks = new ();
-                        foreach (Item item in api.World.SearchItems(new AssetLocation("rustyshell:lanyard-*")))
-                            lanyardStacks.AddRange(item.GetHandBookStacks(client));
+                        List<ItemStack> primerStacks = new ();
+                        foreach (Item item in api.World.SearchItems(new AssetLocation("rustyshell:primer-*")))
+                            primerStacks.AddRange(item.GetHandBookStacks(client));
 
-                        return lanyardStacks.ToArray();
+                        return primerStacks.ToArray();
                     }); // ..
 
                     this.ammunitionStacks = new ItemStack[this.Ammunitions.Length];
@@ -97,16 +98,16 @@ namespace RustyShell {
                 private bool HasAmmunition(IPlayer byPlayer) => this.Ammunitions.Contains(byPlayer.Entity.ActiveHandItemSlot.Itemstack?.Item);
 
                 /// <summary>
-                /// Indicates whether or not a given player has a matching detonator
+                /// Indicates whether or not a given player has a matching charge
                 /// </summary>
                 /// <param name="byPlayer"></param>
-                private static bool HasDetonator(IPlayer byPlayer) => BlockBehaviorLoadableGun.BlastingPowderStack.Any(x => x?.Collectible.Code.Path == byPlayer.Entity.ActiveHandItemSlot.Itemstack?.Collectible.Code.Path);
+                private static bool HasCharge(IPlayer byPlayer) => BlockBehaviorLoadableGun.BaggedChargeStacks.Any(x => x?.Collectible.Code.Path == byPlayer.Entity.ActiveHandItemSlot.Itemstack?.Collectible.Code.Path);
 
                 /// <summary>
-                /// Indicates whether or not a given gun requires a detonator to fire
+                /// Indicates whether or not a given gun requires a charge to fire
                 /// </summary>
                 /// <param name="blockEntity"></param>
-                private static bool GunRequiresDetonator(BlockEntityHeavyGun blockEntity) => blockEntity?.BlockHeavyGun.BarrelType == EnumBarrelType.Smoothbore && !blockEntity.FusedAmmunition;
+                private static bool GunRequiresCharge(BlockEntityHeavyGun blockEntity) => !blockEntity?.FusedAmmunition == true && blockEntity.BlockHeavyGun.MuzzleLoading;
 
 
                 public override WorldInteraction[] GetPlacedBlockInteractionHelp(
@@ -116,22 +117,22 @@ namespace RustyShell {
                     ref EnumHandling handled
                 ) {
                     return new WorldInteraction[] {
-                        new WorldInteraction() {
-                            ActionLangCode    = "blockhelp-loadable-filldetonator",
+                        new () {
+                            ActionLangCode    = "blockhelp-loadable-fillcharge",
                             MouseButton       = EnumMouseButton.Right,
-                            Itemstacks        = BlockBehaviorLoadableGun.BlastingPowderStack,
+                            Itemstacks        = BlockBehaviorLoadableGun.BaggedChargeStacks,
                             GetMatchingStacks = (wi, bs, es) => {
 
                                 BlockEntityHeavyGun blockEntity = world.BlockAccessor.GetBlockEntity<BlockEntityHeavyGun>(bs.Position);
 
-                                if (!BlockBehaviorLoadableGun.GunRequiresDetonator(blockEntity)) return null;
-                                if (blockEntity?.DetonatorSlot?.StackSize >= 16) return null;
+                                if (!BlockBehaviorLoadableGun.GunRequiresCharge(blockEntity))                                           return null;
+                                if (blockEntity?.ChargeSlot?.StackSize == blockEntity?.ChargeSlot?.Itemstack?.Collectible.MaxStackSize) return null;
                                 if (blockEntity?.CanFill ?? false) return wi.Itemstacks;
                                 return null;
                                 
                             } // ..
                         }, // new ..
-                        new WorldInteraction() {
+                        new () {
                             ActionLangCode    = "blockhelp-loadable-fillammunition",
                             MouseButton       = EnumMouseButton.Right,
                             Itemstacks        = this.ammunitionStacks,
@@ -151,7 +152,7 @@ namespace RustyShell {
                             ActionLangCode    = "blockhelp-loadable-fire",
                             MouseButton       = EnumMouseButton.Right,
                             HotKeyCode        = "shift",
-                            Itemstacks        = BlockBehaviorLoadableGun.LanyardStacks,
+                            Itemstacks        = BlockBehaviorLoadableGun.PrimerStacks,
                             GetMatchingStacks = (wi, bs, es) => {
 
                                 BlockEntityHeavyGun blockEntity = world.BlockAccessor.GetBlockEntity<BlockEntityHeavyGun>(bs.Position);
@@ -194,11 +195,11 @@ namespace RustyShell {
 
 
                         blockEntity.Inventory ??= new InventoryGeneric(2, "heavygun-" + blockSel.Position, blockEntity.Api);
-                        if (BlockBehaviorLoadableGun.GunRequiresDetonator(blockEntity) && HasDetonator(byPlayer)) {
+                        if (BlockBehaviorLoadableGun.GunRequiresCharge(blockEntity) && HasCharge(byPlayer)) {
 
-                            int moveableQuantity = GameMath.Min(16 - blockEntity.DetonatorSlot.StackSize, 1);
+                            int moveableQuantity = GameMath.Min(16 - blockEntity.ChargeSlot.StackSize, 1);
 
-                            slot.TryPutInto(blockEntity.Api.World, blockEntity.DetonatorSlot, moveableQuantity);
+                            slot.TryPutInto(blockEntity.Api.World, blockEntity.ChargeSlot, moveableQuantity);
                             blockEntity.MarkDirty();
 
                            handling = EnumHandling.PreventSubsequent;
@@ -218,7 +219,7 @@ namespace RustyShell {
                     
                     if (blockEntity.CanFire
                         && byPlayer.Entity.Controls.Sneak
-                        && (collectible?.Code.Path.StartsWith("lanyard") ?? false)
+                        && (collectible?.Code.Path.StartsWith("primer") ?? false)
                     ) {
 
                         handling = EnumHandling.PreventSubsequent;

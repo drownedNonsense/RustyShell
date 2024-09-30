@@ -1,203 +1,117 @@
 [
     {
-        "file": "rustyshell:recipes/grid/cartridge.json",
+        "file": "rustyshell:recipes/grid/baggedcharge.json",
         "op": "replace",
         "path": "/0/ingredients/A/code",
-        "value": "maltiezfirearms:slug-*",
-        "dependsOn": [{ "modid": "maltiezfirearms" }]
-    },
-    {
-        "file": "rustyshell:recipes/grid/cartridge.json",
-        "op": "replace",
-        "path": "/0/ingredients/C/code",
         "value": "maltiezfirearms:gunpowder-fine",
-        "dependsOn": [{ "modid": "maltiezfirearms" }]
-    },
-    {
-        "file": "rustyshell:recipes/grid/cartridge.json",
-        "op": "replace",
-        "path": "/1/ingredients/A/code",
-        "value": "maltiezfirearms:slug-*",
-        "dependsOn": [{ "modid": "maltiezfirearms" }]
-    },
-    {
-        "file": "rustyshell:recipes/grid/cartridge.json",
-        "op": "replace",
-        "path": "/1/ingredients/C/code",
-        "value": "maltiezfirearms:gunpowder-fine",
-        "dependsOn": [{ "modid": "maltiezfirearms" }]
-    },
-
-    {
-        "file": "rustyshell:recipes/grid/fixedshot.json",
-        "op": "replace",
-        "path": "/2/ingredients/C/code",
-        "value": "maltiezfirearms:bullet-*",
-        "dependsOn": [{ "modid": "maltiezfirearms" }]
-    },
-    {
-        "file": "rustyshell:recipes/grid/fixedshot.json",
-        "op": "replace",
-        "path": "/3/ingredients/C/code",
-        "value": "maltiezfirearms:bullet-*",
         "dependsOn": [{ "modid": "maltiezfirearms" }]
     },
 
     {
         "file": "rustyshell:recipes/grid/shell.json",
         "op": "replace",
-        "path": "/6/ingredients/C/code",
-        "value": "maltiezfirearms:bullet-*",
-        "dependsOn": [{ "modid": "maltiezfirearms" }]
-    },
-    {
-        "file": "rustyshell:recipes/grid/shell.json",
-        "op": "replace",
-        "path": "/7/ingredients/C/code",
-        "value": "maltiezfirearms:bullet-*",
-        "dependsOn": [{ "modid": "maltiezfirearms" }]
-    },
-
-    {
-        "file": "rustyshell:recipes/grid/shot.json",
-        "op": "replace",
-        "path": "/3/ingredients/C/code",
-        "value": "maltiezfirearms:bullet-*",
-        "dependsOn": [{ "modid": "maltiezfirearms" }]
-    },
-    {
-        "file": "rustyshell:recipes/grid/shot.json",
-        "op": "replace",
-        "path": "/4/ingredients/C/code",
-        "value": "maltiezfirearms:bullet-*",
-        "dependsOn": [{ "modid": "maltiezfirearms" }]
-    },
-
-
-    {
-        "file": "rustyshell:recipes/grid/shell.json",
-        "op": "replace",
-        "path": "/0/ingredients/C/code",
+        "path": "/0/ingredients/D/code",
         "value": "maltiezfirearms:gunpowder-fine",
         "dependsOn": [{ "modid": "maltiezfirearms" }]
-    },
-    {
+    }, {
         "file": "rustyshell:recipes/grid/shell.json",
         "op": "replace",
-        "path": "/1/ingredients/C/code",
+        "path": "/1/ingredients/D/code",
         "value": "maltiezfirearms:gunpowder-fine",
         "dependsOn": [{ "modid": "maltiezfirearms" }]
-    },
-    {
+    }, {
         "file": "rustyshell:recipes/grid/shell.json",
         "op": "replace",
         "path": "/2/ingredients/D/code",
         "value": "maltiezfirearms:gunpowder-fine",
         "dependsOn": [{ "modid": "maltiezfirearms" }]
-    },
-    {
-        "file": "rustyshell:recipes/grid/shell.json",
-        "op": "replace",
-        "path": "/2/ingredients/E/code",
-        "value": "maltiezfirearms:gunpowder-fine",
-        "dependsOn": [{ "modid": "maltiezfirearms" }]
-    },
-    {
+    }, {
         "file": "rustyshell:recipes/grid/shell.json",
         "op": "replace",
         "path": "/3/ingredients/D/code",
         "value": "maltiezfirearms:gunpowder-fine",
         "dependsOn": [{ "modid": "maltiezfirearms" }]
-    },
-    {
-        "file": "rustyshell:recipes/grid/shell.json",
-        "op": "replace",
-        "path": "/3/ingredients/E/code",
-        "value": "maltiezfirearms:gunpowder-fine",
-        "dependsOn": [{ "modid": "maltiezfirearms" }]
-    },
-    {
-        "file": "rustyshell:recipes/grid/shell.json",
-        "op": "replace",
-        "path": "/4/ingredients/C/code",
-        "value": "maltiezfirearms:gunpowder-fine",
-        "dependsOn": [{ "modid": "maltiezfirearms" }]
-    },
-    {
+    }, {
         "file": "rustyshell:recipes/grid/shell.json",
         "op": "replace",
         "path": "/4/ingredients/D/code",
         "value": "maltiezfirearms:gunpowder-fine",
         "dependsOn": [{ "modid": "maltiezfirearms" }]
-    },
-    {
-        "file": "rustyshell:recipes/grid/shell.json",
-        "op": "replace",
-        "path": "/5/ingredients/C/code",
-        "value": "maltiezfirearms:gunpowder-fine",
-        "dependsOn": [{ "modid": "maltiezfirearms" }]
-    },
-    {
+    }, {
         "file": "rustyshell:recipes/grid/shell.json",
         "op": "replace",
         "path": "/5/ingredients/D/code",
         "value": "maltiezfirearms:gunpowder-fine",
         "dependsOn": [{ "modid": "maltiezfirearms" }]
-    },
-    {
+    }, {
         "file": "rustyshell:recipes/grid/shell.json",
         "op": "replace",
-        "path": "/6/ingredients/D/code",
+        "path": "/6/ingredients/C/code",
+        "value": "maltiezfirearms:gunpowder-fine",
+        "dependsOn": [{ "modid": "maltiezfirearms" }]
+    }, {
+        "file": "rustyshell:recipes/grid/shell.json",
+        "op": "replace",
+        "path": "/7/ingredients/C/code",
+        "value": "maltiezfirearms:gunpowder-fine",
+        "dependsOn": [{ "modid": "maltiezfirearms" }]
+    }, {
+        "file": "rustyshell:recipes/grid/shell.json",
+        "op": "replace",
+        "path": "/8/ingredients/C/code",
+        "value": "maltiezfirearms:gunpowder-fine",
+        "dependsOn": [{ "modid": "maltiezfirearms" }]
+    }, {
+        "file": "rustyshell:recipes/grid/shell.json",
+        "op": "replace",
+        "path": "/9/ingredients/C/code",
+        "value": "maltiezfirearms:gunpowder-fine",
+        "dependsOn": [{ "modid": "maltiezfirearms" }]
+    }, {
+        "file": "rustyshell:recipes/grid/shell.json",
+        "op": "replace",
+        "path": "/10/ingredients/C/code",
+        "value": "maltiezfirearms:gunpowder-fine",
+        "dependsOn": [{ "modid": "maltiezfirearms" }]
+    }, {
+        "file": "rustyshell:recipes/grid/shell.json",
+        "op": "replace",
+        "path": "/11/ingredients/C/code",
+        "value": "maltiezfirearms:gunpowder-fine",
+        "dependsOn": [{ "modid": "maltiezfirearms" }]
+    }, {
+        "file": "rustyshell:recipes/grid/shell.json",
+        "op": "replace",
+        "path": "/12/ingredients/E/code",
+        "value": "maltiezfirearms:gunpowder-fine",
+        "dependsOn": [{ "modid": "maltiezfirearms" }]
+    }, {
+        "file": "rustyshell:recipes/grid/shell.json",
+        "op": "replace",
+        "path": "/13/ingredients/E/code",
         "value": "maltiezfirearms:gunpowder-fine",
         "dependsOn": [{ "modid": "maltiezfirearms" }]
     },
+
     {
-        "file": "rustyshell:recipes/grid/shell.json",
-        "op": "replace",
-        "path": "/7/ingredients/D/code",
-        "value": "maltiezfirearms:gunpowder-fine",
-        "dependsOn": [{ "modid": "maltiezfirearms" }]
+        "file": "rustyshell:recipes/grid/cartridge.json",
+        "op": "addmerge",
+        "path": "/enabled",
+        "value": false,
+        "dependsOn": [{ "modid": "maltiezfirearms", "invert": true }]
+    }, {
+        "file": "rustyshell:recipes/smithing/cartridgecasing-repairing.json",
+        "op": "add",
+        "path": "/enabled",
+        "value": false,
+        "dependsOn": [{ "modid": "maltiezfirearms", "invert": true }]
     },
+    
     {
-        "file": "rustyshell:recipes/grid/shell.json",
-        "op": "replace",
-        "path": "/8/ingredients/E/code",
-        "value": "maltiezfirearms:gunpowder-fine",
-        "dependsOn": [{ "modid": "maltiezfirearms" }, { "modid": "chemistrylib" }]
-    },
-    {
-        "file": "rustyshell:recipes/grid/shell.json",
-        "op": "replace",
-        "path": "/9/ingredients/E/code",
-        "value": "maltiezfirearms:gunpowder-fine",
-        "dependsOn": [{ "modid": "maltiezfirearms" }, { "modid": "chemistrylib" }]
-    },
-    {
-        "file": "rustyshell:recipes/grid/shell.json",
-        "op": "replace",
-        "path": "/10/ingredients/E/code",
-        "value": "maltiezfirearms:gunpowder-fine",
-        "dependsOn": [{ "modid": "maltiezfirearms" }, { "modid": "chemistrylib" }]
-    },
-    {
-        "file": "rustyshell:recipes/grid/shell.json",
-        "op": "replace",
-        "path": "/11/ingredients/E/code",
-        "value": "maltiezfirearms:gunpowder-fine",
-        "dependsOn": [{ "modid": "maltiezfirearms" }, { "modid": "chemistrylib" }]
-    },
-    {
-        "file": "rustyshell:recipes/grid/shell.json",
-        "op": "replace",
-        "path": "/12/ingredients/D/code",
-        "value": "maltiezfirearms:gunpowder-fine",
-        "dependsOn": [{ "modid": "maltiezfirearms" }, { "modid": "chemistrylib" }]
-    },
-    {
-        "file": "rustyshell:recipes/grid/shell.json",
-        "op": "replace",
-        "path": "/13/ingredients/D/code",
-        "value": "maltiezfirearms:gunpowder-fine",
-        "dependsOn": [{ "modid": "maltiezfirearms" }, { "modid": "chemistrylib" }]
+        "file": "rustyshell:recipes/grid/barrel-repairing.json",
+        "op": "addmerge",
+        "path": "/3/enabled",
+        "value": false,
+        "dependsOn": [{ "modid": "maltiezfirearms", "invert": true }]
     }
 ]

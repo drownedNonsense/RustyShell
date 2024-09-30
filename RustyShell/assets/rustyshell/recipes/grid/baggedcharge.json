@@ -1,0 +1,25 @@
+[
+  {
+    "ingredientPattern": "AB",
+    "ingredients": {
+      "A": { "type": "item", "code": "game:blastingpowder", "quantity": 3 },
+      "B": { "type": "item", "code": "game:linensack" }
+    },
+    "width": 2,
+    "height": 1,
+    "shapeless": true,
+    "output": { "type": "item", "code": "rustyshell:baggedcharge-dry" }
+  },
+  
+  {
+    "ingredientPattern": "A,B",
+    "ingredients": {
+      "A": { "type": "item", "code": "game:fat" },
+      "B": { "type": "item", "code": "rustyshell:baggedcharge-dry" }
+    },
+    "shapeless": true,
+    "width":  1,
+    "height": 2,
+    "output": { "type": "item", "code": "rustyshell:baggedcharge-oiled" }
+  }, 
+]

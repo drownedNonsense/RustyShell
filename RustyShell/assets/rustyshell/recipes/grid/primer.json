@@ -1,0 +1,14 @@
+[
+  {
+    "ingredientPattern": "ABC",
+    "ingredients": {
+      "A": { "type": "item", "code": "game:rope" },
+      "B": { "type": "item", "code": "game:chisel-*", "name": "metal", "allowedVariants": ["copper", "tinbronze", "bismuthbronze", "iron", "blackbronze", "meteoriciron", "steel"]},
+      "C": { "type": "item", "code": "game:saltpeter" }
+    },
+    "shapeless": true,
+    "width":  3,
+    "height": 1,
+    "output": { "type": "item", "code": "rustyshell:primer-{metal}" }
+  }
+]

@@ -1,63 +1,133 @@
 {
-    "code": "shell",
-    "class": "ItemAmmunition",
-	  "variantgroups": [{ "code": "type", "states": ["simple", "explosive", "piercing", "shrapnel", "gas" ]}],
-    "maxstacksize": 1,
-    "creativeinventory": { "general": ["*"], "items": ["*"], "rustyshell": ["*"] },
-    "behaviors": [{ "name": "GroundStorable", "properties": { "layout": "Quadrants", "collisionBox": { "x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 1, "z2": 1 } }}],
-    "heldTpIdleAnimation": "holdbothhandslarge", "heldTpUseAnimation": "twohandplaceblock",
-    "attributes": {
-      "hasFuse":         true,
-      "smokelessPowder": true,
-      "scrollrackable": true,
-      "detonationByType": {
-        "*-simple":    { "type": "Simple",        "amount":  80, "blastRadius":  5, "injureRadius":  8 },
-        "*-piercing":  { "type": "Piercing",      "amount": 120, "blastRadius":  5, "injureRadius":  9 },
-        "*-explosive": { "type": "HighExplosive", "amount":  20, "blastRadius":  7, "injureRadius": 14 },
-        "*-shrapnel":  { "type": "Canister",      "amount":  20, "blastRadius": 10, "injureRadius": 28, "fuseDuration": 1500 },
-        "*-gas":       { "type": "Gas",           "amount": 100, "blastRadius":  1, "injureRadius": 60, "duration": 20000 }
-      },
-      "groundStorageTransform": {
-        "translation": { "x":   0, "y": 0.5, "z":   0 },
-        "rotation":    { "x":   0, "y":  45, "z":  90 },
-        "origin":      { "x": 0.5, "y":   0, "z": 0.5 }
-      },
-      "onscrollrackTransform": {
-        "translation": { "x": -0.5, "y":   0, "z": 0.45 },
-        "rotation":    { "x": -45,  "y":   0, "z":    0 },
-        "origin":      { "x": 0.5,  "y": 0.1, "z":  0.5 }
-      },
-		  "handbook": { "groupBy": [ "shell-*" ]}
+  "code": "shell",
+  "class": "ItemAmmunition",
+  "variantgroups": [
+    { "code": "class",          "states": ["120mm"]},
+    { "code": "shape" ,         "states": ["round", "blunt", "submunition"]},
+    { "code": "type",           "states": ["common", "explosive", "antipersonnel", "gas", "incendiary"]},
+    { "code": "material",       "states": ["tinbronze", "iron"]},
+    { "code": "casingmaterial", "states": ["none", "copper", "brass", "iron"]}
+  ],
+  "allowedVariants": [
+    "shell-120mm-round-*",
+    "shell-120mm-blunt-*",
+    "shell-120mm-submunition-*-none"
+  ],
+  "maxstacksize": 1,
+  "creativeinventory": {
+    "general"    : ["shell-*-round-*", "shell-*-blunt-*"],
+    "items"      : ["shell-*-round-*", "shell-*-blunt-*"],
+    "rustyshell" : ["shell-*-round-*", "shell-*-blunt-*"]
+  },
+  "behaviors": [{
+    "name": "GroundStorable",
+    "properties": { "layout": "Quadrants", "collisionBox": { "x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 0.5, "z2": 1 } }
+  }],
+  "attributes": {
+
+    "damageByType": {
+      "*-round-*-tinbronze-*" : 60,
+      "*-round-*-iron-*"      : 70,
+      "*-blunt-*-tinbronze-*" : 50,
+      "*-blunt-*-iron-*"      : 60,
+      "*-submunition-*-tinbronze-*" : 40,
+      "*-submunition-*-iron-*"      : 50
     },
-    "shapeByType": {
-      "*-explosive": { "base": "ammunition/shell-explosive" },
-      "*-piercing":  { "base": "ammunition/shell-piercing" },
-      "*":           { "base": "ammunition/shell" }
+    "blastRadiusByType": {
+      "*-submunition-common-*"        : 0,
+      "*-submunition-explosive-*"     : 2,
+      "*-submunition-antipersonnel-*" : 1,
+      "*-submunition-incendiary-*"    : 3,
+      "*-submunition-gas-*"           : 5,
+      "*-common-*"        : 5,
+      "*-explosive-*"     : 9,
+      "*-antipersonnel-*" : 5,
+      "*-incendiary-*"    : 12,
+      "*-gas-*"           : 12
     },
-    "texturesByType": {
-      "*-piercing": { "blackbronze1": { "base": "game:block/metal/sheet/blackbronze1" }, "lead1": { "base": "game:block/metal/sheet/lead1" }},
-      "*":          { "blackbronze1": { "base": "game:block/metal/sheet/blackbronze1" }}
+    "injureRadiusByType": {
+      "*-submunition-common-*"        : 3,
+      "*-submunition-explosive-*"     : 6,
+      "*-submunition-antipersonnel-*" : 16,
+      "*-submunition-incendiary-*"    : 8,
+      "*-common-*"        : 8,
+      "*-explosive-*"     : 14,
+      "*-antipersonnel-*" : 24,
+      "*-incendiary-*"    : 24
     },
-    "tpHandTransform": {
-      "translation": { "x": -0.7, "y": -0.1, "z": -0.3 },
-      "rotation":    { "x":   45, "y":  -45, "z": -110 },
-      "origin":      { "x":  0.5, "y":    0, "z":  0.5 },
-      "scale": 0.65
+    "flightExpectancyByType": {
+      "*-blunt-explosive-tinbronze-*" : 2.75,
+      "*-blunt-explosive-iron-*"      : 3.50,
+      "*-blunt-*-tinbronze-*"  : 3.00,
+      "*-blunt-*-iron-*"       : 3.75,
+      "*-explosive-tinbronze-*" : 4.25,
+      "*-explosive-iron-*"      : 5.00,
+      "*-tinbronze-*"  : 6.0,
+      "*-iron-*"       : 7.0
     },
-    "fpHandTransform": {
-      "rotation": { "x":   0, "y":   0, "z":  89 },
-      "origin":   { "x": 0.5, "y": 0.3, "z": 0.5 },
-      "scale": 2.56
+
+    "entityCode": "rustyshell:shell-{class}-{shape}-{material}",
+    "casingCodeByType": {
+      "*-none" : {},
+      "*"      : "rustyshell:casing-{casingmaterial}-fine"
     },
-    "guiTransform": {
-      "translation": { "x":   2, "y":   2, "z":   0 },
-      "rotation":    { "x":   0, "y": 150, "z": -45 },
-      "origin":      { "x": 0.5, "y":   0, "z": 0.5 },
-      "scale": 1.65
+
+    "propellantByType": {
+      "*-none" : {},
+      "*"      : {
+        "strength"    : 4,
+        "isSmokeless" : true
+      }
     },
-    "groundTransform": {
-      "translation": { "x":  0, "y": 0.05, "z":  0 },
-      "rotation":    { "x": 90, "y":    0, "z": 20 },
-      "scale": 3
+
+    "handbookByType": {
+      "*-none" : { "groupBy": [ "shell-120mm-*-none" ]},
+      "*"      : { "groupBy": [ "shell-120mm-*-copper", "shell-120mm-*-brass", "shell-120mm-*-iron" ]}
+    },
+
+    "groundStorageTransform": {
+      "rotation": { "x": 0,   "y": -40, "z": 0 },
+      "origin":   { "x": 0.5, "y":   0, "z": 0.5 }
+    },
+
+    "scrollrackable"        :  true,
+    "onscrollrackTransform" : {
+      "translation": { "x": -0.95, "y": -0.025, "z": 0.5 },
+      "rotation":    { "x":   -45, "y":      0, "z": -90 },
+      "origin":      { "x":   0.5, "y":      0, "z": 0.5 },
+      "scale": 0.9
     }
+  },
+  "shapeByType": {
+    "*-submunition-*" : { "base": "game:block/basic/nothing" },
+    "*-none"          : { "base": "ammunition/warhead-{shape}" },
+    "*"               : { "base": "ammunition/shell-{shape}" }
+  },
+  "textures": {
+    "warhead" : { "base": "game:block/metal/ingot/{material}" },
+    "casing"  : { "base": "game:block/metal/ingot/{casingmaterial}" },
+    "icon"    : { "base": "rustyshell:icon/{type}" }
+  },
+  "texturesByType": { "*-common-*": { "icon": { "base": "game:block/transparent" }}},
+  "heldTpIdleAnimation": "holdbothhandslarge", "heldTpUseAnimation": "twohandplaceblock",
+  "tpHandTransform": {
+    "translation": { "x": -0.65, "y": -0.1, "z": -0.3 },
+    "rotation":    { "x":   114, "y":    2, "z": -130 },
+    "origin":      { "x":   0.5, "y":    0, "z":  0.5 },
+    "scale": 0.65
+  },
+  "guiTransform": {
+    "translation"  : { "x":   2, "y":   2, "z":   0 },
+    "rotation"     : { "x":  23, "y":  45, "z": 132 },
+    "originByType" : {
+      "*-none" : { "x": 0.5, "y": 0.30, "z": 0.5 },
+      "*"      : { "x": 0.5, "y": 0.45, "z": 0.5 }
+    }, 
+    "scale": 1.54
+  },
+  "groundTransform": {
+    "translation": { "x":  0, "y": 0.1, "z": 0 },
+    "rotation":    { "x": 94, "y": 0,   "z": 0 },
+    "scale": 3.6
+  }
 }

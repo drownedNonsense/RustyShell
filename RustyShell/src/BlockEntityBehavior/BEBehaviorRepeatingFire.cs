@@ -43,7 +43,14 @@ namespace RustyShell {
                 base.Initialize(api, properties);
                 if (this.Api is ICoreClientAPI client) {
 
-                    this.renderer = new RotatingBarrelRenderer(client, this.behavior.RotatingBarrelMesh, this.Blockentity, this.Blockentity.Pos, new Vec3f(0.5f, 1f, 0.5f), new Vec3f(0.5f, 2.3f / 16f, 0.5f));
+                    this.renderer = new RotatingBarrelRenderer(
+                        coreClientAPI : client,
+                        mesh          : this.behavior.RotatingBarrelMesh,
+                        blockEntity   : this.Blockentity,
+                        pos           : this.Blockentity.Pos,
+                        gearAnchor    : this.behavior.BarrelAnchor,
+                        barrelAnchor  : this.behavior.BarrelOrigin
+                    ); // ..
                     
                     client.Event.RegisterRenderer(
                         this.renderer,
@@ -102,9 +109,6 @@ namespace RustyShell {
             /// </summary>
             /// <param name="byEntity"></param>
             public void TryStartFire(Entity byEntity) {
-
-                if (this.blockEntityHeavyGun.Cooldown > this.behavior.FireInterval + 0.5f) return;
-
                 this.firingEntity = byEntity;
                 this.movement     = EnumRotDirection.Clockwise;
                 this.updateRef ??= this.Blockentity.RegisterGameTickListener(this.Update, ModContent.HEAVY_GUN_UPDATE_RATE);

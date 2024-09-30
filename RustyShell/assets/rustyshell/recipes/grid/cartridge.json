@@ -1,26 +1,12 @@
-[
-    {
-		"ingredientPattern": "AB,CD",
-		"ingredients": {
-			"A": { "type": "item",  "code": "game:metalbit-*", "quantity": 4 },
-			"B": { "type": "item",  "code": "game:flaxtwine" },
-			"C": { "type": "item",  "code": "game:blastingpowder", "quantity": 4 },
-			"D": { "type": "block", "code": "game:linen-*" }
-		},
-		"width":  2,
-		"height": 2,
-		"output": { "type": "item", "code": "rustyshell:cartridge", "quantity": 4 }
-	},
-    {
-		"ingredientPattern": "BA,DC",
-		"ingredients": {
-			"A": { "type": "item",  "code": "game:metalbit-*", "quantity": 4 },
-			"B": { "type": "item",  "code": "game:flaxtwine" },
-			"C": { "type": "item",  "code": "game:blastingpowder", "quantity": 4 },
-			"D": { "type": "block", "code": "game:linen-*" }
-		},
-		"width":  2,
-		"height": 2,
-		"output": { "type": "item", "code": "rustyshell:cartridge", "quantity": 4 }
-	}
-]
+{
+  "ingredientPattern": "A_,BC",
+  "ingredients": {
+    "A": { "type": "item", "code": "maltiezfirearms:slug-*",            "name": "material" },
+    "B": { "type": "item", "code": "rustyshell:cartridgecasing-*-fine", "name": "casingmaterial" },
+    "C": { "type": "item", "code": "maltiezfirearms:gunpowder-fine" }
+  },
+  "shapeless": true,
+  "width":  2,
+  "height": 2,
+  "output": { "type": "item", "code": "rustyshell:cartridge-round-common-{material}-{casingmaterial}" }
+}

@@ -1,6 +1,6 @@
 {
 	"editor": {
-		"collapsedPaths": "Root/RimMover/Quadrant7-9/Spoke9/Rim9oclock,Root/RimMover/Quadrant7-9/Spoke8/Rim8oclock,Root/RimMover/Quadrant7-9/Spoke7/Rim7oclock,Root/RimMover/Quadrant10-12/Spoke10/Rim10oclock,Root/Hub,Root/RimMover/Quadrant4-6/Spoke6/Rim6oclock,Root/RimMover/Quadrant10-12/Spoke12/Rim12oclock,Root/RimMover/Quadrant4-6/Spoke5,Root/RimMover/Quadrant4-6/Spoke6,Root/RimMover/Quadrant7-9/Spoke7,Root/RimMover/Quadrant7-9/Spoke8,Root/RimMover/Quadrant1-3/Spoke1/Rim1oclock,Root/RimMover/Quadrant1-3/Spoke2/Rim2oclock,Root/RimMover/Quadrant1-3/Spoke3/Rim3oclock,Root/RimMover,Root/RimMover/Quadrant10-12,Root/RimMover/Quadrant1-3/Spoke2,Root/RimMover/Quadrant4-6/Spoke4/Rim4oclock,Root/RimMover/Quadrant1-3/Spoke1,Root/RimMover/Quadrant1-3/Spoke3,Root/RimMover/Quadrant10-12/Spoke12,Root/RimMover/Quadrant10-12/Spoke10,Root/RimMover/Quadrant10-12/Spoke11,Root/RimMover/Quadrant7-9,Root/RimMover/Quadrant10-12/Spoke11/Rim11oclock,Root/RimMover/Quadrant1-3",
+		"collapsedPaths": "Root/RimMover",
 		"allAngles": true,
 		"entityTextureMode": false
 	},
@@ -9,73 +9,15 @@
 	"textureSizes": {
 	},
 	"textures": {
+		"iron1": "game:block/metal/sheet/iron1",
+		"generic": "game:block/wood/planks/generic"
 	},
 	"elements": [
 		{
-			"name": "Hub",
-			"from": [ 0.0, 12.0, 5.9 ],
-			"to": [ 6.8, 15.2, 9.1 ],
-			"rotationOrigin": [ 0.0, 14.0, 7.9 ],
-			"faces": {
-				"north": { "texture": "#generic", "uv": [ 0.0, 0.0, 6.5, 3.0 ] },
-				"east": { "texture": "#top", "uv": [ 6.0, 6.0, 9.0, 9.0 ] },
-				"south": { "texture": "#generic", "uv": [ 0.0, 0.0, 6.5, 3.0 ] },
-				"west": { "texture": "#top", "uv": [ 6.0, 6.0, 9.0, 9.0 ] },
-				"up": { "texture": "#generic", "uv": [ 0.0, 0.0, 6.5, 3.0 ] },
-				"down": { "texture": "#generic", "uv": [ 0.0, 0.0, 6.5, 3.0 ] }
-			},
-			"children": [
-				{
-					"name": "HubFatPart",
-					"from": [ 0.8, -0.8, -0.8 ],
-					"to": [ 6.0, 4.0, 4.0 ],
-					"rotationOrigin": [ 0.8, 1.6, 1.6 ],
-					"faces": {
-						"north": { "texture": "#generic", "uv": [ 0.0, 0.0, 5.2, 4.8 ] },
-						"east": { "texture": "#generic", "uv": [ 0.0, 0.0, 4.8, 4.8 ] },
-						"south": { "texture": "#generic", "uv": [ 0.0, 0.0, 5.2, 4.8 ] },
-						"west": { "texture": "#generic", "uv": [ 0.0, 0.0, 4.8, 4.8 ] },
-						"up": { "texture": "#generic", "uv": [ 0.0, 0.0, 5.2, 4.8 ] },
-						"down": { "texture": "#generic", "uv": [ 0.0, 0.0, 5.2, 4.8 ] }
-					},
-					"children": [
-						{
-							"name": "HubBand1",
-							"from": [ 0.4, -0.16, -0.16 ],
-							"to": [ 1.6, 4.96, 4.96 ],
-							"rotationOrigin": [ 0.4, -0.16, -0.16 ],
-							"faces": {
-								"north": { "texture": "#iron1", "uv": [ 0.5, 0.5, 1.7, 5.3 ] },
-								"east": { "texture": "#iron1", "uv": [ 0.0, 0.0, 4.8, 4.8 ] },
-								"south": { "texture": "#iron1", "uv": [ 14.0, 0.5, 15.2, 5.3 ] },
-								"west": { "texture": "#iron1", "uv": [ 0.0, 0.0, 4.8, 4.8 ] },
-								"up": { "texture": "#iron1", "uv": [ 14.0, 9.0, 15.2, 13.8 ] },
-								"down": { "texture": "#iron1", "uv": [ 0.5, 9.0, 1.7, 13.8 ] }
-							}
-						},
-						{
-							"name": "HubBand2",
-							"from": [ 3.6, -0.16, -0.16 ],
-							"to": [ 4.8, 4.96, 4.96 ],
-							"rotationOrigin": [ 3.6, -0.16, -0.16 ],
-							"faces": {
-								"north": { "texture": "#iron1", "uv": [ 0.5, 9.0, 1.7, 13.8 ] },
-								"east": { "texture": "#iron1", "uv": [ 0.0, 0.0, 4.8, 4.8 ] },
-								"south": { "texture": "#iron1", "uv": [ 14.0, 9.0, 15.2, 13.8 ] },
-								"west": { "texture": "#iron1", "uv": [ 0.0, 0.0, 4.8, 4.8 ] },
-								"up": { "texture": "#iron1", "uv": [ 5.0, 13.5, 10.0, 14.5 ], "rotation": 270 },
-								"down": { "texture": "#iron1", "uv": [ 5.0, 0.5, 10.0, 1.5 ], "rotation": 90 }
-							}
-						}
-					]
-				}
-			]
-		},
-		{
 			"name": "RimMover",
-			"from": [ 2.4, 13.0, 7.0 ],
-			"to": [ 4.0, 14.6, 8.6 ],
-			"rotationOrigin": [ 2.4, 14.0, 8.0 ],
+			"from": [ 3.4, 13.0, 7.0 ],
+			"to": [ 5.0, 14.6, 8.6 ],
+			"rotationOrigin": [ 3.4, 14.0, 8.0 ],
 			"faces": {
 			},
 			"children": [

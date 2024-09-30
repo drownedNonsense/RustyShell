@@ -1,0 +1,21 @@
+{
+  "ingredient": {
+    "type": "item",
+    "code": "game:ingot-*",
+    "name": "casingmaterial",
+    "allowedVariants": ["copper", "brass"]
+  },
+  "pattern": [[
+      "#_#_#_#",
+      "#_#_#_#",
+      "_______",
+      "#_#_#_#",
+      "#_#_#_#"
+  ]],
+  "name": "8 cartridge casings",
+  "output": {
+    "type": "item",
+    "code": "rustyshell:cartridgecasing-{casingmaterial}-fine",
+    "stacksize": 8
+  }
+}

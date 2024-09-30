@@ -24,7 +24,7 @@ namespace RustyShell {
 
                 base.OnLoaded(api);
 
-                this.MinGeneration = this.Attributes["leadableEntityMinGeneration"].AsInt(0);
+                this.MinGeneration = this.Attributes["leadableEntityMinGeneration"].AsInt();
                 this.EntityPaths   = api.World.SearchEntities(
                     this.Attributes["leadableEntityCodes"]
                         .AsArray<string>()

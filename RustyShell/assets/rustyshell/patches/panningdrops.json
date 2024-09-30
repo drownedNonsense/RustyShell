@@ -1,0 +1,23 @@
+[
+  {
+    "file"  : "game:blocktypes/wood/pan.json",
+    "op"    : "addmerge",
+    "path"  : "/attributes/panningDrops/@(sand|gravel)-.*/-",
+    "value" : { "type": "item", "code": "rustyshell:casing-copper-damaged", "chance": { "avg": 0.01, "var": 0 }  }
+  }, {
+    "file"  : "game:blocktypes/wood/pan.json",
+    "op"    : "addmerge",
+    "path"  : "/attributes/panningDrops/@(sand|gravel)-.*/-",
+    "value" : { "type": "item", "code": "rustyshell:casing-brass-damaged", "chance": { "avg": 0.004, "var": 0 }  }
+  }, {
+    "file"  : "game:blocktypes/wood/pan.json",
+    "op"    : "addmerge",
+    "path"  : "/attributes/panningDrops/@(sand|gravel)-.*/-",
+    "value" : { "type": "item", "code": "rustyshell:barrel-fieldgun-12pdr-ruined", "chance": { "avg": 0.001, "var": 0 }  }
+  }, {
+    "file"  : "game:blocktypes/wood/pan.json",
+    "op"    : "addmerge",
+    "path"  : "/attributes/panningDrops/@(sand|gravel)-.*/-",
+    "value" : { "type": "item", "code": "rustyshell:barrel-howitzer-12pdr-ruined", "chance": { "avg": 0.0015, "var": 0 }  }
+  }
+]

@@ -34,8 +34,9 @@ namespace RustyShell {
 
             api.RegisterEntityBehaviorClass("deployablelimber", typeof(EntityBehaviorDeployableLimber));
 
-            api.RegisterItemClass("ItemCommander", typeof(ItemGoad));
-            api.RegisterItemClass("ItemAmmunition", typeof(ItemAmuunition));
+            api.RegisterItemClass("ItemCommander",  typeof(ItemGoad));
+            api.RegisterItemClass("ItemAmmunition", typeof(ItemAmmunition));
+            api.RegisterItemClass("ItemCharge",     typeof(ItemCharge));
 
             RustyShellModSystem.GlobalConstants = api.LoadModConfig<RustyShellModConfig>("RustyShellModConfig.json");
             if (RustyShellModSystem.GlobalConstants == null) {

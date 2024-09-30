@@ -1,0 +1,61 @@
+{
+  "code": "casing",
+  "class": "Item",
+  "variantgroups": [
+    { "code": "metal", "states": ["copper", "brass", "iron"]},
+    { "code": "state", "states": ["fine", "damaged"]}
+  ],
+  "maxstacksize": 4,
+  "creativeinventory": { "general": ["*"], "items": ["*"], "rustyshell": ["*"] },
+  "behaviors": [{ "name": "GroundStorable", "properties": { "layout": "Quadrants", "collisionBox": { "x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 0.6, "z2": 1 } }}],
+  "attributes": {
+
+    "recoveryRateByType" : {
+      "casing-copper-fine" : 0.7,
+      "casing-brass-fine"  : 0.8,
+      "casing-iron-fine"   : 0.9
+    },
+
+    "handbook": { "groupBy": [ "casing-*" ]},
+
+    "groundStorageTransform": {
+      "rotation": { "x": 0,   "y": -40, "z": 0 },
+      "origin":   { "x": 0.5, "y":   0, "z": 0.5 }
+    },
+
+    "scrollrackable"        :  true,
+    "onscrollrackTransform" : {
+      "translation": { "x": -0.95, "y": -0.025, "z": 0.5 },
+      "rotation":    { "x":   -45, "y":      0, "z": -90 },
+      "origin":      { "x":   0.5, "y":      0, "z": 0.5 },
+      "scale": 0.9
+    }
+  },
+
+  "shape"          : { "base": "ammunition/casing" },
+  "texturesByType" : {
+    "*-fine"                : { "casing": { "base": "game:block/metal/ingot/{metal}" }},
+    "casing-copper-damaged" : { "casing": { "base": "game:block/metal/anvil/copper" }},
+    "*-damaged"             : { "casing": { "base": "game:block/metal/tarnished/{metal}" }}
+  } ,
+
+  "heldTpIdleAnimation" : "holdbothhandslarge",
+  "heldTpUseAnimation"  : "twohandplaceblock",
+  "tpHandTransform"     : {
+    "translation": { "x": -0.65, "y": -0.1, "z": -0.3 },
+    "rotation":    { "x":   114, "y":    2, "z": -130 },
+    "origin":      { "x":   0.5, "y":    0, "z":  0.5 },
+    "scale": 0.65
+  },
+  "guiTransform": {
+    "translation": { "x":  -2, "y":  -4, "z":   0 },
+    "rotation":    { "x":  23, "y":  45, "z": 132 },
+    "origin":      { "x": 0.5, "y": 0.5, "z": 0.5 },
+    "scale": 1.54
+  },
+  "groundTransform": {
+    "translation": { "x":  0, "y": 0.1, "z": 0 },
+    "rotation":    { "x": 94, "y": 0,   "z": 0 },
+    "scale": 3.6
+  }
+}

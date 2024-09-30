@@ -50,8 +50,7 @@ namespace RustyShell {
                 /// </summary>
                 /// <param name="byPlayer"></param>
                 /// <returns></returns>
-                private bool CanInteract(IPlayer byPlayer) => byPlayer.Entity.Controls.Sneak
-                    && byPlayer.Entity.ActiveHandItemSlot.Empty;
+                private static bool CanInteract(IPlayer byPlayer) => byPlayer.Entity.Controls.Sneak;
 
 
                 public override WorldInteraction[] GetPlacedBlockInteractionHelp(
@@ -62,16 +61,11 @@ namespace RustyShell {
                 ) { return new WorldInteraction[] {
 
                         new () {
-                            ActionLangCode  = "blockhelp-wheeled-turnleft",
-                            MouseButton     = EnumMouseButton.Right,
-                            HotKeyCode      = "shift",
-                        }, // new ..
-                        new () {
-                            ActionLangCode  = "blockhelp-wheeled-turnright",
-                            MouseButton     = EnumMouseButton.Right,
-                            HotKeyCodes     = new string[2] { "ctrl", "shift" },
-                        }, // new ..
-
+                            ActionLangCode = "blockhelp-rotating-aim",
+                            MouseButton    = EnumMouseButton.Right,
+                            HotKeyCode     = "shift",
+                        }, // WorldInteraction ..
+                        
                     }; // return ..
                 } // WorldInteraction[] ..
 
@@ -84,11 +78,11 @@ namespace RustyShell {
                 ) {
 
                     handling = EnumHandling.PreventDefault;
-                    if (this.CanInteract(byPlayer))
+                    if (CanInteract(byPlayer))
                         world.BlockAccessor
                             .GetBlockEntity(blockSel.Position)?
                             .GetBehavior<BlockEntityBehaviorRotating>()?
-                            .TryStartUpdate();
+                            .TryStartUpdate(byPlayer.Entity);
 
                     return true;
 
@@ -103,13 +97,9 @@ namespace RustyShell {
                     ref EnumHandling handling
                 ) {
 
-                    if (this.CanInteract(byPlayer)) {
+                    if (CanInteract(byPlayer)) {
 
                         handling = EnumHandling.PreventSubsequent;
-                        if (world.BlockAccessor
-                            .GetBlockEntity(blockSel.Position)?
-                            .GetBehavior<BlockEntityBehaviorRotating>() is BlockEntityBehaviorRotating behavior
-                        ) behavior.Movement = byPlayer.Entity.Controls.CtrlKey ? EnumRotDirection.Clockwise : EnumRotDirection.Counterclockwise;
 
                     } else {
 

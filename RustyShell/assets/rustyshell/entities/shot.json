@@ -1,21 +1,25 @@
 {
-	"code":  "shot",
-	"class": "EntityHighCaliber",
-	"variantgroups": [{ "code": "type", "states": ["stone", "round", "explosive", "grape", "canister" ]}],
-	"attributes": { "physics": { "groundDragFactor": 1 }},
-	"hitboxSize": { "x": 0.4, "y": 0.2 },
-	"client": {
-		"renderer": "Shape",
-		"shapeByType": {
-			"*-grape": { "base": "game:block/basic/nothing" },
-			"*":       { "base": "ammunition/roundshot" }
-		},
-		"texturesByType": {
-			"*-stone": { "material": { "base": "game:block/stone/rock/granite1" }},
-			"*":       { "material": { "base": "game:block/metal/sheet/lead1" }}
-		  },
-		"behaviors": [{ "code": "passivephysics" }, { "code": "interpolateposition" }]
-	},
-	"server": { "behaviors": [{ "code": "passivephysics" }, { "code": "despawn", "minSeconds": 300 }]},
-	"sounds": {}
+  "code":  "shot",
+  "class": "EntityHighCaliber",
+  "variantgroups": [
+    { "code": "class" ,   "states": ["4pdr", "12pdr"]},
+    { "code": "material", "states": ["stone", "lead", "iron"]}
+  ],
+  "attributes": { "physics": { "groundDragFactor": 1 }},
+  "hitboxSize": { "x": 0.4, "y": 0.2 },
+  "client": {
+    "behaviors": [{ "code": "passivephysics" }, { "code": "interpolateposition" }],
+
+    "renderer"    : "Shape",
+    "shapeByType" : {
+      "shot-4pdr-*"   : { "base": "ammunition/shot", "scale": 0.75 },
+      "shot-12pdr-*"  : { "base": "ammunition/shot" }
+    },
+    "texturesByType": {
+      "*-stone" : { "material": { "base": "game:block/stone/rock/granite1" }},
+      "*"       : { "material": { "base": "game:block/metal/ingot/{material}" }}
+    }
+  },
+  "server": { "behaviors": [{ "code": "passivephysics" }, { "code": "despawn", "minSeconds": 300 }]},
+  "sounds": {}
 }

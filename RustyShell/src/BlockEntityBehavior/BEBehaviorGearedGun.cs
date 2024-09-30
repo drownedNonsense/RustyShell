@@ -11,8 +11,8 @@ namespace RustyShell {
         // D E F I N I T I O N S
         //=======================
 
-            /** <summary> Tangent theta elevation </summary> **/ internal float Elevation;
-            /** <summary> ELevation direction </summary> **/     internal EnumRotDirection? Movement = null;
+            /** <summary> Current elevation </summary> **/    internal float Elevation;
+            /** <summary> ELevation direction </summary> **/  internal EnumRotDirection? Movement = null;
 
             /** <summary> Reference to the elevation update listener </summary> **/ private long? updateRef;
 
@@ -88,7 +88,7 @@ namespace RustyShell {
             /// <param name="deltaTime"></param>
             private void Update(float deltaTime) {
 
-                this.Elevation += this.Movement.Sign() * this.Behavior.LayingSpeed * deltaTime;
+                this.Elevation += this.Movement.Sign() * 5f * deltaTime;
                 if (this.Elevation > this.Behavior.MaxElevation) { this.Movement = null; this.Elevation = this.Behavior.MaxElevation; }
                 if (this.Elevation < this.Behavior.MinElevation) { this.Movement = null; this.Elevation = this.Behavior.MinElevation; }
 

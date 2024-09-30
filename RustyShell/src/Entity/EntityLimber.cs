@@ -54,7 +54,7 @@ namespace RustyShell {
 
                 } else {
 
-                    int entityGeneration = properties.Attributes["limber"]["minGeneration"].AsInt(0);
+                    int entityGeneration = properties.Attributes["limber"]["minGeneration"].AsInt();
                     string[] entityCodes = api.World.SearchEntities(
                         properties.Attributes["limber"]["entityCodes"]
                             .AsArray<string>()
@@ -176,7 +176,7 @@ namespace RustyShell {
                 ) {
 
                     bool requiresSideEntity = properties.Attributes?["limber"]?["requiresSideEntity"].AsBool(false) ?? false;
-                    int  minGeneration      = properties.Attributes?["limber"]?["minGeneration"].AsInt(0) ?? 0;
+                    int  minGeneration      = properties.Attributes?["limber"]?["minGeneration"].AsInt() ?? 0;
 
                     string[] entityCodes = world.SearchEntities(
                         properties.Attributes["limber"]["entityCodes"]

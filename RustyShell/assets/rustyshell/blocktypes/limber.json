@@ -1,16 +1,15 @@
 {
+	"enabled": false,
 	"code": "limber",
 	"class": "BlockOrientable",
 	"entityClass": "Orientable",
 	"creativeinventory": { "general": ["*"], "rustyshell": ["*"] },
 	"maxstacksize": 1,
 	"behaviors": [
-		{ "name": "Wheeled" },
 		{ "name": "Limberable", "properties": { "entityCode": "rustyshell:limber" }},
 		{ "name": "Unstable" }
 	],
 	"entityBehaviors": [
-		{ "name": "WheeledObject" }
 	],
 	"blockmaterial": "wood",
     "shape":          { "base": "gun/limber-base" },

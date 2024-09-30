@@ -1,0 +1,46 @@
+{
+  "code": "cartridgecasing",
+  "class": "Item",
+  "variantgroups": [
+    { "code": "metal", "states": ["copper", "brass"]},
+    { "code": "state", "states": ["fine", "damaged"]}
+  ],
+  "skipVariants": ["cartridgecasing-steel-damaged"],
+  "maxstacksize": 64,
+  "creativeinventory": { "general": ["*"], "items": ["*"], "rustyshell": ["*"] },
+  "attributes": {
+
+    "recoveryRateByType" : {
+      "cartridgecasing-copper-fine" : 0.4,
+      "cartridgecasing-brass-fine"  : 0.7
+    },
+
+    "handbook": { "groupBy": [ "cartridgecasing-*" ]}
+  },
+
+  "shape"          : { "base": "ammunition/cartridgecasing" },
+  "texturesByType" : {
+    "*-fine"                         : { "casing": { "base": "game:block/metal/ingot/{metal}" }},
+    "cartridgecasing-copper-damaged" : { "casing": { "base": "game:block/metal/anvil/copper" }},
+    "*-damaged"                      : { "casing": { "base": "game:block/metal/tarnished/{metal}" }}
+  } ,
+
+  "tpHandTransform": {
+    "translation": { "x": -0.9, "y": -0.1, "z": -0.8 },
+    "rotation":    { "x":    0, "y":    0, "z":  -90 },
+    "origin":      { "x":  0.5, "y":  0.1, "z":  0.5 },
+    "scale": 0.65
+  },
+  "guiTransform": {
+    "translation": { "x":   3, "y":   3, "z":   0 },
+    "rotation":    { "x":  23, "y":  21, "z": 132 },
+    "origin":      { "x": 0.5, "y": 0.1, "z": 0.5 },
+    "scale": 3.6
+  },
+	"groundTransform": {
+		"translation": { "x":   0, "y": 0.05, "z":   0 },
+		"rotation":    { "x":  94, "y":    0, "z":   0 },
+		"origin":      { "x": 0.5, "y":  0.1, "z": 0.5 },
+		"scale": 3.6
+	}
+}

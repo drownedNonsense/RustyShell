@@ -1,0 +1,119 @@
+{
+	"editor": {
+		"allAngles": false,
+		"entityTextureMode": false
+	},
+	"textureWidth": 16,
+	"textureHeight": 16,
+	"textureSizes": {
+	},
+	"textures": {
+		"drivingband": "game:block/metal/anvil/copper"
+	},
+	"elements": [
+		{
+			"name": "Origin",
+			"from": [ 0.0, 0.0, 0.0 ],
+			"to": [ 0.0, 0.0, 0.0 ],
+			"rotationOrigin": [ 8.0, 0.0, 8.0 ],
+			"faces": {
+			},
+			"children": [
+				{
+					"name": "WarHead",
+					"from": [ 5.75, 10.5, 5.75 ],
+					"to": [ 10.25, 14.5, 10.25 ],
+					"rotationOrigin": [ 8.0, 10.5, 8.0 ],
+					"faces": {
+						"north": { "texture": "#warhead", "uv": [ 11.5, 8.0, 16.0, 12.0 ] },
+						"east": { "texture": "#warhead", "uv": [ 7.0, 7.0, 11.5, 11.0 ] },
+						"south": { "texture": "#warhead", "uv": [ 3.5, 7.0, 8.0, 11.0 ] },
+						"west": { "texture": "#warhead", "uv": [ 0.0, 7.0, 4.5, 11.0 ] },
+						"up": { "texture": "#warhead", "uv": [ 7.0, 5.0, 11.5, 9.5 ], "rotation": 90 }
+					},
+					"children": [
+						{
+							"name": "Icon",
+							"from": [ 0.25, 0.5, 4.51 ],
+							"to": [ 4.25, 3.5, 4.51 ],
+							"rotationOrigin": [ -0.1, 0.5, 1.0 ],
+							"faces": {
+								"south": { "texture": "#icon", "uv": [ 1.0, 3.0, 15.0, 13.0 ], "autoUv": false, "windMode": [-1,-1,-1,-1] }
+							}
+						}
+					]
+				},
+				{
+					"name": "CasingBase",
+					"from": [ 5.35, 0.0, 5.375 ],
+					"to": [ 10.6, 0.25, 10.625 ],
+					"rotationOrigin": [ 8.1, -0.5, 8.125 ],
+					"faces": {
+						"north": { "texture": "#casing", "uv": [ 3.0, 0.0, 8.0, 0.5 ] },
+						"east": { "texture": "#casing", "uv": [ 7.0, 0.0, 12.0, 0.5 ] },
+						"south": { "texture": "#casing", "uv": [ 2.0, 0.0, 7.0, 0.5 ] },
+						"west": { "texture": "#casing", "uv": [ 3.5, 0.0, 8.5, 0.5 ] },
+						"up": { "texture": "#casing", "uv": [ 6.0, 6.5, 11.0, 11.5 ], "rotation": 90 },
+						"down": { "texture": "#casing", "uv": [ 4.0, 3.0, 9.0, 8.0 ], "rotation": 270 }
+					},
+					"children": [
+						{
+							"name": "Primer",
+							"from": [ 2.25, -0.25, 2.25 ],
+							"to": [ 3.25, 0.0, 3.25 ],
+							"rotationOrigin": [ 2.75, -1.5, 2.75 ],
+							"faces": {
+								"north": { "texture": "#casing", "uv": [ 5.5, 3.0, 6.5, 3.5 ] },
+								"east": { "texture": "#casing", "uv": [ 7.5, 4.5, 8.5, 5.0 ] },
+								"south": { "texture": "#casing", "uv": [ 3.5, 5.0, 4.5, 5.5 ] },
+								"west": { "texture": "#casing", "uv": [ 6.5, 4.0, 7.5, 4.5 ] },
+								"down": { "texture": "#casing", "uv": [ 6.0, 4.0, 7.0, 5.0 ], "rotation": 270 }
+							}
+						},
+						{
+							"name": "Casing1",
+							"from": [ 0.25, 0.25, 0.25 ],
+							"to": [ 5.0, 8.0, 5.0 ],
+							"rotationOrigin": [ 2.65, 0.25, 2.625 ],
+							"faces": {
+								"north": { "texture": "#casing", "uv": [ 0.0, 0.0, 4.5, 7.5 ], "windMode": [-1,-1,-1,-1] },
+								"east": { "texture": "#casing", "uv": [ 11.5, 0.0, 16.0, 7.5 ], "windMode": [-1,-1,-1,-1] },
+								"south": { "texture": "#casing", "uv": [ 8.5, 0.0, 13.0, 7.5 ], "windMode": [-1,-1,-1,-1] },
+								"west": { "texture": "#casing", "uv": [ 4.0, 0.0, 8.5, 7.5 ], "windMode": [-1,-1,-1,-1] },
+								"up": { "texture": "#casing", "uv": [ 6.0, 6.5, 10.5, 11.0 ], "rotation": 90, "windMode": [-1,-1,-1,-1] },
+								"down": { "texture": "#casing", "uv": [ 4.0, 3.0, 8.5, 7.5 ], "rotation": 270, "windMode": [-1,-1,-1,-1] }
+							},
+							"children": [
+								{
+									"name": "Casing2",
+									"from": [ 0.12, 7.75, 0.12 ],
+									"to": [ 4.65, 9.75, 4.65 ],
+									"rotationOrigin": [ 2.38, 7.75, 2.375 ],
+									"faces": {
+										"north": { "texture": "#casing", "uv": [ 0.0, 0.0, 4.5, 2.0 ] },
+										"east": { "texture": "#casing", "uv": [ 11.5, 0.0, 16.0, 2.0 ] },
+										"south": { "texture": "#casing", "uv": [ 8.5, 0.0, 13.0, 2.0 ] },
+										"west": { "texture": "#casing", "uv": [ 4.0, 0.0, 8.5, 2.0 ] }
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "DrivingBand",
+					"from": [ 5.7, 10.0, 5.7 ],
+					"to": [ 10.3, 10.5, 10.3 ],
+					"rotationOrigin": [ 8.0, 10.0, 8.0 ],
+					"faces": {
+						"north": { "texture": "#drivingband", "uv": [ 0.0, 0.0, 4.5, 0.5 ] },
+						"east": { "texture": "#drivingband", "uv": [ 11.5, 0.0, 16.0, 0.5 ] },
+						"south": { "texture": "#drivingband", "uv": [ 8.5, 0.0, 13.0, 0.5 ] },
+						"west": { "texture": "#drivingband", "uv": [ 4.0, 0.0, 8.5, 0.5 ] },
+						"up": { "texture": "#drivingband", "uv": [ 0.0, 0.0, 4.5, 4.5 ], "windMode": [-1,-1,-1,-1] },
+						"down": { "texture": "#drivingband", "uv": [ 0.0, 0.0, 4.5, 4.5 ], "windMode": [-1,-1,-1,-1] }
+					}
+				}
+			]
+		}
+	]}

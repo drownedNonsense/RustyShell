@@ -1,0 +1,29 @@
+{
+  "ingredient": {
+    "type": "item",
+    "code": "game:ingot-*",
+    "name": "material",
+    "allowedVariants": ["tinbronze", "iron"]
+  },
+  "pattern": [
+    [
+      "###",
+      "###",
+      "###"
+    ], [
+      "###",
+      "###",
+      "###"
+    ], [
+      "###",
+      "###",
+      "###"
+    ], [
+      "###",
+      "###",
+      "###"
+    ]
+  ],
+  "name": "120mm warhead (blunt)",
+  "output": { "type": "item", "code": "rustyshell:shell-120mm-blunt-common-{material}-none" }
+}

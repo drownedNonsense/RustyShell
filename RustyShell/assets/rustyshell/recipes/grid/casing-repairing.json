@@ -1,0 +1,12 @@
+{
+  "ingredientPattern": "A_,BC",
+  "ingredients": {
+    "A": { "type": "item", "code": "game:solderingiron", "isTool": true, "toolDurabilityCost": 10 },
+    "B": { "type": "item", "code": "game:solderbar-*" },
+    "C": { "type": "item", "code": "rustyshell:casing-*-damaged", "name": "casingmaterial" }
+  },
+  "shapeless": true,
+  "width":  2,
+  "height": 2,
+  "output": { "type": "item", "code": "rustyshell:casing-{casingmaterial}-fine" }
+}

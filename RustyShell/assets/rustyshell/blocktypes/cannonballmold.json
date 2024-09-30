@@ -1,0 +1,89 @@
+{
+  "code": "cannonballmold",
+  "classByType": {
+    "*-raw"    : "Block",
+    "*-burned" : "BlockToolMold"
+  },
+  "entityClassByType": { "*-burned": "ToolMold" },
+  "variantgroups": [
+    { "code": "class" ,       "states": ["4pdr", "12pdr"]},
+    { "code": "materialtype", "states": ["raw", "burned"]}
+  ],
+  "maxStackSize": 8,
+  "creativeinventory": { "general": ["*"], "construction": ["*"], "rustyshell": ["*"] },
+  "behaviorsByType": {
+    "*-raw" : [{ "name": "UnstableFalling" }, { "name": "RightClickPickup" }, { "name": "Unplaceable" }, { "name": "GroundStorable", "properties": { "layout": "SingleCenter" }}],
+    "*"     : [{ "name": "UnstableFalling" }]
+  },
+  "attributesByType": {
+    "*-burned": {
+      "moldrackable"          : false,
+      "scrollrackable"        : true,
+      "onscrollrackTransform" : {
+        "translation": { "x": -0.95, "y": -0.025, "z": 0.5 },
+        "rotation":    { "x":   -45, "y":      0, "z": -90 },
+        "origin":      { "x":   0.5, "y":      0, "z": 0.5 },
+        "scale": 0.9
+      },
+      "requiredUnitsByType"    : { "cannonballmold-4pdr-*": 20, "cannonballmold-12pdr-*": 80 },
+      "fillHeightByType"       : { "cannonballmold-4pdr-*":  3, "cannonballmold-12pdr-*":  5 },
+      "fillQuadsByLevelByType" : {
+        "cannonballmold-4pdr-*"  : [{ "x1": 7, "z1": 7, "x2":  9, "z2":  9 }],
+        "cannonballmold-12pdr-*" : [{ "x1": 6, "z1": 6, "x2": 10, "z2": 10 }]
+      },
+      "drop": {
+        "type": "item",
+        "code": "rustyshell:shot-{class}-round-common-{metal}",
+        "quantity": 1
+      }
+    }
+  },
+  "combustiblePropsByType": {
+    "*-raw": {
+      "meltingPoint": 650,
+      "meltingDuration": 45,
+      "smeltedRatio": 1,
+      "smeltingType": "fire",
+      "smeltedStack": {"type": "block", "code": "rustyshell:cannonballmold-{class}-burned"},
+      "requiresContainer": false
+    }
+  },
+  "blockmaterial": "Ceramic",
+  "replaceable": 700,
+  "resistance": 1.5,
+  "lightAbsorption": 0,
+  "texturesByType": {
+      "*-raw"    : { "ceramic": { "base": "game:block/clay/blueclay" }},
+      "*-burned" : { "ceramic": { "base": "game:block/clay/ceramic" }}
+  },
+  "shape": { "base": "rustyshell:mold/cannonballmold-{class}" },
+  "sounds": { "walk": "walk/stone" },
+  "collisionboxByType": {
+    "cannonballmold-4pdr-*"  : {"x1": 0.35, "y1": 0, "z1": 0.35, "x2": 0.65, "y2": 0.25, "z2": 0.65 },
+    "cannonballmold-12pdr-*" : {"x1": 0.30, "y1": 0, "z1": 0.30, "x2": 0.70, "y2": 0.40, "z2": 0.70 }
+  },
+  "selectionBoxByType": {
+    "cannonballmold-4pdr-*"  : {"x1": 0.35, "y1": 0, "z1": 0.35, "x2": 0.65, "y2": 0.25, "z2": 0.65 },
+    "cannonballmold-12pdr-*" : {"x1": 0.30, "y1": 0, "z1": 0.30, "x2": 0.70, "y2": 0.40, "z2": 0.70 }
+  },
+  "sideopaque": { "all": false },
+  "sidesolid": { "all": false },
+  "heldTpIdleAnimation" : "holdbothhands",
+  "heldTpUseAnimation"  : "twohandplaceblock",
+  "tpHandTransform": {
+      "translation": { "x": -0.65, "y": -0.1, "z": -0.3 },
+      "rotation":    { "x":   114, "y":    2, "z": -130 },
+      "origin":      { "x":   0.5, "y":    0, "z":  0.5 },
+      "scale": 0.65
+  },
+  "guiTransform": {
+    "translation": { "x":   0, "y":  -6, "z": 0 },
+    "rotation":    { "x": -22, "y": -45, "z": 0 },
+    "scale": 1.5
+  },
+  "groundTransform": {
+    "translation": { "x":  0, "y": 0.15, "z": 0 },
+    "rotation":    { "x": 94, "y": 0,    "z": 0 },
+    "scale": 3.6
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "code":  "shot",
+  "class": "EntityHighCaliber",
+  "variantgroups": [
+    { "code": "class" ,   "states": ["canister"]},
+		{ "code": "shape" ,   "states": ["blunt", "submunition"]},
+    { "code": "material", "states": ["stone", "lead", "copper", "brass", "iron", "steel"]}
+  ],
+  "skipVariants": [
+    "shot-canister-submunition-brass",
+    "shot-canister-submunition-iron",
+    "shot-canister-blunt-steel"
+  ],
+  "attributes": { "physics": { "groundDragFactor": 1 }},
+  "hitboxSize": { "x": 0.4, "y": 0.2 },
+  "client": {
+    "behaviors": [{ "code": "passivephysics" }, { "code": "interpolateposition" }],
+
+    "renderer"    : "Shape",
+		"shapeByType" : {
+			"*-submunition-*" : { "base" : "game:entity/bullet" },
+      "*"               : { "base": "ammunition/shot-canister" }
+    },
+    "texturesByType": {
+      "*-stone"         : { "lead"     : { "base": "game:block/stone/rock/granite1" }},
+			"*-submunition-*" : { "lead"     : { "base": "game:block/metal/ingot/{material}" }},
+      "*"               : { "material" : { "base": "game:block/metal/ingot/{material}" }}
+    }
+  },
+  "server": { "behaviors": [{ "code": "passivephysics" }, { "code": "despawn", "minSeconds": 300 }]},
+  "sounds": {}
+}

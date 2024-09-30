@@ -1,0 +1,29 @@
+{
+  "ingredient": {
+    "type": "item",
+    "code": "game:ingot-*",
+    "name": "material",
+    "allowedVariants": ["lead", "iron"]
+  },
+  "pattern": [
+    [
+      "##_##",
+      "##_##",
+      "_____",
+      "##_##",
+      "##_##"
+    ], [
+      "##_##",
+      "##_##",
+      "_____",
+      "##_##",
+      "##_##"
+    ]
+  ],
+  "name": "4 cannon balls (4-pounder)",
+  "output": {
+    "type": "item",
+    "code": "rustyshell:shot-4pdr-round-common-{material}",
+    "stacksize": 4
+  }
+}

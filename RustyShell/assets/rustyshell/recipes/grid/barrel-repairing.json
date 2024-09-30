@@ -1,0 +1,58 @@
+[
+  {
+    "ingredientPattern": "_A_,BCD",
+    "ingredients": {
+      "A": { "type": "item",  "code": "game:solderingiron", "isTool": true, "toolDurabilityCost": 80 },
+      "B": { "type": "item",  "code": "rustyshell:barrel-*-12pdr-ruined", "name": "type" },
+      "C": { "type": "item",  "code": "game:solderbar-*" },
+      "D": { "type": "item",  "code": "game:metalplate-iron", "quantity": 2 }
+    },
+    "shapeless": true,
+    "requiresTrait": "technical",
+    "width":  3,
+    "height": 2,
+    "output": { "type": "item", "code": "rustyshell:barrel-{type}-12pdr-iron-rifled" }
+  }, {
+    "ingredientPattern": "_A_,BCD,_E_",
+    "ingredients": {
+      "A": { "type": "item",  "code": "game:solderingiron", "isTool": true, "toolDurabilityCost": 80 },
+      "B": { "type": "item",  "code": "rustyshell:barrel-fieldgun-120mm-ruined" },
+      "C": { "type": "item",  "code": "game:solderbar-*" },
+      "D": { "type": "block", "code": "game:metal-parts",  "quantity": 4 },
+      "E": { "type": "item",  "code": "game:metalplate-*", "quantity": 4, "name": "material", "allowedVariants": ["iron", "steel"]}
+    },
+    "shapeless": true,
+    "requiresTrait": "technical",
+    "width":  3,
+    "height": 3,
+    "output": { "type": "item", "code": "rustyshell:barrel-fieldgun-120mm-{material}-rifled" }
+  }, {
+    "ingredientPattern": "_A_,BCD,_E_",
+    "ingredients": {
+      "A": { "type": "item",  "code": "game:solderingiron", "isTool": true, "toolDurabilityCost": 80 },
+      "B": { "type": "item",  "code": "rustyshell:barrel-howitzer-120mm-ruined" },
+      "C": { "type": "item",  "code": "game:solderbar-*" },
+      "D": { "type": "block", "code": "game:metal-parts",  "quantity": 4 },
+      "E": { "type": "item",  "code": "game:metalplate-*", "quantity": 3, "name": "material", "allowedVariants": ["iron", "steel"]}
+    },
+    "shapeless": true,
+    "requiresTrait": "technical",
+    "width":  3,
+    "height": 3,
+    "output": { "type": "item", "code": "rustyshell:barrel-howitzer-120mm-{material}-rifled" }
+  }, {
+    "ingredientPattern": "_A_,BCD,_E_",
+    "ingredients": {
+      "A": { "type": "item",  "code": "game:solderingiron", "isTool": true, "toolDurabilityCost": 80 },
+      "B": { "type": "item",  "code": "rustyshell:barrel-machinegun-ruined" },
+      "C": { "type": "item",  "code": "game:solderbar-*" },
+      "D": { "type": "block", "code": "game:metal-parts",  "quantity": 4 },
+      "E": { "type": "item",  "code": "game:metalplate-*", "quantity": 2, "name": "material", "allowedVariants": ["iron", "steel"] }
+    },
+    "shapeless": true,
+    "requiresTrait": "technical",
+    "width":  3,
+    "height": 3,
+    "output": { "type": "item", "code": "rustyshell:barrel-machinegun-{material}" }
+  }
+]

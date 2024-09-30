@@ -1,60 +1,139 @@
 [
-	{
-		"ingredientPattern": "_A_,_B_,CDC",
-		"ingredients": {
-			"A": { "type": "item", "code": "game:hammer-*", "isTool": true },
-			"B": { "type": "item", "code": "game:chisel-*", "isTool": true },
-			"C": { "type": "item", "code": "game:clay-*",   "quantity": 16  },
-			"D": { "type": "item", "code": "game:stone-*",  "quantity": 4, "allowedVariants": [ "granite", "andesite", "basalt", "obsidian", "peridotite", "chert" ]}
+  {
+    "ingredientPattern": "AB,CD",
+    "ingredients": {
+      "A": { "type": "item", "code": "game:chisel-*", "isTool": true, "toolDurabilityCost": 4 },
+      "B": { "type": "item", "code": "game:hammer-*", "isTool": true, "toolDurabilityCost": 4 },
+      "C": { "type": "item", "code": "game:stone-*" },
+      "D": { "type": "item", "code": "game:clay-*" }
+    },
+    "shapeless": true,
+    "width":  2,
+    "height": 2,
+    "output": { "type": "item", "code": "rustyshell:shot-4pdr-round-common-stone" }
+  }, {
+    "ingredientPattern": "AB,CD",
+    "ingredients": {
+      "A": { "type": "item", "code": "game:chisel-*", "isTool": true, "toolDurabilityCost": 8 },
+      "B": { "type": "item", "code": "game:hammer-*", "isTool": true, "toolDurabilityCost": 8 },
+      "C": { "type": "item", "code": "game:rock-*" },
+      "D": { "type": "item", "code": "game:clay-*", "quantity": 2 }
+    },
+    "shapeless": true,
+    "width":  2,
+    "height": 2,
+    "output": { "type": "item", "code": "rustyshell:shot-12pdr-round-common-stone" }
+  }, {
+    "ingredientPattern": "AB,CD",
+    "ingredients": {
+      "A": { "type": "item", "code": "game:chisel-*",                        "isTool": true, "toolDurabilityCost": 8 },
+      "B": { "type": "item", "code": "game:hammer-*",                        "isTool": true, "toolDurabilityCost": 8 },
+      "C": { "type": "item", "code": "rustyshell:shot-12pdr-round-common-*", "name": "material", "allowedVariants": ["lead", "iron"]},
+      "D": { "type": "item", "code": "game:blastingpowder",                  "quantity": 8 }
+    },
+    "shapeless": true,
+    "width":  2,
+    "height": 2,
+    "output": { "type": "item", "code": "rustyshell:shot-12pdr-round-explosive-{material}" }
+  }, {
+    "ingredientPattern": "_AB,CDE,FGH",
+    "ingredients": {
+      "A": { "type": "item",  "code": "game:chisel-*",                        "isTool": true, "toolDurabilityCost": 8 },
+      "B": { "type": "item",  "code": "game:hammer-*",                        "isTool": true, "toolDurabilityCost": 8 },
+			"C": { "type": "item",  "code": "game:powderedsulfur",                  "quantity": 2 },
+      "D": { "type": "item",  "code": "rustyshell:shot-12pdr-round-common-*", "name": "material", "allowedVariants": ["lead", "iron"]},
+      "E": { "type": "item",  "code": "game:blastingpowder",                  "quantity": 6 },
+			"F": { "type": "item",  "code": "chemistrylib:ammoniumchloride" },
+			"G": { "type": "block", "code": "game:bowl-fired" },
+			"H": { "type": "item",  "code": "game:resin", "quantity": 6 }
+    },
+    "attributes": {
+			"liquidContainerProps": {
+				"requiresContent": { "type": "item", "code": "chemistrylib:mineralacidportion-nitric" },
+				"requiresLitres": 0.5
+			}
 		},
-		"width":  3,
-		"height": 3,
-		"output": { "type": "item", "code": "rustyshell:shot-stone" }
-	},
-	{
-		"ingredientPattern": "_A,BC,_A",
-		"ingredients": {
-			"A": { "type": "item", "code": "rustyshell:roundshell" },
-			"B": { "type": "item", "code": "game:hammer-*", "isTool": true },
-			"C": { "type": "item", "code": "game:blastingpowder", "quantity": 8 }
-		},
-		"width":  2,
-		"height": 3,
-		"output": { "type": "item", "code": "rustyshell:shot-explosive" }
-	},
-	{
-		"ingredientPattern": "A_,CB,A_",
-		"ingredients": {
-			"A": { "type": "item", "code": "rustyshell:roundshell" },
-			"B": { "type": "item", "code": "game:hammer-*", "isTool": true },
-			"C": { "type": "item", "code": "game:blastingpowder", "quantity": 8 }
-		},
-		"width":  2,
-		"height": 3,
-		"output": { "type": "item", "code": "rustyshell:shot-explosive" }
-	},
-	{
-		"ingredientPattern": "_A,BC,_D",
-		"ingredients": {
-			"A": { "type": "block", "code": "game:linen-*" },
-			"B": { "type": "item",  "code": "game:rope" },
-			"C": { "type": "item",  "code": "game:metalbit-*", "quantity": 16 },
-			"D": { "type": "item",  "code": "game:plank-*" }
-		},
-		"width":  2,
-		"height": 3,
-		"output": { "type": "item", "code": "rustyshell:shot-grape" }
-	},
-	{
-		"ingredientPattern": "A_,CB,D_",
-		"ingredients": {
-			"A": { "type": "block", "code": "game:linen-*" },
-			"B": { "type": "item",  "code": "game:rope" },
-			"C": { "type": "item",  "code": "game:metalbit-*", "quantity": 16 },
-			"D": { "type": "item",  "code": "game:plank-*" }
-		},
-		"width":  2,
-		"height": 3,
-		"output": { "type": "item", "code": "rustyshell:shot-grape" }
-	}
+    "width":  3,
+    "height": 3,
+    "output": { "type": "item", "code": "rustyshell:shot-12pdr-round-incendiary-{material}" }
+  },
+
+  {
+    "ingredientPattern": "_AB,CDE,_F_",
+    "ingredients": {
+      "A": { "type": "item",  "code": "game:chisel-*", "isTool": true, "toolDurabilityCost": 4 },
+      "B": { "type": "item",  "code": "game:hammer-*", "isTool": true, "toolDurabilityCost": 4 },
+      "C": { "type": "item",  "code": "game:flaxtwine" },
+      "D": { "type": "item",  "code": "game:stone-*", "quantity": 8 },
+      "E": { "type": "block", "code": "game:linen-*" },
+      "F": { "type": "item",  "code": "game:plank-*" }
+    },
+    "shapeless": true,
+    "width":  3,
+    "height": 3,
+    "output": { "type": "item", "code": "rustyshell:shot-grape-blunt-antipersonnel-stone" }
+  }, {
+    "ingredientPattern": "ABC,_D_",
+    "ingredients": {
+      "A": { "type": "item",  "code": "game:flaxtwine" },
+      "B": { "type": "item",  "code": "game:metalbit-*", "quantity": 16, "name": "submaterial", "allowedVariants": ["lead", "copper", "steel"]},
+      "C": { "type": "block", "code": "game:linen-*" },
+      "D": { "type": "item",  "code": "game:plank-*" }
+    },
+    "shapeless": true,
+    "width":  3,
+    "height": 2,
+    "output": { "type": "item", "code": "rustyshell:shot-grape-blunt-antipersonnel-{submaterial}" }
+  }, {
+    "ingredientPattern": "ABC,_D_",
+    "ingredients": {
+      "A": { "type": "item",  "code": "game:flaxtwine" },
+      "B": { "type": "item",  "code": "maltiezfirearms:bullet-*", "quantity": 8, "name": "submaterial" },
+      "C": { "type": "block", "code": "game:linen-*" },
+      "D": { "type": "item",  "code": "game:plank-*" }
+    },
+    "shapeless": true,
+    "width":  3,
+    "height": 2,
+    "output": { "type": "item", "code": "rustyshell:shot-grape-blunt-antipersonnel-{submaterial}" }
+  },
+
+  {
+    "ingredientPattern": "AB,CD,_E",
+    "ingredients": {
+      "A": { "type": "item",  "code": "game:hammer-*",            "isTool": true, "toolDurabilityCost": 20 },
+      "B": { "type": "item",  "code": "game:chisel-*",            "isTool": true, "toolDurabilityCost": 4 },
+      "C": { "type": "item",  "code": "rustyshell:casing-*-fine", "name": "material"},
+      "D": { "type": "item",  "code": "game:stone-*",             "quantity": 8 },
+      "E": { "type": "item",  "code": "rustyshell:baggedcharge-cured" }
+    },
+    "shapeless": true,
+    "width":  2,
+    "height": 3,
+    "output": { "type": "item", "code": "rustyshell:shot-canister-blunt-antipersonnel-{material}-stone" }
+  }, {
+    "ingredientPattern": "_A,BC,_D",
+    "ingredients": {
+      "A": { "type": "item",  "code": "game:hammer-*",            "isTool": true, "toolDurabilityCost": 20 },
+      "B": { "type": "item",  "code": "rustyshell:casing-*-fine", "name": "material"},
+      "C": { "type": "item",  "code": "game:metalbit-*",          "quantity": 16, "name": "submaterial", "allowedVariants": ["lead", "copper", "steel"]},
+      "D": { "type": "item",  "code": "rustyshell:baggedcharge-cured" }
+    },
+    "shapeless": true,
+    "width":  2,
+    "height": 3,
+    "output": { "type": "item", "code": "rustyshell:shot-canister-blunt-antipersonnel-{material}-{submaterial}" }
+  }, {
+    "ingredientPattern": "_A,BC,_D",
+    "ingredients": {
+      "A": { "type": "item",  "code": "game:hammer-*",            "isTool": true, "toolDurabilityCost": 20 },
+      "B": { "type": "item",  "code": "rustyshell:casing-*-fine", "name": "material"},
+      "C": { "type": "item",  "code": "maltiezfirearms:bullet-*", "quantity": 8, "name": "submaterial" },
+      "D": { "type": "item",  "code": "rustyshell:baggedcharge-cured" }
+    },
+    "shapeless": true,
+    "width":  2,
+    "height": 3,
+    "output": { "type": "item", "code": "rustyshell:shot-canister-blunt-antipersonnel-{material}-{submaterial}" }
+  }
 ]

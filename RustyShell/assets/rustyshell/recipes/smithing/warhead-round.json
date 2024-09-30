@@ -1,0 +1,33 @@
+{
+  "ingredient": {
+    "type": "item",
+    "code": "game:ingot-*",
+    "name": "material",
+    "allowedVariants": ["tinbronze", "iron"]
+  },
+  "pattern": [
+    [
+      "###",
+      "###",
+      "###"
+    ], [
+      "###",
+      "###",
+      "###"
+    ], [
+      "###",
+      "###",
+      "###"
+    ], [
+      "###",
+      "###",
+      "###"
+    ], [
+      "___",
+      "_#_",
+      "___"
+    ]
+  ],
+  "name": "120mm warhead (round)",
+  "output": { "type": "item", "code": "rustyshell:shell-120mm-round-common-{material}-none" }
+}
