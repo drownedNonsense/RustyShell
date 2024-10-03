@@ -148,7 +148,7 @@ namespace RustyShell {
                             this.Api.World.SpawnParticles(new ExplosionSmokeParticles() {
                                 basePos              = projectilePos,
                                 ParentVelocityWeight = 1f,
-                                ParentVelocity       = GlobalConstants.CurrentWindSpeedClient,
+                                ParentVelocity       = Vintagestory.API.Config.GlobalConstants.CurrentWindSpeedClient,
                             }); // ..
 
                     if (projectile.Ammunition.Casing is Item casing)

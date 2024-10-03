@@ -9,12 +9,12 @@ namespace RustyShell {
         // D E F I N I T I O N S
         //=======================
 
-            public EnumAmmunitionType Type                    { get; protected set; }
-            public bool               IsFragmentation         { get; protected set; }
-            public bool               IsSubmunition           { get; protected set; }
-            public float              Damage                  { get; protected set; }
-            public int?               BlastRadius             { get; protected set; }
-            public int?               InjureRadius            { get; protected set; }
+            public EnumAmmunitionType Type            { get; protected set; }
+            public bool               IsFragmentation { get; protected set; }
+            public bool               IsSubmunition   { get; protected set; }
+            public float              Damage          { get; protected set; }
+            public int?               BlastRadius     { get; protected set; }
+            public int?               InjureRadius    { get; protected set; }
 
             public float? FlightExpectancy { get; protected set; }
 

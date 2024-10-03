@@ -62,7 +62,7 @@
         "op"    : "addmerge",
         "path"  : "/attributes/tradeProps/selling/list/-",
         "value" : {
-            "code"      : "rustyshell:shell-round-ruined",
+            "code"      : "rustyshell:shell-120mm-round-ruined",
             "type"      : "item",
             "stacksize" : 1,
             "stock"     : { "avg": 2, "var": 3 },
@@ -73,7 +73,7 @@
         "op"    : "addmerge",
         "path"  : "/attributes/tradeProps/selling/list/-",
         "value" : {
-            "code"      : "rustyshell:shell-blunt-ruined",
+            "code"      : "rustyshell:shell-120mm-blunt-ruined",
             "type"      : "item",
             "stacksize" : 1,
             "stock"     : { "avg": 2, "var": 3 },
@@ -102,6 +102,30 @@
             "stacksize" : 1,
             "stock"     : { "avg": 2, "var": 1.25 },
             "price"     : { "avg": 8, "var": 1.25 }
+        }
+    },
+
+    {
+        "file"  : "game:entities/humanoid/trader-luxuries.json",
+        "op"    : "addmerge",
+        "path"  : "/attributes/tradeProps/selling/list/-",
+        "value" : {
+            "code"      : "rustyshell:fuze-percussion",
+            "type"      : "item",
+            "stacksize" : 1,
+            "stock"     : { "avg": 2, "var": 1.25 },
+            "price"     : { "avg": 2, "var": 1 }
+        }
+    }, {
+        "file"  : "game:entities/humanoid/trader-luxuries.json",
+        "op"    : "addmerge",
+        "path"  : "/attributes/tradeProps/selling/list/-",
+        "value" : {
+            "code"      : "rustyshell:fuze-pressure",
+            "type"      : "item",
+            "stacksize" : 1,
+            "stock"     : { "avg": 2, "var": 1.25 },
+            "price"     : { "avg": 3, "var": 1 }
         }
     }
 ]

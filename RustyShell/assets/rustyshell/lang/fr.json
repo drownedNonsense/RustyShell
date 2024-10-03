@@ -15,6 +15,22 @@
 
     "game:blockhelp-repeatingfire-fire": "Commencer à tirer",
 
+    "game:blockhelp-landmine-bury"     : "Enterrer la mine",
+    "game:blockhelp-landmine-excavate" : "Déterrer la mine",
+    "game:blockhelp-landmine-disable"  : "Désamorcer la mine",
+    "game:blockhelp-landmine-fuze"     : "Amorcer la mine",
+    "game:blockhelp-landmine-putsign"  : "Ajouter un avertissement",
+
+    "block-landmine-excavated-disabled-explosive-*"  : "Mine désamorcée",
+    "block-landmine-excavated-disabled-incendiary-*" : "Mine incendiaire désamorcée",
+    "block-landmine-excavated-fuzed-explosive-*"     : "Mine",
+    "block-landmine-excavated-fuzed-incendiary-*"    : "Mine incendiaire",
+    "block-landmine-buried-*-explosive-*"            : "Mine enterrée",
+    "block-landmine-buried-*-incendiary-*"           : "Mine incendiaire enterrée",
+    "blockdesc-landmine-excavated-disabled-*" : "Un appareil qui explose lorsque l'on marche dessus. Il est heuresement désamorcé !",
+    "blockdesc-landmine-excavated-fuzed-*"    : "Un appareil qui explose lorsque l'on marche dessus.",
+    "blockdesc-landmine-buried-*"             : "Un appareil qui explose lorsque l'on marche dessus. Il devrait être déterré avec précaution !",
+
     "block-supportgun-4pdr-*-smoothbore": "Canon de soutien de 4 livres",
     "block-fieldgun-12pdr-*-smoothbore" : "Canon de 12 livres",
     "block-fieldgun-12pdr-*-rifled"     : "Canon de 120 mm",
@@ -42,6 +58,7 @@
     "item-shot-12pdr-round-common-*"     : "Boulet de canon de 12 livres",
     "item-shot-12pdr-round-explosive-*"  : "Bombe de 12 livres",
     "item-shot-12pdr-round-incendiary-*" : "Carcasse de 12 livres",
+    "item-shot-12pdr-hollow-*"           : "Boulet creux de 12 livres",
     "itemdesc-shot-*-common-*"     : "Un projectile solide utilisé par les pièces d'artillerie à canon lisse.",
     "itemdesc-shot-*-explosive-*"  : "Un projectile creux rempli d'explosifs utilisé par les pièces d'artillerie à canon lisse.",
     "itemdesc-shot-*-incendiary-*" : "Un projectile creux rempli de composés incendiaires utilisé par les pièces d'artillerie à canon lisse.",
@@ -148,6 +165,11 @@
     "item-primer-steel"         : "Amorce en acier",
     "itemdesc-primer-*"         : "Un dispositif utilisé pour déclencher des pièces d'artillerie.",
 
+    "item-fuze-percussion" : "Fusée à percussion",
+    "item-fuze-pressure"   : "Fusée à pression",
+    "itemdesc-fuze-percussion" : "Un dispositif qui produit une étincelle à l'impact.",
+    "itemdesc-fuze-pressure"   : "Un dispositif qui produit une étincelle lorsque l'on appuie dessus.",
+
     "game:heavygun-smoothbore"    : "Canon lisse",
     "game:heavygun-rifled"        : "Canon rayé",
     "game:heavygun-fireinterval"  : "{0} tirs par seconde",
@@ -167,11 +189,14 @@
 
     "game:ammunition-damage"                  : "{0} dégâts perforants",
     "game:ammunition-blastradius"             : "Rayon d'explosion : {0}b",
-    "game:ammunition-injureradius"            : "Rayon de blessure : {0}b",
+    "game:ammunition-injureradius"            : "Rayon des retombées : {0}b",
     "game:ammunition-flightexpectancy"        : "Durée de vol moyenne : {0:0}s",
     "game:ammunition-recoveryrate"            : "Taux de récupération des douilles : {0}%",
     "game:ammunition-propellantblaststrength" : "Puissance de la charge : {0}",
 
     "game:charge-strength" : "Force d'explosion : {0}",
-    "game:barrel-toohot": "Le canon est trop chaud."
+    
+    "game:barrel-toohot": "Le canon est trop chaud.",
+
+    "game:placefailure-unsuitableground": "Impossible de placer la mine ici, le sol est inadapté pour creuser."
 }

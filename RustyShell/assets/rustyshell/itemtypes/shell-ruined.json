@@ -35,6 +35,7 @@
     "textures":  {
       "warhead"     : { "base": "game:block/metal/tarnished/iron" },
       "drivingband" : { "base": "game:block/metal/tarnished/steel" },
+      "fuze"        : { "base": "game:block/metal/tarnished/brass" },
       "icon"        : { "base": "game:block/transparent" }
     },
     "heldTpIdleAnimation": "holdbothhandslarge", "heldTpUseAnimation": "twohandplaceblock",

@@ -147,6 +147,7 @@ namespace RustyShell {
                                     projectile.ServerPos.Motion = Mat4f.MulWithVec3(alignmentMatrix, direction.X, direction.Y, direction.Z).ToVec3d() * random.NextSingle();
                                     projectile.Pos.SetFrom(projectile.ServerPos);
                                     this.World.SpawnEntity(projectile);
+                                    if (subMunition.Type == EnumAmmunitionType.Incendiary) projectile.IsOnFire = true;
 
                                     projectile = this.World.ClassRegistry.CreateEntity(type) as EntityAmmunition;
                                     projectile.FiredBy    = this.FiredBy;
@@ -155,6 +156,7 @@ namespace RustyShell {
                                     projectile.ServerPos.Motion = Mat4f.MulWithVec3(alignmentMatrix, direction.X, -direction.Y, direction.Z).ToVec3d() * random.NextSingle();
                                     projectile.Pos.SetFrom(projectile.ServerPos);
                                     this.World.SpawnEntity(projectile);
+                                    if (subMunition.Type == EnumAmmunitionType.Incendiary) projectile.IsOnFire = true;
 
                                     projectile = this.World.ClassRegistry.CreateEntity(type) as EntityAmmunition;
                                     projectile.FiredBy    = this.FiredBy;
@@ -163,6 +165,7 @@ namespace RustyShell {
                                     projectile.ServerPos.Motion = Mat4f.MulWithVec3(alignmentMatrix, direction.X, direction.Y, -direction.Z).ToVec3d() * random.NextSingle();
                                     projectile.Pos.SetFrom(projectile.ServerPos);
                                     this.World.SpawnEntity(projectile);
+                                    if (subMunition.Type == EnumAmmunitionType.Incendiary) projectile.IsOnFire = true;
 
                                     projectile = this.World.ClassRegistry.CreateEntity(type) as EntityAmmunition;
                                     projectile.FiredBy    = this.FiredBy;
@@ -171,6 +174,7 @@ namespace RustyShell {
                                     projectile.ServerPos.Motion = Mat4f.MulWithVec3(alignmentMatrix, direction.X, -direction.Y, -direction.Z).ToVec3d() * random.NextSingle();
                                     projectile.Pos.SetFrom(projectile.ServerPos);
                                     this.World.SpawnEntity(projectile);
+                                    if (subMunition.Type == EnumAmmunitionType.Incendiary) projectile.IsOnFire = true;
 
                                 } // for ..
                             } // for ..

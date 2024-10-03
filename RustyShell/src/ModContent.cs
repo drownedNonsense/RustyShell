@@ -117,7 +117,7 @@ namespace RustyShell {
                 OpacityEvolve        = new EvolvingNatFloat(EnumTransformFunction.LINEAR, -255),
                 SizeEvolve           = new EvolvingNatFloat(EnumTransformFunction.QUADRATIC, 2),
                 ParentVelocityWeight = 2f,
-                ParentVelocity       = GlobalConstants.CurrentWindSpeedClient,
+                ParentVelocity       = Vintagestory.API.Config.GlobalConstants.CurrentWindSpeedClient,
             }); // ..
         } // void ..
 
@@ -142,7 +142,7 @@ namespace RustyShell {
 
                     ItemSlot itemSlot    = (entity as EntityAgent)?.GearInventory?[(int)EnumCharacterDressType.ArmorHead];
                     ItemWearable gasmask = itemSlot?.Itemstack?.Item as ItemWearable;
-                    float gasStrength    = GameMath.Clamp(RustyShellModSystem.GlobalConstants.GasBaseDamage * (room.CoolingWallCount + room.NonCoolingWallCount) / GameMath.Max(room.ExitCount, 1f), 0f, RustyShellModSystem.GlobalConstants.GasBaseDamage);
+                    float gasStrength    = GameMath.Clamp(RustyShellModSystem.ModConfig.GasBaseDamage * (room.CoolingWallCount + room.NonCoolingWallCount) / GameMath.Max(room.ExitCount, 1f), 0f, RustyShellModSystem.ModConfig.GasBaseDamage);
 
 
                     if (gasmask?.GetRemainingDurability(itemSlot?.Itemstack) == 0 || gasmask == null)
@@ -177,7 +177,7 @@ namespace RustyShell {
                 OpacityEvolve        = new EvolvingNatFloat(EnumTransformFunction.LINEAR, -255),
                 SizeEvolve           = new EvolvingNatFloat(EnumTransformFunction.QUADRATIC, 2),
                 ParentVelocityWeight = 3f,
-                ParentVelocity       = GlobalConstants.CurrentWindSpeedClient,
+                ParentVelocity       = Vintagestory.API.Config.GlobalConstants.CurrentWindSpeedClient,
             }); // ..
 
             self.SpawnParticles(new SimpleParticleProperties(
@@ -198,7 +198,7 @@ namespace RustyShell {
                 OpacityEvolve        = new EvolvingNatFloat(EnumTransformFunction.LINEAR, -255),
                 SizeEvolve           = new EvolvingNatFloat(EnumTransformFunction.QUADRATIC, 2),
                 ParentVelocityWeight = 2f,
-                ParentVelocity       = GlobalConstants.CurrentWindSpeedClient,
+                ParentVelocity       = Vintagestory.API.Config.GlobalConstants.CurrentWindSpeedClient,
             }); // ..
         } // void ..
 

@@ -41,13 +41,8 @@
         "*"               : "rustyshell:shot-{class}-{shape}-linen"
       },
 
-      "handbook"   : { "groupBy": [ "*-{type}-*" ]},
-
-      "shelvable": true,
-      "groundStorageTransformByType": {
-        "rotation": { "x": -45, "y":   0, "z": -45 },
-        "origin":   { "x": 0.5, "y": 0.2, "z": 0.5 }
-      }
+      "handbook"  : { "groupBy": [ "*-{type}-*" ]},
+      "shelvable" : true
     },
     "shapeByType": {
       "*-submunition-*" : { "base": "game:block/basic/nothing" },

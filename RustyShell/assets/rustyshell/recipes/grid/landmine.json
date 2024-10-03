@@ -1,0 +1,36 @@
+[
+  {
+      "ingredientPattern": "AB,CD",
+      "ingredients": {
+        "A": { "type": "item", "code": "game:metalnailsandstrips-*" },
+        "B": { "type": "item", "code": "game:hammer-*",                  "isTool": true, "toolDurabilityCost": 8 },
+        "C": { "type": "item", "code": "rustyshell:shot-12pdr-hollow-*", "name": "material", "allowedVariants": ["lead", "iron"]},
+        "D": { "type": "item", "code": "game:blastingpowder",            "quantity": 8 }
+      },
+      "shapeless": true,
+      "width":  2,
+      "height": 2,
+      "output": { "type": "block", "code": "rustyshell:landmine-excavated-disabled-explosive-{material}" }
+    }, {
+      "ingredientPattern": "_AB,CDE,FGH",
+      "ingredients": {
+        "A": { "type": "item",  "code": "game:metalnailsandstrips-*" },
+        "B": { "type": "item",  "code": "game:hammer-*",                  "isTool": true, "toolDurabilityCost": 8 },
+        "C": { "type": "item",  "code": "game:powderedsulfur",            "quantity": 2 },
+        "D": { "type": "item",  "code": "rustyshell:shot-12pdr-hollow-*", "name": "material", "allowedVariants": ["lead", "iron"]},
+        "E": { "type": "item",  "code": "game:blastingpowder",            "quantity": 6 },
+        "F": { "type": "item",  "code": "chemistrylib:ammoniumchloride" },
+        "G": { "type": "block", "code": "game:bowl-fired" },
+        "H": { "type": "item",  "code": "game:resin", "quantity": 6 }
+      },
+      "attributes": {
+        "liquidContainerProps": {
+          "requiresContent": { "type": "item", "code": "chemistrylib:mineralacidportion-nitric" },
+          "requiresLitres": 0.5
+        }
+      },
+      "width":  3,
+      "height": 3,
+      "output": { "type": "block", "code": "rustyshell:landmine-excavated-disabled-incendiary-{material}" }
+    }
+]

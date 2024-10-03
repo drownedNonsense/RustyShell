@@ -43,8 +43,8 @@
     { "name": "WheeledObject" }
   ],
   "blockmaterial": "wood",
-    "shape"          : { "base": "gun/wheeledgun-120mm-base" },
-    "shapeinventory" : { "base": "gun/howitzer-120mm-complete" },
+  "shape"          : { "base": "gun/wheeledgun-120mm-base" },
+  "shapeinventory" : { "base": "gun/howitzer-120mm-complete" },
   "textures": {
     "material"      : { "base": "game:block/metal/plate/{material}" },
     "materialalt"   : { "base": "game:block/metal/ingot/{material}" },
@@ -70,7 +70,7 @@
     "code": "game:metalplate-{material}", 
     "quantity": { "avg": 3, "var": 1 } 
   }],
-    "sidesolid"  : { "all": "false" },
+  "sidesolid"  : { "all": "false" },
   "sideopaque" : { "all": "false" },
   "tpHandTransform": {
     "translation": { "x": -0.2, "y": -1.2, "z": -0.5 },

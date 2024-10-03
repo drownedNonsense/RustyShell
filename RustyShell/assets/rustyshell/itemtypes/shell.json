@@ -108,7 +108,7 @@
     "casing"  : { "base": "game:block/metal/ingot/{casingmaterial}" },
     "icon"    : { "base": "rustyshell:icon/{type}" }
   },
-  "texturesByType": { "*-common-*": { "icon": { "base": "game:block/transparent" }}},
+  "texturesByType": { "*-common-*": { "icon": { "base": "game:block/transparent" }, "fuze": { "base": "game:block/transparent" }}},
   "heldTpIdleAnimation": "holdbothhandslarge", "heldTpUseAnimation": "twohandplaceblock",
   "tpHandTransform": {
     "translation": { "x": -0.65, "y": -0.1, "z": -0.3 },

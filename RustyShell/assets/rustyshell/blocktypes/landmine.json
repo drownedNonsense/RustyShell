@@ -1,0 +1,139 @@
+{
+  "code": "landmine",
+  "class": "BlockLandmine",
+	"entityClass": "Landmine",
+  "variantgroups": [
+    { "code": "state",    "states": ["excavated-disabled", "excavated-fuzed", "buried-hidden", "buried-sign"]},
+    { "code": "type",     "states": ["explosive", "incendiary"]},
+    { "code": "material", "states": ["lead", "iron"]}
+  ],
+	"maxstacksize": 2,
+  "attributes": {
+
+    "blastRadiusByType": {
+      "*-explosive-lead"  : 6,
+      "*-explosive-iron"  : 8,
+      "*-incendiary-lead" : 9,
+      "*-incendiary-iron" : 10
+    },
+    "injureRadiusByType": {
+      "*-explosive-lead"  : 10,
+      "*-explosive-iron"  : 12,
+      "*-incendiary-lead" : 10,
+      "*-incendiary-iron" : 12
+    },
+
+    "disablingDuration" : 2,
+    "buryingDuration"   : 4,
+
+    "canChisel": false,
+    "handbook": { "groupBy": [ "landmine-*" ]}
+  },
+  
+	"creativeinventory": {
+    "general"    : ["landmine-excavated-disabled-*", "landmine-buried-*"],
+    "decorative" : ["landmine-excavated-disabled-*", "landmine-buried-*"],
+    "rustyshell" : ["landmine-excavated-disabled-*", "landmine-buried-*"]
+  },
+
+  "behaviorsByType": {
+    "landmine-excavated-disabled-*" : [{ "name": "Unstable" }, { "name": "RightClickPickup" }],
+    "*"                             : [{ "name": "Unstable" }]
+  },
+
+  "shapeByType": {
+    "landmine-excavated-*"     : { "base": "defense/landmine-{state}" },
+    "landmine-buried-sign-*"   : { "base": "defense/landmine-buried" },
+    "landmine-buried-hidden-*" : { "base": "game:block/plant/dirtmound" }
+  },
+  "shapeinventoryByType": {
+    "landmine-excavated-*"     : { "base": "defense/landmine" },
+    "landmine-buried-sign-*"   : { "base": "defense/landmine-buried" },
+    "landmine-buried-hidden-*" : { "base": "game:block/plant/dirtmound" }
+  },
+
+  "texturesByType": {
+    "landmine-excavated-*"   : { "material" : { "base": "game:block/metal/ingot/{material}" }},
+    "landmine-buried-sign-*" : { "icon"     : { "base": "rustyshell:icon/{type}" }}
+  },
+
+  "texturesinventoryByType": {
+    "landmine-buried-sign-*": { "icon" : { "base": "rustyshell:icon/{type}" }, "fertlow": { "base": "game:block/transparent" }}
+  },
+
+  "selectionBoxByType" : {
+    "landmine-buried-sign-*"   : { "x1": 0.4, "y1": 0, "z1": 0.4, "x2": 0.6, "y2": 0.8, "z2": 0.6 },
+    "landmine-buried-hidden-*" : { "x1": 0.3, "y1": 0, "z1": 0.3, "x2": 0.7, "y2": 0.2, "z2": 0.7 },
+    "landmine-excavated-*"     : { "x1": 0.1, "y1": 0, "z1": 0.1, "x2": 0.9, "y2": 0.1, "z2": 0.9 }
+  },
+  "collisionBoxesByType" : {
+    "landmine-buried-sign-*": [
+      { "x1": 0,   "y1": 0, "z1": 0,   "x2": 1,   "y2": 0.1, "z2": 1   },
+      { "x1": 0.4, "y1": 0, "z1": 0.4, "x2": 0.6, "y2": 0.8, "z2": 0.6 }
+    ],
+    "*": [{ "x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 0.1, "z2": 1 }]
+  },
+  "randomSizeAdjust"   : 0.2,
+	"randomDrawOffset"   : true,
+  "randomizeRotations" : true,
+  "randomizeAxes"      : "xz",
+  "replaceable": 5000,
+  "blockmaterialByType" : { "landmine-excavated-*" : "metal", "landmine-buried-*": "soil" },
+  "resistanceByType"    : { "landmine-buried-*"    : 24 },
+  "dropsByType"         : {
+    "landmine-excavated-disabled-*": [{
+      "type": "block", 
+      "code": "rustyshell:landmine-excavated-disabled-{type}-{material}", 
+      "quantity": { "avg": 1, "var": 0 } 
+    }],
+    "*": []
+  },
+  "faceCullMode": "NeverCull",
+  "sidesolid":  { "all": false },
+  "sideopaque": { "all": false },
+  "sideao":     { "all": false },
+  "emitsideao": { "all": false },
+  "lightAbsorption": 1,
+  "rainPermeable":   true,
+  "heldTpIdleAnimation": "holdbothhands",
+  "heldTpUseAnimation": "twohandplaceblock",
+  "guiTransformByType": {
+    "landmine-excavated-*": {
+      "rotation": { "x": -22.6, "y": 68, "z": 0   },
+      "origin":   { "x":  0.5,  "y": 0,  "z": 0.5 },
+      "scale": 3
+    }
+  },
+  "tpHandTransformByType": {
+    "landmine-buried-sign-*": {
+        "translation" : { "x": -0.55, "y": -0.1, "z": -0.35 },
+        "rotation"    : { "x":  1,    "y": -18,  "z": -66   },
+        "origin"      : { "x":  0.5,  "y":  0.2, "z":  0.5  },
+        "scale"       : 1
+    },
+    "landmine-buried-hidden-*": {
+      "translation" : { "x": -0.55, "y": -0.1, "z": -0.35 },
+      "rotation"    : { "x":  1,    "y": -1,   "z": -80 },
+      "origin"      : { "x":  0.5,  "y":  0.1, "z":  0.5 },
+      "scale"       : 1
+    },
+    "landmine-excavated-*": {
+      "translation" : { "x": -0.55, "y": -0.1, "z": -0.35 },
+      "origin"      : { "x":  0.5,  "y":  0,   "z":  0.5  },
+      "scale"       : 1
+    }
+  },
+  "groundTransform": {
+		"translation" : { "x": 0,   "y":  0.1, "z": 0   },
+		"rotation"    : { "x": 0,   "y": -45,  "z": 0   },
+		"origin"      : { "x": 0.5, "y":  0,   "z": 0.5 },
+		"scale": 4.5
+	},
+  "sounds": {
+    "place": "game:block/dirt",
+    "break": "game:block/dirt",
+    "hit":   "game:block/dirt",
+    "walk":  "game:walk/grass"
+  },
+  "frostable": true
+}

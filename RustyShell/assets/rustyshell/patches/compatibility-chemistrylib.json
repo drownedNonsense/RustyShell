@@ -16,6 +16,14 @@
       },
 
       {
+        "file": "rustyshell:recipes/grid/landmine.json",
+        "op": "addmerge",
+        "path": "/1/enabled",
+        "value": false,
+        "dependsOn": [{ "modid": "chemistrylib", "invert": true }]
+      },
+
+      {
         "file": "rustyshell:recipes/grid/shell.json",
         "op": "addmerge",
         "path": "/8/enabled",

@@ -26,10 +26,10 @@
   }, {
     "ingredientPattern": "AB,CD",
     "ingredients": {
-      "A": { "type": "item", "code": "game:chisel-*",                        "isTool": true, "toolDurabilityCost": 8 },
-      "B": { "type": "item", "code": "game:hammer-*",                        "isTool": true, "toolDurabilityCost": 8 },
-      "C": { "type": "item", "code": "rustyshell:shot-12pdr-round-common-*", "name": "material", "allowedVariants": ["lead", "iron"]},
-      "D": { "type": "item", "code": "game:blastingpowder",                  "quantity": 8 }
+      "A": { "type": "item", "code": "rustyshell:fuze-percussion" },
+      "B": { "type": "item", "code": "game:hammer-*",                  "isTool": true, "toolDurabilityCost": 8 },
+      "C": { "type": "item", "code": "rustyshell:shot-12pdr-hollow-*", "name": "material", "allowedVariants": ["lead", "iron"]},
+      "D": { "type": "item", "code": "game:blastingpowder",            "quantity": 8 }
     },
     "shapeless": true,
     "width":  2,
@@ -38,11 +38,11 @@
   }, {
     "ingredientPattern": "_AB,CDE,FGH",
     "ingredients": {
-      "A": { "type": "item",  "code": "game:chisel-*",                        "isTool": true, "toolDurabilityCost": 8 },
-      "B": { "type": "item",  "code": "game:hammer-*",                        "isTool": true, "toolDurabilityCost": 8 },
-			"C": { "type": "item",  "code": "game:powderedsulfur",                  "quantity": 2 },
-      "D": { "type": "item",  "code": "rustyshell:shot-12pdr-round-common-*", "name": "material", "allowedVariants": ["lead", "iron"]},
-      "E": { "type": "item",  "code": "game:blastingpowder",                  "quantity": 6 },
+      "A": { "type": "item",  "code": "rustyshell:fuze-percussion" },
+      "B": { "type": "item",  "code": "game:hammer-*",                  "isTool": true, "toolDurabilityCost": 8 },
+			"C": { "type": "item",  "code": "game:powderedsulfur",            "quantity": 2 },
+      "D": { "type": "item",  "code": "rustyshell:shot-12pdr-hollow-*", "name": "material", "allowedVariants": ["lead", "iron"]},
+      "E": { "type": "item",  "code": "game:blastingpowder",            "quantity": 6 },
 			"F": { "type": "item",  "code": "chemistrylib:ammoniumchloride" },
 			"G": { "type": "block", "code": "game:bowl-fired" },
 			"H": { "type": "item",  "code": "game:resin", "quantity": 6 }
@@ -57,6 +57,21 @@
     "height": 3,
     "output": { "type": "item", "code": "rustyshell:shot-12pdr-round-incendiary-{material}" }
   },
+
+
+  {
+    "ingredientPattern": "AB,C_",
+    "ingredients": {
+      "A": { "type": "item", "code": "game:chisel-*", "isTool": true, "toolDurabilityCost": 8 },
+      "B": { "type": "item", "code": "game:hammer-*", "isTool": true, "toolDurabilityCost": 8 },
+      "C": { "type": "item", "code": "rustyshell:shot-12pdr-round-common-*", "name": "material", "allowedVariants": ["lead", "iron"]}
+    },
+    "shapeless": true,
+    "width":  2,
+    "height": 2,
+    "output": { "type": "item", "code": "rustyshell:shot-12pdr-hollow-{material}" }
+  },
+
 
   {
     "ingredientPattern": "_AB,CDE,_F_",

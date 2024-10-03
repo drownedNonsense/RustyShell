@@ -55,15 +55,12 @@
       "entityCode" : "rustyshell:shot-{class}-{material}",
       "handbook"   : { "groupBy": [ "shot-{class}-*" ]},
 
-      "shelvable": true,
-      "groundStorageTransformByType": {
-        "rotation": { "x": -45, "y":   0, "z": -45 },
-        "origin":   { "x": 0.5, "y": 0.2, "z": 0.5 }
-      }
+      "shelvable": true
     },
     "shapeByType": {
-      "shot-4pdr-*"   : { "base": "ammunition/shot", "scale": 0.75 },
-      "shot-12pdr-*"  : { "base": "ammunition/shot" }
+      "shot-4pdr-*"               : { "base": "ammunition/shot", "scale": 0.75 },
+      "shot-12pdr-round-common-*" : { "base": "ammunition/shot" },
+      "shot-12pdr-*"              : { "base": "ammunition/shot-hollow-fuzed" }
     },
     "texturesByType": {
       "*-stone" : { "material": { "base": "game:block/stone/rock/granite1" }},

@@ -15,6 +15,22 @@
 
     "game:blockhelp-repeatingfire-fire": "Start firing",
 
+    "game:blockhelp-landmine-bury"     : "Bury the mine",
+    "game:blockhelp-landmine-excavate" : "Excavate the mine",
+    "game:blockhelp-landmine-disable"  : "Disable the mine",
+    "game:blockhelp-landmine-fuze"     : "Add a fuze",
+    "game:blockhelp-landmine-putsign"  : "Add a warning sign",
+
+    "block-landmine-excavated-disabled-explosive-*"  : "Disabled landmine",
+    "block-landmine-excavated-disabled-incendiary-*" : "Disabled incendiary landmine",
+    "block-landmine-excavated-fuzed-explosive-*"     : "Landmine",
+    "block-landmine-excavated-fuzed-incendiary-*"    : "Incendiary landmine",
+    "block-landmine-buried-*-explosive-*"            : "Buried Landmine",
+    "block-landmine-buried-*-incendiary-*"           : "Buried incendiary landmine",
+    "blockdesc-landmine-excavated-disabled-*" : "A device that blows up when walking over it. Fortunately it is not fuzed!",
+    "blockdesc-landmine-excavated-fuzed-*"    : "A device that blows up when walking over it.",
+    "blockdesc-landmine-buried-*"             : "A device that blows up when walking over it. It should be excavated with care!",
+
     "block-supportgun-4pdr-*-smoothbore": "4-pounder support gun",
     "block-fieldgun-12pdr-*-smoothbore" : "12-pounder field gun",
     "block-fieldgun-12pdr-*-rifled"     : "120mm field gun",
@@ -42,6 +58,7 @@
     "item-shot-12pdr-round-common-*"     : "12-pounder cannonball",
     "item-shot-12pdr-round-explosive-*"  : "12-pounder bomb",
     "item-shot-12pdr-round-incendiary-*" : "12-pounder carcass",
+    "item-shot-12pdr-hollow-*"           : "12-pounder hollow shot",
     "itemdesc-shot-*-common-*"     : "A solid projectile used by smoothbore artillery pieces.",
     "itemdesc-shot-*-explosive-*"  : "A hollow projectile filled with explosives used by smoothbore artillery pieces.",
     "itemdesc-shot-*-incendiary-*" : "A hollow projectile filled with incendiary compounds used by smoothbore artillery pieces.",
@@ -78,8 +95,8 @@
     "item-shell-120mm-blunt-common-*"        : "120mm fragmentation warhead",
     "item-shell-120mm-blunt-explosive-*"     : "120mm high explosive fragmentation shell",
     "item-shell-120mm-blunt-antipersonnel-*" : "120mm shrapnel shell",
-    "item-shell-120mm-blunt-gas-*"           : "120mm gas fragmentation shell",
-    "item-shell-120mm-blunt-incendiary-*"    : "120mm incendiary fragmentation shell",
+    "item-shell-120mm-blunt-gas-*"           : "120mm fragmentation gas shell",
+    "item-shell-120mm-blunt-incendiary-*"    : "120mm fragmentation incendiary shell",
     "itemdesc-shell-120mm-*-ruined"              : "An antique 120mm shell. It is too damaged to be used.",
     "itemdesc-shell-120mm-round-common-*"        : "A standard 120mm shell.",
     "itemdesc-shell-120mm-round-explosive-*"     : "A 120mm shell used to damage infrastructures.",
@@ -148,6 +165,11 @@
     "item-primer-steel"         : "Steel primer",
     "itemdesc-primer-*" : "A device used to fire artillery pieces.",
 
+    "item-fuze-percussion" : "Percussion fuze",
+    "item-fuze-pressure"   : "Pressure fuze",
+    "itemdesc-fuze-percussion" : "A device that ignites explosive powders on impact or friction.",
+    "itemdesc-fuze-pressure"   : "A device that ignites explosive powders when pressed.",
+
     "game:heavygun-smoothbore"    : "Smoothbore barrel",
     "game:heavygun-rifled"        : "Rifled barrel",
     "game:heavygun-fireinterval"  : "{0} shot per seconds",
@@ -173,6 +195,8 @@
     "game:ammunition-propellantblaststrength" : "Propellant blast strength: {0}",
 
     "game:charge-strength" : "Blast strength: {0}",
-    "game:barrel-toohot": "The barrel is too hot."
+    "game:barrel-toohot": "The barrel is too hot.",
+
+    "game:placefailure-unsuitableground": "Cannot place the landmine here, the ground is unsuitable for digging."
 
 }

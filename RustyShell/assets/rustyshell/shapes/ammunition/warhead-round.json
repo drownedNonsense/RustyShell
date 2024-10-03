@@ -8,7 +8,8 @@
 	"textureSizes": {
 	},
 	"textures": {
-		"drivingband": "game:block/metal/anvil/copper"
+		"drivingband": "game:block/metal/anvil/copper",
+		"fuze": "game:block/metal/anvil/tinbronze"
 	},
 	"elements": [
 		{
@@ -70,7 +71,52 @@
 												"south": { "texture": "#warhead", "uv": [ 3.5, 1.5, 6.5, 2.0 ] },
 												"west": { "texture": "#warhead", "uv": [ 0.0, 1.0, 3.0, 1.5 ] },
 												"up": { "texture": "#warhead", "uv": [ 5.0, 7.5, 8.0, 10.5 ], "windMode": [-1,-1,-1,-1] }
-											}
+											},
+											"children": [
+												{
+													"name": "WarHead5",
+													"from": [ 0.5, 0.5, 0.5 ],
+													"to": [ 2.5, 1.0, 2.5 ],
+													"rotationOrigin": [ 0.0, 0.5, 0.0 ],
+													"faces": {
+														"north": { "texture": "#warhead", "uv": [ 13.0, 1.5, 15.0, 2.0 ] },
+														"east": { "texture": "#warhead", "uv": [ 8.0, 1.5, 10.0, 2.0 ] },
+														"south": { "texture": "#warhead", "uv": [ 3.5, 1.5, 5.5, 2.0 ] },
+														"west": { "texture": "#warhead", "uv": [ 0.0, 1.0, 2.0, 1.5 ] },
+														"up": { "texture": "#warhead", "uv": [ 5.0, 7.5, 7.0, 9.5 ] }
+													},
+													"children": [
+														{
+															"name": "Fuze1",
+															"from": [ 0.5, 0.5, 0.5 ],
+															"to": [ 1.5, 0.75, 1.5 ],
+															"rotationOrigin": [ 0.0, 0.5, 0.5 ],
+															"faces": {
+																"north": { "texture": "#fuze", "uv": [ 13.0, 1.5, 14.0, 2.0 ] },
+																"east": { "texture": "#fuze", "uv": [ 8.0, 1.5, 9.0, 2.0 ] },
+																"south": { "texture": "#fuze", "uv": [ 3.5, 1.5, 4.5, 2.0 ] },
+																"west": { "texture": "#fuze", "uv": [ 0.0, 1.0, 1.0, 1.5 ] },
+																"up": { "texture": "#fuze", "uv": [ 5.0, 7.5, 6.0, 8.5 ] }
+															},
+															"children": [
+																{
+																	"name": "Fuze2",
+																	"from": [ 0.25, 0.25, 0.25 ],
+																	"to": [ 0.75, 0.35, 0.75 ],
+																	"rotationOrigin": [ 0.25, 0.25, 0.25 ],
+																	"faces": {
+																		"north": { "texture": "#fuze", "uv": [ 13.0, 1.5, 13.5, 2.0 ] },
+																		"east": { "texture": "#fuze", "uv": [ 8.0, 1.5, 8.5, 2.0 ] },
+																		"south": { "texture": "#fuze", "uv": [ 3.5, 1.5, 4.0, 2.0 ] },
+																		"west": { "texture": "#fuze", "uv": [ 0.0, 1.0, 0.5, 1.5 ] },
+																		"up": { "texture": "#fuze", "uv": [ 5.0, 7.5, 5.5, 8.0 ] }
+																	}
+																}
+															]
+														}
+													]
+												}
+											]
 										}
 									]
 								}

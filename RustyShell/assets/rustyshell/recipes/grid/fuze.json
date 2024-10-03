@@ -1,0 +1,26 @@
+[
+  {
+    "ingredientPattern": "A_,BC",
+    "ingredients": {
+      "A": { "type": "item", "code": "game:flint",      "quantity": 2 },
+      "B": { "type": "item", "code": "game:saltpeter" },
+      "C": { "type": "item", "code": "game:metalnailsandstrips-*", "name": "material", "allowedVariants": ["copper", "tinbronze"]}
+    },
+    "shapeless": true,
+    "width":  2,
+    "height": 2,
+    "output": { "type": "item", "code": "rustyshell:fuze-percussion", "quantity": 2 }
+  }, {
+    "ingredientPattern": "AB,CD",
+    "ingredients": {
+      "A": { "type": "item", "code": "game:flint",      "quantity": 2 },
+      "B": { "type": "item", "code": "game:gear-rusty", "quantity": 2 },
+      "C": { "type": "item", "code": "game:saltpeter" },
+      "D": { "type": "item", "code": "game:metalnailsandstrips-*", "name": "material", "allowedVariants": ["copper", "tinbronze"]}
+    },
+    "shapeless": true,
+    "width":  2,
+    "height": 2,
+    "output": { "type": "item", "code": "rustyshell:fuze-pressure", "quantity": 2 }
+  }
+]
