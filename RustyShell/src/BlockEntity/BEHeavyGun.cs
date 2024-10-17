@@ -106,8 +106,9 @@ namespace RustyShell {
                         .ItemAttributes["entityCode"]?
                         .AsString();
 
-                    EntityProperties type       = this.Api.World.GetEntityType(entityCode == null ? this.AmmunitionSlot.Itemstack.Item.Code : new AssetLocation(entityCode));
-                    EntityAmmunition projectile = this.Api.World.ClassRegistry.CreateEntity(type) as EntityAmmunition;
+                    EntityProperties type      = this.Api.World.GetEntityType(entityCode == null ? this.AmmunitionSlot.Itemstack.Item.Code : new AssetLocation(entityCode));
+                    EntityExplosive projectile = this.Api.World.ClassRegistry.CreateEntity(type) as EntityExplosive;
+                    ItemAmmunition ammunition  = this.AmmunitionSlot.Itemstack.Item as ItemAmmunition;
 
                     ThreadSafeRandom random = new();
                     float randPitch = (random.NextSingle() - 0.5f) * (1f - this.BlockHeavyGun.Accuracy) * 0.5f;
@@ -131,8 +132,8 @@ namespace RustyShell {
                             ? EnumGunState.Clean
                             : EnumGunState.Ready;
 
-                    projectile.FiredBy    = byEntity;
-                    projectile.Ammunition = this.AmmunitionSlot.Itemstack.Item as ItemAmmunition;
+                    projectile.FiredBy       = byEntity;
+                    projectile.ExplosiveData = ammunition;
                     projectile.ServerPos.SetPos(projectilePos);
                     projectile.ServerPos.Motion.Set(velocity);
                     projectile.Pos.SetFrom(projectile.ServerPos);
@@ -143,7 +144,7 @@ namespace RustyShell {
                     this.Cooldown            = 0f;
                     this.cooldownUpdateRef ??= this.RegisterGameTickListener(this.CooldownUpdate, ModContent.HEAVY_GUN_UPDATE_RATE);
 
-                    if (this.Api.Side.IsClient() && !((this.ChargeSlot.Itemstack?.Item ?? projectile.Ammunition) is IPropellant { PropellantIsSmokeless: true }))
+                    if (this.Api.Side.IsClient() && !((this.ChargeSlot.Itemstack?.Item ?? ammunition) is IPropellant { PropellantIsSmokeless: true }))
                         for (int i = 0; i < (int)this.blastStrength >> (projectile is EntitySmallCaliber ? 1 : 0); i ++)
                             this.Api.World.SpawnParticles(new ExplosionSmokeParticles() {
                                 basePos              = projectilePos,
@@ -151,9 +152,9 @@ namespace RustyShell {
                                 ParentVelocity       = Vintagestory.API.Config.GlobalConstants.CurrentWindSpeedClient,
                             }); // ..
 
-                    if (projectile.Ammunition.Casing is Item casing)
+                    if (ammunition.Casing is Item casing)
                         this.Api.World.SpawnItemEntity(
-                            itemstack : new ItemStack(this.Api.World.GetItem(casing.CodeWithVariant("state", random.NextSingle() < projectile.Ammunition.RecoveryRate ? "fine" : "damaged"))),
+                            itemstack : new ItemStack(this.Api.World.GetItem(casing.CodeWithVariant("state", random.NextSingle() < ammunition.RecoveryRate ? "fine" : "damaged"))),
                             position  : this.Pos.UpCopy().ToVec3d() + new Vec3d(0.5, 0.5, 0.5),
                             velocity  : new Vec3d(
                                 x: GameMath.FastSin(this.Orientation + GameMath.PIHALF * (0.25f + 0.5f * random.NextSingle())),

@@ -14,9 +14,9 @@ using System.Linq;
 
 namespace RustyShell {
 
-    public enum EnumGunState       { Dirty, Clean, Ready  }
-    public enum EnumBarrelType     { Smoothbore, Rifled }
-    public enum EnumAmmunitionType { Common, Explosive, AntiPersonnel, Gas, Incendiary }
+    public enum EnumGunState      { Dirty, Clean, Ready  }
+    public enum EnumBarrelType    { Smoothbore, Rifled }
+    public enum EnumExplosiveType { Common, Explosive, AntiPersonnel, Gas, Incendiary }
 
     public static class ModContent {
 
@@ -142,7 +142,7 @@ namespace RustyShell {
 
                     ItemSlot itemSlot    = (entity as EntityAgent)?.GearInventory?[(int)EnumCharacterDressType.ArmorHead];
                     ItemWearable gasmask = itemSlot?.Itemstack?.Item as ItemWearable;
-                    float gasStrength    = GameMath.Clamp(RustyShellModSystem.ModConfig.GasBaseDamage * (room.CoolingWallCount + room.NonCoolingWallCount) / GameMath.Max(room.ExitCount, 1f), 0f, RustyShellModSystem.ModConfig.GasBaseDamage);
+                    float gasStrength    = GameMath.Clamp(RustyShellModSystem.ModConfig.GasDamage * (room.CoolingWallCount + room.NonCoolingWallCount) / GameMath.Max(room.ExitCount, 1f), 0f, RustyShellModSystem.ModConfig.GasDamage);
 
 
                     if (gasmask?.GetRemainingDurability(itemSlot?.Itemstack) == 0 || gasmask == null)

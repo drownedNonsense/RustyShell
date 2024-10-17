@@ -94,6 +94,60 @@
     },
 
     {
+        "file": "rustyshell:recipes/grid/grenade.json",
+        "op": "replace",
+        "path": "/0/ingredients/D/code",
+        "value": "maltiezfirearms:gunpowder-fine",
+        "dependsOn": [{ "modid": "maltiezfirearms" }]
+    }, {
+        "file": "rustyshell:recipes/grid/grenade.json",
+        "op": "replace",
+        "path": "/1/ingredients/C/code",
+        "value": "maltiezfirearms:gunpowder-fine",
+        "dependsOn": [{ "modid": "maltiezfirearms" }]
+    }, {
+        "file": "rustyshell:recipes/grid/grenade.json",
+        "op": "replace",
+        "path": "/2/ingredients/C/code",
+        "value": "maltiezfirearms:gunpowder-fine",
+        "dependsOn": [{ "modid": "maltiezfirearms" }]
+    }, {
+        "file": "rustyshell:recipes/grid/grenade.json",
+        "op": "replace",
+        "path": "/3/ingredients/C/code",
+        "value": "maltiezfirearms:gunpowder-fine",
+        "dependsOn": [{ "modid": "maltiezfirearms" }]
+    }, {
+        "file": "rustyshell:recipes/grid/grenade.json",
+        "op": "replace",
+        "path": "/4/ingredients/F/code",
+        "value": "maltiezfirearms:gunpowder-fine",
+        "dependsOn": [{ "modid": "maltiezfirearms" }]
+    },
+
+    {
+        "file": "rustyshell:recipes/grid/shot.json",
+        "op": "addmerge",
+        "path": "/7/enabled",
+        "value": false,
+        "dependsOn": [{ "modid": "maltiezfirearms", "invert": true }]
+    }, {
+        "file": "rustyshell:recipes/grid/shot.json",
+        "op": "addmerge",
+        "path": "/10/enabled",
+        "value": false,
+        "dependsOn": [{ "modid": "maltiezfirearms", "invert": true }]
+    },
+    
+    {
+        "file": "rustyshell:recipes/grid/grenade.json",
+        "op": "addmerge",
+        "path": "/2/enabled",
+        "value": false,
+        "dependsOn": [{ "modid": "maltiezfirearms", "invert": true }]
+    },
+
+    {
         "file": "rustyshell:recipes/grid/cartridge.json",
         "op": "addmerge",
         "path": "/enabled",
@@ -101,7 +155,7 @@
         "dependsOn": [{ "modid": "maltiezfirearms", "invert": true }]
     }, {
         "file": "rustyshell:recipes/smithing/cartridgecasing-repairing.json",
-        "op": "add",
+        "op": "addmerge",
         "path": "/enabled",
         "value": false,
         "dependsOn": [{ "modid": "maltiezfirearms", "invert": true }]

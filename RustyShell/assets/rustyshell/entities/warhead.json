@@ -18,7 +18,7 @@
 			"*"               : { "base" : "ammunition/warhead-{shape}" }
 		},
 		"texturesByType": {
-			"*-submunition-*" : { "lead"    : { "base": "game:block/metal/ingot/{material}" }},
+			"*-submunition-*" : { "lead" : { "base": "game:block/metal/ingot/{material}" }},
 			"*"               : {
 				"warhead" : { "base": "game:block/metal/ingot/{material}" },
 				"icon"    : { "base": "game:block/transparent" }

@@ -35,9 +35,9 @@ public static partial class BlastExtensions {
                         ItemSlot itemslot    = (entity as EntityAgent)?.GearInventory?[(int)EnumCharacterDressType.ArmorHead];
                         ItemWearable gasmask = itemslot?.Itemstack?.Item as ItemWearable;
                         float gasStrength    = GameMath.Clamp(
-                            RustyShellModSystem.ModConfig.GasBaseDamage * (room.CoolingWallCount + room.NonCoolingWallCount) / GameMath.Max(room.ExitCount, 1f),
+                            RustyShellModSystem.ModConfig.GasDamage * (room.CoolingWallCount + room.NonCoolingWallCount) / GameMath.Max(room.ExitCount, 1f),
                             0f,
-                            RustyShellModSystem.ModConfig.GasBaseDamage
+                            RustyShellModSystem.ModConfig.GasDamage
                         ); // ..
 
 
@@ -104,5 +104,12 @@ public static partial class BlastExtensions {
         ); // ..
 
         self.RegisterCallback((_) => self.UnregisterGameTickListener(gasRef), millisecondDuration);
+        (self as IServerWorldAccessor)?.CreateExplosion(
+            pos                       : pos.AsVec3i.AsBlockPos,
+            blastType                 : EnumBlastType.EntityBlast,
+            destructionRadius         : blastRadius * 0.1f,
+            injureRadius              : blastRadius * 0.4f,
+            blockDropChanceMultiplier : 0f
+        ); // ..
     } // void ..
 } // class ..

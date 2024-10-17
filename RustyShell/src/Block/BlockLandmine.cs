@@ -91,8 +91,8 @@ namespace RustyShell {
                     bool withDebugInfo
                 ) {
 
-                    if (this.BlastRadius  > 0)  dsc.AppendLine(Lang.Get("ammunition-blastradius",  this.BlastRadius));
-                    if (this.InjureRadius > 0)  dsc.AppendLine(Lang.Get("ammunition-injureradius", this.InjureRadius));
+                    if (this.BlastRadius  > 0)  dsc.AppendLine(Lang.Get("explosive-blastradius",  this.BlastRadius));
+                    if (this.InjureRadius > 0)  dsc.AppendLine(Lang.Get("explosive-injureradius", this.InjureRadius));
                     
                     base.GetHeldItemInfo(inSlot, dsc, world, withDebugInfo);
 

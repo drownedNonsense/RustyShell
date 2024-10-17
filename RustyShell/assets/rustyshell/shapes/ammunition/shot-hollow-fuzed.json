@@ -8,7 +8,8 @@
 	"textureSizes": {
 	},
 	"textures": {
-		"fuze": "game:block/metal/anvil/tinbronze"
+		"fuze": "game:block/metal/anvil/tinbronze",
+		"material": "game:block/metal/ingot/iron"
 	},
 	"elements": [
 		{

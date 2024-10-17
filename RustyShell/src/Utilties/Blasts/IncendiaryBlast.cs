@@ -52,7 +52,8 @@ public static partial class BlastExtensions {
                         ?.GetBehavior<BEBehaviorBurning>()
                         ?.OnFirePlaced(pos.UpCopy(), pos, (byEntity as EntityPlayer)?.PlayerUID);
                         
-                    self.BlockAccessor.MarkBlockDirty(pos);
+                    self.BlockAccessor.MarkBlockDirty(pos.UpCopy());
+                    self.BlockAccessor.MarkBlockEntityDirty(pos.UpCopy());
                 } // if ..
             } // ..
         ); // ..

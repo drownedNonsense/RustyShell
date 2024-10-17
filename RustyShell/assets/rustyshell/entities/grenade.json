@@ -1,0 +1,22 @@
+{
+  "code":  "grenade",
+  "class": "EntityHighCaliber",
+  "variantgroups": [
+    { "code": "shape",    "states": ["hand"]},
+    { "code": "material", "states": ["copper", "brass", "iron"]}
+  ],
+  "attributes": { "physics": { "groundDragFactor": 1 }},
+  "hitboxSize": { "x": 0.125, "y": 0.125 },
+  "client": {
+    "behaviors": [{ "code": "passivephysics" }, { "code": "interpolateposition" }],
+
+    "renderer" : "Shape",
+    "shape"    : { "base": "ammunition/grenade-{shape}" },
+		"textures" : {
+      "material" : { "base": "game:block/metal/ingot/{material}" },
+      "icon"     : { "base": "game:block/transparent" }
+    }
+  },
+  "server": { "behaviors": [{ "code": "passivephysics" }, { "code": "despawn", "minSeconds": 300 }]},
+  "sounds": {}
+}

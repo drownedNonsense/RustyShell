@@ -1,0 +1,160 @@
+{
+	"editor": {
+		"allAngles": false,
+		"entityTextureMode": false
+	},
+	"textureWidth": 16,
+	"textureHeight": 16,
+	"textureSizes": {
+	},
+	"textures": {
+		"fuze": "game:block/metal/anvil/tinbronze",
+		"material": "game:block/metal/ingot/iron",
+		"icon": "game:block/transparent",
+		"oak": "game:block/wood/oak"
+	},
+	"elements": [
+		{
+			"name": "Origin",
+			"from": [ 8.0, 0.0, 8.0 ],
+			"to": [ 8.0, 0.0, 8.0 ],
+			"rotationOrigin": [ 8.0, 0.0, 8.0 ],
+			"rotationZ": -90.0,
+			"faces": {
+			},
+			"children": [
+				{
+					"name": "Handle1",
+					"from": [ -0.8, 0.0, -0.8 ],
+					"to": [ 0.8, 6.0, 0.8 ],
+					"faces": {
+						"north": { "texture": "#oak", "uv": [ 14.5, 10.0, 16.0, 16.0 ] },
+						"east": { "texture": "#oak", "uv": [ 12.5, 10.0, 14.0, 16.0 ] },
+						"south": { "texture": "#oak", "uv": [ 10.5, 10.0, 12.0, 16.0 ] },
+						"west": { "texture": "#oak", "uv": [ 9.0, 10.0, 10.5, 16.0 ] },
+						"down": { "texture": "#oak", "uv": [ 0.0, 0.0, 1.5, 1.5 ] }
+					},
+					"children": [
+						{
+							"name": "Handle2",
+							"from": [ -0.2, 6.0, -0.2 ],
+							"to": [ 1.8, 10.0, 1.8 ],
+							"rotationOrigin": [ 0.8, 6.0, 0.8 ],
+							"faces": {
+								"north": { "texture": "#oak", "uv": [ 14.0, 2.5, 16.0, 6.5 ] },
+								"east": { "texture": "#oak", "uv": [ 12.5, 4.5, 14.5, 8.5 ] },
+								"south": { "texture": "#oak", "uv": [ 10.5, 4.0, 12.5, 8.0 ] },
+								"west": { "texture": "#oak", "uv": [ 9.5, 5.0, 11.5, 9.0 ] },
+								"down": { "texture": "#oak", "uv": [ 0.0, 0.0, 2.0, 2.0 ] }
+							},
+							"children": [
+								{
+									"name": "Ring2",
+									"from": [ 0.0, 4.0, 0.0 ],
+									"to": [ 2.0, 4.5, 2.0 ],
+									"rotationOrigin": [ 0.0, 4.0, 0.0 ],
+									"faces": {
+										"north": { "texture": "#material", "uv": [ 0.0, 0.0, 2.0, 0.5 ] },
+										"east": { "texture": "#material", "uv": [ 0.0, 0.0, 2.0, 0.5 ] },
+										"south": { "texture": "#material", "uv": [ 0.0, 0.0, 2.0, 0.5 ] },
+										"west": { "texture": "#material", "uv": [ 0.0, 0.0, 2.0, 0.5 ] }
+									},
+									"children": [
+										{
+											"name": "Casing",
+											"from": [ -0.5, 0.5, -0.5 ],
+											"to": [ 2.5, 5.5, 2.5 ],
+											"faces": {
+												"north": { "texture": "#material", "uv": [ 12.5, 4.0, 15.5, 9.0 ] },
+												"east": { "texture": "#material", "uv": [ 9.5, 3.5, 12.5, 8.5 ] },
+												"south": { "texture": "#material", "uv": [ 6.0, 3.0, 9.0, 8.0 ] },
+												"west": { "texture": "#material", "uv": [ 2.5, 3.5, 5.5, 8.5 ] },
+												"up": { "texture": "#material", "uv": [ 7.5, 4.0, 10.5, 7.0 ], "windMode": [-1,-1,-1,-1] },
+												"down": { "texture": "#material", "uv": [ 6.0, 5.0, 9.0, 8.0 ], "windMode": [-1,-1,-1,-1] }
+											},
+											"children": [
+												{
+													"name": "CasingRing1",
+													"from": [ -0.1, 0.2, -0.1 ],
+													"to": [ 3.1, 0.7, 3.1 ],
+													"rotationOrigin": [ 0.5, -0.5, 0.5 ],
+													"faces": {
+														"north": { "texture": "#material", "uv": [ 0.0, 0.0, 3.0, 0.5 ] },
+														"east": { "texture": "#material", "uv": [ 0.0, 0.0, 3.0, 0.5 ] },
+														"south": { "texture": "#material", "uv": [ 0.0, 0.0, 3.0, 0.5 ] },
+														"west": { "texture": "#material", "uv": [ 0.0, 0.0, 3.0, 0.5 ] }
+													}
+												},
+												{
+													"name": "CasingRing2",
+													"from": [ -0.1, 4.3, -0.1 ],
+													"to": [ 3.1, 4.8, 3.1 ],
+													"rotationOrigin": [ 0.5, 3.5, 0.5 ],
+													"faces": {
+														"north": { "texture": "#material", "uv": [ 0.0, 0.0, 3.0, 0.5 ] },
+														"east": { "texture": "#material", "uv": [ 0.0, 0.0, 3.0, 0.5 ] },
+														"south": { "texture": "#material", "uv": [ 0.0, 0.0, 3.0, 0.5 ] },
+														"west": { "texture": "#material", "uv": [ 0.0, 0.0, 3.0, 0.5 ] }
+													}
+												},
+												{
+													"name": "Fuze1",
+													"from": [ 0.955, 5.0, 0.955 ],
+													"to": [ 1.955, 5.25, 1.955 ],
+													"rotationOrigin": [ 0.95, 5.0, 0.955 ],
+													"faces": {
+														"north": { "texture": "#fuze", "uv": [ 10.5, 3.5, 11.5, 3.75 ], "snapUv": false },
+														"east": { "texture": "#fuze", "uv": [ 8.0, 1.5, 9.0, 1.75 ], "snapUv": false },
+														"south": { "texture": "#fuze", "uv": [ 3.5, 1.5, 4.5, 1.75 ], "snapUv": false },
+														"west": { "texture": "#fuze", "uv": [ 1.0, 1.5, 2.0, 1.75 ], "snapUv": false },
+														"up": { "texture": "#fuze", "uv": [ 5.0, 7.5, 6.0, 8.5 ], "snapUv": false }
+													},
+													"children": [
+														{
+															"name": "Fuze2",
+															"from": [ 0.25, 0.25, 0.25 ],
+															"to": [ 0.75, 0.35, 0.75 ],
+															"rotationOrigin": [ 0.25, 0.25, 0.25 ],
+															"faces": {
+																"north": { "texture": "#fuze", "uv": [ 13.0, 1.5, 13.5, 2.0 ] },
+																"east": { "texture": "#fuze", "uv": [ 8.0, 1.5, 8.5, 2.0 ] },
+																"south": { "texture": "#fuze", "uv": [ 3.5, 1.5, 4.0, 2.0 ] },
+																"west": { "texture": "#fuze", "uv": [ 0.0, 1.0, 0.5, 1.5 ] },
+																"up": { "texture": "#fuze", "uv": [ 5.0, 7.5, 5.5, 8.0 ] }
+															}
+														}
+													]
+												},
+												{
+													"name": "Icon",
+													"from": [ -0.5, 1.0, 3.01 ],
+													"to": [ 3.5, 4.0, 3.01 ],
+													"rotationOrigin": [ -0.85, 1.0, 3.01 ],
+													"faces": {
+														"south": { "texture": "#icon", "uv": [ 1.0, 3.0, 15.0, 13.0 ], "autoUv": false, "windMode": [-1,-1,-1,-1] }
+													}
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Ring1",
+							"from": [ -0.1, -0.01, -0.1 ],
+							"to": [ 1.7, 0.49, 1.7 ],
+							"rotationOrigin": [ -0.2, -0.01, -0.2 ],
+							"faces": {
+								"north": { "texture": "#material", "uv": [ 0.0, 0.0, 1.5, 0.5 ] },
+								"east": { "texture": "#material", "uv": [ 0.0, 0.0, 1.5, 0.5 ] },
+								"south": { "texture": "#material", "uv": [ 0.0, 0.0, 1.5, 0.5 ] },
+								"west": { "texture": "#material", "uv": [ 0.0, 0.0, 1.5, 0.5 ] },
+								"down": { "texture": "#material", "uv": [ 0.0, 0.0, 1.5, 1.5 ], "windMode": [-1,-1,-1,-1] }
+							}
+						}
+					]
+				}
+			]
+		}
+	]}

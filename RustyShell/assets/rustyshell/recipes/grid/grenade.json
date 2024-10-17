@@ -1,0 +1,84 @@
+[
+  {
+    "ingredientPattern": "AB,CD,E_",
+    "ingredients": {
+      "A": { "type": "item", "code": "rustyshell:fuze-percussion" },
+      "B": { "type": "item", "code": "game:hammer-*",            "isTool": true, "toolDurabilityCost": 8 },
+      "C": { "type": "item", "code": "rustyshell:casing-*-fine", "name": "material" },
+      "D": { "type": "item", "code": "game:blastingpowder",      "quantity": 8 },
+      "E": { "type": "item", "code": "game:stick" }
+    },
+    "shapeless": true,
+    "width":  2,
+    "height": 3,
+    "output": { "type": "item", "code": "rustyshell:grenade-hand-explosive-{material}" }
+  }, {
+    "ingredientPattern": "_AB,CDE,_F_",
+    "ingredients": {
+      "A": { "type": "item", "code": "rustyshell:fuze-percussion" },
+      "B": { "type": "item", "code": "game:hammer-*",            "isTool": true, "toolDurabilityCost": 8 },
+      "C": { "type": "item", "code": "game:blastingpowder",      "quantity": 4 },
+      "D": { "type": "item", "code": "rustyshell:casing-*-fine", "name": "material" },
+      "E": { "type": "item", "code": "game:metalbit-*",          "quantity": 16 },
+      "F": { "type": "item", "code": "game:stick" }
+    },
+    "width":  3,
+    "height": 3,
+    "output": { "type": "item", "code": "rustyshell:grenade-hand-antipersonnel-{material}" }
+  }, {
+    "ingredientPattern": "_AB,CDE,_F_",
+    "ingredients": {
+      "A": { "type": "item", "code": "rustyshell:fuze-percussion" },
+      "B": { "type": "item", "code": "game:hammer-*",            "isTool": true, "toolDurabilityCost": 8 },
+      "C": { "type": "item", "code": "game:blastingpowder",      "quantity": 4 },
+      "D": { "type": "item", "code": "rustyshell:casing-*-fine", "name": "material" },
+      "E": { "type": "item", "code": "maltiezfirearms:bullet-*", "quantity": 8 },
+      "F": { "type": "item", "code": "game:stick" }
+    },
+    "width":  3,
+    "height": 3,
+    "output": { "type": "item", "code": "rustyshell:grenade-hand-antipersonnel-{material}" }
+  }, {
+    "ingredientPattern": "AB_,CDE,FG_",
+    "ingredients": {
+      "A": { "type": "item",  "code": "chemistrylib:ammoniumchloride", "quantity": 64 },
+      "B": { "type": "item",  "code": "rustyshell:fuze-percussion" },
+      "C": { "type": "item",  "code": "game:blastingpowder",           "quantity": 4 },
+      "D": { "type": "item",  "code": "rustyshell:casing-*-fine",      "name": "material" },
+      "E": { "type": "item",  "code": "game:hammer-*",                 "isTool": true, "toolDurabilityCost": 8 },
+      "F": { "type": "block", "code": "game:bowl-fired" },
+      "G": { "type": "item",  "code": "game:stick" }
+    },
+    "attributes": {
+      "liquidContainerProps": {
+        "requiresContent": { "type": "item", "code": "chemistrylib:mineralacidportion-hydrochloric" },
+        "requiresLitres": 0.5
+      }
+    },
+    "width":  3,
+    "height": 3,
+    "output": { "type": "item", "code": "rustyshell:grenade-hand-gas-{material}" }
+  }, {
+    "ingredientPattern": "ABC,DEF,GHI",
+    "ingredients": {
+			"A": { "type": "item",  "code": "game:resin", "quantity": 6 },
+      "B": { "type": "item",  "code": "rustyshell:fuze-percussion" },
+      "C": { "type": "item",  "code": "game:hammer-*",                 "isTool": true, "toolDurabilityCost": 8 },
+			"D": { "type": "item",  "code": "game:powderedsulfur",           "quantity": 2 },
+      "E": { "type": "item",  "code": "rustyshell:casing-*-fine",      "name": "material" },
+      "F": { "type": "item",  "code": "game:blastingpowder",           "quantity": 6 },
+			"G": { "type": "item",  "code": "chemistrylib:ammoniumchloride", "quantity": 6 },
+      "H": { "type": "item",  "code": "game:stick" },
+			"I": { "type": "block", "code": "game:bowl-fired" }
+    },
+    "attributes": {
+			"liquidContainerProps": {
+				"requiresContent": { "type": "item", "code": "chemistrylib:mineralacidportion-nitric" },
+				"requiresLitres": 0.5
+			}
+		},
+    "width":  3,
+    "height": 3,
+    "output": { "type": "item", "code": "rustyshell:grenade-hand-incendiary-{material}" }
+  }
+]

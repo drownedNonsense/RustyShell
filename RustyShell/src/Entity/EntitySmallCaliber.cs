@@ -4,7 +4,7 @@ using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
 
 namespace RustyShell {
-    public class EntitySmallCaliber : EntityAmmunition {
+    public class EntitySmallCaliber : EntityExplosive {
 
     } // class ..
 } // namespace ..

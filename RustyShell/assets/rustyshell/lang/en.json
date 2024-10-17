@@ -108,6 +108,11 @@
     "itemdesc-shell-120mm-blunt-antipersonnel-*" : "A shrapnel-filled 120mm warhead that will burst in the air and release bullets over a large area.",
     "itemdesc-shell-120mm-blunt-gas-*"           : "A 120mm gas shell that will burst in the air and release gas over a large area.",
     "itemdesc-shell-120mm-blunt-incendiary-*"    : "A 120mm incendiary shell that will burst in the air for large-scale fire damage.",
+    
+    "item-grenade-hand-explosive-*"     : "Hand grenade",
+    "item-grenade-hand-antipersonnel-*" : "Anti-personnel hand grenade",
+    "item-grenade-hand-gas-*"           : "Gas hand grenade",
+    "item-grenade-hand-incendiary-*"    : "Incendiary hand grenade",
 
     "item-casing-copper-fine"    : "Copper casing",
     "item-casing-brass-fine"     : "Brass casing",
@@ -187,10 +192,10 @@
     "game:heavyguninfo-blaststrength" : "Blast strength: {0}",
     "game:heavyguninfo-elevation"     : "Elevation: {0}°",
 
-    "game:ammunition-damage"                  : "{0} piercing damage",
-    "game:ammunition-blastradius"             : "Blast radius: {0}b",
-    "game:ammunition-injureradius"            : "Injure radius: {0}b",
-    "game:ammunition-flightexpectancy"        : "Flight expectancy: {0:0}s",
+    "game:explosive-damage"                   : "{0} piercing damage",
+    "game:explosive-blastradius"              : "Blast radius: {0}b",
+    "game:explosive-injureradius"             : "Injure radius: {0}b",
+    "game:explosive-flightexpectancy"         : "Flight expectancy: {0:0}s",
     "game:ammunition-recoveryrate"            : "Casing recovery rate: {0}%",
     "game:ammunition-propellantblaststrength" : "Propellant blast strength: {0}",
 

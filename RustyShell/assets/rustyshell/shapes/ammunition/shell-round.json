@@ -9,6 +9,9 @@
 	},
 	"textures": {
 		"drivingband": "game:block/metal/anvil/copper",
+		"icon": "game:block/transparent",
+		"material": "game:block/metal/ingot/iron",
+		"casing": "game:block/metal/ingot/brass",
 		"fuze": "game:block/metal/anvil/tinbronze"
 	},
 	"elements": [

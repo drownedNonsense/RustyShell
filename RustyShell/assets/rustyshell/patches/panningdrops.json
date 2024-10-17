@@ -23,6 +23,6 @@
     "file"  : "game:blocktypes/wood/pan.json",
     "op"    : "addmerge",
     "path"  : "/attributes/panningDrops/@(sand|gravel)-.*/-",
-    "value" : { "type": "item", "code": "rustyshell:landmine-excavated-disabled-explosive-iron", "chance": { "avg": 0.002, "var": 0 }}
+    "value" : { "type": "block", "code": "rustyshell:landmine-excavated-disabled-explosive-iron", "chance": { "avg": 0.002, "var": 0 }}
   }
 ]

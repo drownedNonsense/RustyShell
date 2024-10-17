@@ -9,7 +9,8 @@
 	},
 	"textures": {
 		"black": "game:block/black",
-		"charred": "game:block/wood/charred"
+		"charred": "game:block/wood/charred",
+		"material": "game:block/metal/ingot/iron"
 	},
 	"elements": [
 		{

@@ -7,6 +7,6 @@ public class ModConfig {
     /** <summary> Indicates to allow artillery fire to lower soil quality </summary> **/ public bool EnableLandWasting = true;
     /** <summary> Forces land mines to display a sign </summary> **/                     public bool ForceLandmineSign = false;
 
-    public float GasBaseDamage = 10;
+    public float GasDamage = 10;
 
 } // class ..

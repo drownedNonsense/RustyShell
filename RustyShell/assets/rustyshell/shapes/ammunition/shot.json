@@ -8,7 +8,7 @@
 	"textureSizes": {
 	},
 	"textures": {
-		"material": "block/metal/ingot/iron"
+		"material": "game:block/metal/ingot/iron"
 	},
 	"elements": [
 		{

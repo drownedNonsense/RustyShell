@@ -8,7 +8,9 @@
 	"textureSizes": {
 	},
 	"textures": {
-		"drivingband": "game:block/metal/anvil/copper"
+		"drivingband": "game:block/metal/anvil/copper",
+		"casing": "game:block/metal/ingot/brass",
+		"bullet": "game:block/metal/ingot/lead"
 	},
 	"elements": [
 		{

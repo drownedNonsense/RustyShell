@@ -81,8 +81,8 @@
     },
 
     "handbookByType": {
-      "*-none" : { "groupBy": [ "shell-120mm-*-none" ]},
-      "*"      : { "groupBy": [ "shell-120mm-*-copper", "shell-120mm-*-brass", "shell-120mm-*-iron" ]}
+      "*-none" : { "groupBy": [ "shell-{class}-{shape}-{type}-*-none" ]},
+      "*"      : { "groupBy": [ "shell-{class}-{shape}-{type}-*" ]}
     },
 
     "groundStorageTransform": {

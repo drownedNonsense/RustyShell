@@ -1,18 +1,10 @@
-using System;
-using System.IO;
-using System.Collections.Generic;
 using Vintagestory.API.Common;
-using Vintagestory.API.Common.Entities;
-using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
-using Vintagestory.API.Datastructures;
-using Vintagestory.GameContent;
-using Vintagestory.API.Util;
 using RustyShell.Utilities.Blasts;
 
 
 namespace RustyShell {
-    public class EntityHighCaliber : EntityAmmunition {
+    public class EntityHighCaliber : EntityExplosive {
 
         //===============================
         // I M P L E M E N T A T I O N S
@@ -28,7 +20,7 @@ namespace RustyShell {
                     if (
                         !this.stuck                                                                                  &&
                         this.Pos.Motion.LengthSq() >= 1                                                              &&
-                        this.msSinceLaunch         >= (int)((this.Ammunition?.FlightExpectancy ?? 0f) * 1000) - 1500 &&
+                        this.msSinceLaunch         >= (int)((this.ExplosiveData?.FlightExpectancy ?? 0f) * 1000) - 1500 &&
                         this.Properties.Sounds.TryGetValue("flying", out AssetLocation sound)
                     ) this.World.PlaySoundAt(sound, this, null, true, 64, 0.8f );
 
@@ -41,11 +33,11 @@ namespace RustyShell {
                         serverWorld.CommonBlast(
                             byEntity     : this.FiredBy,
                             pos          : this.ServerPos.XYZFloat,
-                            blastRadius  : this.Ammunition.BlastRadius  ?? 0,
-                            injureRadius : this.Ammunition.InjureRadius ?? 0,
-                            strength     : this.Ammunition.Type switch {
-                                EnumAmmunitionType.Common    => RustyShellModSystem.ModConfig.CommonHighcaliberReinforcmentImpact,
-                                EnumAmmunitionType.Explosive => RustyShellModSystem.ModConfig.ExplosiveHighcaliberReinforcmentImpact,
+                            blastRadius  : this.ExplosiveData.BlastRadius  ?? 0,
+                            injureRadius : this.ExplosiveData.InjureRadius ?? 0,
+                            strength     : this.ExplosiveData.Type switch {
+                                EnumExplosiveType.Common    => RustyShellModSystem.ModConfig.CommonHighcaliberReinforcmentImpact,
+                                EnumExplosiveType.Explosive => RustyShellModSystem.ModConfig.ExplosiveHighcaliberReinforcmentImpact,
                                 _                            => 1,
                             } // switch ..
                         ); // ..
@@ -63,21 +55,21 @@ namespace RustyShell {
                         serverWorld.CreateExplosion(
                             pos                       : this.ServerPos.AsBlockPos,
                             blastType                 : EnumBlastType.EntityBlast,
-                            destructionRadius         : this.Ammunition.BlastRadius  ?? 0,
-                            injureRadius              : this.Ammunition.InjureRadius ?? 0,
+                            destructionRadius         : this.ExplosiveData.BlastRadius  ?? 0,
+                            injureRadius              : this.ExplosiveData.InjureRadius ?? 0,
                             blockDropChanceMultiplier : 0f
                         ); // ..
 
-                        this.Die();
                     } // if ..
+                    this.Die();
                 } // void ..
 
                 public override void HandleGasBlast() {
                     this.World.GasBlast(
                         byEntity            : this.FiredBy,
                         pos                 : this.SidedPos.XYZFloat,
-                        blastRadius         : this.Ammunition.BlastRadius ?? 0,
-                        millisecondDuration : this.Ammunition.IsSubmunition ? 10000 : 20000
+                        blastRadius         : this.ExplosiveData.BlastRadius ?? 0,
+                        millisecondDuration : this.ExplosiveData.IsSubmunition ? 10000 : 20000
                     ); // ..
 
                     this.Die();
@@ -90,8 +82,8 @@ namespace RustyShell {
                         serverWorld.IncendiaryBlast(
                             byEntity     : this.FiredBy,
                             pos          : this.ServerPos.XYZFloat,
-                            blastRadius  : this.Ammunition.BlastRadius  ?? 0,
-                            injureRadius : this.Ammunition.InjureRadius ?? 0
+                            blastRadius  : this.ExplosiveData.BlastRadius  ?? 0,
+                            injureRadius : this.ExplosiveData.InjureRadius ?? 0
                         ); // ..
 
                         this.Die();

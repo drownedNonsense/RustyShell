@@ -8,7 +8,8 @@
 	"textureSizes": {
 	},
 	"textures": {
-		"black": "game:block/black"
+		"black": "game:block/black",
+		"casing": "game:block/metal/ingot/brass"
 	},
 	"elements": [
 		{

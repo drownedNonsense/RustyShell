@@ -41,6 +41,7 @@ namespace RustyShell {
 
             api.RegisterItemClass("ItemCommander",  typeof(ItemGoad));
             api.RegisterItemClass("ItemAmmunition", typeof(ItemAmmunition));
+            api.RegisterItemClass("ItemGrenade",    typeof(ItemGrenade));
             api.RegisterItemClass("ItemCharge",     typeof(ItemCharge));
 
             RustyShellModSystem.ModConfig = api.LoadModConfig<ModConfig>("RustyShellModConfig.json");

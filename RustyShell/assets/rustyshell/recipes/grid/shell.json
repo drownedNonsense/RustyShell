@@ -98,14 +98,38 @@
     "height": 2,
     "output": { "type": "item", "code": "rustyshell:shell-120mm-blunt-antipersonnel-{material}-none" }
   }, {
-    "ingredientPattern": "_AB,CDE,_F_",
+    "ingredientPattern": "_AB,CDE",
     "ingredients": {
-      "A": { "type": "item",  "code": "rustyshell:fuze-percussion" },
-      "B": { "type": "item",  "code": "game:hammer-*",                              "isTool": true },
-      "C": { "type": "item",  "code": "game:blastingpowder",                        "quantity": 4 },
-      "D": { "type": "item",  "code": "rustyshell:shell-120mm-round-common-*-none", "name": "material" },
-      "E": { "type": "item",  "code": "chemistrylib:ammoniumchloride",              "quantity": 64 },
-      "F": { "type": "block", "code": "game:woodbucket" }
+      "A": { "type": "item", "code": "rustyshell:fuze-percussion" },
+      "B": { "type": "item", "code": "game:hammer-*",                              "isTool": true },
+      "C": { "type": "item", "code": "game:blastingpowder",                        "quantity": 4 },
+      "D": { "type": "item", "code": "rustyshell:shell-120mm-round-common-*-none", "name": "material" },
+      "E": { "type": "item", "code": "maltiezfirearms:bullet-*",                   "quantity": 16 }
+    },
+    "width":  3,
+    "height": 2,
+    "output": { "type": "item", "code": "rustyshell:shell-120mm-round-antipersonnel-{material}-none" }
+  }, {
+    "ingredientPattern": "_AB,CDE",
+    "ingredients": {
+      "A": { "type": "item", "code": "rustyshell:fuze-percussion" },
+      "B": { "type": "item", "code": "game:hammer-*",                              "isTool": true },
+      "C": { "type": "item", "code": "game:blastingpowder",                        "quantity": 4 },
+      "D": { "type": "item", "code": "rustyshell:shell-120mm-blunt-common-*-none", "name": "material" },
+      "E": { "type": "item", "code": "maltiezfirearms:bullet-*",                   "quantity": 16 }
+    },
+    "width":  3,
+    "height": 2,
+    "output": { "type": "item", "code": "rustyshell:shell-120mm-blunt-antipersonnel-{material}-none" }
+  }, {
+    "ingredientPattern": "AB,CD,EF",
+    "ingredients": {
+      "A": { "type": "item",  "code": "chemistrylib:ammoniumchloride", "quantity": 64 },
+      "B": { "type": "item",  "code": "game:hammer-*",                 "isTool": true },
+      "C": { "type": "item",  "code": "game:blastingpowder",           "quantity": 4 },
+      "D": { "type": "item",  "code": "rustyshell:fuze-percussion" },
+      "E": { "type": "block", "code": "game:bowl-fired" },
+      "F": { "type": "item",  "code": "rustyshell:shell-120mm-round-common-*-none", "name": "material" }
     },
     "attributes": {
       "liquidContainerProps": {
@@ -113,18 +137,18 @@
         "requiresLitres": 0.5
       }
     },
-    "width":  3,
+    "width":  2,
     "height": 3,
     "output": { "type": "item", "code": "rustyshell:shell-120mm-round-gas-{material}-none" }
   }, {
-    "ingredientPattern": "_AB,CDE,_F_",
+    "ingredientPattern": "AB,CD,EF",
     "ingredients": {
-      "A": { "type": "item",  "code": "rustyshell:fuze-percussion" },
-      "B": { "type": "item",  "code": "game:hammer-*",                              "isTool": true },
-      "C": { "type": "item",  "code": "game:blastingpowder",                        "quantity": 4 },
-      "D": { "type": "item",  "code": "rustyshell:shell-120mm-round-common-*-none", "name": "material" },
-      "E": { "type": "item",  "code": "chemistrylib:ammoniumchloride",              "quantity": 64 },
-      "F": { "type": "block", "code": "game:bowl-fired" }
+      "A": { "type": "item",  "code": "chemistrylib:ammoniumchloride", "quantity": 64 },
+      "B": { "type": "item",  "code": "game:hammer-*",                 "isTool": true },
+      "C": { "type": "item",  "code": "game:blastingpowder",           "quantity": 4 },
+      "D": { "type": "item",  "code": "rustyshell:fuze-percussion" },
+      "E": { "type": "block", "code": "game:bowl-fired" },
+      "F": { "type": "item",  "code": "rustyshell:shell-120mm-blunt-common-*-none", "name": "material" }
     },
     "attributes": {
       "liquidContainerProps": {
@@ -132,45 +156,7 @@
         "requiresLitres": 0.5
       }
     },
-    "width":  3,
-    "height": 3,
-    "output": { "type": "item", "code": "rustyshell:shell-120mm-round-gas-{material}-none" }
-  }, {
-    "ingredientPattern": "_AB,CDE,_F_",
-    "ingredients": {
-      "A": { "type": "item",  "code": "rustyshell:fuze-percussion" },
-      "B": { "type": "item",  "code": "game:hammer-*",                              "isTool": true },
-      "C": { "type": "item",  "code": "game:blastingpowder",                        "quantity": 4 },
-      "D": { "type": "item",  "code": "rustyshell:shell-120mm-blunt-common-*-none", "name": "material" },
-      "E": { "type": "item",  "code": "chemistrylib:ammoniumchloride",              "quantity": 64 },
-      "F": { "type": "block", "code": "game:woodbucket" }
-    },
-    "attributes": {
-      "liquidContainerProps": {
-        "requiresContent": { "type": "item", "code": "chemistrylib:mineralacidportion-hydrochloric" },
-        "requiresLitres": 0.5
-      }
-    },
-    "width":  3,
-    "height": 3,
-    "output": { "type": "item", "code": "rustyshell:shell-120mm-blunt-gas-{material}-none" }
-  }, {
-    "ingredientPattern": "_AB,CDE,_F_",
-    "ingredients": {
-      "A": { "type": "item",  "code": "rustyshell:fuze-percussion" },
-      "B": { "type": "item",  "code": "game:hammer-*",                              "isTool": true },
-      "C": { "type": "item",  "code": "game:blastingpowder",                        "quantity": 4 },
-      "D": { "type": "item",  "code": "rustyshell:shell-120mm-blunt-common-*-none", "name": "material" },
-      "E": { "type": "item",  "code": "chemistrylib:ammoniumchloride",              "quantity": 64 },
-      "F": { "type": "block", "code": "game:bowl-fired" }
-    },
-    "attributes": {
-      "liquidContainerProps": {
-        "requiresContent": { "type": "item", "code": "chemistrylib:mineralacidportion-hydrochloric" },
-        "requiresLitres": 0.5
-      }
-    },
-    "width":  3,
+    "width":  2,
     "height": 3,
     "output": { "type": "item", "code": "rustyshell:shell-120mm-blunt-gas-{material}-none" }
   }, {

@@ -1,0 +1,86 @@
+{
+  "code": "grenade",
+  "class": "ItemGrenade",
+  "maxstacksize": 1,
+  "variantgroups": [
+    { "code": "shape",    "states": ["hand"]},
+    { "code": "type",     "states": ["explosive", "antipersonnel", "gas", "incendiary"]},
+    { "code": "material", "states": ["copper", "brass", "iron"]}
+  ],
+  "creativeinventory": {
+    "general"    : ["grenade-hand-*"],
+    "items"      : ["grenade-hand-*"],
+    "rustyshell" : ["grenade-hand-*"]
+  },
+  "attributes": {
+
+    "damageByType": {
+      "*-copper" : 15,
+      "*-brass"  : 20,
+      "*-iron"   : 25
+    },
+
+    "blastRadiusByType": {
+      "*-explosive-*"     : 6,
+      "*-antipersonnel-*" : 4,
+      "*-incendiary-*"    : 8,
+      "*-gas-*"           : 12
+    },
+    "injureRadiusByType": {
+      "*-explosive-copper" : 8,
+      "*-explosive-brass"  : 9,
+      "*-explosive-iron"   : 10,
+      "*-antipersonnel-copper" : 12,
+      "*-antipersonnel-brass"  : 14,
+      "*-antipersonnel-iron"   : 16,
+      "*-incendiary-copper" : 8,
+      "*-incendiary-brass"  : 9,
+      "*-incendiary-iron"   : 10
+    },
+    "flightExpectancyByType": {
+      "*-copper" : 0.5,
+      "*-brass"  : 1.5,
+      "*-iron"   : 3.0
+    },
+
+    "entityCode": "rustyshell:grenade-{shape}-{material}",
+
+		"wearableAttachment" : true,
+		"attachShape"        : { "base": "ammunition/grenade-hand-attached" },
+
+		"handbook": { "groupBy": [ "grenade-{shape}-{type}-*" ]},
+
+    "scrollrackable"        :  true,
+    "onscrollrackTransform" : {
+      "translation": { "x": -0.95, "y": -0.025, "z": 0.5 },
+      "rotation":    { "x":   -45, "y":      0, "z": -90 },
+      "origin":      { "x":   0.5, "y":      0, "z": 0.5 },
+      "scale": 0.9
+    }
+  },
+  "heldTpHitAnimationByType" : { "grenade-hand-*": "falx" },
+  "materialDensity": 200,
+  "shape": { "base": "ammunition/grenade-hand" },
+  "textures": {
+    "material" : { "base": "game:block/metal/ingot/{material}" },
+    "icon"     : { "base": "rustyshell:icon/{type}" }
+  },
+	"guiTransform": {
+		"translation" : { "x":  2,   "y":  0,   "z": 0   },
+		"rotation"    : { "x": -170, "y": -148, "z": 138 },
+		"origin"      : { "x":  1,   "y":  0,   "z": 0.5 },
+		"scaleXyz"    : { "x": -1.8, "y":  1.8, "z": 1.8 }
+	},
+	"tpHandTransform": {
+		"translation" : { "x": -0.55, "y": 0.15, "z": -0.65 },
+		"rotation"    : { "x":  70,   "y": 38,   "z": -22   },
+		"origin"      : { "x":  0.5,  "y": 0,    "z":  0.5  },
+		"scale"       : 0.75
+	},
+	"groundTransform": {
+		"translation" : { "x": 0,   "y":  0.05, "z": 0   },
+		"rotation"    : { "x": 9,   "y": -3,    "z": 1  },
+		"origin"      : { "x": 0.5, "y":  0,    "z": 0.5 },
+		"scale"       : 4
+	}
+}
