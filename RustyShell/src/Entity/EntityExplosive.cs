@@ -68,11 +68,9 @@ public abstract class EntityExplosive : Entity {
 
                 if (this.ShouldDespawn) return;
 
-                this.stuck = this.Collided;
-
                 base.OnGameTick(deltaTime);
 
-                if (this.stuck) {
+                if (this.Collided) {
 
                     this.HandleCollision();
                     return;
@@ -105,8 +103,8 @@ public abstract class EntityExplosive : Entity {
             } // void ..
 
 
-            public void HandleBlast() {
-                if (!this.stuck && this.ExplosiveData?.IsFragmentation == true) {
+            protected void HandleBlast() {
+                if (!this.CollidedHorizontally && this.ExplosiveData?.IsFragmentation == true) {
                     if (this.World.Side.IsServer()) {
 
                         Item subExplosiveItem       = this.World.GetItem(this.ExplosiveData.SubExplosive);
@@ -117,81 +115,54 @@ public abstract class EntityExplosive : Entity {
 
                         EntityProperties type   = this.World.GetEntityType(entityCode == null ? subExplosiveItem.Code : new AssetLocation(entityCode));
                         ThreadSafeRandom random = new();
-                        
-                        float[] alignmentMatrix = Utilities.Matrix.AlignmentMatrix(this.ServerPos.Motion.ToVec3f() * 2f);
 
-                        for (int i = 1; i < 5; i++) {
+                        (float[] alignmentMatrix, float coneRadian) = this.CollidedVertically
+                            ? (Utilities.Matrix.AlignmentMatrix(new Vec3f(0, -Math.Sign(this.motionBeforeCollide.Y), 0)), GameMath.PIHALF)
+                            : (Utilities.Matrix.AlignmentMatrix(this.ServerPos.Motion.ToVec3f() * 2f), (this.ExplosiveData.FragmentationConeDeg ?? 90) * GameMath.DEG2RAD);
 
-                            float pitch    = GameMath.PIHALF * 0.5f * random.NextSingle();
-                            float cosPitch = GameMath.FastCos(pitch);
-                            float sinPitch = GameMath.FastSin(pitch);
 
-                            int amount = 5 / (i + 1);
-                            for (int j = 0; j <= amount; j++) {
+                        for (int i = 0; i < this.ExplosiveData.SubExplosiveCount; i++) {
 
-                                float yaw       = (GameMath.PIHALF + j / (float)amount * GameMath.PIHALF) * 0.5f;
-                                float cosYaw    = GameMath.FastCos(yaw);
-                                float sinYaw    = GameMath.FastSin(yaw);
-                                Vec3f direction = new (cosPitch * sinYaw, sinPitch, -cosPitch * cosYaw);
+                            float theta = random.NextSingle() * coneRadian;
+                            float phi   = random.NextSingle() * GameMath.TWOPI;
 
-                                EntityExplosive projectile = this.World.ClassRegistry.CreateEntity(type) as EntityExplosive;
+                            float sinTheta = GameMath.FastSin(theta);
 
-                                projectile.FiredBy       = this.FiredBy;
-                                projectile.ExplosiveData = subExplosiveData;
-                                projectile.ServerPos.SetPos(this.ServerPos);
-                                projectile.ServerPos.Motion = Mat4f.MulWithVec3(alignmentMatrix, direction.X, direction.Y, direction.Z).ToVec3d() * random.NextSingle();
-                                projectile.Pos.SetFrom(projectile.ServerPos);
-                                this.World.SpawnEntity(projectile);
-                                if (subExplosiveData.Type == EnumExplosiveType.Incendiary) projectile.IsOnFire = true;
+                            float x = GameMath.FastCos(theta);
+                            float y = sinTheta * GameMath.FastCos(phi);
+                            float z = sinTheta * GameMath.FastSin(phi);
 
-                                projectile = this.World.ClassRegistry.CreateEntity(type) as EntityExplosive;
-                                projectile.FiredBy       = this.FiredBy;
-                                projectile.ExplosiveData = subExplosiveData;
-                                projectile.ServerPos.SetPos(this.ServerPos);
-                                projectile.ServerPos.Motion = Mat4f.MulWithVec3(alignmentMatrix, direction.X, -direction.Y, direction.Z).ToVec3d() * random.NextSingle();
-                                projectile.Pos.SetFrom(projectile.ServerPos);
-                                this.World.SpawnEntity(projectile);
-                                if (subExplosiveData.Type == EnumExplosiveType.Incendiary) projectile.IsOnFire = true;
+                            Vec3f direction = new (x, y, z);
+                            EntityExplosive projectile = this.World.ClassRegistry.CreateEntity(type) as EntityExplosive;
 
-                                projectile = this.World.ClassRegistry.CreateEntity(type) as EntityExplosive;
-                                projectile.FiredBy       = this.FiredBy;
-                                projectile.ExplosiveData = subExplosiveData;
-                                projectile.ServerPos.SetPos(this.ServerPos);
-                                projectile.ServerPos.Motion = Mat4f.MulWithVec3(alignmentMatrix, direction.X, direction.Y, -direction.Z).ToVec3d() * random.NextSingle();
-                                projectile.Pos.SetFrom(projectile.ServerPos);
-                                this.World.SpawnEntity(projectile);
-                                if (subExplosiveData.Type == EnumExplosiveType.Incendiary) projectile.IsOnFire = true;
+                            projectile.FiredBy       = this.FiredBy;
+                            projectile.ExplosiveData = subExplosiveData;
+                            projectile.ServerPos.SetPos(this.ServerPos);
+                            projectile.ServerPos.Motion = Mat4f.MulWithVec3(alignmentMatrix, direction.X, direction.Y, direction.Z).ToVec3d() * random.NextSingle();
+                            projectile.Pos.SetFrom(projectile.ServerPos);
+                            this.World.SpawnEntity(projectile);
+                            if (subExplosiveData.Type == EnumExplosiveType.Incendiary) projectile.IsOnFire = true;
 
-                                projectile = this.World.ClassRegistry.CreateEntity(type) as EntityExplosive;
-                                projectile.FiredBy       = this.FiredBy;
-                                projectile.ExplosiveData = subExplosiveData;
-                                projectile.ServerPos.SetPos(this.ServerPos);
-                                projectile.ServerPos.Motion = Mat4f.MulWithVec3(alignmentMatrix, direction.X, -direction.Y, -direction.Z).ToVec3d() * random.NextSingle();
-                                projectile.Pos.SetFrom(projectile.ServerPos);
-                                this.World.SpawnEntity(projectile);
-                                if (subExplosiveData.Type == EnumExplosiveType.Incendiary) projectile.IsOnFire = true;
-
-                            } // for ..
                         } // for ..
-
                         this.Die();
+
                     } // if ..
-                } else switch(this.ExplosiveData?.Type) {
-                    case EnumExplosiveType.Common        : { this.HandleCommonBlast();                   break; }
-                    case EnumExplosiveType.Explosive     : { this.HandleExplosiveBlast();                break; }
-                    case EnumExplosiveType.AntiPersonnel : { this.HandleAntiPersonnelBlast();            break; }
-                    case EnumExplosiveType.Gas           : { this.HandleGasBlast();                      break; }
-                    case EnumExplosiveType.Incendiary    : { this.HandleIncendiaryBlast();               break; }
-                    default                              : { if (this.World.Side.IsServer()) this.Die(); break; }
-                } // switch ..
+                } else try { switch(this.ExplosiveData?.Type) {
+                    case EnumExplosiveType.Common        : { this.HandleCommonBlast();        break; }
+                    case EnumExplosiveType.Explosive     : { this.HandleExplosiveBlast();     break; }
+                    case EnumExplosiveType.AntiPersonnel : { this.HandleAntiPersonnelBlast(); break; }
+                    case EnumExplosiveType.Gas           : { this.HandleGasBlast();           break; }
+                    case EnumExplosiveType.Incendiary    : { this.HandleIncendiaryBlast();    break; }
+                }} catch (Exception e) { this.World.Logger.VerboseDebug($"Error during explosive entity blast: {e}"); }
+                finally { this.Die(); }
             } // void ..
 
 
-            public virtual void HandleCommonBlast()        { if (this.World.Side.IsServer()) this.Die(); }
-            public virtual void HandleExplosiveBlast()     { if (this.World.Side.IsServer()) this.Die(); }
-            public virtual void HandleAntiPersonnelBlast() { if (this.World.Side.IsServer()) this.Die(); }
-            public virtual void HandleGasBlast()           { if (this.World.Side.IsServer()) this.Die(); }
-            public virtual void HandleIncendiaryBlast()    { if (this.World.Side.IsServer()) this.Die(); }
+            protected virtual void HandleCommonBlast()        { if (this.World.Side.IsServer()) this.Die(); }
+            protected virtual void HandleExplosiveBlast()     { if (this.World.Side.IsServer()) this.Die(); }
+            protected virtual void HandleAntiPersonnelBlast() { if (this.World.Side.IsServer()) this.Die(); }
+            protected virtual void HandleGasBlast()           { if (this.World.Side.IsServer()) this.Die(); }
+            protected virtual void HandleIncendiaryBlast()    { if (this.World.Side.IsServer()) this.Die(); }
 
 
         //---------------
@@ -205,13 +176,13 @@ public abstract class EntityExplosive : Entity {
             } // void ..
 
 
-
             public override void OnCollideWithLiquid() {
                 base.OnCollideWithLiquid();
                 this.Die();
             } // void ..
+            
 
-            public virtual void ImpactOnEntity(Entity entity) {
+            protected virtual void ImpactOnEntity(Entity entity) {
                 if ((this.World as IServerWorldAccessor)?.CanDamageEntity(this.FiredBy, entity, out bool isFromPlayer) ?? false) {
 
                     bool didDamage = entity.ReceiveDamage(new DamageSource() {
@@ -221,17 +192,24 @@ public abstract class EntityExplosive : Entity {
                         Type         = EnumDamageType.PiercingAttack
                     }, this.ExplosiveData.Damage * (this.FiredBy?.Stats.GetBlended("rangedWeaponsDamage") ?? 1f));
 
-                    float factor = GameMath.Clamp((1 - entity.Properties.KnockbackResistance) / 10f, 0, 1);
-                    entity.SidedPos.Motion.Add(factor * this.SidedPos.Motion.X, factor * this.SidedPos.Motion.Y, factor * this.SidedPos.Motion.Z);
-
                     if (isFromPlayer && didDamage)
                         this.World.PlaySoundFor(new AssetLocation("sounds/player/projectilehit"), (this.FiredBy as EntityPlayer).Player, false, 24);
 
                 } // if ..
             } // void ..
             
-            public virtual void HandleCollision() {
+            protected virtual void HandleCollision() {
                 if (!this.stuck) {
+
+                    if (
+                        this.ExplosiveData?.CanBounce == true       &&
+                        this.CollidedVertically                     &&
+                        Math.Abs(this.motionBeforeCollide.Y) < 0.2f &&
+                        this.World.Rand.NextSingle() is float random and >= 0.3f
+                    ) {
+                        this.ServerPos.Motion.Y = GameMath.Clamp(this.motionBeforeCollide.Y * -(0.5f + random), -0.2, 0.2);
+                        return; 
+                    } // if ..
 
                     this.stuck     = true;
                     this.msCollide = this.World.ElapsedMilliseconds;
@@ -245,19 +223,22 @@ public abstract class EntityExplosive : Entity {
             /// <summary>
             /// Checks collision with entities
             /// </summary>
-            protected void CheckEntityCollision() {
+            protected virtual void CheckEntityCollision() {
+
 
                 if (this.Api.Side.IsClient() || this.ServerPos.Motion == Vec3d.Zero) return;
 
-                if (this.World.GetNearestEntity(ServerPos.XYZ, 5f, 5f, (e) => {
-                    if (e.EntityId == this.EntityId || !e.IsInteractable)
+                if (this.World.GetEntitiesAround(ServerPos.XYZ, 5f, 5f, (e) => {
+                    if (e.EntityId == this.EntityId || !e.IsInteractable || !e.Alive)
                         return false;
 
                     double dist = e.SelectionBox.Clone().Translate(e.ServerPos.XYZFloat).ShortestDistanceFrom(ServerPos.XYZFloat);
                     return dist < 2f;
-                }) is Entity target) {
-                    this.ImpactOnEntity(target);
-                    this.HandleCollision();
+                }) is Entity[] targets and not []) {
+
+                    foreach (Entity target in targets) this.ImpactOnEntity(target);
+                    if (this.World.Rand.NextSingle() >= (this.ServerPos.Motion.LengthSq() * 0.15f)) this.HandleBlast();
+
                 } // if ..
             } // bool ..
 
@@ -265,7 +246,7 @@ public abstract class EntityExplosive : Entity {
             /// <summary>
             /// Updates projecttile's rotation based on motion
             /// </summary>
-            public virtual void SetRotation() {
+            protected virtual void SetRotation() {
 
                 float speed        = this.SidedPos.Motion.ToVec3f().Length();
                 float inverseSpeed = 1f / speed;

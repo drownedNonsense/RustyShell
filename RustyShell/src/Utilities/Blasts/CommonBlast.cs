@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 using Vintagestory.API.MathTools;
@@ -91,7 +90,7 @@ public static partial class BlastExtensions {
             blastType                 : EnumBlastType.RockBlast,
             destructionRadius         : blastRadius,
             injureRadius              : injureRadius,
-            blockDropChanceMultiplier : 0f
+            blockDropChanceMultiplier : 0.2f
         ); // ..
     } // void ..
 } // class ..

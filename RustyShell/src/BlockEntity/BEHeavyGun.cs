@@ -6,6 +6,7 @@ using Vintagestory.API.MathTools;
 using Vintagestory.API.Util;
 using Vintagestory.API.Config;
 using Vintagestory.API.Datastructures;
+using Vintagestory.API.Client;
 
 namespace RustyShell {
     public class BlockEntityHeavyGun : BlockEntityOrientable {
@@ -123,7 +124,7 @@ namespace RustyShell {
                     float sinYaw   = GameMath.FastSin(this.Orientation + randYaw);
 
                     Vec3f direction     = new Vec3f(-cosPitch * sinYaw, sinPitch, -cosPitch * cosYaw).Normalize();
-                    Vec3d projectilePos = (new Vec3f(this.Pos.X + 0.5f, this.Pos.Y + 0.5f, this.Pos.Z + 0.5f) + direction * this.BlockHeavyGun.BarrelLength).ToVec3d();
+                    Vec3d projectilePos = (new Vec3f(this.Pos.X + 0.5f, this.Pos.Y + 1f, this.Pos.Z + 0.5f) + direction * this.BlockHeavyGun.BarrelLength).ToVec3d();
                     Vec3f velocity      = direction * this.expectedVelocity;
 
                     this.gunState = this.BlockHeavyGun.MuzzleLoading
@@ -144,13 +145,39 @@ namespace RustyShell {
                     this.Cooldown            = 0f;
                     this.cooldownUpdateRef ??= this.RegisterGameTickListener(this.CooldownUpdate, ModContent.HEAVY_GUN_UPDATE_RATE);
 
-                    if (this.Api.Side.IsClient() && !((this.ChargeSlot.Itemstack?.Item ?? ammunition) is IPropellant { PropellantIsSmokeless: true }))
-                        for (int i = 0; i < (int)this.blastStrength >> (projectile is EntitySmallCaliber ? 1 : 0); i ++)
-                            this.Api.World.SpawnParticles(new ExplosionSmokeParticles() {
-                                basePos              = projectilePos,
-                                ParentVelocityWeight = 1f,
-                                ParentVelocity       = Vintagestory.API.Config.GlobalConstants.CurrentWindSpeedClient,
-                            }); // ..
+                    if ((this.ChargeSlot.Itemstack?.Item ?? ammunition) is IPropellant propellant) {
+                        
+                        Vec3f wind      = this.Api.World.BlockAccessor.GetWindSpeedAt(projectilePos.AsBlockPos).ToVec3f();
+                        int smokeAmount = (projectile, propellant.PropellantIsSmokeless) switch {
+                            (EntityHighCaliber, false)  => 8,
+                            (EntityHighCaliber, true)   => 7,
+                            (EntitySmallCaliber, false) => 4,
+                            (EntitySmallCaliber, true)  => 2,
+                            _                           => 1
+                        }; // switch ..
+
+                        int minSmokeOpacity = propellant.PropellantIsSmokeless == true ? 10 : 20;
+                        int maxSmokeOpacity = propellant.PropellantIsSmokeless == true ? 40 : 60;
+                        
+                        for (int i = 0; i < smokeAmount; i ++) {
+
+                            Vec3d position = projectilePos + (direction * i).ToVec3d();
+                            float ratio    = (float)i / smokeAmount;
+
+                            this.Api.World.SpawnParticles(
+                                quantity         : smokeAmount * 0.5f * (i + 1),
+                                color            : ColorUtil.ToRgba((int)(maxSmokeOpacity * (1f - ratio) + minSmokeOpacity), 180, 180, 180),
+                                minPos           : position - new Vec3d(i, i, i) * 0.25,
+                                maxPos           : position + new Vec3d(i, i, i) * 0.25,
+                                minVelocity      : direction * (1f - ratio * 0.5f) * 0.01f + wind * ratio,
+                                maxVelocity      : direction * (1f - ratio * 0.5f) * 0.25f + wind * ratio,
+                                lifeLength       : 4f * (2f - ratio),
+                                gravityEffect    : 0.001f * ratio,
+                                scale            : i,
+                                dualCallByPlayer : (byEntity as EntityPlayer)?.Player
+                            ); // ..
+                        } // for ..
+                    } // if ..
 
                     if (ammunition.Casing is Item casing)
                         this.Api.World.SpawnItemEntity(
@@ -167,7 +194,14 @@ namespace RustyShell {
                     if (this.ChargeSlot.Itemstack != null) this.ChargeSlot?.TakeOutWhole();
 
                     this.Api.World.SpawnEntity(projectile);
-                    this.Api.World.PlaySoundAt(new AssetLocation("sounds/effect/mediumexplosion"), this.Pos.X, this.Pos.Y, this.Pos.Z, null, false, 120);
+                    this.Api.World.PlaySoundAt(
+                        location         : new AssetLocation("sounds/effect/mediumexplosion"),
+                        posx             : this.Pos.X,
+                        posy             : this.Pos.Y,
+                        posz             : this.Pos.Z,
+                        dualCallByPlayer : (byEntity as EntityPlayer)?.Player,
+                        range            : 120
+                    ); // ..
 
                     if (gearedGun != null)
                         gearedGun.Elevation = GameMath.Clamp(

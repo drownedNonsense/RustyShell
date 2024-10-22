@@ -20,27 +20,33 @@
     "attributes": {
 
       "damageByType": {
-        "shot-4pdr-*"  : 30,
-        "shot-12pdr-*" : 40
+        "shot-4pdr-*-stone"  : 50,
+        "shot-4pdr-*"        : 60,
+        "shot-12pdr-*-stone" : 60,
+        "shot-12pdr-*"       : 70
       },
 
       "blastRadiusByType": {
-        "shot-4pdr-round-common-*"    : 3,
-        "shot-4pdr-round-explosive-*" : 5,
+        "shot-4pdr-round-common-stone" : 1,
+        "shot-4pdr-round-common-*"     : 4,
 
-        "shot-12pdr-round-common-*"    : 5,
-        "shot-12pdr-round-explosive-*" : 7,
-        "shot-12pdr-round-incendiary-*": 8
+        "shot-12pdr-round-common-stone" : 4,
+        "shot-12pdr-round-common-*"     : 5,
+        "shot-12pdr-round-explosive-*"  : 7,
+        "shot-12pdr-round-incendiary-*" : 8
       },
 
       "injureRadiusByType": {
-        "shot-4pdr-round-common-*"    : 5,
-        "shot-4pdr-round-explosive-*" : 7,
+        "shot-4pdr-round-common-stone" : 2,
+        "shot-4pdr-round-common-*"     : 5,
 
+        "shot-12pdr-round-common-stone" : 6,
         "shot-12pdr-round-common-*"     : 7,
         "shot-12pdr-round-explosive-*"  : 12,
         "shot-12pdr-round-incendiary-*" : 16
       },
+
+      "canBounceByType": { "*-round-common-*": true },
 
       "flightExpectancyByType": {
         "*-explosive-lead" : 3.00,

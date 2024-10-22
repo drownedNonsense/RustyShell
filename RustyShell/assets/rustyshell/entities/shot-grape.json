@@ -1,6 +1,6 @@
 {
   "code":  "shot",
-  "class": "EntityHighCaliber",
+  "classByType": { "*-submunition-*" : "EntitySmallCaliber", "*": "EntityHighCaliber" },
   "variantgroups": [
     { "code": "class" ,   "states": ["grape"]},
 		{ "code": "shape" ,   "states": ["blunt", "submunition"]},

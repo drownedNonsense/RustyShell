@@ -11,7 +11,7 @@
 		"wearableAttachment": true,
 		"attachShape": { "base": "gun/supportgun-4pdr-attached" },
 
-		"barrelLength" : 2,
+		"barrelLength" : 0.5,
 		"firePower"    : 1.7,
 		"accuracyByType": {
 			"*-tinbronze-*" : 0.70,
@@ -28,7 +28,7 @@
 	"maxstacksize": 1,
 	"behaviors": [
 		{ "name": "Wheeled",          "properties": { "turnSpeedByType": { "*-tinbronze-*": 0.4, "*-iron-*": 0.3 }, "wheelShapePath": "rustyshell:shapes/wheel/spoked-small" }},
-		{ "name": "Loadable",         "properties": { "ammunitionCodes": ["rustyshell:shot-4pdr-*", "rustyshell:shot-grape-blunt-*"]}},
+		{ "name": "Loadable",         "properties": { "fuseDuration": 0.75, "ammunitionCodes": ["rustyshell:shot-4pdr-*", "rustyshell:shot-grape-blunt-*"]}},
 		{ "name": "MuzzleLoading",    "properties": { "cleanDuration": 2.5, "loadDuration": 2.5 }},
 		{ "name": "Geared",           "properties": {
 			"recoilEffect"    : { "avg": 6, "var": 3 },

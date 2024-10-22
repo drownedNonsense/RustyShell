@@ -8,7 +8,7 @@
 		{ "code": "barrel",   "states": ["smoothbore", "rifled"]}
 	],
 	"attributes": {
-		"barrelLength": 3,
+		"barrelLength": 1,
 		"accuracyByType": {
 			"*-tinbronze-smoothbore" : 0.65,
 			"*-iron-smoothbore"      : 0.75,
@@ -29,7 +29,7 @@
 	"maxstacksize": 1,
 	"behaviors": [
 		{ "name": "Wheeled",       "properties": { "turnSpeedByType": { "*-tinbronze-*": 0.25, "*-iron-*": 0.2 }, "wheelShapePath": "rustyshell:shapes/wheel/spoked" }},
-		{ "name": "Loadable",      "properties": { "ammunitionCodes": { "smoothbore": ["rustyshell:shot-12pdr-*", "rustyshell:shot-grape-blunt-*", "rustyshell:shot-canister-blunt-*"], "rifled": ["rustyshell:shell-120mm-round-*-none", "rustyshell:shell-120mm-blunt-*-none", "rustyshell:shot-grape-blunt-*"]}}},
+		{ "name": "Loadable",      "properties": { "fuseDurationByType": { "*-smoothbore": 1 }, "ammunitionCodes": { "smoothbore": ["rustyshell:shot-12pdr-*", "rustyshell:shot-grape-blunt-*", "rustyshell:shot-canister-blunt-*"], "rifled": ["rustyshell:shell-120mm-round-*-none", "rustyshell:shell-120mm-blunt-*-none", "rustyshell:shot-grape-blunt-*"]}}},
 		{ "name": "MuzzleLoading", "properties": { "cleanDuration": 4, "loadDuration": 4 }},
 		{ "name": "Geared",        "properties": {
 			"recoilEffect"    : { "avg": 4, "var": 2 },

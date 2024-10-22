@@ -105,11 +105,10 @@ public static partial class BlastExtensions {
 
         self.RegisterCallback((_) => self.UnregisterGameTickListener(gasRef), millisecondDuration);
         (self as IServerWorldAccessor)?.CreateExplosion(
-            pos                       : pos.AsVec3i.AsBlockPos,
-            blastType                 : EnumBlastType.EntityBlast,
-            destructionRadius         : blastRadius * 0.1f,
-            injureRadius              : blastRadius * 0.4f,
-            blockDropChanceMultiplier : 0f
+            pos               : pos.AsVec3i.AsBlockPos,
+            blastType         : EnumBlastType.EntityBlast,
+            destructionRadius : blastRadius * 0.1f,
+            injureRadius      : blastRadius * 0.4f
         ); // ..
     } // void ..
 } // class ..

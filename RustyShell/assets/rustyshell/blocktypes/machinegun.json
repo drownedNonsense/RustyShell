@@ -4,7 +4,7 @@
 	"entityClass": "HeavyGun",
 	"variantgroups": [{ "code": "material", "states": ["iron", "steel"]}],
 	"attributes": {
-		"barrelLength": 2,
+		"barrelLength": 1,
 		"accuracyByType": {
 			"*-iron"  : 0.85,
 			"*-steel" : 0.9

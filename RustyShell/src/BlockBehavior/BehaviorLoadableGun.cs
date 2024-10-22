@@ -7,6 +7,7 @@ using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Config;
 using Vintagestory.API.Util;
+using Vintagestory.GameContent;
 
 
 namespace RustyShell {
@@ -19,6 +20,7 @@ namespace RustyShell {
             /** <summary> An array of each available ammunition for this gun </summary> **/       internal Item[] Ammunitions;
             /** <summary> An array of each available ammunition code for this gun </summary> **/  private string[] ammunitionCodes;
             /** <summary> An array of each available ammunition code for this gun </summary> **/  private int ammunitionLimit;
+            /** <summary> Gun ignition delay in seconds </summary> **/                            private float fuseDuration;
 
             private ItemStack[] ammunitionStacks;
 
@@ -40,6 +42,7 @@ namespace RustyShell {
                 JsonObject ammunitions = properties["ammunitionCodes"];
                 this.ammunitionLimit   = properties["ammunitionLimit"].AsInt(1);
                 this.ammunitionCodes   = ((this.block.Variant["barrel"] is string barrel && ammunitions[barrel].Exists) ? ammunitions[barrel] : ammunitions).AsArray<string>();
+                this.fuseDuration      = properties["fuseDuration"].AsFloat();
 
             } // void ..
 
@@ -148,7 +151,7 @@ namespace RustyShell {
                                 
                             } // ..
                         }, // new ..
-                        new WorldInteraction() {
+                        new () {
                             ActionLangCode    = "blockhelp-loadable-fire",
                             MouseButton       = EnumMouseButton.Right,
                             HotKeyCode        = "shift",
@@ -223,7 +226,39 @@ namespace RustyShell {
                     ) {
 
                         handling = EnumHandling.PreventSubsequent;
-                        blockEntity.Fire(byPlayer.Entity);
+                        if (this.fuseDuration > 0f) {
+                            ILoadedSound fuseSound = (world as IClientWorldAccessor)?.LoadSound(new SoundParams() {
+                                Location        = new AssetLocation("sounds/effect/fuse"),
+                                ShouldLoop      = true,
+                                Position        = blockSel.FullPosition.ToVec3f(),
+                                DisposeOnFinish = false,
+                                Volume          = 1f,
+                                Range           = 16,
+                            }); // ..
+
+                            long sparkRef = world.RegisterGameTickListener(
+                                millisecondInterval : 10,
+                                onGameTick          : (_) => {
+
+                                    SimpleParticleProperties particles = BlockEntityBomb.smallSparks;
+                                    particles.MinPos.Set(blockSel.Position.ToVec3d() + new Vec3d(0.5, 1, 0.5));
+                                    world.SpawnParticles(
+                                        particlePropertiesProvider : particles,
+                                        dualCallByPlayer           : byPlayer
+                                    ); // ..
+                                } // ..
+                            ); // ..
+
+                            fuseSound?.Start();
+                            world.RegisterCallback((_) => {
+                                world.UnregisterGameTickListener(sparkRef);
+                                fuseSound?.Stop();
+                                fuseSound?.Dispose();
+                                blockEntity.Fire(byPlayer.Entity);
+                            }, (int)(this.fuseDuration * 1000f));
+
+                        } else blockEntity.Fire(byPlayer.Entity);
+
                         if (byPlayer?.WorldData?.CurrentGameMode != EnumGameMode.Creative)
                             slot.Itemstack?.Item.DamageItem(world, byPlayer.Entity, slot, 1);
 

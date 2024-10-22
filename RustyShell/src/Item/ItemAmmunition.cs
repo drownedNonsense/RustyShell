@@ -15,10 +15,13 @@ public class ItemAmmunition : Item, IExplosive, IPropellant {
         public float             Damage          { get; protected set; }
         public int?              BlastRadius     { get; protected set; }
         public int?              InjureRadius    { get; protected set; }
+        public bool              CanBounce       { get; protected set; }
 
         public float? FlightExpectancy { get; protected set; }
 
-        public AssetLocation SubExplosive { get; protected set; }
+        public AssetLocation SubExplosive         { get; protected set; }
+        public int?          SubExplosiveCount    { get; protected set; }
+        public int?          FragmentationConeDeg { get; protected set; }
 
         public Item   Casing       { get; protected set; }
         public float? RecoveryRate { get; protected set; }
@@ -55,6 +58,10 @@ public class ItemAmmunition : Item, IExplosive, IPropellant {
             this.SubExplosive     = this.IsFragmentation
                 ? this.CodeWithVariants(new () {{ "shape", "submunition" }, { "casingmaterial", "none" }})
                 : null;
+
+            this.SubExplosiveCount    = this.Attributes["subExplosiveCount"].AsInt(30);
+            this.FragmentationConeDeg = this.Attributes["fragmentationCone"].AsInt(90);
+            this.CanBounce            = this.Attributes["canBounce"].AsBool();
 
             if (this.Attributes["casingCode"].AsString() is string casingCode) {
                 this.Casing       = api.World.GetItem(new AssetLocation(casingCode));

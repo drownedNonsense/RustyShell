@@ -123,9 +123,15 @@ namespace RustyShell {
                     IPlayer byPlayer,
                     float dropQuantityMultiplier = 1
                 ) {
-                    return world.BlockAccessor.GetBlockEntity<BlockEntityHeavyGun>(pos)?.AmmunitionSlot.Itemstack is ItemStack ammunitions
-                        ? base.GetDrops(world, pos, byPlayer, dropQuantityMultiplier).Append(ammunitions).ToArray()
-                        : base.GetDrops(world, pos, byPlayer, dropQuantityMultiplier);
+                    ItemStack[] drops = base.GetDrops(world, pos, byPlayer, dropQuantityMultiplier);
+                    if (world.BlockAccessor.GetBlockEntity<BlockEntityHeavyGun>(pos) is BlockEntityHeavyGun heavyGun) {
+                        
+                        if (heavyGun.AmmunitionSlot.Itemstack is not null) drops = drops.Append(heavyGun.AmmunitionSlot.Itemstack).ToArray();
+                        if (heavyGun.ChargeSlot.Itemstack is not null)     drops = drops.Append(heavyGun.ChargeSlot.Itemstack).ToArray();
+                        
+                    } // if ..
+
+                    return drops;
                 } // ItemStack ..
     } // class ..
 } // namespace ..

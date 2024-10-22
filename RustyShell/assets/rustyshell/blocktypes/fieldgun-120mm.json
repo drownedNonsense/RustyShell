@@ -8,7 +8,7 @@
     { "code": "barrel",   "states": ["rifled"]}
   ],
   "attributes": {
-    "barrelLength": 4.0,
+    "barrelLength": 1.5,
     "accuracyByType": {
       "*-iron-*"  : 0.90,
       "*-steel-*" : 0.95

@@ -22,10 +22,13 @@ public class ItemGrenade : Item, IExplosive {
         public float             Damage          { get; protected set; }
         public int?              BlastRadius     { get; protected set; }
         public int?              InjureRadius    { get; protected set; }
+        public bool              CanBounce       { get; protected set; }
 
         public float? FlightExpectancy { get; protected set; }
 
-        public AssetLocation SubExplosive { get; protected set; } = null;
+        public AssetLocation SubExplosive         { get; protected set; } = null;
+        public int?          SubExplosiveCount    { get; protected set; } = null;
+        public int?          FragmentationConeDeg { get; protected set; } = null;
 
 
     //===============================
@@ -48,6 +51,7 @@ public class ItemGrenade : Item, IExplosive {
             this.BlastRadius      = this.Attributes["blastRadius"].AsInt();
             this.InjureRadius     = this.Attributes["injureRadius"].AsInt();
             this.FlightExpectancy = this.Attributes["flightExpectancy"].Exists ? this.Attributes["flightExpectancy"].AsFloat() : null;
+            this.CanBounce        = this.Attributes["canBounce"].AsBool();
 
         } // void ..
 

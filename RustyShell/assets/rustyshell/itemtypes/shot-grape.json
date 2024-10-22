@@ -18,22 +18,16 @@
         "*-steel"  : 25
       },
 
-      "blastRadiusByType": {
-        "*-submunition-*" : 1,
-        "*"               : 6
-      },
-
+      "blastRadius": 6,
       "injureRadiusByType": {
-        "*-submunition-stone"  : 5,
-        "*-submunition-lead"   : 8,
-        "*-submunition-copper" : 6,
-        "*-submunition-steel"  : 7,
         "*-stone"  : 10,
         "*-lead"   : 16,
         "*-copper" : 12,
         "*-steel"  : 14
       },
 
+      "subExplosiveCount" : 45,
+      "fragmentationCone" : 22,
       "flightExpectancyByType": { "shot-grape-blunt-*" : 0 },
 
       "entityCodeByType": {
